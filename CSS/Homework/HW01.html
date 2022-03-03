@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery Image</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        body{
+            font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif ;
+        }
+        .content{
+            text-align: center;
+        }
+        .container {
+            margin-top: 20px;
+            justify-content    : center;
+            box-shadow: 10px 10px grey;
+            display: inline-block;
+            border-radius: 5%;
+            background-color: yellow;
+            margin-left: 20px;
+        }
+        .container:hover{
+            background-color: red;
+        }
+        div > h1.article{
+            margin-top: -3px;
+            text-align: center;
+            padding: 5px;
+        }
+        div > p {
+            text-align: left;
+            margin-left: 10%;
+        }
+        div img{
+            border-radius: 5% 5% 0 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    
+    <div>
+        <div class="content">
+            <h1 class="title">Gallery Image</h1>
+        </div>
+        <div class ="container">
+            <img src="https://picsum.photos/id/1/300" alt="photo">
+            <div class="card">
+                <h1 class="article">Photo</h1>
+                <p>this is a photo</p>
+            </div>
+        </div>
+        <div class ="container">
+            <img src="https://picsum.photos/id/2/300" alt="photo">
+            <div class="card">
+                <h1 class="article">Photo</h1>
+                <p>this is a photo</p>
+            </div>
+        </div>
+        <div class ="container">
+            <img src="https://picsum.photos/id/3/300" alt="photo">
+            <div class="card">
+                <h1 class="article">Photo</h1>
+                <p>this is a photo</p>
+            </div>
+        </div>
+        <div class ="container">
+            <img src="https://picsum.photos/id/4/300" alt="photo">
+            <div class="card">
+                <h1 class="article">Photo</h1>
+                <p>this is a photo</p>
+            </div>
+        </div>
+        <div class ="container">
+            <img src="https://picsum.photos/id/5/300" alt="photo">
+            <div class="card">
+                <h1 class="article">Photo</h1>
+                <p>this is a photo</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

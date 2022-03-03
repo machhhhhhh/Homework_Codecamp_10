@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework 3</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            background-color: rgb(236, 235, 235);
+        }
+        h1{
+            color: blue;
+            font-size: 3em;
+        }
+        p{
+            font-family:Arial, Helvetica, sans-serif;
+            font-size: 1.5em;
+        }
+        .container {
+            margin-top: 12%;
+            display: flex;
+            flex-wrap: wrap;
+            height: 75vh;
+            justify-content: space-around;
+        }
+        .container > * {
+            flex: 1;
+        }
+        .title{
+            flex: 1 50%;
+        }
+        .detail{
+            margin-top: -80px;
+            flex: 1 50%;
+            height: 40vh;
+            border-radius: 3%;
+            padding: 10px;
+        }
+        div > a {
+            display: inline-block;
+        }
+        div > form {
+            background-color: white;
+            border-radius: 3%;
+            padding: 20px;
+            text-align: center;
+        }
+        .language{
+            padding: 10px;
+            padding-right: 20%;
+        }
+        .language > a{
+            color: grey;
+        }
+
+        footer{
+            padding-left: 10%;
+            height: auto;
+            background-color: white;
+        }
+        .detail-footer{
+            padding-top: 10px;
+        }
+
+        footer > div > a {
+            padding : 5px 10px 0px 10px
+        }
+
+        @media (max-width : 1000px){
+            h1{
+                padding-top: 30px;
+            }
+            .detail{
+                margin: 0 20%;
+                padding-top: 20px;
+            }
+            .container{
+                margin-top: 0;
+                text-align: center;
+                display: block;
+                height: 100vh;
+            }
+            .detail-footer{
+                font-size: 1rem;
+            }
+            .help{
+                font-size: 1.2em;      
+                padding : 0 20% 0 20%
+            }
+            
+            .language > a {
+                font-size: 0.8em;
+            }
+            
+        }
+
+        @media (max-width:800px){
+            .detail-footer{
+                font-size: 0.8rem;
+            }
+        }
+
+        
+       
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">
+            <h1>Facebook</h1>
+            <p class="help">Facebook ช่วยคุณเชื่อมต่อและแชร์กับผู้คนมากมายรอบตัวคุณ</p>
+        </div>
+        <div class="detail">
+            <form>
+                <div class="form-group">
+                  <input placeholder="อีเมลหรือหมายเลขโทรศัพท์มือถือ" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                </div>
+                <div class="form-group">
+                  <input type="password" placeholder="รหัสผ่าน" class="form-control" id="exampleInputPassword1">
+                </div>
+                <button type="submit" style="margin-bottom: 10px; padding: 5px 35%; min-width: 39%;"  class="login btn btn-primary">เข้าสู่ระบบ</button>
+                    <br>
+                <a href="#">ลืมรหัสผ่านใช่หรือไม่</a>
+                <hr>
+                <button  type="submit"  class="btn btn-success">สร้างบัญชีผู้ใช้ใหม่</button>
+              </form>
+              <p class="detail-footer" style="text-align: center;"><strong>สร้างเพจ</strong>  สำหรับบุคคลที่มีชื่อเสียง วงดนตรีหรือธุรกิจ</p>
+        </div>
+    </div>
+    <footer>
+        <div class="language">
+            <a href="#">ภาษาไทย</a>
+            <a href="#">English (UK)</a>
+            <a href="#">日本語</a>
+            <a href="#">中文(简体)</a>
+            <a href="#">Tiếng Việt</a>
+            <a href="#">Français (France)</a>
+            <a href="#">Deutsch</a>
+            <a href="#">Русский</a>
+            <a href="#">Español</a>
+            <a href="#">Português (Brasil)</a>
+            <a href="#">Italiano</a>
+            <hr>
+        </div>
+        <div class="language" style="margin-top: -30px;">
+            <a href="#">Sign Up</a>
+            <a href="#">Log In</a>
+            <a href="#">Messenger</a>
+            <a href="#">Facebook Lite</a>
+            <a href="#">Watch</a>
+            <a href="#">Places</a>
+            <a href="#">Games</a>
+            <a href="#">Marketplace</a>
+            <a href="#">Facebook Pay</a>
+            <a href="#">Oculus</a>
+            <a href="#">Portal</a>
+            <a href="#">Instagram</a>
+            <a href="#">Bulletin</a>
+            <a href="#">Local</a>
+            <a href="#">Fundraisers</a>
+            <a href="#">Services</a>
+            <a href="#">Voting Information Centre</a>
+            <a href="#">Group</a>
+            <a href="#">About</a>
+            <a href="#">Create ad</a>
+            <a href="#">Create Page</a>
+            <a href="#">Developers</a>
+            <a href="#">Careers</a>
+            <a href="#">Privacy</a>
+            <a href="#">Cookies</a>
+            <a href="#">AdChoices</a>
+            <a href="#">Terms</a>
+            <a href="#">Help</a>
+            <p style="color: grey; font-size: 0.8em; padding-left: 10px; margin-top: 20px;">Meta © 2022</p>
+        </div>
+    </footer>
+</body>
+</html>

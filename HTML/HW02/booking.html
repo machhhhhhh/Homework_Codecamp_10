@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking</title>
+    <style>
+        .container {
+            border:dashed #999 1px;
+            width:25%;
+            height:auto;
+        
+        }
+        .content {
+            border:dotted #f00 1px;
+            width:100px;
+            height:100px;
+            padding:5px;
+        }
+        p{
+            justify-content: center;
+        }
+        td,th{
+            text-align: left;
+        }
+        label{
+            font-size: 1em;
+        }
+        input[type="number"] {
+            width: 70%;
+        }
+        input[type="date"] {
+           text-align: center;
+        }
+        select{
+            width: 90%;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    
+    <form action="http://www.jkorpela.fi/cgi-bin/echo.cgi">
+        <table class="container">
+            <tr>
+                <th colspan="2">
+                    <label>Flying form</label>
+                </th>
+                <th colspan="2">To</th>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <select name="fly" required>
+                        <option value="Chiangmai">Chiang Mai</option>
+                        <option value="bkk">BKK</option>           
+                    </select>
+                </td>
+                <td colspan="2">
+                    <select name="to" required>
+                        <option value="bkk">BKK</option>           
+                        <option value="Chiangmai">Chiang Mai</option>
+                    </select>
+                </td>
+            </tr>
+    
+
+            <tr>
+                <th colspan="2">
+                    <label for="departing">Departing</label>
+                </th>
+                <th colspan="2">
+                    <label for="returning">Returning</label>
+                </th>
+            </tr>
+
+            <tr>
+                <td colspan="2">
+                    <input type="date" name="departing" required>
+                </td>
+                <td colspan="2">
+                    <input type="date" name="returning" required>
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    <label for="adult">Adult</label>
+                </th>
+                <th>
+                    <label for="child">Child</label>
+                </th>
+                <th>
+                    <label for="infant">Infant</label>
+                </th>
+                <th>
+                    <label for="currency" style="color: red;">Currency</label>
+                </th>
+            </tr>
+
+            <tr>
+                <th >
+                    <input type="number" name="adult" value="1">
+                </th>
+                <th>
+                    <input type="number" name="child" value="0">
+                </th>
+                <th>
+                    <input type="number" name="infant" value="0">
+                </th>
+                <th>
+                    <select name="currency" required style="width: 100%;">
+                        <option value="pkr">PKR</option>
+                        <option value="baht"> Baht</option>
+                        <option value="usd">USD</option>       
+                    </select>
+                </th>
+            </tr>
+
+            <tr>
+                <td>
+                    <input type="submit" value="SEARCH" style="background-color: orangered; color: white;">
+                </td>
+            </tr>
+        </table>
+    
+        </form>
+        
+</body>
+</html>

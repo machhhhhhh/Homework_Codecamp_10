@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review 1</title>
+    <style>
+        .title{
+            color: red;
+        }
+        .article{
+            color: indigo;
+        }
+        table{
+            margin:30px auto;
+            font-size: 40px;
+            border: 3px solid;
+            border-collapse: collapse;
+        }
+        th{
+            border: 3px solid black;
+        }
+        td{
+            font-size: 0.5em;
+            border: 3px solid black;
+            color: blue;
+        }
+        p{
+            font-size: 0.8em;
+            color: brown;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <th colspan="2" class="title">Syntax</th>
+        </tr>
+        <tr>
+            <td class="article">Selector</td>
+            <td>h1 p div span</td>
+        </tr>
+        <tr>
+            <td rowspan="2" class="article">declaration</td>
+            <td>property and value</td>
+        </tr>
+        <tr>
+            <td><p>color : blue</p></td>
+        </tr>
+    </table>
+
+    <table>
+        <tr>
+            <th colspan="2" class="title">Type of Writing CSS</th>
+        </tr>
+        <tr>
+            <td rowspan="2" class="article">Inline CSS</td>
+            <td> div style = {...}</td>
+        </tr>
+        <tr>
+            <td><p>the command insind the tag</p></td>
+        </tr>
+        <tr>
+            <td rowspan="2" class="article"> Internal CSS</td>
+            <td> tag{ ... } </td>
+        </tr>
+        <tr>
+            <td><p>the command insind the style of head</p></td>
+        </tr>
+        <tr>
+            <td rowspan="2" class="article"> External CSS</td>
+            <td>link ref = "..." </td>
+        </tr>
+        <tr>
+            <td><p>the command is at another file</p></td>
+        </tr>
+
+    </table>
+
+    <table>
+        <tr>
+            <th colspan="2" class="title">Selectors</th>
+        </tr>
+        <tr>
+            <td rowspan="2" class="article">Type Selector</td>
+            <td>h1, img ,p</td>
+        </tr>
+        <tr>
+            <td><p>select the tag directly</p></td>
+        </tr>
+        <tr>
+            <td rowspan="2" class="article">Class Selector</td>
+            <td> .class </td>
+        </tr>
+        <tr>
+            <td><p> the class with specific name will be selected</p></td>
+        </tr>
+        <tr>
+            <td rowspan="2" class="article">ID Selector</td>
+            <td> #id </td>
+        </tr>
+        <tr>
+            <td><p> the ID with specific name will be selected</p></td>
+        </tr>
+        <tr>
+            <td rowspan="2" class="article">Universal Selector</td>
+            <td> * </td>
+        </tr>
+        <tr>
+            <td><p> all tag will be selected</p></td>
+        </tr>
+        <tr>
+            <td rowspan="2" class="article">Descendant Selector</td>
+            <td> div h1 </td>
+        </tr>
+        <tr>
+            <td><p> the child of parent will be selected<br>In this example the h1 tag inside div tag will be selected</p></td>
+        </tr>
+        <tr>
+            <td rowspan="2" class="article">Pseudo Classes</td>
+            <td>:link<br>:visited<br>:hover<br>:active</td>
+        </tr>
+        <tr>
+            <td><p>more interation about tag</p></td>
+        </tr>
+        <tr>
+            <td rowspan="2" class="article">Pseudo Elements</td>
+            <td>::after <br>::before <br></td>
+        </tr>
+        <tr>
+            <td><p>select and interaction for content by determinant</p></td>
+        </tr>
+        <tr>
+            <td rowspan="2" class="article">Attribute</td>
+            <td>[target] <br> [target=blank] <br>[title=flower]</td>
+        </tr>
+        <tr>
+            <td>select element by target // like a class</td>
+        </tr>
+        
+
+    </table>
+
+    <table>
+        <tr>
+            <th colspan="2" class="title">Combinators</th>
+        </tr>
+        <tr>
+            <td rowspan="2" class="article">Descendant Selector</td>
+            <td>div p</td>
+        </tr>
+        <tr>
+            <td><p>the p tag inside div tag will be selected<br>
+                no care the p tag that follow or not
+            </p></td>
+        </tr>
+        <tr>
+            <td rowspan="2" class="article">Child Selector</td>
+            <td>div > p</td>
+        </tr>
+        <tr>
+            <td><p>the p tag that are inside and follow div tag will be selected</p></td>
+        </tr>
+        <tr>
+            <td rowspan="2" class="article">Adjacent Sibling Selector</td>
+            <td>div + p</td>
+        </tr>
+        <tr>
+            <td><p>the p tag that not inside div tag but next to will be selected for one element</p></td>
+        </tr>
+        <tr>
+            <td rowspan="2" class="article">General Sibling Selector </td>
+            <td>div ~ p</td>
+        </tr>
+        <tr>
+            <td>
+                <p>the p tag that not inside div tag but next to will be selected for every element 
+                <br> unless meet other tag  </p>
+                </td>
+        </tr>
+    </table>
+    
+
+</body>
+</html>
