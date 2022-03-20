@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table for Number</title>
+    <style>
+        body{
+            text-align: center;
+        }
+        #p1{
+            font-size: 3rem;
+            margin: 1rem;
+            color: darkcyan;
+        }
+    </style>
+</head>
+<body>
+    <p id="p1"></p>
+
+
+    <script>
+        let number = +prompt("Enter the Number")
+
+        for(let j=1 ; j< 13; j++){
+            document.querySelector('#p1').innerHTML += `${number} x ${j} = ${number*j} <br>`
+        }
+    </script>
+
+</body>
+</html>

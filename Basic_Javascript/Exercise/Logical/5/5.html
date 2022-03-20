@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logical 5</title>
+</head>
+<body>
+    <script>
+        const admin = "admin"
+        const password = "codecamp#5"
+
+        const check = true;
+        const check_password = true
+
+        while(check){
+            const text = prompt('Who are you...')
+            
+            if (text == null || text.trim().length == 0) { // check if user not type and press cancel
+                alert("ยกเลิก")
+                check = false // boolean to out
+            }
+            else if (text.toLowerCase().trim() == admin){ // when have text cut the space out and check if user is admin
+                
+                while(check_password){ // loop for check password
+
+                    let text_password = prompt('Enter the password')
+
+                    if(text_password == null || text_password.trim().length == 0){ // when user not type and press cancel
+                        alert("ยกเลิก")
+                        check_password = false // boolean to out
+                    }
+                    else if (text_password.toLowerCase().trim() == password){ // when password is correct
+                        alert("ยินดีต้อนรับ")
+                        check_password = false
+                        check = false
+
+                    }
+                    else {
+                        alert('Wrong Password');
+                    }
+                }
+                
+            }
+            else {
+                alert('ผมไม่รู้จักคุณ')
+            }
+        }
+
+    </script>
+</body>
+</html>

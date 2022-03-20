@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For and While 6</title>
+</head>
+<body>
+    <script>
+        
+        let check_question = true
+        let check_answer = true
+
+        while(check_question){ // loop for question
+            const question = +prompt("Enter number 1 - 100 for questions...")
+
+            if(!question){ // when not type and press cancel
+                alert("Cancel")
+                check_question = false // boolean to out
+            }
+            else if (question <= 0 || question > 100) // when question less than 0 and more than 100
+            {
+                alert("The question must be between 1 to 100")
+            }
+            else {
+                check_question = false // finish the question loop
+
+                while(check_answer){ // loop for answer
+                    const answer = +prompt("Enter number to guess...")
+
+                    if (!answer){ // when not type and press cancel
+                        check_answer = false // boolean to out loop
+                        alert("Cancel")
+                    }
+
+                    else if (question != answer){ // condition for check question and answer
+                        if(answer > question){
+                            alert("Too Big ...")
+                        }
+                        else{
+                            alert("Too Small ...")
+                        }
+                    }
+                    else {
+                        alert("Correct ...")
+                        check_answer = false // when the answer is correct use boolean to out loop
+                    }
+                }
+                
+            }
+        }
+
+    </script>
+</body>
+</html>
