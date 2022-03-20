@@ -6,4 +6,4 @@
 
 ### โจทย์ : สร้างเครื่องคิดเลขรับค่า prompt จาก user
 
->> Link to [Assignment]()
+>> Link to [Assignment](https://github.com/machhhhhhh/Homework_Codecamp_10/blob/master/Basic_Javascript/Lab/Calculator/Multiplication_table.html)
