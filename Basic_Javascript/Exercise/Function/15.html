@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Function 15</title>
+</head>
+<body>
+    <script>
+        const number = +prompt('Enter Number ...')
+        let answer = ''
+        let answer1 = ''
+        let answer2 =''
+
+        const draw = n => {
+            for(let i = 0; i < n -1; i++){ // upper
+                for(j =0; j < n; j++){
+                    if(i >= j){
+                        answer1 += '*'
+                    }
+                    else{
+                        answer1 += '-'
+                    }
+                }
+                answer1 += "\n"
+            }
+
+            for(let i = 1; i <= n; i++){ // lower
+                for(let j= n; j >= 1; j--){
+                    if (i <= j){
+                        answer2 += '*'
+                    }
+                    else {
+                        answer2 += '-'
+                    }
+                }
+                answer2 += '\n'
+            }
+
+            answer = answer1 + answer2
+
+        }
+
+        draw(number)
+
+        if(number){
+            alert(answer)
+        }
+        else {
+            alert("CANCEL")
+        }
+
+    </script>
+</body>
+</html>
