@@ -10,4 +10,4 @@
 >if(-1 && 0) alert('Second')
 >if(null || -1&& 0) alert('Third')
 
->> Link to [Assignment]()
+>> Link to [Assignment](https://github.com/machhhhhhh/Homework_Codecamp_10/blob/master/Basic_Javascript/Exercise/Logical/4/4.html)

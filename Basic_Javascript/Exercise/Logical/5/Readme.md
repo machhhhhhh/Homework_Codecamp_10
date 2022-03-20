@@ -9,4 +9,4 @@
 >ถ้ากรอก admin ให้เช็ค password ว่าตรงไหม (password = codecamp#5)
 >ถ้ากรอกอย่างอื่นให้ alert ผมไม่รู้จักคุณ
 >ถ้าเป็น String ว่างหรือยกเลิก ให้ alert ยกเลิก
->> Link to [Assignment]()
+>> Link to [Assignment](https://github.com/machhhhhhh/Homework_Codecamp_10/blob/master/Basic_Javascript/Exercise/Logical/5/5.html)

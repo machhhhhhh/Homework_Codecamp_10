@@ -7,4 +7,4 @@
 ### โจทย์ : Comparison 2
 #### ผลลัพทธ์ของแต่ละ statement คืออะไร
 
->> Link to [Assignment]()
+>> Link to [Assignment](https://github.com/machhhhhhh/Homework_Codecamp_10/blob/master/Basic_Javascript/Exercise/Comparison/2/2.html)

@@ -7,4 +7,4 @@
 ### โจทย์ : Browser จะ show Hello Codecamp ไหม?
 >ตอบ Show
 
->> Link to [Assignment]()
+>> Link to [Assignment](https://github.com/machhhhhhh/Homework_Codecamp_10/blob/master/Basic_Javascript/Exercise/Comparison/5/5.html)

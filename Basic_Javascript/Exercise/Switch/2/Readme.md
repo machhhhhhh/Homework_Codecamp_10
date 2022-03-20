@@ -6,4 +6,4 @@
 
 ### โจทย์ : เปลี่ยน code เป็น switch cases
 
->> Link to [Assignment]()
+>> Link to [Assignment](https://github.com/machhhhhhh/Homework_Codecamp_10/blob/master/Basic_Javascript/Exercise/Switch/2/2.html)

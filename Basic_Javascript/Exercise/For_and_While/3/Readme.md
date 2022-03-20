@@ -10,4 +10,4 @@
 #### ใน for loop Javascript จะเข้าใจว่าตัวเงื่อนไขทำงานเหมือนกัน
 
 
->> Link to [Assignment]()
+>> Link to [Assignment](https://github.com/machhhhhhh/Homework_Codecamp_10/blob/master/Basic_Javascript/Exercise/For_and_While/3/3.html)

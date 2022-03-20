@@ -10,4 +10,4 @@
 >ตั้งชื่อตัวแปรที่ใช้เก็บที่อยู่
 >ตั้งชื่อตัวแปรที่ใช้เก็บที่อายุของจักรวาล
 
->> Link to [Assignment]()
+>> Link to [Assignment](https://github.com/machhhhhhh/Homework_Codecamp_10/blob/master/Basic_Javascript/Lab/Lab02/Lab02.html)

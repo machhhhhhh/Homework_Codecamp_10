@@ -11,4 +11,4 @@
 > 50 - 59 = D
 > น้อยกว่า 50 = F
 
->> Link to [Assignment]()
+>> Link to [Assignment](https://github.com/machhhhhhh/Homework_Codecamp_10/blob/master/Basic_Javascript/Exercise/Comparison/3/3.html)

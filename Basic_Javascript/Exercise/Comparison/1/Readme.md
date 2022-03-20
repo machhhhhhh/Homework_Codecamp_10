@@ -15,4 +15,4 @@
 > "bee" > "Bee"
 > "Bee" < "be"
 
->> Link to [Assignment]()
+>> Link to [Assignment](https://github.com/machhhhhhh/Homework_Codecamp_10/blob/master/Basic_Javascript/Exercise/Comparison/1/1.html)

@@ -8,4 +8,4 @@
 > let i=3
 >while(i){ alert(i) }
 
->> Link to [Assignment]()
+>> Link to [Assignment](https://github.com/machhhhhhh/Homework_Codecamp_10/blob/master/Basic_Javascript/Exercise/For_and_While/1/1.html)
