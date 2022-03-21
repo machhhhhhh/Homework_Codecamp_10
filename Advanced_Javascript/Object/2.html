@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object 2</title>
+</head>
+<body>
+    <script>
+
+        let obj1 = {}
+        let obj2 = {
+            name : '5555'
+        }
+
+        const isEmpty = object => {
+            for(let key in object){ // if have key in the object
+                return false
+            }
+            return true
+        }
+
+
+        console.log(isEmpty(obj1));
+        console.log(isEmpty(obj2));
+
+    </script>
+</body>
+</html>

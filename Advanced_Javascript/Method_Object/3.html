@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Method Object 3</title>
+</head>
+<body>
+    <script>
+        let calculator = {
+
+            // ... your code ...
+            read() {
+                this.number1 = +prompt("Enter The first number...")
+                this.number2 = +prompt("Enter The second number...")
+            },
+
+            sum() {
+                return this.number1 + this.number2
+            },
+
+            mul() {
+                return this.number1 * this.number2
+            }
+
+        };
+
+        calculator.read();
+        alert( calculator.sum() );
+        alert( calculator.mul() );
+    </script>
+</body>
+</html>

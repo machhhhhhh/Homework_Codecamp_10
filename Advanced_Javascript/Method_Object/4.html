@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Method Object 4</title>
+</head>
+<body>
+    <script>
+        let ladder = {
+            step: 0,
+            up() {
+                this.step++; // change value but not returning (not save)
+                return this
+            },
+            down() {
+                this.step--;
+                return this
+            },
+            showStep: function() { // shows the current step
+                alert( this.step );
+            }
+        };
+
+        // ladder.up() // 1 
+        // ladder.up() // 2
+        // ladder.down()   // 1
+        // ladder.showStep()
+
+        ladder.up().up().down().showStep()
+
+    </script>
+</body>
+</html>

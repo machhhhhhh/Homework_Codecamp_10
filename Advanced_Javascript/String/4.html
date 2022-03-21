@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String 4</title>
+</head>
+<body>
+    <script>
+
+        
+        const extractCurrencyValue = (string, rate) => {
+            if(string[0] == '$'){
+                return +string.slice(1) * rate
+            }            
+             return parseInt(string) * rate
+        }
+        
+        let text = prompt("Enter money")
+
+        if(text == null){ 
+            alert("CANCEL")
+        }else {
+            const rate = +prompt("Enter changes")
+            if (rate == 0){
+                alert("CANCEL")
+            }else {
+                alert(extractCurrencyValue(text,rate))
+            }
+        }
+        
+        // alert( extractCurrencyValue('$120', 30.5) === 3660 )
+        
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creating Object</title>
+</head> 
+<body>
+    <script>
+
+        
+        const _name = prompt("Enter your Name...")
+        const name = _name.toUpperCase().trim() 
+        
+        let age = +prompt("Enter your Age...")//
+        while(age <=0 ){
+            alert("Invalid age")
+            age = +prompt("Enter your Age... (number)")
+        }
+
+        const adress = prompt("Enter your Hometown...") 
+
+        const isSingle = confirm("Are you single?...")
+        
+        let clever = +prompt("Rate yourself (1-10)") // 
+        while(clever > 10 || clever < 1){
+            alert("Rate 1 - 10 !!!")
+            clever = +prompt("Rate yourself (1-10)")
+        }
+
+        // if (isSingle == null){
+        //     alert("Please select Single or not")
+        //     isSingle = confirm("Are you single?...")
+        // }
+        
+        // const person = {
+        //     name : name,
+        //     age : age,
+        //     adress : adress,
+        //     isSingle : isSingle,
+        //     clever : clever
+        // }
+
+        const person = {
+            name,
+            age,
+            adress,
+            isSingle,
+            clever
+        }
+        console.log(person);
+
+    </script>
+</body>
+</html>

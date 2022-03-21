@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Constructure and New 2</title>
+</head>
+<body>
+    <script>
+        // class Test {
+
+        //     read(){
+        //         this.number = +prompt("Enter number to sum")
+        //     }
+
+        //     Accumulator(startingValue){
+        //         this.start = startingValue
+        //         // alert(this.number)
+        //         for(let i=this.start; i<=this.number; i++){
+        //             this.sum += i
+        //         }
+        //     }
+
+        // }
+
+        function Accumulator(startingValue){
+            this.start = startingValue
+            this.sum = 0
+            
+            this.read = () => {
+                this.number = +prompt("Enter number to sum")
+
+                for(let i= this.start; i<= this.number; i++){
+                    this.sum += i;
+                }
+                alert(this.sum)
+
+            }
+
+        }
+
+        let accumulator = new Accumulator(1)
+        accumulator.read()
+
+    </script>
+</body>
+</html>

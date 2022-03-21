@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array 3</title>
+</head>
+<body>
+    <script>
+        let number = parseInt(prompt('Enter number'))
+        let array = []
+        
+        const sumInput = number => {
+            
+            let sum = 0
+            let check = true
+            
+            while(check){
+                if (!number) {
+                    check = false
+                    break
+                }
+                array.push(number)
+                // console.log(array);
+                number = parseInt(prompt("Enter Number"))
+            }
+            
+            for(let number of array){
+                sum += number
+            }
+            return sum
+        }
+
+        
+        console.log(sumInput(number));
+
+
+    </script>
+</body>
+</html>

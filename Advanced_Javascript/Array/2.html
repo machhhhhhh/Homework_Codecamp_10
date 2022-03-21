@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array 2</title>
+</head>
+<body>
+    <script>
+       let array = ['Jazz', 'Blues']
+       array.push('Rock-n-Roll')
+
+       if (array.length % 2 == 1){ // when count number of array = odd
+           array[(array.length-1)/2] = 'Classics'   // middle of array
+       }
+       else {
+           // when count number of array = even 
+           // push the middle
+       }
+
+       const item = array.filter(item => item == array[0])
+       array.shift()
+
+       array.unshift('Rap', 'Reggea')
+
+       console.log(item);
+       console.log(array);
+    </script>
+</body>
+</html>
