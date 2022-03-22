@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Function 24</title>
+</head>
+<body>
+    <script>
+        const number = +prompt("Enter number ...")
+        
+        let answer = ''
+        let answer1 = ''
+        let answer2 = ''
+        let count = 1
+        const draw = n =>{
+
+            let x = n
+            for (let i =0;i<n-1;i++){
+                let c=''
+                for (let j=0;j<((n*2)-1)/2;j++){ // check the middle
+                    if(j==x-1) { // if column has index with number
+                        for(let k=0;k<(i*2)+1;k++){ 
+                            c+= `${count}` // fill * follow by i in the row
+                            count++
+                        }
+                        while (c.length<(n*2)-1) c+='-' // to fill - follow the blank
+                    }
+                    else if(c.length<(n*2)-1) c+='-' // prevent to fill if not full
+                }
+                x--
+                c+='\n'
+                answer1 += c
+            }
+
+            let y = 0
+            for (let i = n-1;i>=0;i--){
+                let c=''
+                for (let j=0;j<((n*2)-1)/2;j++){ // check the middle
+                    if(j==y) { // if column has index with number
+                        for(let k=0;k<(i*2)+1;k++){ 
+                            c+= `${count}` // fill * follow by i in the row
+                            count++
+                        }
+                        while (c.length<(n*2)-1) c+='-' // to fill - follow the blank
+                    }
+                    else if(c.length<(n*2)-1) c+='-' // prevent to fill if not full
+                }
+                y++
+                c+='\n'
+                answer2 += c
+            }
+            return answer = answer1 + answer2
+        }
+
+        draw(number)
+
+        if(number){
+            alert(answer)
+        }
+        else {
+            alert('CANCEL')
+        }
+
+    </script>
+</body>
+</html>
