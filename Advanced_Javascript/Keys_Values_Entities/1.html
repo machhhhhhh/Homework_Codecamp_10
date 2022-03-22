@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keys Values Entities 1</title>
+</head>
+<body>
+    <script>
+        let salaries = {
+            "John": 100,
+            "Pete": 300,
+            "Mary": 250
+        };
+
+        const sumSalaries = object => {
+            let salary = Object.entries(object) // convert object to Map for calculating
+            let summary = 0; // total = 0
+            if(salary.length == 0){  // if not have item list
+                summary = 0 // return 0
+            }
+
+            for(let item of salary){  // for every key and value of Map 
+                for(let value of item){ // for each value
+                    if (typeof value === 'number'){ // if value is number then Calculating
+                        summary += value
+                    }
+                }
+            }
+            return summary
+        }
+
+        alert(sumSalaries(salaries))
+
+    </script>
+</body>
+</html>

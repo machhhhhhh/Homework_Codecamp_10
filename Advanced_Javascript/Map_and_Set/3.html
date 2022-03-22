@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map and Set 3</title>
+</head>
+<body>
+    <script>
+        let map = new Map()
+        map.set("name", "John")
+        console.log(map);
+
+        let keys = Array.from( map.keys() ); // declare key of array is key form Map 
+        
+        // keys = Object.fromEntries(map)
+        // Error: keys.push is not a function
+        keys.push("more"); // add value to key
+
+        console.log(keys);
+    </script>
+</body>
+</html>

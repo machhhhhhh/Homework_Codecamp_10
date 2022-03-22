@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Method of Array 1.12</title>
+</head>
+<body>
+    <script>
+        const array1 = [
+            {
+                name: 'apple',
+                birth : '2000-01-01'
+            },
+            {
+                name : 'banana',
+                birth : '1990-10-10'
+            },
+            {
+                name : 'watermelon',
+                birth : '1985-12-30'
+            }
+        ]
+
+        function changeDate(birthday){
+            let birthDate = new Date(birthday);
+            let date = String(birthDate.getDate()).padStart(2, '0');    // dd
+            let month = String(birthDate.getMonth() + 1).padStart(2, '0'); //January is 0!  || mm
+            let year = birthDate.getFullYear(); // yyyy
+            
+            switch(month){
+                case '01': 
+                        month = 'Jan'
+                        break
+                case '02': 
+                        month = 'Feb'
+                        break
+                case '03': 
+                        month = 'Mar'
+                        break
+                case '04': 
+                        month = 'Apr'
+                        break
+                case '05': 
+                        month = 'May'
+                        break
+                case '06': 
+                        month = 'Jun'
+                        break
+                case '07': 
+                        month = 'Jul'
+                        break
+                case '08': 
+                        month = 'Aug'
+                        break
+                case '09': 
+                        month = 'Sep'
+                        break
+                case '10': 
+                        month = 'Oct'
+                        break
+                case '11': 
+                        month = 'Nov'
+                        break
+                case '12': 
+                        month = 'Dec'
+                        break
+                default : alert('Invalid Month')
+            }
+
+            birthDate = date + ' ' + month + ' ' + year;
+            return birthDate
+        }
+
+        const array2 = array1.map(item => `<tr> <td>${item.name}</td> <td>${changeDate(item.birth)}</td> </tr>`)
+
+        console.log(array2);
+
+    </script>
+</body>
+</html>

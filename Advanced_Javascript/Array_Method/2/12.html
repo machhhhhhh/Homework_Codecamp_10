@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Method of Array 2.12</title>
+</head>
+<body>
+    <script>
+
+        const array1 = [
+            {
+                name : 'apple',
+                birth : '2001-01-01'
+            },
+            {
+                name : 'banana',
+                birth : '1990-10-10'
+            },
+            {
+                name : 'watermelon',
+                birth : '1985-12-30'
+            },
+            {
+                name : 'peach',
+                birth : '2002-10-13'
+            },
+        ]
+        
+        function changeDate(birthday){
+            let birthDate = new Date(birthday);
+            let date = String(birthDate.getDate()).padStart(2, '0');    // dd
+            let month = String(birthDate.getMonth() + 1).padStart(2, '0'); //January is 0!  || mm
+            let year = birthDate.getFullYear(); // yyyy
+            
+            birthDate = date + ' ' + month + ' ' + year;
+            return year
+        }
+
+        const array2 = array1.filter(item => changeDate(item.birth)< 2000)
+
+        console.log(array2);
+    </script>
+</body>
+</html>

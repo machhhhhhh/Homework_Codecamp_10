@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map and Set 1</title>
+</head>
+<body>
+    <script>
+        function unique(arr) {
+            // your code
+            return [...new Set (arr)]   // [...new] set new value to array
+                                        // Set = method to collect no same value
+        }
+
+        let values = ["Hare", "Krishna", "Hare", "Krishna", "Krishna", "Krishna", "Hare", "Hare", ":-O" ];
+
+        alert( unique(values) ); // Hare, Krishna, :-O
+    </script>
+</body>
+</html>

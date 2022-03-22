@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Method of Array 1.11</title>
+</head>
+<body>
+    <script>
+        const array1 = [
+            {
+                name : 'apple',
+                birth : '2000-01-01'
+            },
+            {
+                name : 'banana',
+                birth : '1990-10-01'
+            },
+            {
+                name : 'watermelon',
+                birth : '1985-12-01'
+            }
+        ]
+
+        const array2 = array1.map(item => {
+            let today = new Date() // set now time
+            let birthDate = new Date(item.birth) // set birth day
+
+            // console.log(birthDate.getMonth()+1);
+
+            let age = today.getFullYear() - birthDate.getFullYear() // year - year = age
+            // console.log(age);
+            let month = (today.getMonth()+1) - (birthDate.getMonth()+1) // for check month
+            // console.log(birthDate.getMonth()+1);
+            if (month < 0 ||    // if today not reach the birth month
+                (month ===0 && today.getDate() < birthDate.getDate())   // or if same month and not reach birthday
+                ){
+                    age--   
+                }
+
+            return {...item, age: age}
+        })
+
+        console.log(array2);
+
+    </script>
+</body>
+</html>
