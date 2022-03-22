@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Function 21</title>
+</head>
+<body>
+    <script>
+        const number = +prompt("Enter number ...")
+        
+        
+        let answer = ''
+        const draw = n =>{
+            let m = 0
+            for (let i = n-1;i>=0;i--){
+                let c=''
+                for (let j=0;j<((n*2)-1)/2;j++){ // check the middle
+                    if(j==m) { // if column has index with number
+                        for(let k=0;k<(i*2)+1;k++){ 
+                            c+='*' // fill * follow by i in the row
+                        }
+                        while (c.length<(n*2)-1) c+='-' // to fill - follow the blank
+                    }
+                    else if(c.length<(n*2)-1) c+='-' // prevent to fill if not full
+                }
+                m++
+                c+='\n'
+                answer += c
+            }
+        }
+
+        draw(number)
+        if(number){
+            alert(answer)
+        }
+        else {
+            alert('CANCEL')
+        }
+
+    </script>
+</body>
+</html>
