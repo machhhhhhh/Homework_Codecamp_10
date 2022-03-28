@@ -1,7 +1,8 @@
-import { type } from '@testing-library/user-event/dist/type';
 import { useState } from 'react';
 import './App.css';
-
+import Button from '@mui/material/Button'
+import DeleteIcon from '@mui/icons-material/Delete';
+import CheckIcon from '@mui/icons-material/Check';
 
 function App() {
 
@@ -10,20 +11,25 @@ function App() {
   const [done, setDone] = useState([])
 
   // this algorithm not support for same words
-  const finish = todo =>{
+  const finish = index =>{
     // const data = ([...list].splice(index,1));
     // setList(data)
-    let text =''
-    const data = [...list].filter(item => item !== todo)
-    const move = [...list].filter(item => item === todo)
-    setList(data)
+    // const data = [...list].filter(item => item !== todo)
+    // const move = [...list].filter(item => item === todo)
+    // setList(data)
     
-    if(move.length > 1){
-      setDone([move[0],...done])
-    } 
-    else {
-      setDone([move,...done])
-    }
+    // if(move.length > 1){
+    //   setDone([move[0],...done])
+    // } 
+    // else {
+    //   setDone([move,...done])
+    // }
+
+    const data = [...list]
+    const move = data.splice(index,1)
+    setDone([move,...done])
+    setList(data)
+
   }
 
   const add = () => {
@@ -33,8 +39,12 @@ function App() {
     // console.log(list.length);
   }
 
-  const del = todo => {
-    const data = [...list].filter(item => item !==todo)
+  const del = index => {
+    // const data = [...list].filter(list => list !== item)
+    // setList(data)
+    // list.splice(index,1)
+    const data = [...list]
+    data.splice(index,1)
     setList(data)
   }
 
@@ -63,8 +73,8 @@ function App() {
         {list.map((item,key) => 
           <li key={key} >
             {item}
-            <button onClick={() => finish(item)}>Finish</button>
-            <button onClick={() => del(item)}>Del</button>
+            <Button variant="contained" color="success"  onClick={() => finish(key)}><CheckIcon/></Button>
+            <Button variant="contained" color="error" onClick={() => del(key)}><DeleteIcon /></Button>
           </li>
         )}
       </div>
