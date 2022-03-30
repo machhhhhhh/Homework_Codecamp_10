@@ -20,4 +20,4 @@
 > ให้เขียนฟังก์ชัน getMaxSubSum(arr) ที่ return ผลรวมของ subarray ที่มากที่สุดที่ติดกัน
 
 
->> Link to [Github]()
+>> Link to [Github](https://github.com/machhhhhhh/Homework_Codecamp_10/tree/master/Advanced_Javascript/Array)

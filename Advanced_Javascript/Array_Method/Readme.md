@@ -8,4 +8,4 @@
 1. ให้สร้าง array2 จาก array1 ตามที่โจทย์กำหนด โดยใช้ฟังก์ชัน Array.map()
 2. ให้สร้าง array2 จาก array1 ตามที่โจทย์กำหนด โดยใช้ฟังก์ชัน Array.filter()
 
->> Link to [Github]()
+>> Link to [Github](https://github.com/machhhhhhh/Homework_Codecamp_10/tree/master/Advanced_Javascript/Array_Method)

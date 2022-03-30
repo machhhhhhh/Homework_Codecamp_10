@@ -16,4 +16,4 @@
 > ดัดแปลง Object ชื่อ ladder สามารถเรียก function แบบนี้ได้
 
 
->> Link to [Github]()
+>> Link to [Github](https://github.com/machhhhhhh/Homework_Codecamp_10/tree/master/Advanced_Javascript/Method_Object)

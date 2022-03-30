@@ -14,4 +14,4 @@
 > ฟังก์ชัน read() ควรอ่านค่าจาก propmt() และ เพิ่มค่าที่ใส่เข้ามาใน key ชื่อ value พูดง่าย ๆ ก็คือ value คือผลรวมของ prompt โดยเริ่มจาก startingValue
 
 
->> Link to [Github]()
+>> Link to [Github](https://github.com/machhhhhhh/Homework_Codecamp_10/tree/master/Advanced_Javascript/Constructure_and_New)

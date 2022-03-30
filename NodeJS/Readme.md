@@ -9,4 +9,4 @@
 #### Lab1 เข้า localhost:5555/bye 
 #### Lab2 สร้าง route GET PUT POST DELETE
 
->> Link to [Github]()
+>> Link to [Github](https://github.com/machhhhhhh/Homework_Codecamp_10/tree/master/NodeJS/Lab/Express)
