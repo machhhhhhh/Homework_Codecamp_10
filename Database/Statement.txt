@@ -1,0 +1,27 @@
+1.
+select account.account_number from branch
+join account on account.branch_name = branch.branch_name
+where branch.branch_city = 'Riverside'
+
+2.
+select account_number from account
+where branch_name = 'A' or branch_name = 'B'
+
+3.
+select  customer.customer_name ,sum(account.balance) as total_balance from customer
+join depositor on depositor.customer_name = customer.customer_name
+join account on account.account_number = depositor.account_number
+group by customer.customer_name
+
+4.
+select customer_name , sum(balance) as Total_Balance from depositor
+join account on account.account_number = depositor.account_number
+group by depositor.customer_name
+having count(*) >1
+
+5.
+select customer_name, sum(balance) as Total_balance from depositor
+join account on account.account_number = depositor.account_number
+group by depositor.customer_name
+having count(*) > 1
+order by sum(balance) DESC

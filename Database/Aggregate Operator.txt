@@ -1,0 +1,9 @@
+1. select count(*) as number_of_people from sailors
+
+2. select sum(age) from sailors where rating = 10
+
+3. select avg(age) from sailors where rating = 10
+
+4. select sname , max(age) as age from sailors
+
+5. SELECT distinct sname from sailors where age between 25 and 35;

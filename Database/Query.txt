@@ -1,0 +1,65 @@
+1. select distinct sname,age from sailors
+
+2. 
+select sailors.sname from sailors 
+join reserves on sailors.sid = reserves.sid
+where reserves.bid = 103
+
+3.
+select distinct sid from reserves
+join boats on boats.bid = reserves.bid
+where boats.color = 'red'
+
+4.
+select distinct  sailors.sid, sailors.sname , 
+boats.color as Boat_Color from reserves
+join boats on boats.bid = reserves.bid
+join sailors on sailors.sid = reserves.sid
+where boats.color = 'Red'
+
+5.
+select distinct boats.color from sailors
+join reserves on reserves.sid = sailors.sid
+join boats on boats.bid = reserves.bid
+where sailors.sname = 'Lubber'
+
+6.
+select distinct sname from sailors
+join reserves on reserves.sid = sailors.sid
+
+7.
+select distinct sname from sailors
+join reserves on reserves.sid = sailors.sid
+join boats on boats.bid = reserves.bid
+where boats.color = 'red' or boats.color = 'green'
+
+8.
+select distinct sname from sailors
+where sname in 
+(
+	select distinct sname from sailors
+	join reserves on sailors.sid = reserves.sid
+	join boats on boats.bid = reserves.bid
+	where boats.color = 'red'
+)
+AND sname in (
+	select distinct sname from sailors
+	join reserves on sailors.sid = reserves.sid
+	join boats on boats.bid = reserves.bid
+	where boats.color = 'green'
+)
+
+9.
+select distinct sid, sname from sailors
+where sid in (
+	select distinct sailors.sid from sailors
+	join reserves on reserves.sid = sailors.sid
+	join boats on boats.bid = reserves.bid
+	where boats.color = 'red'
+)
+AND sid not in (
+	select distinct sailors.sid from sailors
+	join reserves on reserves.sid = sailors.sid
+	join boats on boats.bid = reserves.bid
+	where boats.color = 'green'
+);
