@@ -16,6 +16,11 @@ app.get('/',async (req,res) => {
     res.status(200).send(list)
 })
 
+app.get('/:id', async (req, res) => {
+    const list = await db.Todolist.findOne({where : { id : req.params.id}})
+    res.status(200).send(list)
+})
+
 app.post('/', async (req,res) => {
 
     const newList = await db.Todolist.create({
