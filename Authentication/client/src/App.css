@@ -1,0 +1,18 @@
+@import '~antd/dist/antd.css';
+
+li {
+    list-style-type: none;
+    /* background-color: red; */
+    width: 30%;
+    margin: auto;
+}
+
+.list {
+    align-items: center;
+    text-align: center;
+    margin: auto;
+}
+.check{
+    display: inline;
+    width: 50%;
+}
