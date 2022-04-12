@@ -1,11 +1,14 @@
-import Todolist from './components/todolist'
-import './App.css'
+import React, { useState } from 'react';
+import './App.css';
+import PrivateRoutes from './components/private-routes/PrivateRoutes';
+import LocalStorageservice from './services/localStorageservice';
 
 function App() {
+
+  const [role, setRole] = useState(LocalStorageservice.getRole())
+
   return (
-    <>
-      <Todolist/>
-    </>
+      <PrivateRoutes role= {role} setRole= {setRole}/>
   );
 }
 
