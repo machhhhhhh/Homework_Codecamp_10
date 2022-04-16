@@ -1,0 +1,75 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/* 
+body{
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif ;
+} */
+
+.container{
+    width: 30%; 
+}
+.c2{
+    display: inline-block;
+    /* background-color: red;  */
+    /* border: 2px solid rgb(2, 167, 244); */
+    margin: 5% 20%;
+    outline: 2px rgb(0, 170, 255) solid;
+    padding: 1px 3px 0px 1px;
+    /* width: 39.5%; */
+}
+.c1 {
+    display: inline-block;
+    padding: 5px;
+    background-color: rgb(230,230,230);
+    box-shadow: 3px 3px #888888;
+    border: solid 3px rgb(100, 100, 100);
+    border-radius: 1%;
+    /* margin: auto 20%; */
+    /* outline: 1px solid blue; */
+}
+
+table{
+    /* background-color: blue; */
+    background-color: white;
+    /* border-radius: 1%; */
+    /* margin: auto; */
+    padding: 1.5em 1.5em 0 1.5em;
+
+}
+
+td {
+    padding-bottom: 0.5em;
+    padding-top: 0.2em;
+}
+
+label > span {
+    color: red;
+}
+
+.url{
+    margin-left: -4px;
+    width: 20%;
+}
+.url-span , .logo{
+    font-size: 0.86em;
+}
+.setup{
+    color: rgb(80,80,80);
+    background-color: rgb(230, 230, 230);
+    border: 2px  rgb(200,200,200);
+    border-style: solid none;
+}
+
+.button {
+    color: rgb(174, 38, 38);
+    background-color: rgb(237, 237, 84);
+    width: 5%;
+}
+button{
+    border-radius: 5px;
+    color: black;
+    background-color: rgb(235, 235, 235);
+}

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenge 1</title>
+    <link rel="stylesheet" href="./Challenge1.css">
+</head>
+<body>
+    <form  action="">
+        <div class="c2">
+            <div class="c1">
+                <table>
+                    <tr>
+                        <td class="container" >
+                            <label for="name">Name <span>*</span>:</label>
+                        </td>
+                        <td>
+                            <input type="text" id="name" name="name">
+                            <button class="button" type="button"  ><strong>?</strong></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td >
+                            <label for="text">Tab Text <span>*</span>:</label>
+                        </td>
+                        <td>
+                            <input type="text" id="text" name="text">
+                            <button class="button" type="button"><strong>?</strong></button>
+                        </td>
+                    </tr>
+                    <tr >
+                        <td>
+                            <label for="url">URL <span>*</span>:</label>
+                        </td>
+                        <td>
+                            <span class="url-span" >https://www.wizehive.com/webform/</span>
+                            <input class="url" type="text" id="url" name="url">
+                        </td>
+                    </tr>
+    
+    
+                    <!------------------- Body ------------------>
+    
+                    <tr>
+                        <td colspan="2" class="setup" style="padding: 0.5em 0.5em 0.5em 0.2em;" > 
+                            FORM SETUP
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td >
+                            <label for="form">Form:</label>
+                        </td>
+                        <td>
+                            <select name="form" id="form">
+                                <option value="" selected disabled hidden></option>
+                                <option value="bangkok">BKK</option>
+                                <option value="cm">ChiangMai</option>
+                                <option value="pk">Phuket</option>
+                                <option value="" disabled hidden>sdfsdfsdfsdfsdfdsfdsfsd</option>
+                            </select>
+                            <button type="button" ><strong>Edit</strong></button>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td>
+                            <label for="logo">Logo:</label>
+                        </td>
+                        <td>
+                            <span class="logo">no logo uploaded </span>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button type="button"><strong>Upload Logo</strong></button>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td>
+                            <label for="template">Template Text:</label>
+                        </td>
+                        <td>
+                            <select name="template" id="template">
+                                <option value="english">English</option>
+                                <option value="Thai">Thailand</option>
+                                <option value="" disabled hidden>sdfsdfsdfsdfsdfdsfdsfsd</option>
+                            </select>
+                            <button type="button"><strong>Edit</strong></button>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td>
+                            <label for="reviewForm">Review Form:</label>
+                        </td>
+                        <td>
+                            <select name="reviewForm" id="reviewForm">
+                                <option value="default">Default</option>
+                                <option value="special">Special</option>
+                                <option value="" disabled hidden>sdfsdfsdfsdfsdfdsfdsfsd</option>
+                            </select>
+                        </td>
+                    </tr>
+    
+    
+                    <tr>
+                        <td>
+                            <label for="reviewScore">Review Score:</label>
+                        </td>
+                        <td>
+                            <select name="reviewScore" id="reviewScore">
+                                <option value="rating">Rating</option>
+                                <option value="count">Count</option>
+                                <option value="" disabled hidden>sdfsdfsdfsdfsdfdsfdsfsd</option>
+                            </select>
+                            <button type="button"><strong>Reload Fields</strong></button>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td>
+                            <label for="scoringType">Scoring Type:</label>
+                        </td>
+                        <td>
+                            <select name="scoringType" id="scoringType">
+                                <option value="average">Average</option>
+                                <option value="mean">Mean</option>
+                                <option value="min">Min</option>
+                                <option value="max">Max</option>
+                            </select>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td>
+                            <label for="maxScore">Max Score</label>
+                        </td>
+                        <td>
+                            <input type="text" id="maxScore" name="maxScore" value="4.00">
+                        </td>
+                    </tr>
+    
+                </table>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
