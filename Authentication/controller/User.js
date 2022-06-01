@@ -53,7 +53,10 @@ const register = async(req,res) => {
         const newUser = await db.User.create({
             username : req.body.username,
             password : hash,
-            name : req.body.name
+            firstname : req.body.firstname,
+            lastname : req.body.lastname,
+            phone : req.body.phone,
+            image : req.body.image
         })
 
         res.status(201).send({message : 'User Created'})

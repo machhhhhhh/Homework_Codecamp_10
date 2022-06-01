@@ -1,7 +1,7 @@
 import Todolist from '../components/pages/Index'
 import Login from '../components/pages/Login'
 import Register from '../components/pages/Register'
-import Profile from '../components/pages/Profile'
+import Dashboard from '../components/pages/Dashboard'
 
 const components = {
     todo : {
@@ -16,9 +16,9 @@ const components = {
         url : '/register',
         component : Register
     },
-    profile : {
-        url : '/profile',
-        component : Profile
+    dashboard : {
+        url : '/dashboard',
+        component : Dashboard
     }
 }
 
@@ -34,8 +34,8 @@ export default {
     user : {
         allowRoutes : [
             components.todo,
-            components.profile
+            components.dashboard
         ],
-        redirectRoutes : '/profile'
+        redirectRoutes : '/dashboard'
     }
 }

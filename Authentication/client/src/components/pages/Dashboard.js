@@ -2,12 +2,14 @@ import { Button, notification } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import LocalStorageservice from '../../services/localStorageservice';
-import axios from '../../config/axios'
+// import axios from '../../config/axios'
 import jwtDecode from 'jwt-decode'
 
-export default function Profile(props) {
+import Header from './Header'
 
-    let userLogin
+export default function Dashboard(props) {
+
+    // let userLogin
     // let allUser
     // let user
     const [user,setUser] = useState([])
@@ -35,22 +37,27 @@ export default function Profile(props) {
     useEffect(()=>{
         // getUser()
         const token = LocalStorageservice.getToken()
-        userLogin = jwtDecode(token)
+        const userLogin = jwtDecode(token)
         // console.log(user);
         setUser(userLogin)
+        // console.log(user);
     },[])
 
 
     return (
         <div>
-            <h2>Profile</h2>
+            {/* <h2>Profile</h2>
             <p>
-                <strong>Name:</strong> {user.name}
+                <strong>Name:</strong> {user.firstname}
                 <br />
                 <strong>User ID:</strong> {user.id}
-            </p>
-            <Link to= '/list'><Button>Todolist</Button></Link>
-            <br></br>
+            </p> */}
+            {/* <Link to= '/list'><Button>Todolist</Button></Link> */}
+            {/* <br></br> */}
+
+
+            <Header />
+
             <Button onClick={logout}>Logout</Button>
         </div>
     );

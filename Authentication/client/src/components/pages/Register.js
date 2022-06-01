@@ -2,7 +2,7 @@ import React from 'react';
 import { Form, Input, Button, Row, Col, Divider , notification} from 'antd';
 import Title from 'antd/lib/typography/Title';
 import axios from '../../config/axios';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 const layout = {
     labelCol: { xs: 24, sm: 7, md: 6, lg: 6, xl: 5, xxl: 4 },
@@ -13,14 +13,17 @@ function Register(props) {
     const onFinish = async values => {
         console.log('Received values of form: ', values);
         const body = {
-            username : values.email,
+            username : values.username,
             password : values.password,
-            name : values.nickname 
+            firstname : values.firstname,
+            lastname : values.lastname,
+            image : values.image,
+            phone : values.phone
         }
         await axios.post('/user/register', body)
             .then( res => {
                 notification.success({
-                    message: `${values.nickname} has registered`,
+                    message: `${values.firstname} ${values.lastname} has registered`,
                   });
 
                   props.history.push('/user/login')
@@ -51,7 +54,7 @@ function Register(props) {
                         style={{ width: "100%" }}
                     >
                         <Form.Item
-                            name="email"
+                            name="username"
                             label="E-mail"
                             rules={[
                                 {
@@ -104,17 +107,67 @@ function Register(props) {
                             <Input.Password />
                         </Form.Item>
 
-                        <Form.Item
+                        {/* <Form.Item
                             name="nickname"
                             label={<span>Nickname&nbsp;</span>}
                             rules={[{ required: true, message: 'Please input your nickname!', whitespace: true }]}
                         >
                             <Input />
+                        </Form.Item> */}
+                        
+                        <Form.Item
+                            name= 'firstname'
+                            label = 'First Name' 
+                            rules={[{
+                                required : true,
+                                message : 'Please input your firstname! ',
+                                whitespace : true
+                            }]}
+                            >
+                            <Input/>
+
+                        </Form.Item>
+                        <Form.Item
+                            name= 'lastname'
+                            label = 'Last Name' 
+                            rules={[{
+                                required : true,
+                                message : 'Please input your lastname! ',
+                                whitespace : true
+                            }]}
+                            >
+                            <Input/>
+
+                        </Form.Item>
+                        <Form.Item
+                            name= 'phone'
+                            label = 'Phone' 
+                            rules={[{
+                                required : true,
+                                message : 'Please input your phone! ',
+                                whitespace : true
+                            }]}
+                            >
+                            <Input/>
+
+                        </Form.Item>
+                        <Form.Item
+                            name= 'image'
+                            label = 'Image' 
+                            rules={[{
+                                required : true,
+                                message : 'Please input your image! ',
+                                whitespace : true
+                            }]}
+                            >
+                            <Input/>
+
                         </Form.Item>
 
                             <Button className="Button" type="primary" htmlType="submit">
                                 Register
                             </Button>
+                            <Link to='/login'><Button type='primary' className="Button" danger>Back</Button></Link>
                     </Form>
                 </div>
             </Col>
