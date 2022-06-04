@@ -1,14 +1,21 @@
-import React from 'react'
+import React , {useState}from 'react'
 import '../css/message.css'
 import {Avatar} from '@mui/material'
 import VideoCameraFrontIcon from '@mui/icons-material/VideoCameraFront';
 import PhotoIcon from '@mui/icons-material/Photo';
 import MoodIcon from '@mui/icons-material/Mood';
+import axios from '../../config/axios'
 
 function PostMessage() {
 
+    const [input, setInput] = useState('')
+    // const [image, setImage] = useState('')
+
     const handleSubmit = e => {
-        // e.preventDefault()
+        e.preventDefault()
+        // axios.post to backend
+
+        setInput('')
     }
 
   return (
@@ -21,6 +28,8 @@ function PostMessage() {
                     type='text'
                     className='message_input'
                     placeholder={`What's on your mind.`}
+                    value={input}
+                    onChange={e => setInput(e.target.value)}
                 />
                 <button type='submit' onClick={e => handleSubmit(e)} >Send</button>
             </form>

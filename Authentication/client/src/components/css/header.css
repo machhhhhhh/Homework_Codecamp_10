@@ -78,5 +78,10 @@
 
 .dashboard{
     background-color: #f1f2f5;
-    height: 100vh;
+    height: auto;
+}
+.story_header{
+    background-color: white;
+    border-radius: 15px;
+    padding: 30px;
 }
