@@ -17,6 +17,6 @@ const User = require('./routes/User')
 route.use('/list', Todolist)
 route.use('/user', User)
 
-db.sequelize.sync({force: true}).then(()=> {
+db.sequelize.sync().then(()=> {
     route.listen(process.env.port, () => console.log('Listening at ' + process.env.port))
 })

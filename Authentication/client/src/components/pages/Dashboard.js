@@ -1,11 +1,14 @@
-import { Button, notification } from 'antd';
+import {  notification } from 'antd';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import LocalStorageservice from '../../services/localStorageservice';
 // import axios from '../../config/axios'
 import jwtDecode from 'jwt-decode'
 
-import Header from './Header'
+import Header from '../navigate/Header'
+import Sidebar from '../navigate/Sidebar'
+import Feed from '../navigate/Feed';
+import '../css/header.css'
 
 export default function Dashboard(props) {
 
@@ -45,20 +48,22 @@ export default function Dashboard(props) {
 
 
     return (
-        <div>
+        <div className='dashboard'>
             {/* <h2>Profile</h2>
             <p>
                 <strong>Name:</strong> {user.firstname}
                 <br />
                 <strong>User ID:</strong> {user.id}
             </p> */}
-            {/* <Link to= '/list'><Button>Todolist</Button></Link> */}
-            {/* <br></br> */}
 
+            <Header user = {user} logout={logout}/>
 
-            <Header />
+            <div className="content">
+                <Sidebar user = {user}/>
+                <Feed    />
+                {/* <Widgets /> */}
+            </div>
 
-            <Button onClick={logout}>Logout</Button>
         </div>
     );
 }
