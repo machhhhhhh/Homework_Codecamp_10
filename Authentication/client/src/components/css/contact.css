@@ -1,0 +1,42 @@
+.contact {
+    margin-top: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 5px 7px -7px rgba(0,0,0,0.75);
+}
+
+.contact-header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.contact-header > h2 {
+    color: grey;
+}
+
+.contact-header-icon {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.icon {
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+
+
+.friend-contact{
+    display: flex;
+    border-radius: 15px;
+    padding: 10px;
+    align-items: center;
+    cursor: pointer;
+}
+
+.friend-contact:hover{
+    background-color: lightgrey;
+}
+
+.friend-contact > .friend-name {
+    margin-left: 15px;
+}

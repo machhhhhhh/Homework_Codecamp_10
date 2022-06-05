@@ -9,6 +9,7 @@ import Header from '../navigate/Header'
 import Sidebar from '../navigate/Sidebar'
 import Feed from '../navigate/Feed';
 import '../css/header.css'
+import Widgets from '../navigate/Widgets';
 
 export default function Dashboard(props) {
 
@@ -41,6 +42,7 @@ export default function Dashboard(props) {
         // getUser()
         const token = LocalStorageservice.getToken()
         const userLogin = jwtDecode(token)
+        console.log(jwtDecode(token));
         // console.log(user);
         setUser(userLogin)
         // console.log(user);
@@ -55,13 +57,14 @@ export default function Dashboard(props) {
                 <br />
                 <strong>User ID:</strong> {user.id}
             </p> */}
+            {/* {user} */}
 
             <Header user = {user} logout={logout}/>
 
             <div className="content">
                 <Sidebar user = {user}/>
                 <Feed    />
-                {/* <Widgets /> */}
+                <Widgets />
             </div>
 
         </div>

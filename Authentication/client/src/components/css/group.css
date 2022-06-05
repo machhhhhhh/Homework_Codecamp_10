@@ -1,0 +1,23 @@
+.groups{
+    border-radius: 15px;
+    margin-top: 20px;
+    box-shadow: 0px 5px 7px -7px rgba(0,0,0,0.75);
+}
+.groups > h2 {
+    color: grey;
+}
+
+.group{
+    display: flex;
+    padding: 10px;
+    border-radius: 15px;
+    cursor: pointer;
+    align-items: center;
+}
+
+.group:hover{
+    background-color: grey;
+}
+.group > h4 {
+    margin-left: 20px;
+}

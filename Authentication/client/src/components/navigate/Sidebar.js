@@ -1,6 +1,6 @@
 import React from 'react'
 import '../css/sidebar.css'
-import SidebarRow from './SidebarRow'
+import SidebarRow from './Sidebar/SidebarRow'
 
 import GroupIcon from '@mui/icons-material/Group';
 import GroupsIcon from '@mui/icons-material/Groups';

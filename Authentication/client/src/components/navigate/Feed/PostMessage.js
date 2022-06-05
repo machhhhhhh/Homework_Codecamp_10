@@ -1,10 +1,10 @@
 import React , {useState}from 'react'
-import '../css/message.css'
+import '../../css/message.css'
 import {Avatar} from '@mui/material'
 import VideoCameraFrontIcon from '@mui/icons-material/VideoCameraFront';
 import PhotoIcon from '@mui/icons-material/Photo';
 import MoodIcon from '@mui/icons-material/Mood';
-import axios from '../../config/axios'
+import axios from '../../../config/axios'
 
 function PostMessage() {
 
