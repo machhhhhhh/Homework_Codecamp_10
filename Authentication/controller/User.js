@@ -21,6 +21,7 @@ const login = async(req,res) => {
             const token  = jwt.sign(payload, process.env.SECRET_OR_KEY, {expiresIn: 3600 * 5})
 
             res.status(200).send({
+                user : User,
                 token : token,
                 message : 'Login Successfully'
             })
@@ -35,9 +36,12 @@ const login = async(req,res) => {
    
 }
 
-// const logout = async(req,res) => {
-
-// }
+const logout = async(req,res) => {
+    req.session.destroy(() => {
+        req.logout();
+        res.redirect("/"); //Inside a callback… bulletproof!
+       });
+}
 
 const register = async(req,res) => {
 
@@ -73,6 +77,6 @@ const getUser = async (req,res) => {
 module.exports = {
     login,
     register,
-    // logout,
+    logout,
     getUser
 }

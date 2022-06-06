@@ -13,7 +13,6 @@ function Post({profile, image, username, timestamp, message}) {
             <div className='post_topInfo'>
                 <h3>{username}</h3>
                 <p>timestamp</p>
-
             </div>
         </div>
         <div className='post_bottom'>

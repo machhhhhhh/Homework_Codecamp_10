@@ -2,6 +2,8 @@ import Todolist from '../components/pages/Index'
 import Login from '../components/pages/Login'
 import Register from '../components/pages/Register'
 import Dashboard from '../components/pages/Dashboard'
+// import FacebookLogin from '../components/pages/FacebookLogin'
+
 const components = {
     todo : {
         url : '/list',

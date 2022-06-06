@@ -16,7 +16,7 @@ function Sidebar(props) {
 
   return (
     <div className='sidebar'>
-        <SidebarRow title={props.user.id} Icon={Avatar} />
+        <SidebarRow title={props.user.firstname + ' ' + props.user.lastname} Icon={Avatar} />
         <SidebarRow title="Friends" Icon={GroupIcon} />
         <SidebarRow title="Groups" Icon={GroupsIcon} />
         <SidebarRow title="Marketplace" Icon={StorefrontIcon} />

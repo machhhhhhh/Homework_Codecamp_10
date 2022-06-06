@@ -6,9 +6,8 @@
     display: flex;
     flex: 1;
     cursor: pointer;
-    padding-top: 5px;
     padding-right: 30px;
-
+    align-items: center;
 }
 
 .ad:hover{
@@ -25,7 +24,6 @@
 
 .ad_title{
     margin-left: 15px;
-    margin-top: 30px;
 }
 .ad_title > p {
     color: grey;

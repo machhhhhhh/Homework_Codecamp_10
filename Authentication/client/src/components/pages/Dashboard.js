@@ -2,7 +2,7 @@ import {  notification } from 'antd';
 import React, { useEffect, useState } from 'react';
 // import { Link } from 'react-router-dom';
 import LocalStorageservice from '../../services/localStorageservice';
-// import axios from '../../config/axios'
+import axios from '../../config/axios'
 import jwtDecode from 'jwt-decode'
 
 import Header from '../navigate/Header'
@@ -18,12 +18,20 @@ export default function Dashboard(props) {
     // let user
     const [user,setUser] = useState([])
 
-    const logout = () => {
+    const logout = async () => {
+        
         LocalStorageservice.removeToken()
         props.setRole('guest')
         notification.success({
             message: "Logout"
         })
+
+        props.history.push('/login')
+        // await axios.get('/user/logout')
+        // .then(res => {
+            
+        //     })
+        //     .catch(err => console.error(err))
     }
 
     // async function getUser(){
@@ -38,15 +46,26 @@ export default function Dashboard(props) {
     //     // jsonstringuser.map(user => console.log(user))
     // }
 
-    useEffect(()=>{
+    useEffect( async ()=>{
         // getUser()
         const token = LocalStorageservice.getToken()
-        const userLogin = jwtDecode(token)
-        console.log(jwtDecode(token));
+        // const userLogin = jwtDecode(token)
         // console.log(user);
-        setUser(userLogin)
+        // setUser(userLogin)
         // console.log(user);
-    },[])
+        // console.log(jwtDecode(token));
+
+        const result = await axios.get('/user')
+        const data = result.data
+        const profile = data.filter(user => user.id === jwtDecode(token).id)
+        profile.map(user => {
+            console.log(user);
+            setUser(user)
+        })
+
+    },[0])
+
+    
 
 
     return (
@@ -63,8 +82,8 @@ export default function Dashboard(props) {
 
             <div className="content">
                 <Sidebar user = {user}/>
-                <Feed    />
-                <Widgets />
+                <Feed    user = {user}/>
+                <Widgets user = {user}/>
             </div>
 
         </div>

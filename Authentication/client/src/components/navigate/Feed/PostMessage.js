@@ -6,7 +6,7 @@ import PhotoIcon from '@mui/icons-material/Photo';
 import MoodIcon from '@mui/icons-material/Mood';
 import axios from '../../../config/axios'
 
-function PostMessage() {
+function PostMessage(props) {
 
     const [input, setInput] = useState('')
     // const [image, setImage] = useState('')
@@ -22,7 +22,7 @@ function PostMessage() {
     <div className='message'>
 
         <div className='message_top'>
-            <Avatar src=""/>
+            <Avatar src={props.user.image} className="message-avatar"/>
             <form>
                 <input 
                     type='text'

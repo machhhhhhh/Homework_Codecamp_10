@@ -5,11 +5,11 @@ import PostMessage from './Feed/PostMessage'
 import StoryHeader from './Feed/StoryHeader'
 import Post from './Feed/Post'
 
-function Feed() {
+function Feed(props) {
   return (
     <div className='feed'>
       <StoryHeader/>
-      <PostMessage/>
+      <PostMessage user={props.user} />
 
       <Post
         profile="https://media.wired.com/photos/598e35fb99d76447c4eb1f28/master/pass/phonepicutres-TA.jpg"

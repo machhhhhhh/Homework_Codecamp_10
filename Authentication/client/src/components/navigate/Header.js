@@ -62,8 +62,8 @@ function Header(props) {
             </div>
             <div className='header_right' >
                 <div className='header_info'>
-                    <Avatar src="" />
-                    <span>{props.user.id}</span>
+                    <Avatar src={props.user.image} />
+                    <span>{props.user.firstname} {props.user.lastname}</span>
                 </div>
 
                 <IconButton>

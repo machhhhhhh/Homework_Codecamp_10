@@ -12,6 +12,11 @@
   padding: 20px;
 }
 
+.Title {
+  display: flex;
+  flex-direction: column;
+}
+
 .Button {
   font-size: 20px;
   width: 100%;

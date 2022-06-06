@@ -3,6 +3,7 @@ import { Form, Input, Button, Row, Col, Divider , notification} from 'antd';
 import Title from 'antd/lib/typography/Title';
 import axios from '../../config/axios';
 import { Link, withRouter } from 'react-router-dom';
+import '../css/register.css'
 
 const layout = {
     labelCol: { xs: 24, sm: 7, md: 6, lg: 6, xl: 5, xxl: 4 },
@@ -37,14 +38,15 @@ function Register(props) {
     };
 
     return (
-        <Row justify="center" >
+        <Row justify="center" className='register'>
             <Col xs={23} sm={23} md={23} lg={14} xl={14} xxl={12}>
                 <div
                     className="Form"
                 >
                     <Row justify="center">
                         <Title level={2} className="Title">
-                            Register
+                            <img src='https://blogs.icrc.org/th/wp-content/uploads/sites/104/2022/02/facebook-icon.png' alt='logo' />
+                            <img src='https://www.webdesignerdepot.com/cdn-origin/uploads/2015/07/featured_facebook.jpg' alt='word' />
                         </Title>
                     </Row>
                     <Divider className="Divider" />
@@ -163,11 +165,12 @@ function Register(props) {
                             <Input/>
 
                         </Form.Item>
-
-                            <Button className="Button" type="primary" htmlType="submit">
-                                Register
-                            </Button>
-                            <Link to='/login'><Button type='primary' className="Button" danger>Back</Button></Link>
+                            <div className='button'>
+                                <Button className="button-login" type="primary" htmlType="submit">
+                                    Register
+                                </Button>
+                                <Link to='/login'><Button type='primary' className="button-register" danger>Back</Button></Link>
+                            </div>
                     </Form>
                 </div>
             </Col>
