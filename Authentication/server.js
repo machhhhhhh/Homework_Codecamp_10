@@ -3,11 +3,18 @@ const express = require('express')
 const route = express()
 const cors = require('cors')
 const db = require('./models')
+const session = require('express-session')
 
 route.use(cors())
 route.use(express.json())
 route.use(express.urlencoded({extended:true}))
 require('./config/passport/passport')
+route.use(session({
+    secret:'cat hahahah',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: true }
+  }))
 
 // import routes
 // const Todolist = require('./routes/Todolist')
@@ -19,6 +26,6 @@ const Post = require('./routes/Post')
 route.use('/user', User)
 route.use('/post', Post)
 
-db.sequelize.sync().then(()=> {
+db.sequelize.sync({force:false}).then(()=> {
     route.listen(process.env.port, () => console.log('Listening at ' + process.env.port))
 })

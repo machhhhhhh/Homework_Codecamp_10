@@ -1,5 +1,5 @@
 import {  notification } from 'antd';
-import React, { useEffect, useState } from 'react';
+import React, {  useEffect, useState } from 'react';
 // import { Link } from 'react-router-dom';
 import LocalStorageservice from '../../services/localStorageservice';
 import axios from '../../config/axios'
@@ -26,7 +26,7 @@ export default function Dashboard(props) {
             message: "Logout"
         })
 
-        props.history.push('/login')
+        // props.history.push('/login')
         // await axios.get('/user/logout')
         // .then(res => {
             
@@ -45,16 +45,20 @@ export default function Dashboard(props) {
     //     console.log(jsonstringuser);
     //     // jsonstringuser.map(user => console.log(user))
     // }
+    
 
+
+    
+    
     useEffect( async ()=>{
         // getUser()
-        const token = LocalStorageservice.getToken()
         // const userLogin = jwtDecode(token)
         // console.log(user);
         // setUser(userLogin)
         // console.log(user);
         // console.log(jwtDecode(token));
-
+        
+        const token = LocalStorageservice.getToken()
         const result = await axios.get('/user')
         const data = result.data
         const profile = data.filter(user => user.id === jwtDecode(token).id)
@@ -62,8 +66,9 @@ export default function Dashboard(props) {
             // console.log(user);
             setUser(user)
         })
+        
 
-    },[0])
+    },[])
 
     
 

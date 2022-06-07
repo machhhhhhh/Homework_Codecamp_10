@@ -16,7 +16,8 @@ function PostMessage(props) {
         // axios.post to backend
 
         const body  = {
-            description : input
+            description : input,
+            user_id : props.user.id
             // emotion : ,
             // photo : 
         }

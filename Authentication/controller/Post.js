@@ -12,7 +12,7 @@ const getPost = async (req,res) => {
     // const Post = await db.findAll({where : {UserId : friend.UserId}}) // หา post ทั้งหมดของ friend ทั้งหมด
     
     const user = await db.User.findOne({where : { id : req.user.id}}) // หา user
-    const post = await db.Post.findAll({where : { UserId : user.id}})
+    const post = await db.Post.findAll({where : { user_id : user.id}})
 
     res.status(200).send({post,user})
     
@@ -24,7 +24,7 @@ const post = async ( req,res) => {
         description : req.body.description,
         photo : req.body.photo,
         emotion : req.body.emotion,
-        UserId : req.user.id
+        user_id : req.user.id
     })
     
     res.status(201).send(newPost)
@@ -35,7 +35,7 @@ const updatePost = async (req,res) => {
     const post = await db.Post.findOne({
         where : {
             id : req.params.id,
-            UserId : req.user.id
+            user_id : req.user.id
         }
     })
 
@@ -56,7 +56,7 @@ const deletePost = async (req,res) => {
     const post = await db.Post.findOne({
         where : {
             id : req.params.id,
-            UserId : req.user.id
+            user_id : req.user.id
         }
     })
 

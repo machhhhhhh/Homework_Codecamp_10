@@ -14,7 +14,10 @@ function Post({profile, image, username, timestamp, message, user, userPost, rel
     const [isEdit, setIsEdit] = useState(false)
 
     const deletePost = async() => {
-        await axios.delete(`/post/${post.id}`)
+        const check = window.confirm("Are you sure ???")
+        if (check) {
+            await axios.delete(`/post/${post.id}`)
+        }
         reload()
     }
     

@@ -17,7 +17,12 @@
 
 .button{
     justify-content: center;
-   display: flex;
+    display: flex;
+}
+
+.button > .button-login{
+    background-color: green;
+    border-radius: none
 }
 
 .button-register{
