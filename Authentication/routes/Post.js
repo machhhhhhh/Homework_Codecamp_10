@@ -1,8 +1,13 @@
-const post = async (req,res) => {
-    res.send('5555')
-}
+const express = require('express')
+const route = express.Router()
+const PostController = require('../controller/Post')
+const passport = require('passport')
 
+const authentication = passport.authenticate('jwt', {session:false})
 
-module.exports = {
-    post,
-}
+route.get('/', authentication , PostController.getPost)
+route.post('/', authentication , PostController.post)
+// route.put('/:id', authentication , TodolistController.updateList)
+// route.delete('/:id', authentication , TodolistController.deleteList)
+
+module.exports = route

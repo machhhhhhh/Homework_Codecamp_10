@@ -12,14 +12,14 @@ function Post({profile, image, username, timestamp, message}) {
             <Avatar src={profile} className='avatar'/>
             <div className='post_topInfo'>
                 <h3>{username}</h3>
-                <p>timestamp</p>
+                <p>{timestamp}</p>
             </div>
         </div>
         <div className='post_bottom'>
               {message}
             </div>
         <div className='post_image'>
-              <img src={image} alt="post" />
+              {image && <img src={image} alt="post" />}
         </div>
 
 

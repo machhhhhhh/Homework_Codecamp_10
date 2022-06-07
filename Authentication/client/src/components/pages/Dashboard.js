@@ -59,7 +59,7 @@ export default function Dashboard(props) {
         const data = result.data
         const profile = data.filter(user => user.id === jwtDecode(token).id)
         profile.map(user => {
-            console.log(user);
+            // console.log(user);
             setUser(user)
         })
 
