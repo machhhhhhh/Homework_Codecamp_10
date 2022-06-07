@@ -1,19 +1,65 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../../css/post.css'
 import {Avatar} from '@mui/material'
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
+import EditIcon from '@mui/icons-material/Edit';
 import SendIcon from '@mui/icons-material/Send';
+import DeleteIcon from '@mui/icons-material/Delete';
+import axios from '../../../config/axios';
 
-function Post({profile, image, username, timestamp, message}) {
-  return (
-    <div className='post'>
-        <div className='post_top'>
-            <Avatar src={profile} className='avatar'/>
-            <div className='post_topInfo'>
-                <h3>{username}</h3>
-                <p>{timestamp}</p>
+function Post({profile, image, username, timestamp, message, user, userPost, reload, post}) {
+    
+    const [input, setInput] = useState('')
+    const [isEdit, setIsEdit] = useState(false)
+
+    const deletePost = async() => {
+        await axios.delete(`/post/${post.id}`)
+        reload()
+    }
+    
+    const editPost = async (e) => {
+        e.preventDefault()
+        const body = {
+            description: input 
+            // photo : ,
+            // emotion : 
+        }
+
+        await axios.put(`/post/${post.id}`, body)
+        setInput("")
+        setIsEdit(false)
+        reload()
+        console.log('edit');
+    }
+    const toggleEdit = () => {
+        setInput(message)
+        setIsEdit(true)
+    }
+
+    let content = (
+        <div className='post'>
+            <div className='post_top'>
+            <div className='post-info'>
+                <Avatar src={profile} className='avatar'/>
+                <div className='post_topInfo'>
+                    <h3>{username}</h3>
+                    <p>{timestamp}</p>
+                </div>
             </div>
+            <div className='button'>
+                { (user.id === userPost.id) ?
+                    <>
+                    <button onClick={()=> toggleEdit()}><EditIcon style={{color : 'blue'}} /></button>
+                    <button onClick={(e)=>deletePost(e)}><DeleteIcon style={{color : 'red'}}/></button>
+                    </>
+                 : 
+                 <>
+                     <h1>Not match</h1>
+                 </>
+                 }
+            </div>
+
         </div>
         <div className='post_bottom'>
               {message}
@@ -38,6 +84,48 @@ function Post({profile, image, username, timestamp, message}) {
             </div>
         </div>
     </div>
+    )
+
+    if (isEdit){
+        content = (
+        <div className='post'>
+            <div className='post_top'>
+            <div className='post-info'>
+                <Avatar src={profile} className='avatar'/>
+                <div className='post_topInfo'>
+                    <h3>{username}</h3>
+                    <p>{timestamp}</p>
+                </div>
+            </div>
+
+        </div>
+        <div className='post_bottom'>
+            <form>
+                <input 
+                    type='text'
+                    className='message-input'
+                    placeholder={`What's on your mind.`}
+                    value={input}
+                    onChange={e => setInput(e.target.value)}
+                />
+                <button type='submit' onClick={(e) => editPost(e)} >Send</button>
+            </form>
+            </div>
+        <div className='post_image'>
+              {image && <img src={image} alt="post" />}
+        </div>
+
+
+    </div>
+
+            
+        )
+    }
+
+  return (
+    <>
+        {content}
+    </>
   )
 }
 

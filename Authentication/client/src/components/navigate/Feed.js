@@ -10,18 +10,20 @@ import axios from '../../config/axios'
 function Feed(props) {
 
   const [posts, setPost] = useState([])
+  const [user ,setUser] = useState([])
 
   const loadPost = async() => {
     const result = await axios.get('/post')
 
-    // console.log(result.data)
+    // console.log(result.data.post)
     // posts = result.data
 
-    setPost(result.data)
-    // console.log(post);
+    setPost(result.data.post)
+    setUser(result.data.user)
     // posts.map(post => {
     //   console.log(post);
     // })
+    // console.log(result.data.user)
   }
 
   useEffect(()=>{
@@ -38,11 +40,15 @@ function Feed(props) {
         {posts && posts.map(post => 
           <Post
             key={post.id}
-            profile={props.user.image}
+            profile={user.image}
             image={post.photo}
-            username={props.user.firstname + ' ' + props.user.lastname}
-            timestamp={post.createAt}
+            username={user.firstname + ' ' + user.lastname}
+            timestamp={post.createdAt}
             message={post.description}
+            user = {props.user}
+            post = {post}
+            userPost = {user}
+            reload = {loadPost}
           />
     )}
 
