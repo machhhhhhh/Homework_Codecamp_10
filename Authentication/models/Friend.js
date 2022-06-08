@@ -2,7 +2,6 @@ module.exports = (sequelize, DataTypes) => {
     const model = sequelize.define('Friend', {
         status : {
             type : DataTypes.STRING(255),
-            allowNull : false,
             defaultValue : 'REQUESTED',
             validate : {
                 isIn : [['REQUESTED', 'ACCEPTED']]

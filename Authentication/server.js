@@ -21,11 +21,13 @@ route.use(session({
 // const Todolist = require('./routes/Todolist')
 const User = require('./routes/User')
 const Post = require('./routes/Post')
+const Friend = require('./routes/Friend')
 
 // actual routes
 // route.use('/list', Todolist)
 route.use('/user', User)
 route.use('/post', Post)
+route.use('/friend', Friend)
 
 route.use((req,res) => {
   res.status(400).send({message : 'resource not found in this server'})

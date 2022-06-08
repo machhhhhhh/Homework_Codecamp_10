@@ -53,6 +53,11 @@ const updatePost = async (req,res,next) => {
                 description : req.body.description,
                 photo : req.body.photo,
                 emotion : req.body.emotion,
+            }, {
+                where : {
+                    id : req.params.id,
+                    user_id : req.user.id
+                }
             })
             res.status(200).send({message : 'Update Successfully'})
         } else {
