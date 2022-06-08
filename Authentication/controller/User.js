@@ -1,6 +1,8 @@
 const db = require('../models')
 const bcryptjs = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const cloundinary = require('cloudinary').v2
+const fs = require('fs')
 
 const login = async(req,res,next) => {
 
@@ -61,7 +63,7 @@ const register = async(req,res,next) => {
             const salt = bcryptjs.genSaltSync(12)
             const hash = bcryptjs.hashSync(req.body.password, salt)
 
-            const newUser = await db.User.create({
+            await db.User.create({
                 username : req.body.username,
                 password : hash,
                 firstname : req.body.firstname,
@@ -79,14 +81,40 @@ const register = async(req,res,next) => {
 
 }
 
-// const getUser = async (req,res) => {
-//     const user = await db.User.findAll()
-//     res.status(200).send(user)
-// }
+const updateProfile = async (req,res,next) => {
+    try {
+
+        // console.log(req.file);
+        const user = await db.User.findOne({where : {id : req.user.id}})
+        if(!user){
+            res.status(404).send({message : 'User not found'})
+        }
+
+        cloundinary.uploader.upload(req.file.path, async (err,result)=>{ // set photo in public to clound
+            if(err) return next(err)
+
+            await user.update({image : result.secure_url}) // push photo from clond to database
+
+            fs.unlinkSync(req.file.path)
+            res.status(201).send({message : 'Change Profile Photo complete'})
+        })
+
+
+        
+    } catch (error) {
+        next(error)
+    }
+}
+
+const getUser = async (req,res) => {
+    const user = await db.User.findAll()
+    res.status(200).send(user)
+}
 
 module.exports = {
     login,
     register,
     // logout,
-    // getUser
+    getUser,
+    updateProfile
 }

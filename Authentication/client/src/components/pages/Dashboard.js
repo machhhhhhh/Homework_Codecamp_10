@@ -3,7 +3,7 @@ import React, {  useEffect, useState } from 'react';
 // import { Link } from 'react-router-dom';
 import LocalStorageservice from '../../services/localStorageservice';
 import jwtDecode from 'jwt-decode'
-
+import axios from '../../config/axios';
 import Header from '../navigate/Header'
 import Sidebar from '../navigate/Sidebar'
 import Feed from '../navigate/Feed';
@@ -60,14 +60,14 @@ function Dashboard(props) {
         
         const token = LocalStorageservice.getToken()
         // console.log(jwtDecode(token))
-        setUser(jwtDecode(token))
-        // const result = await axios.get('/user')
-        // const data = result.data
-        // const profile = data.filter(user => user.id === jwtDecode(token).id)
-        // profile.map(user => {
-        //     // console.log(user);
-        //     setUser(user)
-        // })
+        // setUser(jwtDecode(token))
+        const result = await axios.get('/user')
+        const data = result.data
+        const profile = data.filter(user => user.id === jwtDecode(token).id)
+        profile.map(user => {
+            console.log(user);
+            setUser(user)
+        })
         
 
     },[])

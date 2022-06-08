@@ -2,8 +2,8 @@ const express = require('express')
 const route = express.Router()
 const TodolistController = require('../controller/Todolist')
 const passport = require('passport')
+const authentication = require('../middleware/passport')
 
-const authentication = passport.authenticate('jwt', {session:false})
 
 route.get('/', authentication , TodolistController.getAllList)
 route.post('/', authentication , TodolistController.postList)
