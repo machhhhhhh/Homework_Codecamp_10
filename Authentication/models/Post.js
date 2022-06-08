@@ -17,7 +17,9 @@ module.exports = (sequelize, DataTypes) => {
                 model : {
                     tableName : 'user'
                 },
-                key : 'id'
+                key : 'id',
+                onUpdate : 'RESTRICT',
+                onDelete : 'RESTRICT'
             }
         }
     },{

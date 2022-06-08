@@ -10,7 +10,9 @@ module.exports = (sequelize, DataTypes) => {
                 model : {
                     tableName : 'post'
                 },
-                key : 'id'
+                key : 'id',
+                onUpdate : 'RESTRICT',
+                onDelete : 'RESTRICT'
             }
         },
         user_id : {
@@ -20,7 +22,9 @@ module.exports = (sequelize, DataTypes) => {
                 model : {
                     tableName : 'user'
                 },
-                key : 'id'
+                key : 'id',
+                onUpdate : 'RESTRICT',
+                onDelete : 'RESTRICT'
             }
         }
     }, {

@@ -17,7 +17,7 @@ function PostMessage(props) {
 
         const body  = {
             description : input,
-            user_id : props.user.id
+            // user_id : props.user.id
             // emotion : ,
             // photo : 
         }

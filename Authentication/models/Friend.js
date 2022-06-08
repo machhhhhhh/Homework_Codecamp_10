@@ -2,7 +2,11 @@ module.exports = (sequelize, DataTypes) => {
     const model = sequelize.define('Friend', {
         status : {
             type : DataTypes.STRING(255),
-            allowNull : false
+            allowNull : false,
+            defaultValue : 'REQUESTED',
+            validate : {
+                isIn : [['REQUESTED', 'ACCEPTED']]
+            }
         },
         sender_id : {
             type : DataTypes.INTEGER,
@@ -11,7 +15,9 @@ module.exports = (sequelize, DataTypes) => {
                 model : {
                     tableName : 'user'
                 },
-                key : 'id'
+                key : 'id',
+                onUpdate : 'RESTRICT',
+                onDelete : 'RESTRICT'
             }
         },
         receiver_id : {
@@ -21,7 +27,9 @@ module.exports = (sequelize, DataTypes) => {
                 model : {
                     tableName : 'user'
                 },
-                key : 'id'
+                key : 'id',
+                onUpdate : 'RESTRICT',
+                onDelete : 'RESTRICT'
             }
         }
     },{
@@ -36,8 +44,8 @@ module.exports = (sequelize, DataTypes) => {
     //             name : 'user_id',
     //             allowNull : false
     //         },
-    //         onUpdate : 'RESTRICT',
-    //         onDelete : 'RESTRICT'
+            // onUpdate : 'RESTRICT',
+            // onDelete : 'RESTRICT'
     //     })
     //     model.belongsTo(models.Friend , { 
     //         as : "receiver" ,

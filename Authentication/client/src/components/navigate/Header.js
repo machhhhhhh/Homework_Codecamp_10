@@ -14,21 +14,30 @@ import ArrowDropDownCircleIcon from '@mui/icons-material/ArrowDropDownCircle';
 import IconButton from '@mui/material/IconButton';
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 import {Avatar} from '@mui/material'
+import { Link ,useHistory } from 'react-router-dom';
+import Dashboard from '../pages/Dashboard'
 
 function Header(props) {
+
+    let history = useHistory()
 
     const logOut = (e) => {
         e.preventDefault()
         props.logout()
     }
 
+    const home = () => {
+        history.push('/dashboard')
+    }
+
+
   return (
         <div className='header'>
-            <div className='header_left'>
+            <div className='header_left' >
 
-                <IconButton>
-                    <FacebookRoundedIcon style={{color : 'blue'}} fontSize ='large'/>
-                </IconButton>
+                        <IconButton>
+                            <FacebookRoundedIcon style={{color : 'blue'}} fontSize ='large' onClick={()=>home()}/>
+                        </IconButton>
                 
                 <div className='header_input'>
                     <SearchIcon />
