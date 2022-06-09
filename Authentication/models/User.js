@@ -51,30 +51,30 @@ module.exports = (sequelize, DataTypes) => {
         timestamps : false
     })
 
-    // model.associate = models => {
-    //     model.hasMany(models.Post, {FOREIGNKEY : 'user_id'})
-    //     model.hasMany(models.PostLike, {FOREIGNKEY : 'user_id'})
-    //     model.hasMany(models.Comment, {FOREIGNKEY : 'user_id'})
-    //     model.hasMany(models.CommentLike, {FOREIGNKEY : 'user_id'})
-    //     model.hasMany(models.Friend , { 
-    //         as : "sender" ,
-    //         FOREIGNKEY : {
-    //             name : 'user_id',
-    //             allowNull : false
-    //         },
-    //         onUpdate : 'RESTRICT',
-    //         onDelete : 'RESTRICT'
-    //     })
-    //     model.hasMany(models.Friend , { 
-    //         as : "receiver" ,
-    //         FOREIGNKEY : {
-    //             name : 'user_id',
-    //             allowNull : false
-    //         },
-    //         onUpdate : 'RESTRICT',
-    //         onDelete : 'RESTRICT'
-    //     })
-    // }
+    model.associate = models => {
+        model.hasMany(models.Post, {FOREIGNKEY : 'user_id'})
+        model.hasMany(models.PostLike, {FOREIGNKEY : 'user_id'})
+        model.hasMany(models.Comment, {FOREIGNKEY : 'user_id'})
+        model.hasMany(models.CommentLike, {FOREIGNKEY : 'user_id'})
+        // model.hasMany(models.Friend , { 
+        //     as : "sender" ,
+        //     FOREIGNKEY : {
+        //         name : 'user_id',
+        //         allowNull : false
+        //     },
+        //     onUpdate : 'RESTRICT',
+        //     onDelete : 'RESTRICT'
+        // })
+        // model.hasMany(models.Friend , { 
+        //     as : "receiver" ,
+        //     FOREIGNKEY : {
+        //         name : 'user_id',
+        //         allowNull : false
+        //     },
+        //     onUpdate : 'RESTRICT',
+        //     onDelete : 'RESTRICT'
+        // })
+    }
 
     return model
 }

@@ -8,7 +8,7 @@ import SendIcon from '@mui/icons-material/Send';
 import DeleteIcon from '@mui/icons-material/Delete';
 import axios from '../../../config/axios';
 
-function Post({profile, image, username, timestamp, message, user, userPost, reload, post}) {
+function Post({profile, image, username, timestamp, message, user, reload, post}) {
     
     const [input, setInput] = useState('')
     const [isEdit, setIsEdit] = useState(false)
@@ -51,14 +51,14 @@ function Post({profile, image, username, timestamp, message, user, userPost, rel
                 </div>
             </div>
             <div className='button'>
-                { (user.id === userPost.id) ?
+                { (user.id === post.User.id) ?
                     <>
                     <button onClick={()=> toggleEdit()}><EditIcon style={{color : 'blue'}} /></button>
                     <button onClick={(e)=>deletePost(e)}><DeleteIcon style={{color : 'red'}}/></button>
                     </>
                  : 
                  <>
-                     <h1>Not match</h1>
+                     {/* <h1>Can't Edit and Del</h1> */}
                  </>
                  }
             </div>

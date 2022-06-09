@@ -15,15 +15,17 @@ function Feed(props) {
   const loadPost = async() => {
     const result = await axios.get('/post')
 
-    // console.log(result.data.post)
+      result.data.map(post=>{
+        console.log(post);
+      })
+
     // posts = result.data
 
-    setPost(result.data.post)
-    setUser(result.data.user)
-    // posts.map(post => {
-    //   console.log(post);
-    // })
-    // console.log(result.data.user)
+    setPost(result.data)
+    // setUser(result.data.user)
+
+
+
   }
 
   useEffect(()=>{
@@ -37,20 +39,23 @@ function Feed(props) {
       <StoryHeader/>
       <PostMessage user={props.user} />
 
-        {posts && posts.map(post => 
-          <Post
-            key={post.id}
-            profile={user.image}
-            image={post.photo}
-            username={user.firstname + ' ' + user.lastname}
-            timestamp={post.createdAt}
-            message={post.description}
-            user = {props.user}
-            post = {post}
-            userPost = {user}
-            reload = {loadPost}
-          />
-    )}
+
+      {posts && posts.map((post)=>(
+            <Post
+                key={post.id}
+                profile={post.User.image}
+                image={post.photo}
+                username={post.User.firstname + ' ' + post.User.lastname}
+                timestamp={post.createdAt}
+                message={post.description}
+                user = {props.user}
+                post = {post}
+                reload = {loadPost}
+              />
+      ))}
+
+          
+          
 
       {/* <Post
         profile={props.user.image}

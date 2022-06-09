@@ -150,7 +150,7 @@ const unFriend = async (req,res,next) =>  {
         // const friend = await Friend.findOne({where : req.params.id})
 
         if(!friend) {
-            return res.status(404).send({message : 'Not found request'})
+            return res.status(403).send({message : 'Cannot Delete Friends'})
         }
 
         // if (friend.sender_id === req.user.id || friend.receiver_id === req.user.id){
