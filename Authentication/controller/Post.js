@@ -1,4 +1,4 @@
-const  {Post,sequelize, User,PostLike,Comment, Friend}  = require('../models')
+const  {Post,sequelize, User,PostLike,Comment, Friend, CommentLike}  = require('../models')
 const fs = require('fs')
 const cloundinary = require('cloudinary').v2
 const util = require('util')
@@ -46,6 +46,28 @@ const getPost = async (req,res,next) => {
                 },
                 {
                     model : Comment,
+                    include : [
+                        {
+                            model : User,
+                            attributes : {
+                                exclude : ['username', 'password', 'phone']
+                            }
+                        },
+                        {
+                            model : CommentLike,
+                                include : [
+                                    {
+                                        model : User,
+                                        attributes : {
+                                            exclude : ['username', 'password', 'phone']
+                                        }
+                                      }
+                                    ]
+                        }
+                    ]
+                },
+                {
+                    model : PostLike,
                     include : [
                         {
                             model : User,
@@ -104,13 +126,15 @@ const updatePost = async (req,res,next) => {
         const post = await Post.findOne({
             where : {
                 id : req.params.id,
-                UserId : req.user.id
             }
         })
 
         if (!post) {
             return   res.status(404).send({message : 'Post Not Found'})
         }
+
+        if(post.UserId !== req.user.id) return res.status(400).send({message : "Cannot Edit this post"})
+
         let image = {}
             if(req.file){
                 image = await uploadPromise(req.file.path)
@@ -147,11 +171,13 @@ const deletePost = async (req,res,next) => {
         const post = await Post.findOne({
             where : {
                 id : req.params.id,
-                UserId : req.user.id
             }
         })
 
         if(!post) return res.status(404).send({message : "Post Not Found"})
+
+        if(post.UserId !== req.user.id) return res.status(400).send({message : 'Cannot Delete this Post'})
+
         await Comment.destroy({where : {PostId : post.id}}, {transaction})
         await PostLike.destroy({where : {PostId : post.id}}, {transaction})
 

@@ -23,6 +23,8 @@ const User = require('./routes/User')
 const Post = require('./routes/Post')
 const Friend = require('./routes/Friend')
 const Comment = require('./routes/Comment')
+const PostLike = require('./routes/PostLike')
+const CommentLike = require('./routes/CommentLike')
 
 // actual routes
 // route.use('/list', Todolist)
@@ -30,6 +32,8 @@ route.use('/user', User)
 route.use('/post', Post)
 route.use('/friend', Friend)
 route.use('/comment', Comment)
+route.use('/like', PostLike)
+route.use('/comment-like', CommentLike)
 
 route.use((req,res) => {
   res.status(400).send({message : 'resource not found in this server'})

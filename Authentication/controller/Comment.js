@@ -5,6 +5,32 @@ const {Op} = require('sequelize')
 const getComment = async(req,res,next) => {
     try {
 
+        const {post_id} = req.body
+
+        const post = await Post.findOne({where : {id : post_id}})
+        if(!post) return res.status(404).send({message : "Post not found"})
+
+
+        const comment = await Comment.findAll({
+            where : {PostId : post_id},
+            include : [
+                {
+                    model : User,
+                    attributes : {
+                        exclude : ['username', 'password']
+                    }
+                },
+                {
+                    model : Post,
+                }
+            ]
+        })
+        if(!comment) return res.status(200).send({message : "No Comment"})
+
+        
+
+        res.status(200).send(comment)
+
 
     } catch (error) {
         next(error)
@@ -62,8 +88,10 @@ const addComment = async(req,res,next) => {
 const editComment = async (req,res,next) => {
     try {
 
+        
         const comment = await Comment.findOne({where : {id : req.params.id}})
         if(!comment) return res.status(404).send({message : 'Comment not found'})
+
         
         if ( req.user.id !== comment.UserId){
             return res.status(403).send({message : 'Cannot Edit Comment'})
@@ -90,18 +118,21 @@ const editComment = async (req,res,next) => {
 const deleteComment = async (req,res,next) => {
     try {
 
-        const post = await Post.findOne({where : { id  : req.body.post_id}})
+        const {post_id} = req.body
+
+        const post = await Post.findOne({where : { id  : post_id}})
         if(!post) return res.status(404).send({message : 'Post not found'})
         const comment = await Comment.findOne({where : {id : req.params.id}})
         
         if(!comment) return res.status(404).send({message : 'Comment not found'})
 
 
+
         if (req.user.id !== comment.UserId && post.UserId !== req.user.id ){
             return res.status(403).send({message : 'Cannot Delete this comment'})
         }
 
-        await Comment.destroy({where : {id : req.params.id}})
+        await comment.destroy()
 
         res.status(204).send({message : 'Delete Complete'})
 
