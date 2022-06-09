@@ -24,6 +24,7 @@
     "mysql2": "^2.3.3",
     "passport": "^0.5.2",
     "passport-jwt": "^4.0.0",
-    "sequelize": "^6.18.0"
+    "sequelize": "^6.18.0",
+    "util": "^0.12.4"
   }
 }

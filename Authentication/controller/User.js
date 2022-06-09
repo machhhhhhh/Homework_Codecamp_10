@@ -94,6 +94,14 @@ const updateProfile = async (req,res,next) => {
             if(err) return next(err)
 
             await user.update({image : result.secure_url}) // push photo from clond to database
+            
+            if(req.user.profileImg){
+                const splited = req.user.profileImg.split('/')
+                cloundinary.uploader.destroy(
+                    splited[splited.length -1],split('.')[0],
+                    (err, result) => {}
+                )
+            }
 
             fs.unlinkSync(req.file.path)
             res.status(201).send({message : 'Change Profile Photo complete'})
