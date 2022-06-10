@@ -1,8 +1,11 @@
 import React from 'react'
 import {Avatar} from '@mui/material'
-import { Link } from 'react-router-dom';
+
 
 function SidebarRow({title, Icon,user}) {
+
+ 
+
   return (
     <div className='sidebar-row'>
         {user && <Avatar src={user.image}/>}

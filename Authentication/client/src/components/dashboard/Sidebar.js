@@ -9,19 +9,26 @@ import YouTubeIcon from '@mui/icons-material/YouTube';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import SendIcon from '@mui/icons-material/Send';
-import { Link } from 'react-router-dom';
-
-import Friend from '../pages/Friend';
+import {useHistory} from 'react-router-dom'
 
 function Sidebar(props) {
+
+  const history = useHistory()
+
+  const friend =  () => {
+      try {
+        history.push('/friend')
+      }
+      catch(err) {
+        console.error(err)
+      }
+  }
 
     
 
   return (
     <div className='sidebar'>
-        {/* <Link to="/friend" component={Friend} > */}
-        <SidebarRow title={props.user.firstname + ' ' + props.user.lastname}  user={props.user}/>
-        {/* </Link> */}
+        <span onClick={()=>friend()}><SidebarRow title={props.user.firstname + ' ' + props.user.lastname}  user={props.user}/></span>
         <SidebarRow title="Friends" Icon={GroupIcon} />
         <SidebarRow title="Groups" Icon={GroupsIcon} />
         <SidebarRow title="Marketplace" Icon={StorefrontIcon} />

@@ -4,11 +4,11 @@ import React, {  useEffect, useState } from 'react';
 import LocalStorageservice from '../../services/localStorageservice';
 import jwtDecode from 'jwt-decode'
 import axios from '../../config/axios';
-import Header from '../navigate/Header'
-import Sidebar from '../navigate/Sidebar'
-import Feed from '../navigate/Feed';
+import Header from '../dashboard/Header'
+import Sidebar from '../dashboard/Sidebar'
+import Feed from '../dashboard/Feed';
 import '../css/header.css'
-import Widgets from '../navigate/Widgets';
+import Widgets from '../dashboard/Widgets';
 import { withRouter } from 'react-router-dom';
 
 function Dashboard(props) {
@@ -25,6 +25,8 @@ function Dashboard(props) {
         notification.success({
             message: "Logout"
         })
+
+        fetchUser()
 
         // props.history.push('/login')
         // await axios.get('/user/logout')
@@ -47,6 +49,18 @@ function Dashboard(props) {
     // }
     
 
+    const fetchUser = async () => {
+            const token = LocalStorageservice.getToken()
+            // console.log(jwtDecode(token))
+            // setUser(jwtDecode(token))
+            const result = await axios.get('/user')
+            const data = result.data
+            const profile = data.filter(user => user.id === jwtDecode(token).id)
+            profile.map(user => {
+                // console.log(user);
+                return setUser(user)
+            })
+    }
 
     
     
@@ -58,16 +72,7 @@ function Dashboard(props) {
         // console.log(user);
         // console.log(jwtDecode(token));
         
-        const token = LocalStorageservice.getToken()
-        // console.log(jwtDecode(token))
-        // setUser(jwtDecode(token))
-        const result = await axios.get('/user')
-        const data = result.data
-        const profile = data.filter(user => user.id === jwtDecode(token).id)
-        profile.map(user => {
-            // console.log(user);
-            setUser(user)
-        })
+        fetchUser()
         
 
     },[])
@@ -76,24 +81,24 @@ function Dashboard(props) {
 
 
     return (
-        <div className='dashboard'>
-            {/* <h2>Profile</h2>
-            <p>
-                <strong>Name:</strong> {user.firstname}
-                <br />
-                <strong>User ID:</strong> {user.id}
-            </p> */}
-            {/* {user} */}
+                <div className='dashboard'>
+                    {/* <h2>Profile</h2>
+                    <p>
+                        <strong>Name:</strong> {user.firstname}
+                        <br />
+                        <strong>User ID:</strong> {user.id}
+                    </p> */}
+                    {/* {user} */}
 
-            <Header user = {user} logout={logout}/>
+                    <Header user = {user} logout={logout}  />
 
-            <div className="content">
-                <Sidebar user = {user}/>
-                <Feed    user = {user}/>
-                <Widgets user = {user}/>
-            </div>
+                    <div className="content">
+                        <Sidebar user = {user}/>
+                        <Feed    user = {user}/>
+                        <Widgets user = {user}/>
+                    </div>
 
-        </div>
+                </div>
     );
 }
 

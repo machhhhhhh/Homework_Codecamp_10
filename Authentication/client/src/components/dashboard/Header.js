@@ -14,20 +14,27 @@ import ArrowDropDownCircleIcon from '@mui/icons-material/ArrowDropDownCircle';
 import IconButton from '@mui/material/IconButton';
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 import {Avatar} from '@mui/material'
-import { Link ,useHistory } from 'react-router-dom';
-import Dashboard from '../pages/Dashboard'
+import { useHistory } from 'react-router-dom';
 
 function Header(props) {
 
     let history = useHistory()
 
-    const logOut = (e) => {
-        e.preventDefault()
-        props.logout()
+    const logOut = () => {
+        try{
+            // e.preventDefault()
+            props.logout()
+        }catch(err){
+            console.error(err)
+        }
     }
 
     const home = () => {
-        history.push('/dashboard')
+        try{
+            history.push('/dashboard')
+        } catch(err) {
+            console.error(err)
+        }
     }
 
 
@@ -88,7 +95,7 @@ function Header(props) {
                     <ArrowDropDownCircleIcon fontSize='large'/>
                 </IconButton>
                 <IconButton>
-                    <ExitToAppRoundedIcon fontSize='large' style={{color : 'red'}} onClick ={(e)=>logOut(e)}/>
+                    <ExitToAppRoundedIcon fontSize='large' style={{color : 'red'}} onClick ={()=>logOut()}/>
                 </IconButton>
             </div>
         </div>

@@ -126,9 +126,9 @@ const deleteComment = async (req,res,next) => {
         
         if(!comment) return res.status(404).send({message : 'Comment not found'})
 
+        
+        if (req.user.id !== comment.UserId && post.UserId !== req.user.id){
 
-
-        if (req.user.id !== comment.UserId && post.UserId !== req.user.id ){
             return res.status(403).send({message : 'Cannot Delete this comment'})
         }
 

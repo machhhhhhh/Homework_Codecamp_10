@@ -12,19 +12,26 @@ function PostMessage(props) {
     // const [image, setImage] = useState('')
 
     const handleSubmit = async(e) => {
-        // e.preventDefault()
         // axios.post to backend
-
-        const body  = {
-            description : input,
-            // user_id : props.user.id
-            // emotion : ,
-            // photo : 
+        
+        try{
+            e.preventDefault()
+            if(input){
+                const body  = {
+                    description : input,
+                    // user_id : props.user.id
+                    // emotion : ,
+                    // photo : 
+                }
+        
+                await axios.post('/post', body)
+            }
+            setInput('')
+            props.reload()
+        } catch(err) {
+            console.error(err)
         }
-
-        await axios.post('/post', body)
-
-        setInput('')
+        
     }
 
   return (

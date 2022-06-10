@@ -11,7 +11,8 @@ function PrivateRoutes(props) {
 
 
   return (
-    <Switch>
+    // // Routes
+    <Switch> 
         {allowRoutes.map(route => 
         <Route 
                 path={route.url}
