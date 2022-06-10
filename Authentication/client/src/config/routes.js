@@ -3,6 +3,7 @@ import Login from '../components/pages/Login'
 import Register from '../components/pages/Register'
 import Dashboard from '../components/pages/Dashboard'
 import Friend from '../components/pages/Friend'
+import Profile from '../components/pages/Profile'
 // import FacebookLogin from '../components/pages/FacebookLogin'
 
 const components = {
@@ -25,6 +26,10 @@ const components = {
     friend : {
         url : '/friend',
         component : Friend
+    },
+    profile : {
+        url : '/profile',
+        component : Profile
     }
 }
 
@@ -41,7 +46,8 @@ export default {
         allowRoutes : [
             components.todo,
             components.dashboard,
-            components.friend
+            components.friend,
+            components.profile
         ],
         redirectRoutes : '/dashboard'
     }

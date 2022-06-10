@@ -1,7 +1,10 @@
 import { Avatar } from 'antd'
 import React , {useEffect, useState}from 'react'
-import '../../css/comment.css'
+import '../../css/dashboard/comment.css'
 import axios from '../../../config/axios'
+import EditIcon from '@mui/icons-material/Edit';
+import ClearIcon from '@mui/icons-material/Clear';
+import { IconButton } from '@mui/material';
 
 function Comment({description, firstname, lastname, image, createdAt,comment, user, post, reload, isComment, setComment,setMessage}) {
 
@@ -92,9 +95,13 @@ function Comment({description, firstname, lastname, image, createdAt,comment, us
                     {(isComment)?
                         <></> :
                         (isEdit)? <></> :
-                        <>
-                            <button onClick={()=>toggleEdit()}>edit</button>
-                            <button onClick={()=>deleteComment()}>del</button>
+                        <> 
+                            <IconButton className='icon-button'>
+                                <EditIcon onClick={()=>toggleEdit()} className='button-edit'/>
+                            </IconButton>
+                            <IconButton>
+                                <ClearIcon onClick={()=>deleteComment()} className="button-delete" />
+                            </IconButton>
                         </>
                     }
                 </>
@@ -104,14 +111,13 @@ function Comment({description, firstname, lastname, image, createdAt,comment, us
                             {(isComment)?
                             <></> :
                             <>
-                                <button onClick={()=>deleteComment()}>del</button>
+                                <IconButton>
+                                    <ClearIcon onClick={()=>deleteComment()} className='button-delete'/>
+                                </IconButton>
                             </>
                     }
                         </>
-                    :
-                    <>
-                        <h2>You Can't edit del</h2>
-                    </>
+                    :   <></>
                 }
             </div>
         </div>

@@ -1,5 +1,5 @@
 import React from 'react'
-import '../../css/friend.css'
+import '../../css/dashboard/friend.css'
 import AddFriend from './AddFriend'
 
 function Add() {

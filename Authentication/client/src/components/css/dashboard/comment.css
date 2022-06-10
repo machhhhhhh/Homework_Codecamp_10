@@ -40,3 +40,15 @@ form > input {
     background-color: #eff2f5;
     margin-bottom: 20px;
 }
+
+.button-delete{
+    color: red;
+    cursor: pointer;
+}
+
+
+.button-edit{
+    color: blue;
+    margin-right: 15px;
+    cursor: pointer;
+}

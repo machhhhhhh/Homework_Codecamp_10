@@ -1,5 +1,5 @@
 import React from 'react'
-import '../css/widget.css'
+import '../css/dashboard/widget.css'
 import Ads from './Widget/Ads'
 import Friends from './Widget/Friends'
 import Add from './Widget/Add'

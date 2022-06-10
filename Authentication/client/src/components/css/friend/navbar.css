@@ -1,0 +1,56 @@
+.navbars{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    background-color: rgb(250, 250, 250);
+}
+
+.navbars-header{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 20px;
+    margin-top: 20px;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    cursor: pointer;
+    align-items: center;
+}
+.navbar:hover{
+    border-radius: 20px;
+    background-color: lightgrey;
+}
+.navbar-info {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-info > h3 {
+    margin-left: 20px;
+}
+.navbars > .main {
+    background-color: lightgrey;
+    border-radius: 20px;
+}
+
+.navbars > .main > .navbar > .navbar-info > .navbar-div-icon {
+    background-color: blue;
+}
+
+.navbars > .main > .navbar > .navbar-info > .navbar-div-icon > .navbar-icon {
+    color: white;
+}
+.navbar > .navbar-info > .navbar-div-icon >.navbar-icon {
+    color: black;
+}
+.navbar > .navbar-info > .navbar-div-icon {
+    background-color:  lightgrey;
+    height: auto;
+    padding: 5px;
+    border-radius: 15px;
+}

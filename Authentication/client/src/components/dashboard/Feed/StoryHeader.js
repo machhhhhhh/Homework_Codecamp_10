@@ -1,6 +1,6 @@
 import React from 'react'
 import StoryReel from './StoryReel'
-import '../../css/header.css'
+import '../../css/dashboard/header.css'
 
 function StoryHeader() {
   return (

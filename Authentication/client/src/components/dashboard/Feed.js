@@ -1,5 +1,5 @@
 import React, { useEffect ,useState } from 'react'
-import '../css/feed.css'
+import '../css/dashboard/feed.css'
 
 import PostMessage from './Feed/PostMessage'
 import StoryHeader from './Feed/StoryHeader'

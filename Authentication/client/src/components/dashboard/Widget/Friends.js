@@ -1,5 +1,5 @@
 import React from 'react'
-import '../../css/contact.css'
+import '../../css/dashboard/contact.css'
 import Friend from './Friend'
 
 import MenuIcon from '@mui/icons-material/Menu';

@@ -1,5 +1,5 @@
 import React from 'react'
-import '../../css/group.css'
+import '../../css/dashboard/group.css'
 import Group from './Group'
 
 function Groups() {

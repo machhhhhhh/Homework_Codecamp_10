@@ -1,6 +1,6 @@
 import React from 'react'
 import Ad from './Ad'
-import '../../css/ads.css'
+import '../../css/dashboard/ads.css'
 
 function Ads() {
   return (

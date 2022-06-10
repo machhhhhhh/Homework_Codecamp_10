@@ -54,7 +54,7 @@ const getAllFriends = async (req,res,next) => {
             return res.status(404).send({message : "No Have Friends ..."})
         }
 
-        res.status(200).send(user)
+        res.status(200).send({user,friend})
 
     } catch (error) {
         next(error)
@@ -128,20 +128,23 @@ const accept = async (req,res,next) => {
     }
 }
 
-
-const unFriend = async (req,res,next) =>  {
+const deleteFriend = async (req,res,next) =>  {
     try {
 
+        const {friend_id} = req.body
         const friend = await Friend.findOne({ 
             where : {
+                // id : req.params.id
                 [Op.or] : [
                     {
-                        id : req.params.id,
+                        // id : req.params.id,
                         sender_id : req.user.id,
+                        receiver_id : friend_id
                     },
                     {
-                        id : req.params.id,
-                        receiver_id : req.user.id
+                        // id : req.params.id,
+                        receiver_id : req.user.id,
+                        sender_id : friend_id
                     }
                 ]
             }
@@ -150,17 +153,66 @@ const unFriend = async (req,res,next) =>  {
         // const friend = await Friend.findOne({where : req.params.id})
 
         if(!friend) {
-            return res.status(403).send({message : 'Cannot Delete Friends'})
+            return res.status(404).send({message : 'Friend not found'})
         }
+
+        if(friend.sender_id !== req.user.id && friend.receiver_id !== req.user.id){
+            return res.status(403).send({message: "Cannot Unfriend"})
+        }
+        
+
 
         // if (friend.sender_id === req.user.id || friend.receiver_id === req.user.id){
         // }
         
-        await Friend.destroy({
+        await friend.destroy()
+        
+        res.status(204).send({message : "Delete Friend Successfully"})
+        // res.status(400).send({message : "Cannot Delete Friend"})
+
+
+    } catch (error) {
+        next(error)
+    }
+}
+
+const unFriend = async (req,res,next) =>  {
+    try {
+
+      
+
+        const friend = await Friend.findOne({ 
             where : {
                 id : req.params.id
+                // [Op.or] : [
+                //     {
+                //         id : req.params.id,
+                //         sender_id : req.user.id,
+                //     },
+                //     {
+                //         id : req.params.id,
+                //         receiver_id : req.user.id
+                //     }
+                // ]
             }
         })
+
+        // const friend = await Friend.findOne({where : req.params.id})
+
+        if(!friend) {
+            return res.status(404).send({message : 'Friend not found'})
+        }
+
+        if(friend.sender_id !== req.user.id && friend.receiver_id !== req.user.id){
+            return res.status(403).send({message: "Cannot Unfriend"})
+        }
+        
+
+
+        // if (friend.sender_id === req.user.id || friend.receiver_id === req.user.id){
+        // }
+        
+        await friend.destroy()
         
         res.status(204).send({message : "Delete Friend Successfully"})
         // res.status(400).send({message : "Cannot Delete Friend"})
@@ -175,5 +227,6 @@ module.exports = {
     addFriend,
     accept,
     unFriend,
-    getAllFriends
+    getAllFriends,
+    deleteFriend
 }

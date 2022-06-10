@@ -1,21 +1,12 @@
-import {  notification } from 'antd';
-import React, {  useEffect, useState } from 'react';
-// import { Link } from 'react-router-dom';
-import LocalStorageservice from '../../services/localStorageservice';
-import jwtDecode from 'jwt-decode'
-import axios from '../../config/axios';
+import React ,{useEffect,useState}from 'react'
 import Header from '../dashboard/Header'
-import Sidebar from '../dashboard/Sidebar'
-import Feed from '../dashboard/Feed';
-import '../css/dashboard/header.css'
-import Widgets from '../dashboard/Widgets';
-import { withRouter } from 'react-router-dom';
+import LocalStorageservice from '../../services/localStorageservice'
+import jwtDecode from 'jwt-decode'
+import axios from '../../config/axios'
+import { notification } from 'antd'
 
-function Dashboard(props) {
+function Profile(props) {
 
-    // let userLogin
-    // let allUser
-    // let user
     const [user,setUser] = useState([])
 
     const logout = async () => {
@@ -57,8 +48,8 @@ function Dashboard(props) {
             const data = result.data
             const profile = data.filter(user => user.id === jwtDecode(token).id)
             profile.map(user => {
-                // console.log(user);
-                 setUser(user)
+                console.log(user);
+                 return setUser(user)
             })
     }
 
@@ -77,29 +68,18 @@ function Dashboard(props) {
 
     },[])
 
-    
 
+  return (
+    <div className='profile'>
+        {(user)? 
+            <Header uesr = {user} logout = {logout} />
 
-    return (
-                <div className='dashboard'>
-                    {/* <h2>Profile</h2>
-                    <p>
-                        <strong>Name:</strong> {user.firstname}
-                        <br />
-                        <strong>User ID:</strong> {user.id}
-                    </p> */}
-                    {/* {user} */}
+            :   
+            <h1>No user</h1>
+        }
 
-                    <Header user = {user} logout={logout}  />
-
-                    <div className="content">
-                        <Sidebar user = {user}/>
-                        <Feed    user = {user}/>
-                        <Widgets user = {user}/>
-                    </div>
-
-                </div>
-    );
+    </div>
+  )
 }
 
-export default withRouter(Dashboard)
+export default Profile

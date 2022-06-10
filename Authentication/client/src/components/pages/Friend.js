@@ -5,6 +5,9 @@ import LocalStorageservice from '../../services/localStorageservice'
 import axios from '../../config/axios'
 import jwtDecode from 'jwt-decode'
 import {withRouter} from 'react-router-dom'
+import Navbars from '../friend/Navbars'
+import '../css/friend/friend.css'
+import Friends from '../friend/Friend'
 
 function Friend(props) {
 
@@ -39,16 +42,20 @@ function Friend(props) {
         const data = result.data
         const profile = data.filter(user => user.id === jwtDecode(token).id)
         profile.map(user => {
-            // console.log(user);
-            setUser(user)
+            return setUser(user)
         })
+
         
 
-    },[0])
+    },[])
 
   return (
     <div className='friends'>
         <Header user = {user} logout={logout}/>
+        <div className='friends-body'>
+            <Navbars/>
+            <Friends/>
+        </div>
     </div>
   )
 }

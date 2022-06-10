@@ -1,5 +1,5 @@
 import React from 'react'
-import '../css/sidebar.css'
+import '../css/dashboard/sidebar.css'
 import SidebarRow from './Sidebar/SidebarRow'
 
 import GroupIcon from '@mui/icons-material/Group';
@@ -24,12 +24,23 @@ function Sidebar(props) {
       }
   }
 
+  const profile = () => {
+    try {
+      history.push('/profile')
+    } catch (error) {
+      console.error(error)
+    }
+  }
     
 
   return (
     <div className='sidebar'>
-        <span onClick={()=>friend()}><SidebarRow title={props.user.firstname + ' ' + props.user.lastname}  user={props.user}/></span>
-        <SidebarRow title="Friends" Icon={GroupIcon} />
+        <span onClick={()=>profile()}>
+          <SidebarRow title={props.user.firstname + ' ' + props.user.lastname}  user={props.user}/>
+        </span>
+        <span onClick={()=>friend()}>
+          <SidebarRow title="Friends" Icon={GroupIcon} />
+        </span>
         <SidebarRow title="Groups" Icon={GroupsIcon} />
         <SidebarRow title="Marketplace" Icon={StorefrontIcon} />
         <SidebarRow title="Watch" Icon={YouTubeIcon} />

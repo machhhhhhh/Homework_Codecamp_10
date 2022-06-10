@@ -1,0 +1,73 @@
+.friend-feed {
+    display: flex;
+    flex: 4;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+.friend-feed-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 20px 40px;
+}
+.friend-feed-header > h4 {
+    color: blue;
+    cursor: pointer;
+    padding: 5px;
+}
+.friend-feed-header > h4:hover {
+    background-color: lightgrey;
+    border-radius: 10px;
+}
+
+.friend-feed-detail {
+    display: flex;
+}
+
+.friend-form {
+    width: 200px;
+    margin-left: 40px;
+    height: 350px;
+    cursor: pointer;
+    background-color: white;
+    border-radius: 15px;
+}
+
+.friend-form > img {
+    width: 100%;
+    height: 60%;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    /* height: 40%; */
+}
+
+.friend-form > .friend-form-info {
+    /* padding: 20px; */
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-right: 20px;
+}
+.friend-form-info-button {
+    display: flex;
+    flex-direction: column;
+}
+.friend-form-info-button > button {
+    cursor: pointer;
+    border : none;
+    border-radius: 5px;
+    padding: 5px;
+}
+.button-reject{
+    margin-top: 15px;
+    background-color: rgb(250,0,0);
+    color: white;
+}
+.button-accept{
+    background-color: rgb(19,11,247);
+    color: white;
+}
+.button-unfriend{
+    margin-top: 20px;
+    background-color: rgb(250, 0, 0);
+    color: white;
+}
