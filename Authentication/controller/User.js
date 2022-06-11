@@ -69,7 +69,7 @@ const register = async(req,res,next) => {
                 firstname : req.body.firstname,
                 lastname : req.body.lastname,
                 phone : req.body.phone,
-                image : req.body.image
+                // image : req.body.image
             })
 
             res.status(201).send({message : 'User Created'})

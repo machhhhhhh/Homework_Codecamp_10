@@ -2,14 +2,14 @@ import React from 'react'
 import Navbar from './Navbar'
 import GroupIcon from '@mui/icons-material/Group';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
-import FlagIcon from '@mui/icons-material/Flag';
 import CakeIcon from '@mui/icons-material/Cake';
 import SettingsIcon from '@mui/icons-material/Settings';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import '../css/friend/navbar.css'
+import HourglassTopIcon from '@mui/icons-material/HourglassTop';
 import SearchIcon from '@mui/icons-material/Search';
-import {ALL_FRIEND, REQUEST_FRIEND, FIND_FRIEND} from '../../config/data'
+import {ALL_FRIEND, REQUEST_FRIEND, FIND_FRIEND, PENDING_FRIEND} from '../../config/data'
 
 function Navbars({changeMode}) {
   return (
@@ -35,6 +35,13 @@ function Navbars({changeMode}) {
               Arrow = {ArrowForwardIosIcon}
             />
        </div>
+        <div onClick={()=>changeMode(PENDING_FRIEND)}>
+          <Navbar
+            title = 'Pending'
+            Icon = {HourglassTopIcon}
+            Arrow = {ArrowForwardIosIcon}
+          />
+        </div>
         <div onClick={()=>changeMode(FIND_FRIEND)}>
           <Navbar
             title = 'Search'
@@ -43,18 +50,13 @@ function Navbars({changeMode}) {
           />
         </div>
         <Navbar
-          title = 'Suggest'
-          Icon = {FlagIcon}
-          Arrow = {ArrowForwardIosIcon}
-        />
-        <Navbar
           title = 'Birthday'
           Icon = {CakeIcon}
         />
         <Navbar
           title = 'Customize'
           Icon = {CheckBoxIcon}
-          Arrow = {ArrowForwardIosIcon}
+          // Arrow = {ArrowForwardIosIcon}
         />
     </div>
   )

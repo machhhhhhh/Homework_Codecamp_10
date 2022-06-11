@@ -18,7 +18,7 @@ function Register(props) {
             password : values.password,
             firstname : values.firstname,
             lastname : values.lastname,
-            image : values.image,
+            // image : values.image,
             phone : values.phone
         }
         await axios.post('/user/register', body)
@@ -147,18 +147,6 @@ function Register(props) {
                             rules={[{
                                 required : true,
                                 message : 'Please input your phone! ',
-                                whitespace : true
-                            }]}
-                            >
-                            <Input/>
-
-                        </Form.Item>
-                        <Form.Item
-                            name= 'image'
-                            label = 'Image' 
-                            rules={[{
-                                required : true,
-                                message : 'Please input your image! ',
                                 whitespace : true
                             }]}
                             >

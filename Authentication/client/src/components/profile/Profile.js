@@ -10,9 +10,8 @@ function Profile() {
 
     const [user, setUser] = useState([])
     const [image, setImage] = useState(null)
-    const [firstname, setFirstname] = useState('')
-    const [lastname, setLastname] = useState('')
-    
+
+
     // let fname , lname
     const inputEl = useRef()
     
@@ -20,8 +19,6 @@ function Profile() {
             
             const cancle = async () => {
                 setImage(null)
-                setFirstname('')
-                setLastname('')
                 history.push('/dashboard')
             }
             
@@ -33,40 +30,12 @@ function Profile() {
                     const formData = new FormData()
                     formData.append('profileImg',image)
 
-
-            // if(firstname==='' || lastname ==='' || firstname ===null || lastname === null) {
-            //     alert("First Name and Last Name Must not null")
-            //     return history.push('/profile')
-            // }
-            formData.append('firstname',(firstname===null || firstname ==='')? user.firstname : firstname )
-            formData.append('lastname',(lastname=== null || lastname ==='')? user.lastname : lastname )
-
-            // formData.append('firstname',(firstname===null)? user.firstname : firstname )
-            // formData.append('lastname',(lastname=== null)? user.lastname : lastname )
+                    await axios.put(`/user/profile`, formData)
+                    return history.push('/profile')
             
-            // if(firstname!=='' && lastname!==''){
-            // }
-
-            // if(firstname==='' && lastname){
-            //     formData.append('firstname',user.firstname)
-            //     formData.append('lastname',lastname)
-            // }
-            // if(firstname && lastname===''){
-            //     formData.append('firstname',firstname)
-            //     formData.append('lastname',user.lastname)
-            // }
-            // if(firstname==='',lastname ===''){
-            //     formData.append('firstname',user.firstname)
-            //     formData.append('lastname',user.lastname)
-            // }
-
-
-            await axios.put(`/user/profile`, formData)
-            return history.push('/profile')
-            
-        } catch (error) {
-            console.error(error)
-        }
+                } catch (error) {
+                    console.error(error)
+                }
 
 
 
@@ -128,11 +97,11 @@ function Profile() {
                 </div>
                 <div className='profile-info-firstname profile-space'>
                     <label >First Name :</label>
-                    <input  value={ user.firstname } disabled  onChange={e=>setFirstname(e.target.value)}/>
+                    <input  value={ user.firstname } disabled  />
                 </div>
                 <div className='profile-info-lastname profile-space'>
                     <label >Last Name :</label>
-                    <input  value={ user.lastname} disabled  onChange={e=>setLastname(e.target.value)}  />
+                    <input  value={ user.lastname} disabled />
                 </div>
                 <div className='profile-info-phone profile-space'>
                     <label >Phone : </label>

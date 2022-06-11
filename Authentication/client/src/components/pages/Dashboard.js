@@ -1,6 +1,4 @@
-import {  notification } from 'antd';
 import React, {  useEffect, useState } from 'react';
-// import { Link } from 'react-router-dom';
 import LocalStorageservice from '../../services/localStorageservice';
 import jwtDecode from 'jwt-decode'
 import axios from '../../config/axios';
@@ -13,40 +11,7 @@ import { withRouter } from 'react-router-dom';
 
 function Dashboard(props) {
 
-    // let userLogin
-    // let allUser
-    // let user
     const [user,setUser] = useState([])
-
-    const logout = async () => {
-        
-        LocalStorageservice.removeToken()
-        props.setRole('guest')
-        notification.success({
-            message: "Logout"
-        })
-
-        // fetchUser()
-
-        // props.history.push('/login')
-        // await axios.get('/user/logout')
-        // .then(res => {
-            
-        //     })
-        //     .catch(err => console.error(err))
-    }
-
-    // async function getUser(){
-    //     const response = await axios.get('/user')
-    //     allUser = response.data
-    //     const token = LocalStorageservice.getToken()
-    //     userLogin = jwtDecode(token)
-    //     user = allUser.filter(person => person.id===userLogin.id)
-    //     // console.log(JSON.stringify(user));
-    //     const jsonstringuser = JSON.stringify(user)
-    //     console.log(jsonstringuser);
-    //     // jsonstringuser.map(user => console.log(user))
-    // }
     
 
     const fetchUser = async () => {

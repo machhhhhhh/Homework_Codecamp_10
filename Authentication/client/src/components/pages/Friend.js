@@ -5,13 +5,13 @@ import {withRouter} from 'react-router-dom'
 import Navbars from '../friend/Navbars'
 import '../css/friend/friend.css'
 import Friends from '../friend/Friend'
-import {ALL_FRIEND ,REQUEST_FRIEND} from '../../config/data'
+import {ALL_FRIEND ,REQUEST_FRIEND, PENDING_FRIEND, FIND_FRIEND} from '../../config/data'
 
 function Friend() {
 
     const [user,setUser] = useState([])
     const [mode, setMode] = useState(ALL_FRIEND)
-    const [checkFriend, setCheck] = useState(null)
+    const [toggleFetch, setToggleFetch] = useState(false)
 
     useEffect(()=>{
 
@@ -21,17 +21,17 @@ function Friend() {
                 let result
                 if(mode === ALL_FRIEND){
                     result = await axios.get('/friend?status=ACCEPTED')
-                    setCheck(true)
                 } 
                 else if (mode === REQUEST_FRIEND){
                     result = await axios.get('/friend?status=REQUESTED')
-                    setCheck(false)
                 }
-                else {
+                else if (mode === FIND_FRIEND) {
                     result = await axios.get('/friend/unknown')
-                    setCheck(null)
                 }
-                console.log(result.data)
+                else if (mode === PENDING_FRIEND){
+                    result = await axios.get('/friend')
+                }
+                
                 setUser(result.data)
     
             } catch (error) {
@@ -44,7 +44,7 @@ function Friend() {
         // console.log(user);
 
 
-    },[mode])
+    },[mode,toggleFetch])
 
     const changeMode = (mode) => {setMode(mode)}
 
@@ -53,7 +53,11 @@ function Friend() {
         <Header/>
         <div className='friends-body'>
             <Navbars changeMode = {changeMode} />
-            <Friends friends = {user} check = {checkFriend} />
+            <Friends 
+                friends = {user} 
+                mode = {mode}  
+                setToggleFetch = {setToggleFetch}
+                />
         </div>
     </div>
   )

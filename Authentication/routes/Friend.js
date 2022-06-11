@@ -5,6 +5,7 @@ const authenticate = require('../middleware/passport')
 
 route.get('/', authenticate, FriendController.getAllFriends)
 route.post('/', authenticate, FriendController.addFriend)
+route.post('/accept', authenticate, FriendController.acceptFriend)
 route.post('/unfriend', authenticate, FriendController.deleteFriend)
 route.put('/:id', authenticate, FriendController.accept),
 route.delete('/:id',authenticate, FriendController.unFriend)

@@ -113,7 +113,7 @@ function Header() {
         <div className='header'>
             <div className='header_left' >
 
-                        <IconButton onClick={()=>home()}>
+                        <IconButton onClick={home}>
                             <FacebookRoundedIcon style={{color : 'blue'}} fontSize ='large'/>
                         </IconButton>
                 

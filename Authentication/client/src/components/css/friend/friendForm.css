@@ -1,0 +1,23 @@
+.friend-form {
+    margin-top: 50px;
+    margin-left: 50px;
+}
+
+.button-addfriend{
+    margin-top: 15px;
+    color: white;
+    background-color: blue;
+}
+
+.button-addfriend:hover{
+    background-color: grey;
+    color: black;
+}
+.button-cancel:hover{
+    background-color: grey;
+    color: black;
+}
+.button-unfriend:hover{
+    background-color: grey;
+    color: black;
+}

@@ -26,7 +26,7 @@ function Feed(props) {
 
     fetchPost()
 
-  },[posts])
+  },[])
   
 
 

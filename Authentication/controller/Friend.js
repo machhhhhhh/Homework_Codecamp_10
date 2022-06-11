@@ -18,11 +18,13 @@ const getUnKnown = async(req,res,next) => {
                 acc.push(item.sender_id)
             }
             return acc
-        },[])
+        },[req.user.id])
 
         const user = await User.findAll({
             where : {
-                [Op.notIn] : friend_id
+                id : {
+                    [Op.notIn] : friend_id
+                }
             }
         })
 
@@ -37,15 +39,28 @@ const getAllFriends = async (req,res,next) => {
     try {
 
         const {status, searchName} = req.query
-        const where = {}
-        if(status) where.status = status
-        const friend = await Friend.findAll({
-            where : {
-                ...where,
+        let where = {}
+        
+        if(status==="ACCEPTED"){
+            where = {
+                status,
                 [Op.or] : [{sender_id : req.user.id}, {receiver_id : req.user.id}]
             }
-        })
-        // console.log(friend);
+        }
+        else if (status ==="REQUESTED"){
+            where = {
+                status,
+                receiver_id : req.user.id
+            }
+        }
+        if (!status) {
+            where = {
+                status : 'REQUESTED',
+                sender_id : req.user.id
+            }
+        }
+
+        const friend = await Friend.findAll({where})
 
         const friend_id = friend.reduce((acc, item) => {
             if(req.user.id === item.sender_id){
@@ -128,6 +143,31 @@ const addFriend = async (req,res,next) => {
     }
 }
 
+const acceptFriend = async(req,res,next) => {
+
+    try {
+        const {friend_id} = req.body
+        const friend = await Friend.findOne({ 
+            where : {
+                status : 'REQUESTED',
+                sender_id : friend_id,
+                receiver_id : req.user.id
+            }
+        })
+
+
+        if(!friend) {
+            return res.status(404).send({message : 'Friend not found'})
+        }
+
+        await friend.update({status : "ACCEPTED"})
+        res.status(200).send({message : "Accept Friend Complete"})
+        
+    } catch (error) {
+        next(error)
+    }
+}
+
 const accept = async (req,res,next) => {
     try {
         
@@ -182,7 +222,6 @@ const deleteFriend = async (req,res,next) =>  {
             }
         })
 
-        // const friend = await Friend.findOne({where : req.params.id})
 
         if(!friend) {
             return res.status(404).send({message : 'Friend not found'})
@@ -261,5 +300,6 @@ module.exports = {
     unFriend,
     getAllFriends,
     deleteFriend,
-    getUnKnown
+    getUnKnown,
+    acceptFriend
 }

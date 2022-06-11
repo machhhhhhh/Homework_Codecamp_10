@@ -33,10 +33,10 @@ module.exports = (sequelize, DataTypes) => {
         },
         image : {
             type : DataTypes.STRING(255),
-            allowNull : false,
-            validate : {
-                notEmpty : true
-            }
+            // allowNull : false,
+            // validate : {
+            //     notEmpty : true
+            // }
         },
         phone : {
             type : DataTypes.STRING(255 ),
