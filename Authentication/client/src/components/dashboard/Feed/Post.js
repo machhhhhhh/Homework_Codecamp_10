@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import '../../css/dashboard/post.css'
 import {Avatar} from '@mui/material'
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
@@ -22,7 +22,8 @@ function Post({profile, image, username, timestamp, message, user,reload, post})
         try {
             setIsEdit(false)
             e.preventDefault()
-            setComment(true)
+            setComment(!isComment)
+            setMessage('')
             
         } catch (error) {
             console.error(error);
@@ -148,7 +149,7 @@ function Post({profile, image, username, timestamp, message, user,reload, post})
                     <input 
                         type='text'
                         className='comment-input'
-                        placeholder={`What's on your mind.`}
+                        placeholder={`Write something ...`}
                         value={comment}
                         onChange={e => setMessage(e.target.value)}
                     />

@@ -1,6 +1,38 @@
 const {Friend, User} = require('../models')
 const {Op} = require('sequelize')
 
+
+const getUnKnown = async(req,res,next) => {
+    try {
+        const friend = await Friend.findAll({
+            where : {
+                [Op.or] : [{sender_id : req.user.id}, {receiver_id : req.user.id}]
+            }
+        })
+        // console.log(friend);
+
+        const friend_id = friend.reduce((acc, item) => {
+            if(req.user.id === item.sender_id){
+                acc.push(item.receiver_id)
+            } else {
+                acc.push(item.sender_id)
+            }
+            return acc
+        },[])
+
+        const user = await User.findAll({
+            where : {
+                [Op.notIn] : friend_id
+            }
+        })
+
+        res.status(200).send(user)
+
+    } catch (error) {
+        next(error)
+    }
+}
+
 const getAllFriends = async (req,res,next) => {
     try {
 
@@ -54,7 +86,7 @@ const getAllFriends = async (req,res,next) => {
             return res.status(404).send({message : "No Have Friends ..."})
         }
 
-        res.status(200).send({user,friend})
+        res.status(200).send(user)
 
     } catch (error) {
         next(error)
@@ -228,5 +260,6 @@ module.exports = {
     accept,
     unFriend,
     getAllFriends,
-    deleteFriend
+    deleteFriend,
+    getUnKnown
 }

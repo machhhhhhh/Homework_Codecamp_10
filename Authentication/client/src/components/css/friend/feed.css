@@ -3,6 +3,7 @@
     flex: 4;
     flex-direction: column;
     flex-wrap: wrap;
+    height: 100vh;
 }
 .friend-feed-header{
     display: flex;

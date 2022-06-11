@@ -1,0 +1,143 @@
+.profile{
+    background-color: #f1f2f3;
+    height: auto;
+}
+
+.profile-header{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-evenly; */
+    /* gap: 2; */
+    /* background-color: #f1f2f3; */
+    /* height: 100vh; */
+    /* margin-bottom: 300px; */
+    margin-top: 50px;
+}
+
+.profile-image {
+    /* display: flex; */
+    width: 300px;
+    height: 300px;
+    /* flex: 1; */
+}
+
+.profile-image > img {
+    /* width: 100%; */
+    height: 100%;
+    border-radius: 15%;
+    cursor: pointer;
+}
+
+
+.profile-info {
+    /* flex: 4; */
+    margin-top: 30px;
+    display: flex;
+    margin-left: 100px;
+    /* align-items: center; */
+    flex-direction: column;
+    /* margin-bottom: 50px; */
+    padding-bottom: 100px;
+}
+
+.profile-info-username {
+    display: flex;
+    align-items: center;
+    /* justify-content: space-between; */
+}
+.profile-info-username > label {
+    flex: 0.48;
+}
+
+.profile-info-username > input {
+    flex: 1;
+    outline-width: 0;
+    border: none;
+    padding: 5px 20px;
+    margin: 0 10px;
+    border-radius: 999px;
+    background-color: lightgrey;
+    width: 100%;
+}
+
+.profile-info-firstname {
+    display: flex;
+    align-items: center;
+}
+
+.profile-info-firstname > label {
+    flex: 0.48;
+    align-items: center;
+}
+
+.profile-info-firstname > input {
+    flex: 1;
+    outline-width: 0;
+    border: none;
+    padding: 5px 20px;
+    margin: 0 10px;
+    border-radius: 999px;
+    background-color: lightgrey;
+    width: 100%;
+}
+
+.profile-info-lastname {
+    display: flex;
+    align-items: center;
+}
+
+.profile-info-lastname > label {
+    flex: 0.48;
+}
+.profile-info-lastname > input {
+    flex: 1;
+    outline-width: 0;
+    border: none;
+    padding: 5px 20px;
+    margin: 0 10px;
+    border-radius: 999px;
+    background-color: lightgrey;
+    width: 100%;
+}
+.profile-info-phone {
+    display: flex;
+    align-items: center;
+}
+
+.profile-info-phone > label {
+    flex: 0.48;
+}
+.profile-info-phone > input {
+    flex: 1;
+    outline-width: 0;
+    border: none;
+    padding: 5px 20px;
+    margin: 0 10px;
+    border-radius: 999px;
+    background-color: lightgrey;
+    width: 100%;
+}
+.profile-space{
+    margin-top: 20px;
+}
+
+.button-update{
+    background-color: blue;
+    color: white;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+.button-update:disabled{
+    color: white;
+    background-color: black;
+    cursor: default;
+}
+
+.button-back {
+    background-color: red;
+    color: white;
+    cursor: pointer;
+    border-radius: 20px;
+}

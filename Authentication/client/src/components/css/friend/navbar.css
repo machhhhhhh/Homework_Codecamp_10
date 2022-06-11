@@ -3,6 +3,8 @@
     flex-direction: column;
     flex: 1;
     background-color: rgb(250, 250, 250);
+    border-bottom-right-radius: 20px;
+    height: 450px;
 }
 
 .navbars-header{
@@ -33,10 +35,10 @@
 .navbar-info > h3 {
     margin-left: 20px;
 }
-.navbars > .main {
+/* .navbars > .main {
     background-color: lightgrey;
     border-radius: 20px;
-}
+} */
 
 .navbars > .main > .navbar > .navbar-info > .navbar-div-icon {
     background-color: blue;

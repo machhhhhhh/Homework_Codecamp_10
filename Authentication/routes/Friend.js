@@ -8,5 +8,6 @@ route.post('/', authenticate, FriendController.addFriend)
 route.post('/unfriend', authenticate, FriendController.deleteFriend)
 route.put('/:id', authenticate, FriendController.accept),
 route.delete('/:id',authenticate, FriendController.unFriend)
+route.get('/unknown', authenticate, FriendController.getUnKnown)
 
 module.exports = route

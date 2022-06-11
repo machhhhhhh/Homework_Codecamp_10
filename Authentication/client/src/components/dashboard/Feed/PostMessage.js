@@ -27,7 +27,7 @@ function PostMessage(props) {
                 await axios.post('/post', body)
             }
             setInput('')
-            props.reload()
+            window.location.reload()
         } catch(err) {
             console.error(err)
         }

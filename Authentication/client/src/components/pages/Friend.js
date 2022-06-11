@@ -1,60 +1,59 @@
 import React, { useState , useEffect } from 'react'
 import Header from '../dashboard/Header'
-import {notification} from 'antd'
-import LocalStorageservice from '../../services/localStorageservice'
 import axios from '../../config/axios'
-import jwtDecode from 'jwt-decode'
 import {withRouter} from 'react-router-dom'
 import Navbars from '../friend/Navbars'
 import '../css/friend/friend.css'
 import Friends from '../friend/Friend'
+import {ALL_FRIEND ,REQUEST_FRIEND} from '../../config/data'
 
-function Friend(props) {
+function Friend() {
 
     const [user,setUser] = useState([])
+    const [mode, setMode] = useState(ALL_FRIEND)
+    const [checkFriend, setCheck] = useState(null)
 
-    const logout = async () => {
-        
-        LocalStorageservice.removeToken()
-        props.setRole('guest')
-        notification.success({
-            message: "Logout"
-        })
+    useEffect(()=>{
 
-        // props.history.push('/login')
-        // await axios.get('/user/logout')
-        // .then(res => {
+        const fetchFriend = async() => {
             
-        //     })
-        //     .catch(err => console.error(err))
-    }
+            try {
+                let result
+                if(mode === ALL_FRIEND){
+                    result = await axios.get('/friend?status=ACCEPTED')
+                    setCheck(true)
+                } 
+                else if (mode === REQUEST_FRIEND){
+                    result = await axios.get('/friend?status=REQUESTED')
+                    setCheck(false)
+                }
+                else {
+                    result = await axios.get('/friend/unknown')
+                    setCheck(null)
+                }
+                console.log(result.data)
+                setUser(result.data)
+    
+            } catch (error) {
+                console.error(error);
+            }
 
-    useEffect( async ()=>{
-        // getUser()
-        // const userLogin = jwtDecode(token)
+        }
+
+        fetchFriend()
         // console.log(user);
-        // setUser(userLogin)
-        // console.log(user);
-        // console.log(jwtDecode(token));
-        
-        const token = LocalStorageservice.getToken()
-        const result = await axios.get('/user')
-        const data = result.data
-        const profile = data.filter(user => user.id === jwtDecode(token).id)
-        profile.map(user => {
-            return setUser(user)
-        })
 
-        
 
-    },[])
+    },[mode])
+
+    const changeMode = (mode) => {setMode(mode)}
 
   return (
     <div className='friends'>
-        <Header user = {user} logout={logout}/>
+        <Header/>
         <div className='friends-body'>
-            <Navbars/>
-            <Friends/>
+            <Navbars changeMode = {changeMode} />
+            <Friends friends = {user} check = {checkFriend} />
         </div>
     </div>
   )

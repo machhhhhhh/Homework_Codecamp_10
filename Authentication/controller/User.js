@@ -93,7 +93,11 @@ const updateProfile = async (req,res,next) => {
         cloundinary.uploader.upload(req.file.path, async (err,result)=>{ // set photo in public to clound
             if(err) return next(err)
 
-            await user.update({image : result.secure_url}) // push photo from clond to database
+            await user.update({
+                image : result.secure_url,
+                firstname : req.body.firstname,
+                lastname : req.body.lastname,
+            }) // push photo from clond to database
             
             if(req.user.profileImg){
                 const splited = req.user.profileImg.split('/')

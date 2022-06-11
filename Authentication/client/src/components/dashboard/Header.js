@@ -20,22 +20,16 @@ import axios from '../../config/axios';
 import { notification } from 'antd';
 import jwtDecode from 'jwt-decode';
 
-function Header(props) {
+function Header() {
+
+    const [user, setUser]= useState([])
 
     let history = useHistory()
 
-    const logOut = () => {
-        try{
-            // e.preventDefault()
-            props.logout()
-        }catch(err){
-            console.error(err)
-        }
-    }
 
     const profile = () => {
         try {
-            history.push('/profile')
+            return history.push('/profile')
         } catch (error) {
             console.error(error)
         }
@@ -43,22 +37,26 @@ function Header(props) {
 
     const home = () => {
         try{
-            history.push('/dashboard')
+            return history.push('/dashboard')
         } catch(err) {
             console.error(err)
         }
     }
-    const [user,setUser] = useState([])
 
     const logout = async () => {
         
-        LocalStorageservice.removeToken()
-        props.setRole('guest')
-        notification.success({
-            message: "Logout"
-        })
+        try {
+            LocalStorageservice.removeToken()
+            // props.setRole('guest')
+            notification.success({
+                message: "Logout"
+            })
 
-        // fetchUser()
+            // fetchUser()
+            return history.push('/login')
+        } catch (error) {
+            console.error(error)
+        }
 
         // props.history.push('/login')
         // await axios.get('/user/logout')
@@ -70,7 +68,7 @@ function Header(props) {
 
     // async function getUser(){
     //     const response = await axios.get('/user')
-    //     allUser = response.data
+    //     // allUser = response.data
     //     const token = LocalStorageservice.getToken()
     //     userLogin = jwtDecode(token)
     //     user = allUser.filter(person => person.id===userLogin.id)
@@ -96,7 +94,7 @@ function Header(props) {
 
     
     
-    useEffect( async ()=>{
+    useEffect( ()=>{
         // getUser()
         // const userLogin = jwtDecode(token)
         // console.log(user);
@@ -105,6 +103,7 @@ function Header(props) {
         // console.log(jwtDecode(token));
         
         fetchUser()
+
         
 
     },[])
@@ -114,8 +113,8 @@ function Header(props) {
         <div className='header'>
             <div className='header_left' >
 
-                        <IconButton>
-                            <FacebookRoundedIcon style={{color : 'blue'}} fontSize ='large' onClick={()=>home()}/>
+                        <IconButton onClick={()=>home()}>
+                            <FacebookRoundedIcon style={{color : 'blue'}} fontSize ='large'/>
                         </IconButton>
                 
                 <div className='header_input'>
@@ -167,7 +166,7 @@ function Header(props) {
                     <ArrowDropDownCircleIcon fontSize='large'/>
                 </IconButton>
                 <IconButton>
-                    <ExitToAppRoundedIcon fontSize='large' style={{color : 'red'}} onClick ={()=>logOut()}/>
+                    <ExitToAppRoundedIcon fontSize='large' style={{color : 'red'}} onClick ={()=>logout()}/>
                 </IconButton>
             </div>
         </div>

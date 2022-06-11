@@ -17,7 +17,7 @@ function Sidebar(props) {
 
   const friend =  () => {
       try {
-        history.push('/friend')
+       return history.push('/friend')
       }
       catch(err) {
         console.error(err)
@@ -26,7 +26,7 @@ function Sidebar(props) {
 
   const profile = () => {
     try {
-      history.push('/profile')
+      return history.push('/profile')
     } catch (error) {
       console.error(error)
     }

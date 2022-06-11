@@ -11,40 +11,31 @@ function Feed(props) {
 
   const [posts, setPost] = useState([])
 
-  async function loadPost () {
-    try {
+  const fetchPost = async () => {
+      try {
         const result = await axios.get('/post')
-  
-        result.data.map(post=>{
-          console.log(post);
-        })
-  
-      // posts = result.data
-  
-      setPost(result.data)
-      // setUser(result.data.user)
-
-
-
-    } catch (error) {
-        console.error(error);
-    }
+        setPost(result.data)
+      } catch (error) {
+        console.error(error)
+      }
   }
-  
 
   useEffect(()=>{
 
     
 
-    loadPost()
-  },[])
+    fetchPost()
+
+  },[posts])
+  
+
 
 
   return (
 
     <div className='feed'>
       <StoryHeader/>
-      <PostMessage user={props.user} reload = {loadPost} />
+      <PostMessage user={props.user} reload = {fetchPost} />
 
 
       {posts && posts.map((post)=>(
@@ -57,7 +48,7 @@ function Feed(props) {
                 message={post.description}
                 user = {props.user}
                 post = {post}
-                reload = {loadPost}
+                reload = {fetchPost}
               />
       ))}
 

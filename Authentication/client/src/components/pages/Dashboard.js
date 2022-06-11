@@ -50,21 +50,26 @@ function Dashboard(props) {
     
 
     const fetchUser = async () => {
-            const token = LocalStorageservice.getToken()
-            // console.log(jwtDecode(token))
-            // setUser(jwtDecode(token))
-            const result = await axios.get('/user')
-            const data = result.data
-            const profile = data.filter(user => user.id === jwtDecode(token).id)
-            profile.map(user => {
-                // console.log(user);
-                 setUser(user)
-            })
+            try{
+                const token = LocalStorageservice.getToken()
+                // console.log(jwtDecode(token))
+                // setUser(jwtDecode(token))
+                const result = await axios.get('/user')
+                const data = result.data
+                const profile = data.filter(user => user.id === jwtDecode(token).id)
+                profile.map(user => {
+                    // console.log(user);
+                    return setUser(user)
+                })
+
+            } catch(err){
+                console.error(err)
+            }
     }
 
     
     
-    useEffect( async ()=>{
+    useEffect( ()=>{
         // getUser()
         // const userLogin = jwtDecode(token)
         // console.log(user);
@@ -90,7 +95,7 @@ function Dashboard(props) {
                     </p> */}
                     {/* {user} */}
 
-                    <Header user = {user} logout={logout}  />
+                    <Header setRole={props.setRole} />
 
                     <div className="content">
                         <Sidebar user = {user}/>
