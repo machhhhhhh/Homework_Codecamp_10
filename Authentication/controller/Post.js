@@ -107,11 +107,11 @@ const post = async ( req,res,next) => {
             
             
             const newPost = await Post.create({
-            description : req.body.description,
-            photo : image.secure_url,
-            emotion : req.body.emotion,
-            UserId : req.user.id
-        })
+                description : req.body.description,
+                photo : image.secure_url,
+                emotion : req.body.emotion,
+                UserId : req.user.id
+            })
             
             res.status(201).send(newPost)
         

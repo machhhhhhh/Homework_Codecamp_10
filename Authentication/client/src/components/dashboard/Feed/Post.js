@@ -8,6 +8,7 @@ import SendIcon from '@mui/icons-material/Send';
 import DeleteIcon from '@mui/icons-material/Delete';
 import axios from '../../../config/axios';
 import Comment from './Comment'
+import timeSince from '../../../config/timeSince'
 
 function Post({profile, image, username, timestamp, message, user,reload, post}) {
     
@@ -104,7 +105,7 @@ function Post({profile, image, username, timestamp, message, user,reload, post})
                     <Avatar src={profile} className='avatar'/>
                     <div className='post_topInfo'>
                         <h3>{username}</h3>
-                        <p>{timestamp}</p>
+                        <p>{timeSince(timestamp)}</p>
                     </div>
                 </div>
                 <div className='button'>
@@ -187,7 +188,7 @@ function Post({profile, image, username, timestamp, message, user,reload, post})
                 <Avatar src={profile} className='avatar'/>
                 <div className='post_topInfo'>
                     <h3>{username}</h3>
-                    <p>{timestamp}</p>
+                    <p>{timeSince(timestamp)}</p>
                 </div>
             </div>
 

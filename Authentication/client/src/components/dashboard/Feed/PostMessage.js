@@ -1,31 +1,42 @@
-import React , {useState}from 'react'
+import React , {useRef, useState}from 'react'
 import '../../css/dashboard/message.css'
 import {Avatar} from '@mui/material'
 import VideoCameraFrontIcon from '@mui/icons-material/VideoCameraFront';
 import PhotoIcon from '@mui/icons-material/Photo';
 import MoodIcon from '@mui/icons-material/Mood';
 import axios from '../../../config/axios'
+import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 
 function PostMessage(props) {
 
     const [input, setInput] = useState('')
-    // const [image, setImage] = useState('')
+    const [image, setImage] = useState(null)
+
+    const inputEl = useRef()
 
     const handleSubmit = async(e) => {
         // axios.post to backend
         
         try{
             e.preventDefault()
-            if(input){
-                const body  = {
-                    description : input,
-                    // user_id : props.user.id
-                    // emotion : ,
-                    // photo : 
-                }
-        
-                await axios.post('/post', body)
+            const formData = new FormData()
+            if(input && !image){
+                formData.append('description',input)
             }
+            else if (!input && image) {
+                formData.append('postImg',image)
+            }
+            else if (input && image){
+                formData.append('postImg',image)
+                formData.append('description',input)
+            }
+
+            else {
+                alert('No Content')
+                return window.location.reload()
+            }
+
+            await axios.post('/post', formData)
             setInput('')
             window.location.reload()
         } catch(err) {
@@ -47,8 +58,24 @@ function PostMessage(props) {
                     value={input}
                     onChange={e => setInput(e.target.value)}
                 />
+                <div className='message-input-photo'>
+                    <PhotoCameraIcon onClick={()=>inputEl.current.click()} fontSize='large' />
+                    <input type='file' 
+                        onChange={e => setImage(e.target.files[0])} 
+                        ref={inputEl}
+                        hidden
+                        alt='message'
+                        />
+                </div>
+                
                 <button type='submit' onClick={e => handleSubmit(e)} >Send</button>
             </form>
+        </div>
+        
+        <div className='message-photo'>
+            {image && (
+                <img src={URL.createObjectURL(image)} alt='post' />
+            )}
         </div>
 
         <div className='message_bottom'>
