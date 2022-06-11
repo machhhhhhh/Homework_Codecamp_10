@@ -68,3 +68,13 @@
     background-color: #eff2f5;
     border-radius: 20px;    
 }
+
+.message-photo > img {
+    /* align-items: center; */
+    margin: 20px 100px;
+    width: 70%;
+    /* height: 50%; */
+}
+.message-photo{
+    box-shadow: 0px 5px 7px -7px rgba(0,0,0,0.75);
+}
