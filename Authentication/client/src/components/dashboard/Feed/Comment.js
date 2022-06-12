@@ -14,14 +14,53 @@ function Comment({description, firstname, lastname, image, createdAt,comment, us
     const [text, setText] = useState('')
     const [like, setLike] = useState(false)
 
-    useEffect(()=>{
+    useEffect(()=> {
+
         if(isComment) {
             setEdit(false)
         }
 
+        const fetchLike = async (id) => {
+            try{
+                const result = await axios.get(`/comment-like/${id}`)
+                // console.log(result)
+                setLike(result.data);                
+            } catch(err) {
+                console.error(err)
+            }
+        }
 
+        fetchLike(comment.id)
 
-    },[isComment])
+    },[like])
+
+    const pressLike = async() => {
+
+        try{
+            
+            const body = {
+                comment_id : comment.id
+            }
+            await axios.post('/comment-like',body)
+            setLike(prev=>!prev)
+        } catch(err) {
+            console.error(err)
+        }
+
+    }
+
+    const pressUnlike = async() => {
+
+        try{
+
+            await axios.delete(`/comment-like/${comment.id}`)
+            setLike(prev=>!prev)
+        } catch(err) {
+            console.error(err)
+        }
+
+    }
+
 
 
     const deleteComment = async (e) => {
@@ -94,10 +133,16 @@ function Comment({description, firstname, lastname, image, createdAt,comment, us
                     <p>{timeSince(createdAt)}</p>
             </div>
 
-            <div className='comment-like' onClick={()=>setLike(prev=>!prev)}>
-                {!like && (<ThumbUpIcon/>)}
-                {like && (<ThumbUpIcon style={{color:'blue'}}/>)}
-            </div>
+                {like && (
+                    <div className='comment-like' onClick={()=>pressUnlike()}>
+                        <ThumbUpIcon style={{color:'blue'}}/>
+                    </div>
+                    )}
+                {!like && (
+                    <div className='comment-like' onClick={()=>pressLike()}>
+                        <ThumbUpIcon />
+                    </div>
+                )}
 
             <div className='comment-button'>
                 {(user.id === comment.UserId)  ? 
@@ -151,10 +196,16 @@ function Comment({description, firstname, lastname, image, createdAt,comment, us
                             </form>
                             {/* <p>{createdAt}</p> */}
                         </div>
-                        <div className='comment-like-edit' onClick={()=>setLike(prev=>!prev)}>
-                            {!like && (<ThumbUpIcon/>)}
-                            {like && (<ThumbUpIcon style={{color:'blue'}}/>)}
-                        </div>
+                            {!like && (
+                                <div className='comment-like-edit' onClick={()=>pressLike()}>
+                                    <ThumbUpIcon/>
+                                </div>
+                            )}
+                            {like && (
+                                <div className='comment-like-edit' onClick={()=>pressUnlike()}>
+                                    <ThumbUpIcon style={{color:'blue'}}/>
+                                </div>
+                            )}
                         {/* <p>{timeSince(createdAt)}</p> */}
                 </div>
                 {/* <div className='comment-button'>

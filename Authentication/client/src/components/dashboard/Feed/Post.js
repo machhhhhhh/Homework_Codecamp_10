@@ -18,6 +18,45 @@ function Post({profile, image, username, timestamp, message, user,reload, post})
     const [comment, setMessage] = useState('')
     const [like, setLike] = useState(false)
 
+    useEffect(()=>{
+        
+        const fetchLike = async(id) => {
+            try{
+                const result = await axios.get(`/like/${id}`)
+                setLike(result.data);
+            } catch(err){
+                console.error(err)
+            }
+        }
+
+
+        fetchLike(post.id)
+
+    },[like])
+
+
+
+    const pressLike = async() => {
+        try{
+
+            const body = {
+                post_id : post.id
+            }
+            await axios.post('/like', body)
+            setLike(prev=>!prev)
+        } catch(err){
+            console.error(err)
+        }
+    }
+    const pressUnlike = async() => {
+        try{    
+            await axios.delete(`/like/${post.id}`)
+            setLike(prev=>!prev)
+        } catch(err){
+            console.error(err)
+        }
+    }
+
     const toggleComment = async (e) => {
         try {
             setIsEdit(false)
@@ -128,20 +167,18 @@ function Post({profile, image, username, timestamp, message, user,reload, post})
               {image && <img src={image} alt="post" />}
         </div>
             <div className='post_options'>
-                <div className='post_option' onClick={()=>setLike(prev=>!prev)} >
                     {(!like) && (
-                        <>
+                        <div className='post_option' onClick={()=>pressLike()} >
                             <ThumbUpIcon/>
                             <p>Like</p>
-                        </>
+                        </div>
                     )}
                     {(like) && (
-                        <>
+                        <div className='post_option' onClick={()=>pressUnlike()} >
                             <ThumbUpIcon style={{color:'blue'}}/>
                             <p style={{color:'blue'}}><strong>Like</strong></p>
-                        </>
+                        </div>
                     )}
-                </div>
                 <div className='post_option' onClick={(e) => toggleComment(e)}>
                     <ChatBubbleIcon/>
                     <p>Comment</p>
@@ -217,20 +254,18 @@ function Post({profile, image, username, timestamp, message, user,reload, post})
               {image && <img src={image} alt="post" />}
         </div>
         <div className='post_options'>
-                <div className='post_option' onClick={()=>setLike(prev=>!prev)} >
                             {(!like) && (
-                                <>
+                                <div className='post_option' onClick={()=>pressLike()} >
                                     <ThumbUpIcon/>
                                     <p>Like</p>
-                                </>
+                                </div>
                             )}
                             {(like) && (
-                                <>
+                                <div className='post_option' onClick={()=>pressUnlike()} >
                                     <ThumbUpIcon style={{color:'blue'}}/>
                                     <p style={{color:'blue'}}><strong>Like</strong></p>
-                                </>
+                                </div>
                             )}
-                </div>
 
                 <div className='post_option' onClick={(e) => toggleComment(e)}>
                     <ChatBubbleIcon/>

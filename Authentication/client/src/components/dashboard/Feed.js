@@ -14,6 +14,7 @@ function Feed(props) {
   const fetchPost = async () => {
       try {
         const result = await axios.get('/post')
+        // console.log(result.data)
         setPost(result.data)
       } catch (error) {
         console.error(error)

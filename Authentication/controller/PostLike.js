@@ -4,32 +4,27 @@ const getLike = async(req,res,next)=> {
 
     try {
 
-        const post = await Post.findOne({where : {id : req.params.id}})
-        if(!post) return res.status(404).send({message : "post not found"})
 
-        const like = await PostLike.findAll({
-            // status :s
+        const like = await PostLike.findOne({
             where : 
             {
-                PostId : post.id,
+                PostId : req.params.id,
                 UserId : req.user.id
             },
-            include : [
-                {
-                    model : User,
-                    attributes : {
-                        exclude : ['username', 'password', 'phone']
-                    }
-                }
-            ]
+            // include : [
+            //     {
+            //         model : User,
+            //         attributes : {
+            //             exclude : ['username', 'password', 'phone']
+            //         }
+            //     }
+            // ]
         })
 
-        let check = false
+        if(!like) return res.status(200).send(false)
+        
 
-        if(!like) check = false
-        else check = true
-
-        res.status(200).send(check)
+        res.status(200).send(true)
 
 
     } catch (error) {
@@ -115,7 +110,7 @@ const unLike = async(req,res,next) => {
         //     }
         // }
         // )
-        const like = await PostLike.findOne( {where : {id : req.params.id}})
+        const like = await PostLike.findOne( {where : {PostId : req.params.id}})
 
         if(!like) return res.status(404).send({message :'Like not Found'})
 

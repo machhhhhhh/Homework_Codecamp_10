@@ -99,13 +99,13 @@ export default function timeSince(timeStamp) {
       return timeStamp;
     }
     if(secondsPast < 60){ // Less than a minute
-      return parseInt(secondsPast) + 'secs';
+      return parseInt(secondsPast) + ' secs';
     }
     if(secondsPast < 3600){ // Less than an hour
-      return parseInt(secondsPast/60) + 'mins';
+      return parseInt(secondsPast/60) + ' mins';
     }
     if(secondsPast <= 86400){ // Less than a day
-      return parseInt(secondsPast/3600) + 'hrs';
+      return parseInt(secondsPast/3600) + ' hrs';
     }
     if(secondsPast <= 172800){ // Less than 2 days
       return 'Yesderday at ' + formatDate(timeStamp, "h:mmtt");

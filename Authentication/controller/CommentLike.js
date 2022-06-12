@@ -1,5 +1,27 @@
 const {CommentLike, Comment} = require('../models')
 
+const getLike = async(req,res,next) => {
+
+    try {
+        
+        const like = await CommentLike.findOne({
+            where : {
+                CommentId : req.params.id,
+                UserId : req.user.id
+            }
+        })
+
+        if(!like) return res.status(200).send(false)
+        
+        res.status(200).send(true)
+
+    } catch (error) {
+        next(error)
+    }
+
+}
+
+
 const pressLike = async (req,res,next) => {
     try {
 
@@ -27,7 +49,7 @@ const pressLike = async (req,res,next) => {
 const unLike = async (req,res,next) => {
     try {
         
-        const commentLike = await CommentLike.findOne({where : {id : req.params.id}})
+        const commentLike = await CommentLike.findOne({where : {CommentId : req.params.id}})
 
         if(!commentLike) return res.status(404).send({message : "Like not found"})
         
@@ -56,5 +78,6 @@ const unLike = async (req,res,next) => {
 
 module.exports = {
     pressLike,
-    unLike
+    unLike,
+    getLike
 }
