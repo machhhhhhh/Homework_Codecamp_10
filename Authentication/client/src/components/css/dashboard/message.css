@@ -71,10 +71,34 @@
 
 .message-photo > img {
     /* align-items: center; */
-    margin: 20px 100px;
+    /* margin: 20px 100px; */
     width: 70%;
+    margin-left: 120px;
     /* height: 50%; */
+    /* margin: 30px 100px 0px 100px; */
+    padding-bottom: 20px;
+    margin-top: 30px;
 }
 .message-photo{
+    /* background-color: red; */
+    width: 100%;
+    display: flex;
     box-shadow: 0px 5px 7px -7px rgba(0,0,0,0.75);
+    justify-content: space-between;
+    /* margin-top: 30px; */
+    /* padding-top: 30px; */
+    /* margin-bottom: 50px; */
+}
+
+.clear-photo{
+    color: red;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+.clear-photo:hover {
+    background-color: lightgrey;
+    border-radius: 10px;
+    color: white;
 }

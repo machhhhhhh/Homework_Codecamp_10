@@ -5,7 +5,7 @@ import VideoCameraFrontIcon from '@mui/icons-material/VideoCameraFront';
 import PhotoIcon from '@mui/icons-material/Photo';
 import MoodIcon from '@mui/icons-material/Mood';
 import axios from '../../../config/axios'
-import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
+import ClearIcon from '@mui/icons-material/Clear';
 
 function PostMessage(props) {
 
@@ -20,24 +20,26 @@ function PostMessage(props) {
         try{
             e.preventDefault()
             const formData = new FormData()
-            if(input && !image){
-                formData.append('description',input)
-            }
-            else if (!input && image) {
-                formData.append('postImg',image)
-            }
-            else if (input && image){
-                formData.append('postImg',image)
-                formData.append('description',input)
-            }
-
-            else {
-                alert('No Content')
-                return window.location.reload()
-            }
+            // if(input && !image){
+            //     formData.append('description',input)
+            // }
+            // else if (!input && image) {
+            //     formData.append('postImg',image)
+            // }
+            // else if (input && image){
+            // }
+            
+            formData.append('postImg',image)
+            formData.append('description',input)
+            // else {
+            //     alert('No Content')
+            //     return window.location.reload()
+            // }
 
             await axios.post('/post', formData)
             setInput('')
+            setImage(null)
+            inputEl.current.value = null
             window.location.reload()
         } catch(err) {
             console.error(err)
@@ -58,15 +60,7 @@ function PostMessage(props) {
                     value={input}
                     onChange={e => setInput(e.target.value)}
                 />
-                <div className='message-input-photo'>
-                    <PhotoCameraIcon onClick={()=>inputEl.current.click()} fontSize='large' />
-                    <input type='file' 
-                        onChange={e => setImage(e.target.files[0])} 
-                        ref={inputEl}
-                        hidden
-                        alt='message'
-                        />
-                </div>
+                
                 
                 <button type='submit' onClick={e => handleSubmit(e)} >Send</button>
             </form>
@@ -74,7 +68,10 @@ function PostMessage(props) {
         
         <div className='message-photo'>
             {image && (
-                <img src={URL.createObjectURL(image)} alt='post' />
+                <>
+                    <img src={URL.createObjectURL(image)} alt='post' />
+                    <ClearIcon className='clear-photo' onClick={()=>setImage(null)}/>
+                </>
             )}
         </div>
 
@@ -83,8 +80,14 @@ function PostMessage(props) {
                 <VideoCameraFrontIcon style={{color : 'red'}} fontSize='large'/>
                 <h3>Live Video</h3>
             </div>
-            <div className='message_option'>
-                <PhotoIcon style={{color : 'green'}} fontSize='large'/>
+            <div className='message_option' onClick={()=>inputEl.current.click()}>
+                <input type='file' 
+                        onChange={e => setImage(e.target.files[0])} 
+                        ref={inputEl}
+                        hidden
+                        alt='message'
+                        />
+                <PhotoIcon style={{color : 'green'}}   fontSize='large'/>
                 <h3>Photo/Video</h3>
             </div>
             <div className='message_option'>
