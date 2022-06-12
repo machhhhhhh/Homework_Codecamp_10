@@ -5,6 +5,8 @@ import jwtDecode from 'jwt-decode'
 import '../css/profile.css'
 import {useHistory} from 'react-router-dom'
 
+const url = 'https://icon-library.com/images/no-user-image-icon/no-user-image-icon-26.jpg'
+
 function Profile() {
     const history = useHistory()
 
@@ -84,7 +86,7 @@ function Profile() {
                     alt='profile'
                     />
                 <img 
-                    src={image? URL.createObjectURL(image) : user.image} 
+                    src={image? URL.createObjectURL(image) : user.image ? user.image : url} 
                     onClick={()=>inputEl.current.click()}
                     alt='profileImage'
                     />
