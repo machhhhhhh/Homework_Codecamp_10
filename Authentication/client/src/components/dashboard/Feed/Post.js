@@ -83,7 +83,6 @@ function Post({profile, image, username, timestamp, message, user,reload, post})
                 setMessage('')
             }
             
-            setComment(false)
             reload()
             
         } catch (error) {
@@ -190,39 +189,41 @@ function Post({profile, image, username, timestamp, message, user,reload, post})
         </div>
         
         {(isComment)? 
-            <div className='comment-form'>
-                <Avatar src={user.image} />
-                <form>
-                    <input 
-                        type='text'
-                        className='comment-input'
-                        placeholder={`Write something ...`}
-                        value={comment}
-                        onChange={e => setMessage(e.target.value)}
-                    />
-                <button type='submit' className='comment-submit' onClick={e => addComment(e)} >Send</button>
-                </form>
-            </div>
+            <>
+                <div className='comment-form'>
+                    <Avatar src={user.image} />
+                    <form>
+                        <input 
+                            type='text'
+                            className='comment-input'
+                            placeholder={`Write something ...`}
+                            value={comment}
+                            onChange={e => setMessage(e.target.value)}
+                        />
+                    <button type='submit' className='comment-submit' onClick={e => addComment(e)} >Send</button>
+                    </form>
+                </div>
+                    {post.Comments && post.Comments.map(comment => (
+                        <Comment  
+                            key={comment.id} 
+                            description = {comment.description}
+                            firstname={comment.User.firstname} 
+                            lastname = {comment.User.lastname} 
+                            image = {comment.User.image}
+                            createdAt = {comment.createdAt}
+                            comment = {comment}
+                            user = {user}
+                            post = {post}
+                            reload = {reload}
+                            isComment = {isComment}
+                            setComment = {setComment}
+                            setMessage = {setInput}
+                            />
+                    ))}
+            </>
             : <></> }
         
 
-        {post.Comments && post.Comments.map(comment => (
-            <Comment  
-                key={comment.id} 
-                description = {comment.description}
-                firstname={comment.User.firstname} 
-                lastname = {comment.User.lastname} 
-                image = {comment.User.image}
-                createdAt = {comment.createdAt}
-                comment = {comment}
-                user = {user}
-                post = {post}
-                reload = {reload}
-                isComment = {isComment}
-                setComment = {setComment}
-                setMessage = {setInput}
-                />
-        ))}
     </div>
     )
 
@@ -276,22 +277,6 @@ function Post({profile, image, username, timestamp, message, user,reload, post})
                     <p>Share</p>
                 </div>
         </div>
-        
-            
-        {post.Comments && post.Comments.map(comment => (
-            <Comment  
-                key={comment.id} 
-                description = {comment.description}
-                firstname={comment.User.firstname} 
-                lastname = {comment.User.lastname} 
-                image = {comment.User.image}
-                createdAt = {comment.createdAt}
-                comment = {comment}
-                user = {user}
-                post = {post}
-                reload = {reload}
-                />
-        ))}
 
 
     </div>

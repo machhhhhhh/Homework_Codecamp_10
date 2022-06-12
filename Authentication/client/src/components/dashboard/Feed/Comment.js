@@ -16,9 +16,9 @@ function Comment({description, firstname, lastname, image, createdAt,comment, us
 
     useEffect(()=> {
 
-        if(isComment) {
-            setEdit(false)
-        }
+        // if(isComment) {
+        //     setEdit(false)
+        // }
 
         const fetchLike = async (id) => {
             try{
@@ -43,6 +43,7 @@ function Comment({description, firstname, lastname, image, createdAt,comment, us
             }
             await axios.post('/comment-like',body)
             setLike(prev=>!prev)
+            reload()
         } catch(err) {
             console.error(err)
         }
@@ -55,6 +56,7 @@ function Comment({description, firstname, lastname, image, createdAt,comment, us
 
             await axios.delete(`/comment-like/${comment.id}`)
             setLike(prev=>!prev)
+            reload()
         } catch(err) {
             console.error(err)
         }
@@ -111,10 +113,9 @@ function Comment({description, firstname, lastname, image, createdAt,comment, us
     const toggleEdit = () => {
         try {
             setMessage('')
-            setComment(false)
             setText(description)
             setEdit(true)
-            reload()
+            // reload()
         } catch (error) {
             console.error(error);
         }
@@ -144,35 +145,26 @@ function Comment({description, firstname, lastname, image, createdAt,comment, us
                     </div>
                 )}
 
+                {comment.CommentLikes.length!== 0 && <p className='comment-length'>{comment.CommentLikes.length}</p>}
+                
+
             <div className='comment-button'>
                 {(user.id === comment.UserId)  ? 
                 <>
-                    {(isComment)?
-                        <></> :
-                        (isEdit)? <></> :
-                        <> 
                             <IconButton className='icon-button'>
                                 <EditIcon onClick={()=>toggleEdit()} className='button-edit'/>
                             </IconButton>
                             <IconButton>
                                 <ClearIcon onClick={()=>deleteComment()} className="button-delete" />
                             </IconButton>
-                        </>
-                    }
                 </>
                 :
                     (user.id === post.UserId) ?
                         <>
-                            {(isComment)?
-                            <></> :
-                            <>
                                 <IconButton>
                                     <ClearIcon onClick={()=>deleteComment()} className='button-delete'/>
                                 </IconButton>
-                            </>
-                    }
-                        </>
-                    :   <></>
+                            </> : <></>
                 }
             </div>
         </div>
@@ -196,7 +188,7 @@ function Comment({description, firstname, lastname, image, createdAt,comment, us
                             </form>
                             {/* <p>{createdAt}</p> */}
                         </div>
-                            {!like && (
+                            {/* {!like && (
                                 <div className='comment-like-edit' onClick={()=>pressLike()}>
                                     <ThumbUpIcon/>
                                 </div>
@@ -205,7 +197,7 @@ function Comment({description, firstname, lastname, image, createdAt,comment, us
                                 <div className='comment-like-edit' onClick={()=>pressUnlike()}>
                                     <ThumbUpIcon style={{color:'blue'}}/>
                                 </div>
-                            )}
+                            )} */}
                         {/* <p>{timeSince(createdAt)}</p> */}
                 </div>
                 {/* <div className='comment-button'>

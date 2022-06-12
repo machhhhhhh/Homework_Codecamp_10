@@ -7,7 +7,7 @@ import StorefrontIcon from '@mui/icons-material/Storefront';
 import FacebookRoundedIcon from '@mui/icons-material/FacebookRounded';
 import GroupsRoundedIcon from '@mui/icons-material/GroupsRounded';
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
-import ExitToAppRoundedIcon from '@mui/icons-material/ExitToAppRounded';
+// import ExitToAppRoundedIcon from '@mui/icons-material/ExitToAppRounded';
 import NotificationsRoundedIcon from '@mui/icons-material/NotificationsRounded';
 import ForumRoundedIcon from '@mui/icons-material/ForumRounded';
 import ArrowDropDownCircleIcon from '@mui/icons-material/ArrowDropDownCircle';
@@ -19,6 +19,7 @@ import LocalStorageservice from '../../services/localStorageservice';
 import axios from '../../config/axios';
 import { notification } from 'antd';
 import jwtDecode from 'jwt-decode';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 function Header() {
 
@@ -166,7 +167,7 @@ function Header() {
                     <ArrowDropDownCircleIcon fontSize='large'/>
                 </IconButton>
                 <IconButton>
-                    <ExitToAppRoundedIcon fontSize='large' style={{color : 'red'}} onClick ={()=>logout()}/>
+                    <LogoutIcon fontSize='large' style={{color : 'red'}} onClick ={()=>logout()}/>
                 </IconButton>
             </div>
         </div>

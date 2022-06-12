@@ -68,6 +68,14 @@ form > input {
     /* height: 30px; */
     padding: 5px;
     margin: 20px 0px;
+    /* margin-left: 300px; */
+    /* position: absolute; */
+}
+.comment-length{
+    /* background-color: red; */
+    /* align-items: center; */
+    margin-top: 25px;
+    margin-bottom: 25px;
 }
 
 .comment-like-edit {
