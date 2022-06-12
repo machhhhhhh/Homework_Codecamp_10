@@ -5,11 +5,14 @@ import axios from '../../../config/axios'
 import EditIcon from '@mui/icons-material/Edit';
 import ClearIcon from '@mui/icons-material/Clear';
 import { IconButton } from '@mui/material';
+import timeSince from '../../../config/timeSince'
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 
 function Comment({description, firstname, lastname, image, createdAt,comment, user, post, reload, isComment, setComment,setMessage}) {
 
     const [isEdit, setEdit] = useState(false)
     const [text, setText] = useState('')
+    const [like, setLike] = useState(false)
 
     useEffect(()=>{
         if(isComment) {
@@ -88,7 +91,14 @@ function Comment({description, firstname, lastname, image, createdAt,comment, us
                         <h4>{description}</h4>
                         {/* <p>{createdAt}</p> */}
                     </div>
+                    <p>{timeSince(createdAt)}</p>
             </div>
+
+            <div className='comment-like' onClick={()=>setLike(prev=>!prev)}>
+                {!like && (<ThumbUpIcon/>)}
+                {like && (<ThumbUpIcon style={{color:'blue'}}/>)}
+            </div>
+
             <div className='comment-button'>
                 {(user.id === comment.UserId)  ? 
                 <>
@@ -141,6 +151,11 @@ function Comment({description, firstname, lastname, image, createdAt,comment, us
                             </form>
                             {/* <p>{createdAt}</p> */}
                         </div>
+                        <div className='comment-like-edit' onClick={()=>setLike(prev=>!prev)}>
+                            {!like && (<ThumbUpIcon/>)}
+                            {like && (<ThumbUpIcon style={{color:'blue'}}/>)}
+                        </div>
+                        {/* <p>{timeSince(createdAt)}</p> */}
                 </div>
                 {/* <div className='comment-button'>
                     {(user.id === comment.UserId) ?  

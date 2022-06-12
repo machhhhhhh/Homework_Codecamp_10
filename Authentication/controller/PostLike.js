@@ -1,17 +1,18 @@
 const {PostLike,Post,User} = require('../models')
 
-const getAllLike = async(req,res,next)=> {
+const getLike = async(req,res,next)=> {
 
     try {
-        const {post_id} = req.body
 
-        const post = await Post.findOne({where : {id : post_id}})
-        if(!post) return res.status(404).send({message:'Post not found'})
+        const post = await Post.findOne({where : {id : req.params.id}})
+        if(!post) return res.status(404).send({message : "post not found"})
 
         const like = await PostLike.findAll({
+            // status :s
             where : 
             {
-                PostId : post_id
+                PostId : post.id,
+                UserId : req.user.id
             },
             include : [
                 {
@@ -23,10 +24,12 @@ const getAllLike = async(req,res,next)=> {
             ]
         })
 
-        if(!like) return res.status(200).send({message : "No Like"})
+        let check = false
 
+        if(!like) check = false
+        else check = true
 
-        res.status(200).send(like)
+        res.status(200).send(check)
 
 
     } catch (error) {
@@ -39,15 +42,15 @@ const likeOrNot = async(req,res,next) => {
     try {
 
         let icon = false
-        const {post_id} = req.body
+        // const {post_id} = req.body
 
-        const post = await Post.findOne({where : {id : post_id}})
-        if(!post) return res.status(404).send({message:'Post not found'})
+        // const post = await Post.findOne({where : {id : post_id}})
+        // if(!post) return res.status(404).send({message:'Post not found'})
 
         const like = await PostLike.findOne({
             where : 
             { 
-                PostId : post.id,
+                PostId : req.params.id,
                 UserId : req.user.id
             }
         })
@@ -133,5 +136,5 @@ module.exports ={
     pressLike,
     unLike,
     likeOrNot,
-    getAllLike
+    getLike
 }

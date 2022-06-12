@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../../css/dashboard/post.css'
 import {Avatar} from '@mui/material'
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
@@ -16,8 +16,7 @@ function Post({profile, image, username, timestamp, message, user,reload, post})
     const [isEdit, setIsEdit] = useState(false)
     const [isComment, setComment] = useState(false)
     const [comment, setMessage] = useState('')
-
-
+    const [like, setLike] = useState(false)
 
     const toggleComment = async (e) => {
         try {
@@ -129,9 +128,19 @@ function Post({profile, image, username, timestamp, message, user,reload, post})
               {image && <img src={image} alt="post" />}
         </div>
             <div className='post_options'>
-                <div className='post_option'>
-                    <ThumbUpIcon/>
-                    <p>Like</p>
+                <div className='post_option' onClick={()=>setLike(prev=>!prev)} >
+                    {(!like) && (
+                        <>
+                            <ThumbUpIcon/>
+                            <p>Like</p>
+                        </>
+                    )}
+                    {(like) && (
+                        <>
+                            <ThumbUpIcon style={{color:'blue'}}/>
+                            <p style={{color:'blue'}}><strong>Like</strong></p>
+                        </>
+                    )}
                 </div>
                 <div className='post_option' onClick={(e) => toggleComment(e)}>
                     <ChatBubbleIcon/>
@@ -208,10 +217,21 @@ function Post({profile, image, username, timestamp, message, user,reload, post})
               {image && <img src={image} alt="post" />}
         </div>
         <div className='post_options'>
-                <div className='post_option'>
-                    <ThumbUpIcon/>
-                    <p>Like</p>
+                <div className='post_option' onClick={()=>setLike(prev=>!prev)} >
+                            {(!like) && (
+                                <>
+                                    <ThumbUpIcon/>
+                                    <p>Like</p>
+                                </>
+                            )}
+                            {(like) && (
+                                <>
+                                    <ThumbUpIcon style={{color:'blue'}}/>
+                                    <p style={{color:'blue'}}><strong>Like</strong></p>
+                                </>
+                            )}
                 </div>
+
                 <div className='post_option' onClick={(e) => toggleComment(e)}>
                     <ChatBubbleIcon/>
                     <p>Comment</p>
