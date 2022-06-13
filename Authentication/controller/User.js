@@ -3,6 +3,44 @@ const bcryptjs = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const cloundinary = require('cloudinary').v2
 const fs = require('fs')
+const {Op} = require('sequelize')
+
+const findUser = async(req,res,next)=> {
+
+    try {
+
+        const user = await db.User.findOne({ where : { id : req.params.id } })
+        if(!user) return res.status(404).send({message : "No User"})
+
+        const friend = await db.Friend.findOne({
+            where : {
+                [Op.or] : [
+                    {
+                        sender_id : req.user.id,
+                        receiver_id : user.id
+                    },
+                    {
+                        sender_id : user.id,
+                        receiver_id : req.user.id
+                    }
+                ]
+            }
+        })
+
+        let check = null
+
+        if(!friend) check = null
+        else if (friend.status === "ACCEPTED") check = "ACCEPT"
+        else if (friend.status === "REQUESTED" && friend.sender_id === req.user.id ) check = "PENDING"
+        else if (friend.status === "REQUESTED" && friend.receiver_id === req.user.id) check = "REQUEST"
+
+        res.status(200).send({user,check})
+        
+    } catch (error) {
+        next(error)
+    }
+
+}
 
 const login = async(req,res,next) => {
 
@@ -128,5 +166,6 @@ module.exports = {
     register,
     // logout,
     getUser,
-    updateProfile
+    updateProfile,
+    findUser
 }

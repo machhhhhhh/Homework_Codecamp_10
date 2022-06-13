@@ -21,7 +21,7 @@ const getLike = async(req,res,next)=> {
             // ]
         })
 
-        if(!like) return res.status(200).send(false)
+        if(!like) return res.status(404).send(false)
         
 
         res.status(200).send(true)
