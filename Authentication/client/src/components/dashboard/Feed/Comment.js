@@ -7,8 +7,9 @@ import ClearIcon from '@mui/icons-material/Clear';
 import { IconButton } from '@mui/material';
 import timeSince from '../../../config/timeSince'
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import SendIcon from '@mui/icons-material/Send';
 
-function Comment({description, firstname, lastname, image, createdAt,comment, user, post, reload, isComment, setComment,setMessage}) {
+function Comment({description, firstname, lastname, image, createdAt,comment, user, post, reload, isComment, setComment,setMessage, isPostEdit}) {
 
     const [isEdit, setEdit] = useState(false)
     const [text, setText] = useState('')
@@ -134,39 +135,46 @@ function Comment({description, firstname, lastname, image, createdAt,comment, us
                     <p>{timeSince(createdAt)}</p>
             </div>
 
-                {like && (
-                    <div className='comment-like' onClick={()=>pressUnlike()}>
-                        <ThumbUpIcon style={{color:'blue'}}/>
-                    </div>
-                    )}
-                {!like && (
-                    <div className='comment-like' onClick={()=>pressLike()}>
-                        <ThumbUpIcon />
-                    </div>
-                )}
+                {!isPostEdit && (
+                    <>
+                        {like && (
+                            <div className='comment-like' onClick={()=>pressUnlike()}>
+                                <ThumbUpIcon style={{color:'blue'}}/>
+                            </div>
+                            )}
+                        {!like && (
+                            <div className='comment-like' onClick={()=>pressLike()}>
+                                <ThumbUpIcon />
+                            </div>
+                        )}
 
-                {comment.CommentLikes.length!== 0 && <p className='comment-length'>{comment.CommentLikes.length}</p>}
+                        {comment.CommentLikes.length!== 0 && <p className='comment-length'>{comment.CommentLikes.length}</p>}
+                    </>
+                )}
                 
 
-            <div className='comment-button'>
+            {/* {isPostEdit===false &&  ( */}
+                <div className='comment-button'>
                 {(user.id === comment.UserId)  ? 
                 <>
-                            <IconButton className='icon-button'>
+                    {isPostEdit ===false && (
+                        <>
                                 <EditIcon onClick={()=>toggleEdit()} className='button-edit'/>
-                            </IconButton>
-                            <IconButton>
                                 <ClearIcon onClick={()=>deleteComment()} className="button-delete" />
-                            </IconButton>
+                        </>
+                    )}
+                            
                 </>
                 :
                     (user.id === post.UserId) ?
                         <>
-                                <IconButton>
-                                    <ClearIcon onClick={()=>deleteComment()} className='button-delete'/>
-                                </IconButton>
+                                {isPostEdit===false && (
+                                        <ClearIcon onClick={()=>deleteComment()} className='button-delete'/>
+                                )}
                             </> : <></>
                 }
             </div>
+            {/* )} */}
         </div>
     )
 
@@ -184,7 +192,7 @@ function Comment({description, firstname, lastname, image, createdAt,comment, us
                                     value= {text}
                                     onChange= {e => setText(e.target.value)}
                                 />
-                                <button type='submit' onClick={e => editComment(e)} >send</button>
+                                <button type='submit' className='comment-edit' onClick={e => editComment(e)} ><SendIcon/></button>
                             </form>
                             {/* <p>{createdAt}</p> */}
                         </div>

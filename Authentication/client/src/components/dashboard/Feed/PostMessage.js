@@ -6,6 +6,7 @@ import PhotoIcon from '@mui/icons-material/Photo';
 import MoodIcon from '@mui/icons-material/Mood';
 import axios from '../../../config/axios'
 import ClearIcon from '@mui/icons-material/Clear';
+import SendIcon from '@mui/icons-material/Send'
 
 function PostMessage(props) {
 
@@ -40,7 +41,8 @@ function PostMessage(props) {
             setInput('')
             setImage(null)
             inputEl.current.value = null
-            window.location.reload()
+            // window.location.reload()
+            props.reload()
         } catch(err) {
             console.error(err)
         }
@@ -62,7 +64,7 @@ function PostMessage(props) {
                 />
                 
                 
-                <button type='submit' onClick={e => handleSubmit(e)} >Send</button>
+                <button type='submit' onClick={e => handleSubmit(e)} ><SendIcon/></button>
             </form>
         </div>
         

@@ -39,7 +39,13 @@
 }
 
 .message_top > form > button {
-    display: none;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    color: blue;
+}
+.message_top > form > button:hover {
+    color: black;
 }
 
 .message_input{

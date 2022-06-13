@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import '../../css/dashboard/post.css'
 import {Avatar} from '@mui/material'
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
@@ -9,14 +9,18 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import axios from '../../../config/axios';
 import Comment from './Comment'
 import timeSince from '../../../config/timeSince'
+import CancelIcon from '@mui/icons-material/Cancel';
 
 function Post({profile, image, username, timestamp, message, user,reload, post}) {
     
+    const [photo,setPhoto] = useState(null)
     const [input, setInput] = useState('')
     const [isEdit, setIsEdit] = useState(false)
     const [isComment, setComment] = useState(false)
     const [comment, setMessage] = useState('')
     const [like, setLike] = useState(false)
+
+    const inputEl = useRef()
 
     useEffect(()=>{
         
@@ -106,16 +110,22 @@ function Post({profile, image, username, timestamp, message, user,reload, post})
         try{
             setComment(false)
             e.preventDefault()
-            const body = {
-                description: input 
-                // photo : ,
-                // emotion : 
+            // const body = {
+            //     description: input 
+            //     // photo : ,
+            //     // emotion : 
+            // }
+            const formData = new FormData()
+            if(photo) {
+                formData.append('postImg', photo)
             }
+            formData.append('description', input)
 
-            await axios.put(`/post/${post.id}`, body)
+            await axios.put(`/post/${post.id}`, formData)
             setInput("")
             setIsEdit(false)
             reload()
+            setComment(prev=>!prev)
             // console.log('edit');
 
         } catch(error){
@@ -148,8 +158,8 @@ function Post({profile, image, username, timestamp, message, user,reload, post})
                 <div className='button'>
                     { (user.id === post.UserId) ?
                         <>
-                        <button onClick={(e)=> toggleEdit(e)}><EditIcon style={{color : 'blue'}} /></button>
-                        <button onClick={(e)=>deletePost(e)}><DeleteIcon style={{color : 'red'}}/></button>
+                            <button className='button-button-edit' onClick={(e)=> toggleEdit(e)}><EditIcon /></button>
+                            <button className='button-button-del' onClick={(e)=>deletePost(e)}><DeleteIcon/></button>
                         </>
                     : 
                     <>
@@ -190,19 +200,6 @@ function Post({profile, image, username, timestamp, message, user,reload, post})
         
         {(isComment)? 
             <>
-                <div className='comment-form'>
-                    <Avatar src={user.image} />
-                    <form>
-                        <input 
-                            type='text'
-                            className='comment-input'
-                            placeholder={`Write something ...`}
-                            value={comment}
-                            onChange={e => setMessage(e.target.value)}
-                        />
-                    <button type='submit' className='comment-submit' onClick={e => addComment(e)} >Send</button>
-                    </form>
-                </div>
                     {post.Comments && post.Comments.map(comment => (
                         <Comment  
                             key={comment.id} 
@@ -218,8 +215,23 @@ function Post({profile, image, username, timestamp, message, user,reload, post})
                             isComment = {isComment}
                             setComment = {setComment}
                             setMessage = {setInput}
+                            isPostEdit = {isEdit}
                             />
                     ))}
+                    
+                    <div className='comment-form'>
+                    <Avatar src={user.image} />
+                    <form>
+                        <input 
+                            type='text'
+                            className='comment-input'
+                            placeholder={`Write something ...`}
+                            value={comment}
+                            onChange={e => setMessage(e.target.value)}
+                        />
+                    <button type='submit' className='comment-submit' onClick={e => addComment(e)} ><SendIcon/></button>
+                    </form>
+                </div>
             </>
             : <></> }
         
@@ -231,28 +243,40 @@ function Post({profile, image, username, timestamp, message, user,reload, post})
         content = (
         <div className='post'>
             <div className='post_top'>
-            <div className='post-info'>
-                <Avatar src={profile} className='avatar'/>
-                <div className='post_topInfo'>
-                    <h3>{username}</h3>
-                    <p>{timeSince(timestamp)}</p>
+                <div className='post-info'>
+                    <Avatar src={profile} className='avatar'/>
+                    <div className='post_topInfo'>
+                        <h3>{username}</h3>
+                        <p>{timeSince(timestamp)}</p>
+                    </div>
                 </div>
-            </div>
-
+                <button className='button-cancle-edit' onClick={()=>setIsEdit(prev=>!prev)} ><CancelIcon/></button>
         </div>
         <div className='post_bottom'>
-            <form>
+            <form className='post-buttom-edit'>
                 <input 
                     type='text'
                     className='message-input'
                     value={input}
                     onChange={e => setInput(e.target.value)}
                 />
-                <button type='submit' onClick={(e) => editPost(e)} >Send</button>
+                <button type='submit' className='button-post-edit' onClick={(e) => editPost(e)} ><SendIcon/></button>
             </form>
-            </div>
+        </div>
         <div className='post_image'>
-              {image && <img src={image} alt="post" />}
+
+                <input 
+                    type='file'
+                    hidden
+                    onChange={(e)=>setPhoto(e.target.files[0])}
+                    ref={inputEl}
+                />
+                <img 
+                    src={photo ? URL.createObjectURL(photo) : image}  
+                    onClick={()=>inputEl.current.click()}
+                    alt='post'
+                />
+
         </div>
         <div className='post_options'>
                             {(!like) && (
@@ -277,6 +301,24 @@ function Post({profile, image, username, timestamp, message, user,reload, post})
                     <p>Share</p>
                 </div>
         </div>
+        {post.Comments && post.Comments.map(comment => (
+                        <Comment  
+                            key={comment.id} 
+                            description = {comment.description}
+                            firstname={comment.User.firstname} 
+                            lastname = {comment.User.lastname} 
+                            image = {comment.User.image}
+                            createdAt = {comment.createdAt}
+                            comment = {comment}
+                            user = {user}
+                            post = {post}
+                            reload = {reload}
+                            isComment = {!isComment}
+                            setComment = {setComment}
+                            setMessage = {setInput}
+                            isPostEdit={isEdit}
+                            />
+                    ))}
 
 
     </div>
