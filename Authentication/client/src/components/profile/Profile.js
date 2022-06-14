@@ -33,7 +33,7 @@ function Profile() {
                     formData.append('profileImg',image)
 
                     await axios.put(`/user/profile`, formData)
-                    return history.push('/profile')
+                    return window.location.reload()
             
                 } catch (error) {
                     console.error(error)
@@ -72,7 +72,7 @@ function Profile() {
             console.errror(error)
         }
 
-    },[])   
+    },[image])   
 
 
   return (

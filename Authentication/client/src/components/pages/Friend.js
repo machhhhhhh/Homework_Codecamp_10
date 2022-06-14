@@ -7,7 +7,7 @@ import '../css/friend/friend.css'
 import Friends from '../friend/Friend'
 import {ALL_FRIEND ,REQUEST_FRIEND, PENDING_FRIEND, FIND_FRIEND} from '../../config/data'
 
-function Friend() {
+function Friend(props) {
 
     const [user,setUser] = useState([])
     const [mode, setMode] = useState(ALL_FRIEND)
@@ -50,7 +50,7 @@ function Friend() {
 
   return (
     <div className='friends'>
-        <Header/>
+        <Header user = {props.user} setRole = {props.setRole} />
         <div className='friends-body'>
             <Navbars changeMode = {changeMode} />
             <Friends 

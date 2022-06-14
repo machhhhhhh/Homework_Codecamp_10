@@ -5,6 +5,7 @@ import Dashboard from '../components/pages/Dashboard'
 import Friend from '../components/pages/Friend'
 import Profile from '../components/pages/Profile'
 // import FacebookLogin from '../components/pages/FacebookLogin'
+import User from '../components/pages/User'
 
 const components = {
     todo : {
@@ -30,6 +31,10 @@ const components = {
     profile : {
         url : '/profile',
         component : Profile
+    },
+    user : {
+        url : '/user',
+        component : User
     }
 }
 
@@ -47,7 +52,8 @@ export default {
             components.todo,
             components.dashboard,
             components.friend,
-            components.profile
+            components.profile,
+            components.user
         ],
         redirectRoutes : '/dashboard'
     }

@@ -1,4 +1,4 @@
-import React ,{useState, useEffect}from 'react'
+import React from 'react'
 import '../css/dashboard/header.css'
 import SearchIcon from '@mui/icons-material/Search';
 import HomeIcon from '@mui/icons-material/Home';
@@ -16,14 +16,10 @@ import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 import {Avatar} from '@mui/material'
 import { useHistory } from 'react-router-dom';
 import LocalStorageservice from '../../services/localStorageservice';
-import axios from '../../config/axios';
 import { notification } from 'antd';
-import jwtDecode from 'jwt-decode';
 import LogoutIcon from '@mui/icons-material/Logout';
 
-function Header() {
-
-    const [user, setUser]= useState([])
+function Header(props) {
 
     let history = useHistory()
 
@@ -48,67 +44,18 @@ function Header() {
         
         try {
             LocalStorageservice.removeToken()
-            // props.setRole('guest')
+            props.setRole('guest')
             notification.success({
                 message: "Logout"
             })
 
-            // fetchUser()
             return history.push('/login')
+
         } catch (error) {
             console.error(error)
         }
 
-        // props.history.push('/login')
-        // await axios.get('/user/logout')
-        // .then(res => {
-            
-        //     })
-        //     .catch(err => console.error(err))
     }
-
-    // async function getUser(){
-    //     const response = await axios.get('/user')
-    //     // allUser = response.data
-    //     const token = LocalStorageservice.getToken()
-    //     userLogin = jwtDecode(token)
-    //     user = allUser.filter(person => person.id===userLogin.id)
-    //     // console.log(JSON.stringify(user));
-    //     const jsonstringuser = JSON.stringify(user)
-    //     console.log(jsonstringuser);
-    //     // jsonstringuser.map(user => console.log(user))
-    // }
-    
-
-    const fetchUser = async () => {
-            const token = LocalStorageservice.getToken()
-            // console.log(jwtDecode(token))
-            // setUser(jwtDecode(token))
-            const result = await axios.get('/user')
-            const data = result.data
-            const profile = data.filter(user => user.id === jwtDecode(token).id)
-            profile.map(user => {
-                // console.log(user);
-                 return setUser(user)
-            })
-    }
-
-    
-    
-    useEffect( ()=>{
-        // getUser()
-        // const userLogin = jwtDecode(token)
-        // console.log(user);
-        // setUser(userLogin)
-        // console.log(user);
-        // console.log(jwtDecode(token));
-        
-        fetchUser()
-
-        
-
-    },[])
-
 
   return (
         <div className='header'>
@@ -150,8 +97,8 @@ function Header() {
             </div>
             <div className='header_right' >
                 <div className='header_info' onClick={()=>profile()} >
-                    <Avatar src={user.image} />
-                    <span>{user.firstname} {user.lastname}</span>
+                    <Avatar src={props.user.image} />
+                    <span>{props.user.firstname} {props.user.lastname}</span>
                 </div>
 
                 <IconButton>

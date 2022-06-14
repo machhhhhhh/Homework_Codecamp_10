@@ -23,14 +23,10 @@ function Feed(props) {
 
   useEffect(()=>{
 
-    
-
     fetchPost()
 
   },[])
   
-
-
 
   return (
 
@@ -53,17 +49,6 @@ function Feed(props) {
               />
       ))}
 
-          
-          
-
-      {/* <Post
-        profile={props.user.image}
-        image="https://ichef.bbci.co.uk/news/999/cpsprodpb/15951/production/_117310488_16.jpg"
-        username={props.user.firstname + ' ' + props.user.lastname}
-        timestamp="this is a time"
-        message="message"
-      /> */}
-      
     </div>
   )
 }

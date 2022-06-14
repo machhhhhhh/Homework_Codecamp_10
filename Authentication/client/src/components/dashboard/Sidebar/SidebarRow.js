@@ -1,10 +1,7 @@
 import React from 'react'
 import {Avatar} from '@mui/material'
 
-
 function SidebarRow({title, Icon,user}) {
-
- 
 
   return (
     <div className='sidebar-row'>

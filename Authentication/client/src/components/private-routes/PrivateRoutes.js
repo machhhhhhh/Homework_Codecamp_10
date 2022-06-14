@@ -1,6 +1,9 @@
+import React, { useEffect, useState } from 'react'
 import { Switch ,Redirect, Route} from 'react-router-dom'
-import React from 'react'
 import ConfigRoutes from '../../config/routes'
+import jwtDecode from 'jwt-decode'
+import LocalStorageservice from '../../services/localStorageservice';
+import axios from '../../config/axios';
 
 function PrivateRoutes(props) {
 
@@ -8,6 +11,27 @@ function PrivateRoutes(props) {
 
     const allowRoutes = ConfigRoutes[role].allowRoutes
     const redirectRoutes = ConfigRoutes[role].redirectRoutes
+
+    const [user, setUser] = useState([])
+
+    useEffect(()=>{
+
+        const fetchUser = async () => {
+            try {
+                const token = LocalStorageservice.getToken()
+                const result = await axios.get('/user')
+                const data = result.data
+                const profile = data.filter(user => user.id === jwtDecode(token).id)
+                profile.map(user => {
+                     return setUser(user)
+                })
+            } catch (error) {
+                console.error(error)
+            }
+          }
+    
+        if(role !== 'guest') fetchUser()
+    },[role])  
 
 
   return (
@@ -19,7 +43,7 @@ function PrivateRoutes(props) {
                 key={route.url}
                 exact
         >
-            <route.component setRole={props.setRole}/>
+            <route.component setRole={props.setRole} user = {user} />
         </Route>
         )}
         <Redirect to={redirectRoutes}/>
