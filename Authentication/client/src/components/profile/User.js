@@ -3,10 +3,23 @@ import AddIcon from '@mui/icons-material/Add';
 import CheckIcon from '@mui/icons-material/Check';
 import RemoveIcon from '@mui/icons-material/Remove';
 import axios from '../../config/axios'
+import {useHistory} from 'react-router-dom'
 
 const url = 'https://icon-library.com/images/no-user-image-icon/no-user-image-icon-26.jpg'
 
 function User({user, check, setRefresh}) {
+  const history = useHistory()
+
+  const profile = async (e) => {
+    try {
+      if(check !== 'user') return
+
+      return history.push('/profile')
+
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   const addFriend = async () => {
     try {
@@ -57,7 +70,7 @@ function User({user, check, setRefresh}) {
 
   return (
     <div className='user'>
-        <img src={user.image ? user.image : url} alt='user' />
+        <img src={user.image ? user.image : url} alt='user' onClick={profile} />
         <div className='user-check'>
             <h1>{user.firstname ? user.firstname : 'No User'} <span> {user.lastname && user.lastname}</span> </h1>
             {check ==="ACCEPT" && (

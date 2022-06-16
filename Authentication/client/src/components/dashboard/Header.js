@@ -14,7 +14,7 @@ import ArrowDropDownCircleIcon from '@mui/icons-material/ArrowDropDownCircle';
 import IconButton from '@mui/material/IconButton';
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 import {Avatar} from '@mui/material'
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import LocalStorageservice from '../../services/localStorageservice';
 import { notification } from 'antd';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -23,14 +23,6 @@ function Header(props) {
 
     let history = useHistory()
 
-
-    const profile = () => {
-        try {
-            return history.push('/profile')
-        } catch (error) {
-            console.error(error)
-        }
-    }
 
     const home = () => {
         try{
@@ -96,10 +88,17 @@ function Header(props) {
                 </div>
             </div>
             <div className='header_right' >
-                <div className='header_info' onClick={()=>profile()} >
-                    <Avatar src={props.user.image} />
-                    <span>{props.user.firstname} {props.user.lastname}</span>
-                </div>
+                <Link to={{
+                    pathname : '/user',
+                    state : {
+                        user_id : props.user.id
+                    }
+                }}>
+                        <div className='header_info' >
+                            <Avatar src={props.user.image} />
+                            <span>{props.user.firstname} {props.user.lastname}</span>
+                        </div>
+                </Link>
 
                 <IconButton>
                     <MenuRoundedIcon fontSize='large'/>

@@ -9,7 +9,7 @@ import YouTubeIcon from '@mui/icons-material/YouTube';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import SendIcon from '@mui/icons-material/Send';
-import {useHistory} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 
 function Sidebar(props) {
 
@@ -35,9 +35,14 @@ function Sidebar(props) {
 
   return (
     <div className='sidebar'>
-        <span onClick={()=>profile()}>
-          <SidebarRow title={props.user.firstname + ' ' + props.user.lastname}  user={props.user}/>
-        </span>
+        <Link to={{
+            pathname : '/user',
+            state : {
+              user_id : props.user.id
+            }
+        }}>
+              <SidebarRow title={props.user.firstname + ' ' + props.user.lastname}  user={props.user}/>
+        </Link>
         <span onClick={()=>friend()}>
           <SidebarRow title="Friends" Icon={GroupIcon} />
         </span>
