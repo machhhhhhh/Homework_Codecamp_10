@@ -7,6 +7,7 @@ import MoodIcon from '@mui/icons-material/Mood';
 import axios from '../../../config/axios'
 import ClearIcon from '@mui/icons-material/Clear';
 import SendIcon from '@mui/icons-material/Send'
+import {Link} from 'react-router-dom'
 
 function PostMessage(props) {
 
@@ -53,7 +54,9 @@ function PostMessage(props) {
     <div className='message'>
 
         <div className='message_top'>
-            <Avatar src={props.user.image} className="message-avatar"/>
+            <Link to='/profile'>
+                <Avatar src={props.user.image} className="message-avatar"/>
+            </Link>
             <form>
                 <input 
                     type='text'

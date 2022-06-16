@@ -7,6 +7,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 import timeSince from '../../../config/timeSince'
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import SendIcon from '@mui/icons-material/Send';
+import { Link } from 'react-router-dom';
 
 function Comment({description, firstname, lastname, image, createdAt,comment, user, post, reload, isComment, setComment,setMessage, isPostEdit}) {
 
@@ -125,7 +126,14 @@ function Comment({description, firstname, lastname, image, createdAt,comment, us
         <div className='comment'>
             {/* {props.comment.id} */}
             <div className='comment-top'>
-                    <Avatar src={image} className='comment-avatar'/>
+                    <Link to={{
+                        pathname : '/user',
+                        state : {
+                            user_id : comment.UserId
+                        }
+                    }}>
+                        <Avatar src={image} className='comment-avatar'/>
+                    </Link>
                     <div className='comment-info'>
                         <h3>{firstname}  {lastname}</h3>
                         <h4>{description}</h4>

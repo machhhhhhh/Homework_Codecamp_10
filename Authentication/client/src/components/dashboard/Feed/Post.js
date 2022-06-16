@@ -10,6 +10,7 @@ import axios from '../../../config/axios';
 import Comment from './Comment'
 import timeSince from '../../../config/timeSince'
 import CancelIcon from '@mui/icons-material/Cancel';
+import { Link } from 'react-router-dom';
 
 function Post({profile, image, username, timestamp, message, user,reload, post}) {
     
@@ -149,7 +150,14 @@ function Post({profile, image, username, timestamp, message, user,reload, post})
         <div className='post'>
             <div className='post_top'>
                 <div className='post-info'>
-                    <Avatar src={profile} className='avatar'/>
+                    <Link to={{
+                        pathname : '/user',
+                        state: {
+                            user_id : post.UserId
+                        }
+                    }}>
+                        <Avatar src={profile} className='avatar'/>
+                    </Link>
                     <div className='post_topInfo'>
                         <h3>{username}</h3>
                         <p>{timeSince(timestamp)}</p>
@@ -244,7 +252,14 @@ function Post({profile, image, username, timestamp, message, user,reload, post})
         <div className='post'>
             <div className='post_top'>
                 <div className='post-info'>
-                    <Avatar src={profile} className='avatar'/>
+                    <Link to={{
+                        pathname : '/user',
+                        state : {
+                            user_id : post.UserId
+                        }
+                    }}>
+                        <Avatar src={profile} className='avatar'/>
+                    </Link>
                     <div className='post_topInfo'>
                         <h3>{username}</h3>
                         <p>{timeSince(timestamp)}</p>
