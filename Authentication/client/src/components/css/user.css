@@ -1,0 +1,90 @@
+.users {
+    height: 100vh;
+    background-color: #f1f2f3;
+}
+.user {
+    height: auto;
+    display: flex;
+    margin-top: 5%;
+    margin-left: 15%;
+}
+
+.user > img {
+    width: 30%;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.user-check{
+    margin-top: 80px;
+}
+
+.user-check > h1 {
+    margin-left: 200px;
+}
+.user-check > h1 > span {
+    margin-left: 30px;
+}
+
+.user-check > .user-request {
+    margin-left: 200px;
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.user-check > .button-check-unfriend {
+    margin-left: 200px;
+    margin-top: 20px;
+    border: none;
+    cursor: pointer;
+    background-color: red;
+    color: white;
+    border-radius: 15px;
+    padding: 10px 30px;
+}
+.user-check > .button-check-unfriend:hover {
+    background-color: lightgrey;
+    color: black;
+}
+
+.user-check > .user-request > .button-request-accept {
+    border: none;
+    cursor: pointer;
+    background-color: green;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 15px;
+}
+.user-check > .user-request > .button-request-remove {
+    border: none;
+    padding: 10px 20px;
+    background-color: red;
+    color: white;
+    border-radius: 15px;
+    cursor: pointer;
+}
+.user-check > .user-request > .button-request-accept:hover{
+    background-color: grey;
+    color: black;
+}
+
+.user-check > .user-request > .button-request-remove:hover{
+    background-color: grey;
+    color: black;
+}
+
+.user-check > .button-send {
+    margin-left: 220px;
+    margin-top: 50px;
+    padding: 5px 50px;
+    cursor: pointer;
+    border: none;
+    background-color: blue;
+    border-radius: 15px;
+    color: wheat;
+}
+.user-check > .button-send:hover {
+    background-color: grey;
+    color: black;
+}

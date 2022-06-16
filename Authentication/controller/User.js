@@ -28,12 +28,11 @@ const findUser = async(req,res,next)=> {
         })
 
         let check = null
-
-        if(!friend) check = null
+        if(!friend) check = "SEND"
         else if (friend.status === "ACCEPTED") check = "ACCEPT"
         else if (friend.status === "REQUESTED" && friend.sender_id === req.user.id ) check = "PENDING"
         else if (friend.status === "REQUESTED" && friend.receiver_id === req.user.id) check = "REQUEST"
-
+        
         res.status(200).send({user,check})
         
     } catch (error) {

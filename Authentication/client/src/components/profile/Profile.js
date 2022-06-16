@@ -1,24 +1,18 @@
-import React, { useState , useEffect, useRef} from 'react'
+import React, { useState , useRef} from 'react'
 import axios from '../../config/axios'
-import LocalStorageservice from '../../services/localStorageservice'
-import jwtDecode from 'jwt-decode'
 import '../css/profile.css'
 import {useHistory} from 'react-router-dom'
 
 const url = 'https://icon-library.com/images/no-user-image-icon/no-user-image-icon-26.jpg'
 
-function Profile() {
-    const history = useHistory()
+function Profile({user}) {
 
-    const [user, setUser] = useState([])
+    const history = useHistory()
+    const inputEl = useRef()
+
     const [image, setImage] = useState(null)
 
-
-    // let fname , lname
-    const inputEl = useRef()
     
-    
-            
             const cancle = async () => {
                 setImage(null)
                 history.push('/dashboard')
@@ -42,37 +36,6 @@ function Profile() {
 
 
     }
-
-    useEffect(()=>{
-
-        try {
-            
-            const fetchUser = async () => {
-                const token = LocalStorageservice.getToken()
-                // console.log(jwtDecode(token))
-                    // setUser(jwtDecode(token))
-                    const result = await axios.get('/user')
-                    const data = result.data
-                    const profile = data.filter(user => user.id === jwtDecode(token).id)
-                    profile.map(user => {
-                        // console.log(props);
-                        // console.log(user);
-                        // fname = user.firstname
-                        // lname = user.lastname
-                         return setUser(user)
-                        })
-        
-                        
-                    }
-
-            fetchUser()
-            
-
-        } catch (error) {
-            console.errror(error)
-        }
-
-    },[image])   
 
 
   return (

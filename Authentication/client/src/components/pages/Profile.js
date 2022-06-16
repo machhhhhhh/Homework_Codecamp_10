@@ -8,7 +8,7 @@ function Profile(props) {
   return (
     <div className='profile'>
             <Header setRole = {props.setRole} user = {props.user} />
-            <Profiles/>
+            <Profiles user = {props.user} />
     </div>
   )
 }
