@@ -39,7 +39,7 @@ function User(props) {
     return (
         <div className='users'>
             <Header setRole = {props.setRole} user = {props.user} />
-            <Users  user = {user} check = {check} />
+            <Users  user = {user} check = {check} setRefresh= {setRefresh} />
         </div>
   )
 }

@@ -2,39 +2,103 @@ import React from 'react'
 import AddIcon from '@mui/icons-material/Add';
 import CheckIcon from '@mui/icons-material/Check';
 import RemoveIcon from '@mui/icons-material/Remove';
+import axios from '../../config/axios'
 
 const url = 'https://icon-library.com/images/no-user-image-icon/no-user-image-icon-26.jpg'
 
-function User({user, check}) {
+function User({user, check, setRefresh}) {
+
+  const addFriend = async () => {
+    try {
+
+      const body = {
+        target_id : user.id
+      }
+
+      await axios.post('/friend', body)
+      setRefresh(prev=>!prev)
+
+    } catch (error) {
+        console.error(error)
+    }
+  }
+
+  const unFriend = async () => {
+    try {
+
+      const check = window.confirm("Are you sure ??!")
+      if(!check) {
+        return;
+      }
+
+      const body = {
+        friend_id : user.id
+      }
+      
+      await axios.post('/friend/unfriend', body)
+      setRefresh(prev=>!prev)
+    } catch (error) {
+        console.error(error)
+    }
+  }
+
+  const acceptFriend = async() => {
+    try {
+
+      const body = {
+        friend_id : user.id
+      }
+      await axios.post('/friend/accept', body)
+      setRefresh(prev=>!prev)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   return (
     <div className='user'>
         <img src={user.image ? user.image : url} alt='user' />
         <div className='user-check'>
             <h1>{user.firstname ? user.firstname : 'No User'} <span> {user.lastname && user.lastname}</span> </h1>
             {check ==="ACCEPT" && (
-                <button className='button-check-unfriend'>
-                  <strong>Unfriend</strong>
+                <button 
+                  className='button-check-unfriend'
+                  onClick={unFriend}
+                  >
+                    <strong>Unfriend</strong>
                 </button>
             )}
 
             {check ==="PENDING" && (
-                <button className='button-check-unfriend'>
+                <button 
+                  className='button-check-unfriend'
+                  onClick={unFriend}
+                  >
                   <strong>Cancel</strong>
                 </button>
             )}
             {check ==="REQUEST" && (
               <div className='user-request'>
-                <button className='button-request-accept'>
-                   <strong> <CheckIcon/></strong>
+                <button 
+                  className='button-request-accept'
+                  onClick={acceptFriend}
+                  >
+                    <strong> <CheckIcon/></strong> 
                 </button>
-                <button className='button-request-remove'>
-                  <strong><RemoveIcon/></strong>
+                <button 
+                  className='button-request-remove'
+                  onClick={unFriend}
+                  >
+                    <strong><RemoveIcon/></strong>
                 </button>
               </div>
             )}
             {check ==="SEND" && (
-                <button className='button-send'>
-                  <strong><AddIcon/></strong>
+                <button 
+                  className='button-send'
+                  onClick={addFriend}
+                  >
+                    <strong><AddIcon/></strong>
                 </button>
             )}
             
