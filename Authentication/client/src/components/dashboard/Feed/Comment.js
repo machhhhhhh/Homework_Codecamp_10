@@ -17,13 +17,10 @@ function Comment({description, firstname, lastname, image, createdAt,comment, us
 
     useEffect(()=> {
 
-        // if(isComment) {
-        //     setEdit(false)
-        // }
 
-        const fetchLike = async (id) => {
+        const fetchLike = async () => {
             try{
-                const result = await axios.get(`/comment-like/${id}`)
+                const result = await axios.get(`/comment-like/${comment.id}`)
                 // console.log(result)
                 setLike(result.data);                
             } catch(err) {
@@ -31,7 +28,7 @@ function Comment({description, firstname, lastname, image, createdAt,comment, us
             }
         }
 
-        fetchLike(comment.id)
+        fetchLike()
 
     },[like])
 

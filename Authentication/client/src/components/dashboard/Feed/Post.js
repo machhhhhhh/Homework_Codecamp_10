@@ -25,9 +25,9 @@ function Post({profile, image, username, timestamp, message, user,reload, post})
 
     useEffect(()=>{
         
-        const fetchLike = async(id) => {
+        const fetchLike = async() => {
             try{
-                const result = await axios.get(`/like/${id}`)
+                const result = await axios.get(`/like/${post.id}`)
                 setLike(result.data);
             } catch(err){
                 console.error(err)

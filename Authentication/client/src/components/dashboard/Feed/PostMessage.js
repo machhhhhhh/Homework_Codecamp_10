@@ -54,7 +54,12 @@ function PostMessage(props) {
     <div className='message'>
 
         <div className='message_top'>
-            <Link to='/profile'>
+            <Link to={{
+                pathname : '/user',
+                state : {
+                    user_id : props.user.id
+                }
+            }}>
                 <Avatar src={props.user.image} className="message-avatar"/>
             </Link>
             <form>

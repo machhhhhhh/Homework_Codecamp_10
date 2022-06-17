@@ -24,15 +24,6 @@ function Sidebar(props) {
       }
   }
 
-  const profile = () => {
-    try {
-      return history.push('/profile')
-    } catch (error) {
-      console.error(error)
-    }
-  }
-    
-
   return (
     <div className='sidebar'>
         <Link to={{
