@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
     const model = sequelize.define('Customer', {
-        email : {
+        username : {
             type : DataTypes.STRING(255),
             unique : true,
             allowNull : false,
@@ -36,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
                 notEmpty : true
             }
        },
-        photo : {
+        image : {
             type : DataTypes.STRING(255)
        },
 

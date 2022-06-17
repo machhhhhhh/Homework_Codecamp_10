@@ -18,10 +18,12 @@ route.use(session({
   }))
 
 //  import routes
-
+const customerRoute = require('./routes/customerRoute')
+const shopOwnerRoute = require('./routes/shopOwnerRoute')
 
 //  actual routes
-
+route.use('/customer', customerRoute)
+route.use('/shop', shopOwnerRoute)
 
 db.sequelize.sync({force:false}).then( () => {
     route.listen(process.env.PORT , () => console.log('Listening at ' + process.env.PORT))

@@ -1,3 +1,4 @@
+const e = require('express')
 const passport = require('passport')
 const {Strategy, ExtractJwt} = require('passport-jwt')
 const db = require('../../models')
@@ -8,13 +9,19 @@ const option = {
 }
 
 const JWTStrategy = new Strategy(option,async ( payload, done) => {
-    const user = await db.User.findOne({ where : { id : payload.id}})
+    const customer = await db.Customer.findOne({ where : { id : payload.id}})
 
-    if (user) {
-        done(null, User)
+    if (customer) {
+        done(null, customer)
     }
     else {
-        done(null, false)
+        const shop = await db.Shop.findOne({where : {id : payload.id}})
+        if(shop) {
+            done(null, shop)
+        } 
+        else {
+            done(null, false)
+        }
     }
 
 })

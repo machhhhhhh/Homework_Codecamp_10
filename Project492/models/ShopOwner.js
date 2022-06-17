@@ -1,11 +1,11 @@
 module.exports = (sequelize, DataTypes) => {
     const model = sequelize.define('Shop', {
-       email : {
+       username : {
            type : DataTypes.STRING(255),
            unique : true,
            allowNull : false,
             validate : {
-                notEmpty : true
+                isEmail : true
             }
        } ,
        password : {
@@ -37,7 +37,7 @@ module.exports = (sequelize, DataTypes) => {
                 notEmpty : true
             }
        },
-       photo : {
+       image : {
            type : DataTypes.STRING(255)
        },
        shopname : {
@@ -56,14 +56,14 @@ module.exports = (sequelize, DataTypes) => {
             }
        },
        latitude : {
-           type : DataTypes.INTEGER(255),
+           type : DataTypes.STRING(255),
            allowNull : false,
             validate : {
                 notEmpty : true
             }
        },
        longitude : {
-           type : DataTypes.INTEGER(255),
+           type : DataTypes.STRING(255),
            allowNull : false,
             validate : {
                 notEmpty : true
