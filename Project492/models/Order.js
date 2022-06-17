@@ -1,7 +1,11 @@
 module.exports = (sequelize, DataTypes) => {
     const model = sequelize.define('Order', {
         problem : {
-            type : DataTypes.STRING(255)
+            type : DataTypes.STRING(255),
+            allowNull : false,
+            validate : {
+                notEmpty : true
+            }
        },
        description : {
            type : DataTypes.STRING(255)
@@ -20,7 +24,10 @@ module.exports = (sequelize, DataTypes) => {
 
     model.associate = models => {
         model.belongsTo(models.Customer, {FORIENGEKEY : 'cid'})
-        model.belongsTo(models.Shop, {FORIENGEKEY : 'sid'})
+        model.belongsTo(models.Shop, {
+            FORIENGEKEY : 'sid',
+            // allowNull : true
+        })
     
         model.hasOne(models.Invoice, {FORIENGEKEY : 'oid'})
         model.hasMany(models.Ophoto, {FORIENGEKEY : 'oid'})

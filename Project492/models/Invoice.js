@@ -1,7 +1,11 @@
 module.exports = (sequelize, DataTypes) => {
     const model = sequelize.define('Invoice', {
         isPay : {
-            type : DataTypes.BOOLEAN
+            type : DataTypes.STRING(255),
+            defaultValue : 'NO',
+            validate : {
+                isIn : [['YES','NO']]
+            }
        },
        photo : {
            type : DataTypes.STRING(255)

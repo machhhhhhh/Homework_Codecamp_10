@@ -9,5 +9,10 @@ module.exports = (sequelize, DataTypes) => {
         timestamps : true
     })
 
+
+    model.associate = models => {
+        model.belongsTo(models.Report, {FOREIGNKEY : 'rid'})
+    }
+
     return model
 }
