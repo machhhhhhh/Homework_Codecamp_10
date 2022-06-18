@@ -112,7 +112,7 @@ const turnOn = async(req,res,next) => {
             isShopOn : 'YES'
         })
 
-        return res.status(200).send({message : 'Turn Shop On', data})
+        return res.status(200).send({message : 'Open Shop', data})
 
     } catch (error) {
         next(error)
@@ -127,7 +127,7 @@ const turnOff = async(req,res,next) => {
             isShopOn : 'NO'
         })
 
-        return res.status(200).send({message : 'Turn Shop Off', data})
+        return res.status(200).send({message : 'Close Shop', data})
         
     } catch (error) {
         next(error)

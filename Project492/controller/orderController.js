@@ -4,10 +4,13 @@ const {Op} = require('sequelize')
 const getAllOrder = async (req,res,next) => {
     try {
 
+        
         const customer = await Customer.findOne({where : { username : req.user.username}})
         if(customer) return res.status(400).send({message : 'customer cannot get order'})
 
-        // const shop 
+        const shop = await Shop.findOne({where : {username : req.user.username}})
+        if(!shop) return res.status(404).send({message : 'shop not found'})
+        if(shop.isShopOn === 'NO') return res.status(400).send({message : 'Please open the shop'})
 
         const order = await Order.findAll({
             where : {
@@ -96,6 +99,10 @@ const acceptOrder = async (req,res,next) => {
         const order = await Order.findOne({where : {id : req.params.id}})
         if(!order) return res.status(404).send({message : 'order not found'})
         if(!order.CustomerId) return res.status(400).send({message : 'order must have customer'})
+
+        const shop = await Shop.findOne({where : {username : req.user.username}})
+        if(!shop) return res.status(404).send({message : 'shop not found'})
+        if(shop.isShopOn === "NO") return res.status(400).send({message : "Please Open Shop"})
 
         const customer = await Customer.findOne({where : {username : req.user.username}})
 
