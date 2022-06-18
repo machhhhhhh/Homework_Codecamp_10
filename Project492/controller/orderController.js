@@ -7,6 +7,8 @@ const getAllOrder = async (req,res,next) => {
         const customer = await Customer.findOne({where : { username : req.user.username}})
         if(customer) return res.status(400).send({message : 'customer cannot get order'})
 
+        // const shop 
+
         const order = await Order.findAll({
             where : {
                 ShopId : {

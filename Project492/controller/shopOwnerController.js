@@ -102,9 +102,43 @@ const updateProfile = async(req,res,next) => {
     }
 }
 
+const turnOn = async(req,res,next) => {
+    try {
+
+        const shop = await Shop.findOne({ where : {username : req.user.username}})
+        if(!shop) return res.status(404).send({message : 'shop not found'})
+
+        const data = await shop.update({
+            isShopOn : 'YES'
+        })
+
+        return res.status(200).send({message : 'Turn Shop On', data})
+
+    } catch (error) {
+        next(error)
+    }
+}
+const turnOff = async(req,res,next) => {
+    try {
+        const shop = await Shop.findOne({ where : {username : req.user.username}})
+        if(!shop) return res.status(404).send({message : 'shop not found'})
+
+        const data = await shop.update({
+            isShopOn : 'NO'
+        })
+
+        return res.status(200).send({message : 'Turn Shop Off', data})
+        
+    } catch (error) {
+        next(error)
+    }
+}
+
 module.exports = {
     getUser,
     shopLogin,
     shopRegister,
-    updateProfile
+    updateProfile,
+    turnOff,
+    turnOn
 }

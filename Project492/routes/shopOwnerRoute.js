@@ -9,4 +9,7 @@ route.post('/login', shopOwnerController.shopLogin)
 route.post('/register', shopOwnerController.shopRegister)
 route.put('/profile', authenticate, upload.single('shopImg'),shopOwnerController.updateProfile)
 
+route.put('/on', authenticate, shopOwnerController.turnOn)
+route.put('/off', authenticate, shopOwnerController.turnOff)
+
 module.exports = route
