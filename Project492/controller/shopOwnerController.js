@@ -6,7 +6,11 @@ const fs = require('fs')
 
 const getUser = async(req,res,next) => {
     try {
-        const shop = await Shop.findOne({ where : {id : req.user.id}})
+        const shop = await Shop.findOne({
+            where : {
+                username : req.user.username,
+            }
+        })
         if(!shop) return res.status(404).send({message : 'shop not found'})
         return res.status(200).send(shop)
     } catch (error) {
@@ -24,6 +28,7 @@ const shopLogin = async(req,res,next) => {
 
         const payload = {
             id : shop.id,
+            username : shop.username,
             firstname: shop.firstname,
             lastname:  shop.lastname,
             shopname : shop.shopname,
@@ -33,7 +38,7 @@ const shopLogin = async(req,res,next) => {
         
         const token = jwt.sign(payload, process.env.SECRET_OR_KEY, {expiresIn : 3600 * 5})
         
-        return res.status(200).send(token)
+        return res.status(200).send({token})
 
     } catch (error) {
         next(error)

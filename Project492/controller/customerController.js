@@ -20,7 +20,11 @@ const getAllUser = async(req,res,next) => {
 const getUser = async(req,res,next) => {
     try {
 
-        const customer = await Customer.findOne({where : {id : req.user.id}})
+        const customer = await Customer.findOne({
+            where : {
+                username : req.user.username,
+            }
+        })
         if (!customer) return res.status(404).send({message : 'customer not found'})
         return res.status(200).send(customer)
     } catch (error) {
@@ -38,6 +42,7 @@ const userLogin = async(req,res,next) => {
 
         const payload = {
             id : customer.id,
+            username : customer.username,
             firstname : customer.firstname,
             lastname : customer.lastname,
         }
@@ -45,7 +50,7 @@ const userLogin = async(req,res,next) => {
         const token = jwt.sign(payload, process.env.SECRET_OR_KEY, {expiresIn: 3600 * 5})
         
 
-        return res.status(200).send(token)
+        return res.status(200).send({token})
 
     } catch (error) {
         next(error)
