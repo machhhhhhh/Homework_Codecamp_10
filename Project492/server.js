@@ -21,12 +21,15 @@ route.use(session({
 const customerRoute = require('./routes/customerRoute')
 const shopOwnerRoute = require('./routes/shopOwnerRoute')
 const orderRoute = require('./routes/orderRoute')
-
+const historyCustomerRoute = require('./routes/historyCustomerRoute')
+const historyShopRoute = require('./routes/historyShopRoute')
 
 //  actual routes
 route.use('/customer', customerRoute)
 route.use('/shop', shopOwnerRoute)
 route.use('/order', orderRoute)
+route.use('/history-customer', historyCustomerRoute)
+route.use('/history-shop', historyShopRoute)
 
 
 db.sequelize.sync({force:false}).then( () => {

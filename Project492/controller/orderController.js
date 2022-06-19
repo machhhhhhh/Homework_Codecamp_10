@@ -1,5 +1,6 @@
 const {Order,Customer,Shop, Ophoto} = require('../models')
 const {Op} = require('sequelize')
+const axios = require('../config/axios/axios')
 
 const getAllOrder = async (req,res,next) => {
     try {
@@ -132,6 +133,22 @@ const acceptOrder = async (req,res,next) => {
             ]
         })
         if(!data) return res.status(404).send({message : "order not found"})
+
+        const body = {
+            order_id : data.id,
+            customer_id : data.CustomerId
+        }
+
+        const history_customer = await axios.post('/history-customer', body)
+        if(!history_customer) return res.status(400).send({message : 'cannot create history of customer'})
+
+        const content = {
+            order_id : data.id,
+            shop_id : data.ShopId
+        }
+
+        const history_shop = await axios.post('/history-shop', content)
+        if(!history_shop) return res.status(400).send({ message : 'cannot create history of shop'})
 
         return res.status(200).send({message : 'Accept Complete', data})
 

@@ -3,6 +3,7 @@ const bcryptjs = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const cloundinary = require('cloudinary').v2
 const fs = require('fs')
+const stoage = require('node-sessionstorage')
 
 const getUser = async(req,res,next) => {
     try {
@@ -38,6 +39,8 @@ const shopLogin = async(req,res,next) => {
         
         const token = jwt.sign(payload, process.env.SECRET_OR_KEY, {expiresIn : 3600 * 5})
         
+        stoage.setItem('token',token)
+
         return res.status(200).send({token})
 
     } catch (error) {
@@ -122,6 +125,8 @@ const turnOff = async(req,res,next) => {
     try {
         const shop = await Shop.findOne({ where : {username : req.user.username}})
         if(!shop) return res.status(404).send({message : 'shop not found'})
+
+        // const order = await
 
         const data = await shop.update({
             isShopOn : 'NO'

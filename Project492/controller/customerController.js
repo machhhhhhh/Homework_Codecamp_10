@@ -3,6 +3,7 @@ const bcryptjs = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const cloundinary = require('cloudinary').v2
 const fs = require('fs')
+const storage = require('node-sessionstorage')
 
 const getAllUser = async(req,res,next) => {
     try {
@@ -48,7 +49,7 @@ const userLogin = async(req,res,next) => {
         }
 
         const token = jwt.sign(payload, process.env.SECRET_OR_KEY, {expiresIn: 3600 * 5})
-        
+        storage.setItem('token',token)
 
         return res.status(200).send({token})
 
