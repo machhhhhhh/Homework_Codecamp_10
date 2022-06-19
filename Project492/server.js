@@ -21,13 +21,16 @@ route.use(session({
 const customerRoute = require('./routes/customerRoute')
 const shopOwnerRoute = require('./routes/shopOwnerRoute')
 const orderRoute = require('./routes/orderRoute')
+const orderPhotoRoute = require('./routes/orderPhotoRoute')
 const historyCustomerRoute = require('./routes/historyCustomerRoute')
 const historyShopRoute = require('./routes/historyShopRoute')
+
 
 //  actual routes
 route.use('/customer', customerRoute)
 route.use('/shop', shopOwnerRoute)
 route.use('/order', orderRoute)
+route.use('/order/photo', orderPhotoRoute)
 route.use('/history-customer', historyCustomerRoute)
 route.use('/history-shop', historyShopRoute)
 
