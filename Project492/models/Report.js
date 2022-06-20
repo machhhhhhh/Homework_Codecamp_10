@@ -23,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     model.associate = models => {
         model.belongsTo(models.Customer, {FOREIGNKEY : 'cid'})
         model.hasMany(models.Rphoto, {FOREIGNKEY : 'rid'})
+        model.belongsTo(models.Order, {FOREIGNKEY : 'oid'})
     }
 
     return model

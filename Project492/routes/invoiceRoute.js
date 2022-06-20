@@ -5,6 +5,7 @@ const authenticate = require('../middleware/passport')
 const upload = require('../middleware/upload')
 
 route.get('/', authenticate, invoiceController.getInvoice)
+route.get('/:id', authenticate, invoiceController.isPay)
 route.post('/', authenticate, upload.single("invoiceImg"), invoiceController.createInvoice)
 route.put('/:id', authenticate, upload.single('invoiceImg'),invoiceController.payInvoice)
 route.post('/list', authenticate, invoiceController.addList)
