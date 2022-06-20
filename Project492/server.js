@@ -26,6 +26,7 @@ const historyCustomerRoute = require('./routes/historyCustomerRoute')
 const historyShopRoute = require('./routes/historyShopRoute')
 const invoiceRoute = require('./routes/invoiceRoute')
 const reportRoute = require('./routes/reportRoute')
+const reportPhotoRoute = require('./routes/reportPhotoRoute')
 
 //  actual routes
 route.use('/customer', customerRoute)
@@ -36,6 +37,7 @@ route.use('/history-customer', historyCustomerRoute)
 route.use('/history-shop', historyShopRoute)
 route.use('/invoice', invoiceRoute)
 route.use('/report', reportRoute)
+route.use('/report/photo', reportPhotoRoute)
 
 db.sequelize.sync({force:false}).then( () => {
     route.listen(process.env.PORT , () => console.log('Listening at ' + process.env.PORT))

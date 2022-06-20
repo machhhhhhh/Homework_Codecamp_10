@@ -92,7 +92,7 @@ const createReport = async(req,res,next) => {
             isReport : "YES"
         })
 
-        // if(!newReport) return res.status(400).send({message : 'cannot create this report'})
+        if(!newReport) return res.status(400).send({message : 'cannot create this report'})
 
         const data = await Report.findOne({
             where : {id : newReport.id},

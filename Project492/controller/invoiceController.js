@@ -124,7 +124,7 @@ const createInvoice = async(req,res,next) => {
         // go ahead create the list in forntend before call
         // after create list finish     
 
-
+        if(!newInvoice) return res.status(400).send({message : 'cannot create invoice'})
 
 
         return res.status(201).send(newInvoice)

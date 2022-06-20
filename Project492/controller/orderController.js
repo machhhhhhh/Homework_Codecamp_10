@@ -104,6 +104,8 @@ const addOrder = async (req,res,next) => {
             CustomerId : req.user.id
         })
 
+        if(!newOrder) return res.status(400).send({message : 'cannot create order'})
+
         const order = await Order.findOne({
             where : { id : newOrder.id},
             include : [

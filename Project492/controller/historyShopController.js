@@ -51,7 +51,9 @@ const createHistory = async(req,res,next) => {
             ShopId : shop.id
         })
 
-        return res.status(200).send(newHistory)
+        if(!newHistory) return res.status(400).send({message : 'cannot create the history of shop'})
+
+        return res.status(201).send(newHistory)
 
     } catch (error) {
         next(error)

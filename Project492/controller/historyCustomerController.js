@@ -52,7 +52,10 @@ const createHistory = async(req,res,next) => {
             CustomerId : customer.id
         })
 
-        return res.status(200).send(newHistory)
+
+        if(!newHistory) return res.status(400).send({message : 'cannot create the history of customer'})
+
+        return res.status(201).send(newHistory)
 
         
     } catch (error) {
