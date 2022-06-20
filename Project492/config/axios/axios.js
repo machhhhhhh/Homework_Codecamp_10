@@ -1,5 +1,5 @@
 const axios = require('axios')
-const {notification} = require('antd')
+// const {notification} = require('antd')
 const storage = require('node-sessionstorage')
 
 axios.defaults.baseURL = "http://localhost:5000";
@@ -30,10 +30,10 @@ axios.interceptors.response.use(
         if (err.response.status === 401 && err.response){
             storage.removeItem('token')
             // storage.clear();
-            window.location.reload()
-            notification.error({
-                message : 'Please login again'
-            })
+            // window.location.reload()
+            // notification.error({
+            //     message : 'Please login again'
+            // })
             return Promise.reject(err)
         }
         return Promise.reject(err)

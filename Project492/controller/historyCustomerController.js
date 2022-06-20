@@ -75,6 +75,7 @@ const updateDelete = async(req,res,next) => {
         })
 
         if (!history) return res.status(404).send({message : 'No have history'})
+        if(history.isDelete === "YES") return res.status(400).send({message : 'Has Deleted before'})
 
         await history.update({
             isDelete : 'YES'
