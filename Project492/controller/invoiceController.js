@@ -60,6 +60,7 @@ const createInvoice = async(req,res,next) => {
 
         if(order.ShopId !== shop.id) return res.status(400).send({message : 'cannot make invoice'})
 
+
         const checkInvoice = await Invoice.findOne({
             where : {
                 CustomerId : order.CustomerId,
@@ -164,13 +165,11 @@ const payInvoice = async(req,res,next) => {
         let image = {}
         if(req.file){
             image = await uploadPromise(req.file.path)
-            // console.log(req.file);
             if(req.user.invoiceImg){
                 const splited = req.user.invoiceImg.split('/')
-                await destroyPromise(splited[splited.length -1].split('.')[0],(err, result) => {})
+                destroyPromise(splited[splited.length -1].split('.')[0],(err, result) => {})
             }
             fs.unlinkSync(req.file.path)
-            // console.log(img);
         }
 
         await invoice.update({

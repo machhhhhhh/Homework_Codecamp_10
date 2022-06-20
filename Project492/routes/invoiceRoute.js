@@ -6,7 +6,7 @@ const upload = require('../middleware/upload')
 
 route.get('/', authenticate, invoiceController.getInvoice)
 route.post('/', authenticate, upload.single("invoiceImg"), invoiceController.createInvoice)
-route.put('/:id', authenticate, invoiceController.payInvoice)
-route.post('/list', authenticate,upload.single('invoiceImg'), invoiceController.addList)
+route.put('/:id', authenticate, upload.single('invoiceImg'),invoiceController.payInvoice)
+route.post('/list', authenticate, invoiceController.addList)
 
 module.exports = route
