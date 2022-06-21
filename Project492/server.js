@@ -18,6 +18,7 @@ route.use(session({
   }))
 
 //  import routes
+const userRoute = require('./routes/userRoute')
 const customerRoute = require('./routes/customerRoute')
 const shopOwnerRoute = require('./routes/shopOwnerRoute')
 const orderRoute = require('./routes/orderRoute')
@@ -29,6 +30,7 @@ const reportRoute = require('./routes/reportRoute')
 const reportPhotoRoute = require('./routes/reportPhotoRoute')
 
 //  actual routes
+route.use('/user', userRoute)
 route.use('/customer', customerRoute)
 route.use('/shop', shopOwnerRoute)
 route.use('/order', orderRoute)
