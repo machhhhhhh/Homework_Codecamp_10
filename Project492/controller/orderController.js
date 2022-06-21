@@ -94,8 +94,24 @@ const addOrder = async (req,res,next) => {
     try {
         const shop = await Shop.findOne({where : {username : req.user.username}})
         if(shop) return res.status(400).send({message : 'shop cannot create order'})
+
+        const customer = await Customer.findOne({where : {username : req.user.username}})
+        if(!customer) return res.status(404).send({message : 'customer not found'})
+
         if(!req.body.problem && !req.file) return res.status(400).send({message : 'Type the problem'})
         
+
+        const isOrder = await Order.findOne({
+            where : {
+                ShopId : {
+                    [Op.is] : null  // to specify for order that waiting to accept
+                },
+                CustomerId : customer.id
+            }
+        })
+
+        if(isOrder) return res.status(400).send({message : 'cannot create the second order'})
+
         const newOrder = await Order.create({
             problem : req.body.problem,
             description : req.body.description,
@@ -138,12 +154,12 @@ const acceptOrder = async (req,res,next) => {
         if(!order.CustomerId) return res.status(400).send({message : 'order must have customer'})
 
         const shop = await Shop.findOne({where : {username : req.user.username}})
+        const customer = await Customer.findOne({where : {username : req.user.username}})
+        if(customer) return res.status(400).send({message : 'customer cannot accept'}) 
         if(!shop) return res.status(404).send({message : 'shop not found'})
         if(shop.isShopOn === "NO") return res.status(400).send({message : "Please Open Shop"})
 
-        const customer = await Customer.findOne({where : {username : req.user.username}})
-
-        if(customer) return res.status(400).send({message : 'customer cannot accept'}) 
+        
         if(order.ShopId) return res.status(400).send({message : 'This Order already taken'})
 
 
@@ -170,23 +186,20 @@ const acceptOrder = async (req,res,next) => {
                 }
             ]
         })
-        if(!data) return res.status(404).send({message : "order not found"})
 
-        const body = {
-            order_id : data.id,
-            customer_id : data.CustomerId
-        }
+        // const body = {
+        //     order_id : data.id,
+        // }
 
-        const history_customer = await axios.post('/history-customer', body)
-        if(!history_customer) return res.status(400).send({message : 'cannot create history of customer'})
+        // const history_customer = await axios.post('/history-customer', body)
+        // if(!history_customer) return res.status(400).send({message : 'cannot create history of customer'})
 
-        const content = {
-            order_id : data.id,
-            shop_id : data.ShopId
-        }
+        // const content = {
+        //     order_id : data.id,
+        // }
 
-        const history_shop = await axios.post('/history-shop', content)
-        if(!history_shop) return res.status(400).send({ message : 'cannot create history of shop'})
+        // const history_shop = await axios.post('/history-shop', content)
+        // if(!history_shop) return res.status(400).send({ message : 'cannot create history of shop'})
 
         return res.status(200).send({message : 'Accept Complete', data})
 

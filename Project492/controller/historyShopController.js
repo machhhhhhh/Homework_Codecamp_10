@@ -29,18 +29,15 @@ const getHistory = async(req,res,next) => {
 }
 const createHistory = async(req,res,next) => {
     try {
-        const {order_id, shop_id} = req.body
+        const {order_id} = req.body
 
         const order = await Order.findOne({where : {id : order_id}})
         if(!order) return res.status(404).send({messsage : 'order not found'})
 
-        const shop = await Shop.findOne({where : {id : shop_id}})
-        if(!shop) return res.status(404).send({message : 'shop not found'})
-
         const history = await Hshop.findOne({
             where : {
                 OrderId : order.id,
-                ShopId : shop.id
+                ShopId : order.ShopId
             }
         })
 
@@ -48,10 +45,10 @@ const createHistory = async(req,res,next) => {
         
         const newHistory = await Hshop.create({
             OrderId : order.id,
-            ShopId : shop.id
+            ShopId : order.ShopId
         })
 
-        if(!newHistory) return res.status(400).send({message : 'cannot create the history of shop'})
+        // if(!newHistory) return res.status(400).send({message : 'cannot create the history of shop'})
 
         return res.status(201).send(newHistory)
 

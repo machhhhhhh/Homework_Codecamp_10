@@ -31,17 +31,15 @@ const getHistory = async(req,res,next) => {
 const createHistory = async(req,res,next) => {
     try {
 
-        const {order_id, customer_id} = req.body
+        const {order_id} = req.body
 
         const order = await Order.findOne({where : {id : order_id}})
         if(!order) return res.status(404).send({message : 'order not found'})
-        const customer = await Customer.findOne({where : {id : customer_id}})
-        if(!customer) return res.status(404).send({message : 'customer not found'})
 
         const history = await Hcus.findOne({
             where : {
                 OrderId : order.id,
-                CustomerId : customer.id
+                CustomerId : order.CustomerId
             }
         })
 
@@ -49,11 +47,11 @@ const createHistory = async(req,res,next) => {
 
         const newHistory = await Hcus.create({
             OrderId : order.id,
-            CustomerId : customer.id
+            CustomerId : order.CustomerId
         })
 
 
-        if(!newHistory) return res.status(400).send({message : 'cannot create the history of customer'})
+        // if(!newHistory) return res.status(400).send({message : 'cannot create the history of customer'})
 
         return res.status(201).send(newHistory)
 

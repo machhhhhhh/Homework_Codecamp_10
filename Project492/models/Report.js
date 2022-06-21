@@ -2,10 +2,6 @@ module.exports = (sequelize, DataTypes) => {
     const model = sequelize.define('Report', {
         description : {
             type : DataTypes.STRING(255),
-            allowNull : false,
-            validate : {
-                notEmpty : true
-            }
        },
         isReport : {
            type : DataTypes.STRING(255),

@@ -9,15 +9,15 @@ const uploadPromise = util.promisify(cloundinary.uploader.upload)
 const createPhoto = async(req,res,next) => {
     try {
 
-        const {order_id} = req.body
-        const order = await Order.findOne({where : {id : order_id}})
-        if (!order) return res.status(404).send({message : 'order not found'})
-
         const shop = await Shop.findOne({where : {username : req.user.username}})
         if(shop) return res.status(400).send({message : 'shop cannot create order photo'})
 
         const customer = await Customer.findOne({where : {username : req.user.username}})
         if (!customer) return res.status(404).send({message : 'customer not found'})
+
+        const {order_id} = req.body
+        const order = await Order.findOne({where : {id : order_id}})
+        if (!order) return res.status(404).send({message : 'order not found'})
 
         if(order.CustomerId !== customer.id) return res.status(400).send({message : 'only customer who report can add the photo'})
 
