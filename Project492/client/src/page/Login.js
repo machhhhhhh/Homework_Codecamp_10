@@ -4,7 +4,7 @@ import {useNavigate} from 'react-router-dom'
 import axios from '../config/axios'
 import LocalStorageService from '../service/LocalStorageService'
 
-function Login({setRole}) {
+function Login({setRole,role}) {
 
   const navigate = useNavigate()
 
@@ -29,18 +29,12 @@ function Login({setRole}) {
       return;
     }
     console.log(result.data)
+    
     LocalStorageService.setToken(result.data.token)
+    setRole(result.data.message)
 
     setPassword('')
     setUsername('')
-    if(result.data.message === 'customer') {
-      setRole('customer')
-       return navigate('/index')
-    }
-    if(result.data.message === 'shop') {
-      setRole('shop')
-      return navigate('/home')
-    }
 
   }
 

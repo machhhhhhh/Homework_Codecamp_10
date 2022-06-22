@@ -4,7 +4,7 @@ const historyCustomerController = require('../controller/historyCustomerControll
 const authenticate = require('../middleware/passport')
 
 route.get('/',authenticate, historyCustomerController.getHistory)
-route.post('/', authenticate, historyCustomerController.createHistory)
+route.post('/', historyCustomerController.createHistory)
 route.put('/:id', authenticate, historyCustomerController.updateDelete)
 
 module.exports = route

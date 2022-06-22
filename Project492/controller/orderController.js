@@ -187,19 +187,18 @@ const acceptOrder = async (req,res,next) => {
             ]
         })
 
-        // const body = {
-        //     order_id : data.id,
-        // }
+        const body = {
+            order_id : data.id,
+        }
 
-        // const history_customer = await axios.post('/history-customer', body)
-        // if(!history_customer) return res.status(400).send({message : 'cannot create history of customer'})
+        const history_customer = await axios.post('/history-customer', body)
+        if(!history_customer) return res.status(400).send({message : 'cannot create history of customer'})
 
-        // const content = {
-        //     order_id : data.id,
-        // }
+        const history_shop = await axios.post('/history-shop', body)
+        if(!history_shop) return res.status(400).send({ message : 'cannot create history of shop'})
 
-        // const history_shop = await axios.post('/history-shop', content)
-        // if(!history_shop) return res.status(400).send({ message : 'cannot create history of shop'})
+        const report = await axios.post("/report", body)
+        if(!report) return res.status(400).send({message : 'cannot create report'})
 
         return res.status(200).send({message : 'Accept Complete', data})
 

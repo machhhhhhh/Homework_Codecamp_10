@@ -21,20 +21,22 @@ const getAllUser = async(req,res,next) => {
 const getUser = async(req,res,next) => {
     try {
 
-        const customer = await Customer.findOne({
-            where : {
-                username : req.user.username,
-            }
-        })
-        if (!customer) {
-            const shop = await Shop.findOne({
-                where : {
-                    username : req.user.username,
-                }
-            })
-            if(!shop) return res.status(404).send({message : 'user not found'})
-            return res.status(200).send(shop)
-        }
+        const customer = await Customer.findAll()
+
+        // const customer = await Customer.findOne({
+        //     where : {
+        //         username : req.user.username,
+        //     }
+        // })
+        // if (!customer) {
+        //     const shop = await Shop.findOne({
+        //         where : {
+        //             username : req.user.username,
+        //         }
+        //     })
+        //     if(!shop) return res.status(404).send({message : 'user not found'})
+        //     return res.status(200).send(shop)
+        // }
         return res.status(200).send(customer)
     } catch (error) {
         next(error)

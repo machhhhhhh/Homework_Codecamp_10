@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import axios from '../config/axios'
+import LocalStorageService from '../service/LocalStorageService'
 
-function Index({logout}) {
+function Index({logout,role}) {
+
 
   return (
     <div>
+      <h1>Customer</h1>
         <button onClick={()=>logout()}>Out</button>
     </div>
   )

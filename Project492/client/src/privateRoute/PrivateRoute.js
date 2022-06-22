@@ -6,16 +6,28 @@ import Index from '../page/Index'
 import Login from '../page/Login'
 import Register from '../page/Register'
 import Home from '../page/home'
+import axios from 'axios'
 
 function PrivateRoute(props) {
 
     const role = props.role || 'guest' 
+    const [user, setUser] = useState(null)
+
     const navigate = useNavigate()
 
     useEffect(()=>{
         if(role === 'guest') navigate('/')
         if(role === 'customer') navigate('/index')
         if(role === 'shop') navigate('/home')
+
+        console.log(role);
+
+        // const fetchUser = async () => {
+        //     const result = await axios.get('/user')
+        //     console.log(result);
+        // }
+
+        // if(role!=='guest') fetchUser()
 
     },[role])
 
@@ -33,8 +45,8 @@ function PrivateRoute(props) {
 
         {role==='guest' && (
             <>
-                <Route path='*' element={<Login setRole={props.setRole}  /> }  exact />
-                <Route path='/' element={<Login setRole={props.setRole}  /> }  exact />
+                <Route path='*' element={<Login role ={role} setRole={props.setRole}  /> }  exact />
+                <Route path='/' element={<Login setRole={props.setRole}  role= {role} /> }  exact />
                 <Route path='/register' element={<Register/>}  exact/>
                 
             </>
@@ -42,16 +54,16 @@ function PrivateRoute(props) {
 
         {role ==='customer' && (
             <>
-                <Route path='*' element={<Index logout={logout} />} exact/>
-                <Route path='/index' element={<Index logout={logout} />} exact/>
+                <Route path='*' element={<Index role = {role} logout={logout} user = {user} />} exact/>
+                <Route path='/index' element={<Index  role = {role} logout={logout} user = {user} />} exact/>
             </>
         )}
 
 
         {role ==='shop' && (
             <>
-                <Route path='*' element={<Home logout={logout} />} exact />
-                <Route path='/home' element={<Home logout={logout} />} exact />
+                <Route path='*' element={<Home logout={logout} user = {user} />} exact />
+                <Route path='/home' element={<Home logout={logout}  user = {user}/>} exact />
             </>
         )}
 
