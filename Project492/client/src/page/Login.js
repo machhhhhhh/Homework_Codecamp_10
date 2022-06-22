@@ -28,7 +28,7 @@ function Login({setRole,role}) {
       alert('cannot login')
       return;
     }
-    console.log(result.data)
+    // console.log(result.data)
     
     LocalStorageService.setToken(result.data.token)
     setRole(result.data.message)

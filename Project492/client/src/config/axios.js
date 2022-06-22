@@ -6,7 +6,7 @@ axios.defaults.baseURL = "http://localhost:5000";
 
 axios.interceptors.request.use(
     config => {
-        if(config.url.includes('/') || config.url.includes('/register')){ // login page and register page should not add Header
+        if(config.url.includes('/login') || config.url.includes('/register')){ // login page and register page should not add Header
             return config
         }
 

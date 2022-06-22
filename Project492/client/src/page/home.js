@@ -1,12 +1,11 @@
-import React, { useEffect } from 'react'
-import LocalStorageService from '../service/LocalStorageService';
+import React from 'react'
 
-function home({logout}) {
+function home({logout,user}) {
 
 
   return (
     <div>
-      <h1>Shop</h1>
+      <h1>{user.firstname} {user.lastname}</h1>
       <button onClick={()=>logout()}>Out</button>
     </div>
   )

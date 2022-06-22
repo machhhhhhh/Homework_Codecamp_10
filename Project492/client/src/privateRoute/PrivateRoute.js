@@ -11,27 +11,24 @@ import axios from 'axios'
 function PrivateRoute(props) {
 
     const role = props.role || 'guest' 
-    // const [user, setUser] = useState(null)
+    const [user, setUser] = useState(null)
 
     const navigate = useNavigate()
 
     useEffect(()=>{
-        if(role === 'guest') navigate('/')
+        if(role === 'guest') navigate('/login')
         if(role === 'customer') navigate('/index')
         if(role === 'shop') navigate('/home')
         
 
-        console.log(role);
-
         const fetchUser = async () => {
             
             const result = await axios.get('/user')
-            console.log(result);
+            setUser(result.data)
 
         }
 
-        // if(role!=='guest') 
-        // fetchUser()
+        if(role!=='guest') fetchUser()
 
     },[role])
 
@@ -39,10 +36,8 @@ function PrivateRoute(props) {
     const logout = async() => {
         props.setRole('guest')
         LocalStorageService.removeToken()
-        navigate('/')
       }
 
-    // const [role, setRole] = useState('guest')
 
   return (
     <Routes>
@@ -50,7 +45,7 @@ function PrivateRoute(props) {
 
         {role==='guest' && (
             <>
-                <Route path='/' element={<Login setRole={props.setRole}  role= {role} /> }  exact />
+                <Route path='/login' element={<Login setRole={props.setRole}  role= {role} /> }  exact />
                 <Route path='/register' element={<Register/>}  exact/>
                 
             </>
@@ -58,14 +53,14 @@ function PrivateRoute(props) {
 
         {role ==='customer' && (
             <>
-                <Route path='/index' element={<Index  role = {role} logout={logout}  />} exact/>
+                <Route path='/index' element={<Index logout={logout} user = {user}  />} exact/>
             </>
         )}
 
 
         {role ==='shop' && (
             <>
-                <Route path='/home' element={<Home logout={logout}  />} exact />
+                <Route path='/home' element={<Home logout={logout} user = {user}  />} exact />
             </>
         )}
 
