@@ -1,10 +1,13 @@
+import React , {useState} from "react";
+import LocalStorageService from "./service/LocalStorageService";
+import PrivateRoute from './privateRoute/PrivateRoute'
 
 function App() {
-  return (
-    <div className="App">
-          <h1>Hello World</h1>
-    </div>
-  );
+
+  const [role, setRole] = useState(LocalStorageService.getRole())
+
+  return <PrivateRoute role = {role} setRole = {setRole} />
+
 }
 
 export default App;

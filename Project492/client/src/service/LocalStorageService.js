@@ -1,3 +1,5 @@
+import jwtDecode from 'jwt-decode'
+
 function setToken(token) {
     localStorage.setItem('ACCESS_TOKEN', token)
 }
@@ -12,7 +14,14 @@ function removeToken(){
 
 function getRole() {
     if (getToken()){
-        return 'user'
+        // return 'user'
+        const checkShop = jwtDecode(getToken())
+        if(checkShop.shopname){
+            return 'shop'
+        }
+        else {
+            return 'customer'
+        }
     }
         return 'guest'
 }

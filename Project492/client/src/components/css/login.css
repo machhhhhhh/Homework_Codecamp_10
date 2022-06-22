@@ -1,0 +1,72 @@
+
+.login {
+    background-color: darkviolet; 
+    /* rgb(120, 0, 150) */
+    /* border-radius: 15px; */
+    height: auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.login-logo{
+    /* padding-top: 30px; */
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.login-logo > img {
+    height: 300px;
+    color: black;
+    background-color: yellow;
+    border-radius: 30px;
+    padding: 20px;
+}
+.login > h1 {
+    text-align: center;
+    color: aqua;
+    font-size: 3em;
+}
+
+form > .login-form {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 60px;
+}
+
+.login > form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-form > input {
+    margin-top: 20px;
+    padding-left: 30px;
+    font-size: 2em;
+}
+
+form > button {
+    margin: 20px 150px;
+    font-size: 2em;
+    border: none;
+    padding: 5px 0px;
+    border-radius: 20px;
+    cursor: pointer;
+    color: white;
+    background-color: rgb(50,230,0);
+}
+
+h3 {
+    height: auto;
+}
+
+h3 {
+    margin-top: 20px;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+h3 > span {
+    color:  red;
+    cursor: pointer;
+}
