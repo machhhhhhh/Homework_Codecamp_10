@@ -55,6 +55,10 @@ form > button {
     color: white;
     background-color: rgb(50,230,0);
 }
+form > button:hover {
+    color: black;
+    background-color: lightgray;
+}
 
 h3 {
     height: auto;
@@ -69,4 +73,8 @@ h3 {
 h3 > span {
     color:  red;
     cursor: pointer;
+}
+
+h3 > span:hover {
+    color:  white;
 }
