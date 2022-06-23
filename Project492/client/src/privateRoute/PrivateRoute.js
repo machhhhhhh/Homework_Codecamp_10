@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import {Route, Routes, useNavigate} from 'react-router-dom'
 import LocalStorageService from '../service/LocalStorageService'
+import axios from '../config/axios'
 
 import Index from '../page/Index'
 import Login from '../page/Login'
 import Register from '../page/Register'
 import Home from '../page/home'
-import axios from 'axios'
+
+import CustomerProfile from '../components/customer/page/profile'
 
 function PrivateRoute(props) {
 
@@ -23,8 +25,12 @@ function PrivateRoute(props) {
 
         const fetchUser = async () => {
             
-            const result = await axios.get('/user')
-            setUser(result.data)
+            try {
+                const result = await axios.get('/user')
+                setUser(result.data)
+            } catch (error) {
+                console.error(error)
+            }
 
         }
 
@@ -36,6 +42,7 @@ function PrivateRoute(props) {
     const logout = async() => {
         props.setRole('guest')
         LocalStorageService.removeToken()
+        return navigate('/login')
       }
 
 
@@ -53,7 +60,8 @@ function PrivateRoute(props) {
 
         {role ==='customer' && (
             <>
-                <Route path='/index' element={<Index logout={logout} user = {user}  />} exact/>
+                <Route path='/index' element={<Index user = {user}  />} exact/>
+                <Route path='/customer-profile' element={<CustomerProfile logout={logout} user = {user}  />} exact/>
             </>
         )}
 

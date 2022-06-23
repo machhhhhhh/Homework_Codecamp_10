@@ -1,0 +1,66 @@
+.register {
+    background-color: darkviolet; 
+    height: auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.register-logo{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 30px;
+}
+.register-logo > .register-logo-image {
+    background-color: yellow;
+    padding: 30px;
+    height: 300px;
+    border-radius: 50%;
+}
+
+.register-form-header > .register-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.register-form-header {
+    margin-top: 40px;
+    margin: 40px 60px 0px 40px;
+}
+
+.register-form-header > .register-form > input {
+    margin-top: 15px;
+    font-size: 2em;
+    padding: 5px 5px 5px 15px ;
+}
+
+.button {
+    display: flex;
+    margin-top: 20px;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.button > button {
+    font-size: 2em;
+    border: none;
+    padding: 0px 5px;
+    border-radius: 30px;
+    cursor: pointer;
+    align-items: center;
+    background-color: #f1f2f3;
+    padding-top: 5px;
+}
+
+.button > .button-back {
+    color: white;
+    background-color: red;
+}
+.button > .button-submit {
+    color: white;
+    background-color: rgb(50,230,0);
+}
+
+.button > button:hover{
+    color: black;
+    background-color: lightgray;
+}
