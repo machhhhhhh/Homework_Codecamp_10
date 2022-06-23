@@ -6,4 +6,80 @@
 .customer-profile {
     background-color: darkviolet;
     height: auto;
+    text-align: center;
 }
+
+.customer-profile-image {
+    margin-top: 50px;
+}
+.customer-profile-image > .customer-profile-image-tag {
+    height: 250px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.customer-profile-info {
+    margin-top: 30px;
+    font-size: 1.9em;
+    background-color: #f1f2f3;
+    margin: 30px 20px  0px 20px;
+    padding-bottom: 25px;
+    padding-top: 10px;
+    border-radius: 40px;
+}
+.customer-profile-info > .customer-profile-info-detail { 
+    margin-top: 20px;
+}
+.customer-profile-info > .customer-profile-info-detail > input {
+    font-size: 0.9em;
+    width: 60%;
+    border: none;
+    padding-left: 15px;
+}
+
+.customer-profile > .customer-profile-history{
+    margin-top: 30px;
+    font-size: 2em;
+    padding: 15px 70px;
+    border: none;
+    border-radius: 15px;
+    background-color: orange;
+    cursor: pointer;
+}
+.customer-profile > .customer-profile-history:hover{
+    background-color: #f1f2f3;
+    color: grey
+}
+
+.customer-profile > .customer-profile-button {
+    display: flex;
+    margin-top: 30px;
+    justify-content: space-around;
+    padding-bottom: 30px;
+}
+
+.customer-profile-button > .customer-profile-button-back {
+    color:  white;
+    background-color: rgb(30,250,0);
+    padding: 15px 15px 10px 12px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.customer-profile-button > .customer-profile-button-back:hover {
+    color:  green;
+    background-color: lightgrey;
+}
+.customer-profile-button > .customer-profile-button-logout:hover {
+    color:  green;
+    background-color: lightgrey;
+}
+.customer-profile-button > .customer-profile-button-logout {
+    color:  white;
+    background-color: red;
+    border: none;
+    padding: 20px 15px 15px 15px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+

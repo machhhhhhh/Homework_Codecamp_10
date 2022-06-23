@@ -1,7 +1,9 @@
-import React from 'react'
+import React , {useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 // import axios from '../../config/axios'
 import '../../css/customer/profile.css'
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
 import Header from '../components/Header'
 
@@ -24,6 +26,14 @@ function Profile({logout, user}) {
       }
     }
 
+    const history = async() => {
+      try {
+        // return navigate('/customer-history')
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
   return (
     <div className='customer-profile'>
         <Header/>
@@ -35,10 +45,30 @@ function Profile({logout, user}) {
                 alt='customer-profile'
             />
         </div>
-        {name}
 
-        <button onClick={()=>logout()}>out</button>
-        <button onClick={(e)=>back(e)}>back</button>
+        <div className='customer-profile-info'>
+
+              <div className='customer-profile-info-detail'>
+                  <label>Name : </label>
+                  <input type='text' value={name} />
+              </div>
+
+              <div className='customer-profile-info-detail'>
+                  <label>E-Mail : </label>
+                  <input type='text' value={user.username} />
+              </div>
+              <div className='customer-profile-info-detail'>
+                  <label>Phone : </label>
+                  <input type='text' value={user.phone} />
+              </div>
+        </div>
+        <button className='customer-profile-history' onClick={()=>history()}><strong>History</strong></button>
+
+        <div className='customer-profile-button'>
+            <button className='customer-profile-button-back' onClick={(e)=>back(e)}><ArrowBackIosNewIcon fontSize='large'/></button>
+            <button className='customer-profile-button-logout' onClick={()=>logout()}><ExitToAppIcon fontSize='large' /></button>
+        </div>
+
     </div>
   )
 }
