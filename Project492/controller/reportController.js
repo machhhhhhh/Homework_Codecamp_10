@@ -143,7 +143,7 @@ const pressReport = async(req,res,next) => {
             isReport : 'YES'
         })
        
-        return res.status(200).send({message : 'report successfully'})
+        return res.status(200).send({message : 'report successfully', report})
         
     } catch (error) {
         next(error)

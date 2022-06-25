@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {useLocation, useNavigate} from 'react-router-dom'
+import {useLocation, useNavigate, Link} from 'react-router-dom'
 import axios from '../../../config/axios'
 import '../../css/customer/historyDetail.css'
 
@@ -14,43 +14,29 @@ export default function HistoryDefail() {
 
     const location = useLocation()
     const navigate = useNavigate()
-    const history_id = location.state.history_id
+    const order_id = location.state.order_id
 
     const [history, setHistory] = useState([])
     const [qr, setQR] = useState(false) // false == not pay || not create
     const [checkReport, setReport] = useState(false)
 
-    const [load, setLoad] = useState(false)
-
 
     useEffect(()=>{
 
-        if(!history_id) navigate('/customer-history')
 
         const fetchHistory = async() => {
             try {
-                const result = await axios.get(`/history-customer/${history_id}`)
-                // console.log(result.data);
+                const result = await axios.get(`/history-customer/${order_id}`)
                 setHistory(result.data)
-                setLoad(true)
             } catch (error) {
                 console.error(error)
             }
         }
 
-        fetchHistory()
-        
-    },[])
-    
-    useEffect(()=>{
-
         const isPay = async() => {
             try {
-                if(load){
-                    const result = await axios.get(`/invoice/${history.OrderId}`)
-                    console.log(result.data);
+                    const result = await axios.get(`/invoice/${order_id}`)
                     setQR(result.data.check)
-                }
                 
             } catch (error) {
                 console.error(error)
@@ -59,57 +45,52 @@ export default function HistoryDefail() {
 
         const isReport = async() => {
             try {
-                if(load){
-                    const result = await axios.get(`/report/${history.OrderId}`)
-                    console.log(result.data);
+                    const result = await axios.get(`/report/${order_id}`)
                     setReport(result.data.check)
-                }
                 
             } catch (error) {
                 console.error(error)
             }
         }
-        
 
+        fetchHistory()
         isPay()
         isReport()
-
-    },[load])
-
-                
+        
+    },[])
     
 
-    const back = async() => {
+    const back = async(e) => {
         try {
-
+            e.preventDefault()
             return navigate('/customer-history')
             
         } catch (error) {
             console.error(error)
         }
     }
-    const code = async() => {
+    const code = async(e) => {
         try {
-
+            e.preventDefault()
             // return navigate('/customer-invoice')
             
         } catch (error) {
             console.error(error)
         }
     }
-    const chat = async() => {
+    const chat = async(e) => {
         try {
-
+            e.preventDefault()
             // return navigate('/customer-chat')
             
         } catch (error) {
             console.error(error)
         }
     }
-    const report = async() => {
+    const report = async(e) => {
         try {
-
-            // return navigate('/customer-report')
+            e.preventDefault()
+            return navigate('/customer-report',{state:{ order_id : order_id , shop : history.Order.Shop.shopname}})
             
         } catch (error) {
             console.error(error)
@@ -133,10 +114,10 @@ export default function HistoryDefail() {
 
 
         <div className='customer-history-detail-button'>
-            <button className='customer-history-detail-button-back' onClick={()=>back()}><ArrowBackIcon fontSize='large' /></button>
-            <button className='customer-history-detail-button-chat' onClick={()=>chat()}><ChatIcon fontSize='large' /></button>
-            <button className='customer-history-detail-button-qr-code' disabled={!qr} onClick={()=>code()}><QrCodeScannerIcon fontSize='large'/></button>
-            <button className='customer-history-detail-button-report' disabled={checkReport} onClick={()=>report()}  ><ReportIcon fontSize='large' /></button>
+            <button className='customer-history-detail-button-back' onClick={(e)=>back(e)}><ArrowBackIcon fontSize='large' /></button>
+            <button className='customer-history-detail-button-chat' onClick={(e)=>chat(e)}><ChatIcon fontSize='large' /></button>
+            <button className='customer-history-detail-button-qr-code' disabled={!qr} onClick={(e)=>code(e)}><QrCodeScannerIcon fontSize='large'/></button>
+            <button className='customer-history-detail-button-report' disabled={checkReport} onClick={(e)=>report(e)}  ><ReportIcon fontSize='large' /></button>
         </div>
 
     </div>

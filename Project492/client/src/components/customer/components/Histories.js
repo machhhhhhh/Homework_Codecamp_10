@@ -26,7 +26,7 @@ function Histories({history, reload}) {
     <div className='histories'>
               {history.Order && (<h1 className='histories-time'><strong>{history.Order.createdAt.slice(0,10)}</strong></h1>)}
               <ClearIcon fontSize='large' className='histories-delete' onClick={()=>destroy()}/>
-              <Link to='/customer-history-detail' state={{ history_id: history.id }}>
+              <Link to='/customer-history-detail' state={{ order_id: history.OrderId }}>
                 <ArrowForwardIosIcon fontSize='large' className='histories-appear' />
               </Link>
     </div>

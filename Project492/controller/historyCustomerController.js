@@ -32,14 +32,14 @@ const getHistory = async(req,res,next) => {
 const getOneHistory = async(req,res,next) => {
     try {
 
-        const {id} = req.params // order history id
+        const {id} = req.params // order order id
 
         const customer = await Customer.findOne({where : {username : req.user.username}})
         if(!customer) return res.status(404).send({message : 'customer not found'})
 
         const history = await Hcus.findOne({
             where : {
-                id : id,
+                OrderId : id,
                 CustomerId : customer.id
             },
             include : [

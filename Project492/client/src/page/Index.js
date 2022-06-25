@@ -20,6 +20,26 @@ function Index({logout,user}) {
     }
   }
 
+  const getStart = async(e) => {
+    try {
+      e.preventDefault()
+      return navigate('/order')
+      
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const map = async(e) => {
+    try {
+      e.preventDefault()
+      return navigate('/customer-map')
+      
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   return (
     <div className='customer-index'>
         
@@ -36,8 +56,8 @@ function Index({logout,user}) {
             />
         </div>
 
-        <button className='customer-index-start'><strong>Get Start</strong></button>
-        <button className='customer-index-map'><strong>Map</strong></button>
+        <button className='customer-index-start' onClick={(e)=>getStart(e)}><strong>Get Start</strong></button>
+        <button className='customer-index-map' onClick={(e)=>map(e)} ><strong>Map</strong></button>
 
     </div>
   )

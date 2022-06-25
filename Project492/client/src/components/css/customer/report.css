@@ -1,0 +1,87 @@
+.customer-report {
+    background-color: darkviolet;
+    height: auto;
+    padding-bottom: 30px;
+}
+.customer-report-header, .customer-report-shop, .customer-report-form {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.customer-report-header{
+    margin-top: 50px;
+    background-color: red;
+    color: white;
+    font-size: 3em;
+    margin-left: 50px;
+    margin-right: 50px;
+    padding: 10px 0px;
+}
+
+.customer-report-text-area {
+    resize : none;
+    font-size : 2.5em;
+    padding: 10px;
+}
+.customer-report-shop {
+    font-size: 2.6em;
+    background-color: rgb(50,250,0);
+    color: white;
+    padding: 10px 0px;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+
+.customer-report-photo-icon{
+    margin-left: 20px;
+    color: yellow;
+    cursor: pointer;
+}
+.customer-report-photo-icon:hover{
+    color: black;
+}
+
+.customer-report-photo{
+    margin-top: 50px;
+}
+
+.customer-report-photo-add {
+    font-size: 2.5em;
+    /* background-color: red; */
+    text-align: left;
+    margin-left: 50px;
+}
+
+.customer-report-form-button > button {
+    border: none;
+    cursor: pointer;
+    padding : 10px;
+    font-size: 1.6em;
+    border-radius: 15px;
+}
+
+.customer-report-form-button{
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-evenly;
+    padding-bottom: 30px;
+}
+
+.customer-report-form-button-subbmit{
+    color: white;
+    background-color: rgb(50,250,0);
+}
+.customer-report-form-button-cancel{
+    color: white;
+    background-color: red;
+}
+
+.customer-report-form-button-subbmit:hover{
+    color: black;
+    background-color: lightgrey;
+}
+.customer-report-form-button-cancel:hover{
+    color: black;
+    background-color: lightgrey;
+}

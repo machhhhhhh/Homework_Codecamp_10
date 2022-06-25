@@ -68,9 +68,10 @@ function Profile({logout}) {
       }
     }
 
-    const history = async() => {
+    const history = async(e) => {
       try {
         // setCheck(prev=>!prev)
+        e.preventDefault()
         return navigate('/customer-history')
       } catch (error) {
         console.error(error)
@@ -113,7 +114,7 @@ function Profile({logout}) {
                   <input type='text' value={user.phone} />
               </div>
         </div>
-        <button className='customer-profile-history' onClick={()=>history()}><strong>History</strong></button>
+        <button className='customer-profile-history' onClick={(e)=>history(e)}><strong>History</strong></button>
 
         <div className='customer-profile-button'>
             <button className='customer-profile-button-back' onClick={(e)=>back(e)}><ArrowBackIosNewIcon fontSize='large'/></button>

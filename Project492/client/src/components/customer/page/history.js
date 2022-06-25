@@ -32,9 +32,9 @@ function History() {
         }
     }
 
-    const destroy = async() => {
+    const destroy = async(e) => {
         try {
-
+            e.preventDefault()
             const check = window.confirm('Sure ??!')
             if(!check) return;
 
@@ -47,8 +47,9 @@ function History() {
         }
     }
 
-    const back = async() => {
+    const back = async(e) => {
         try {
+            e.preventDefault()
             return navigate('/customer-profile')
         } catch (error) {
             console.error(error)
@@ -62,7 +63,7 @@ function History() {
             {(history.length!==0) && (
                 <div className='customer-history-header'>
                     <h1></h1>
-                    <DeleteIcon fontSize='large' className='customer-history-header-delete' onClick={()=>destroy()}/>
+                    <DeleteIcon fontSize='large' className='customer-history-header-delete' onClick={(e)=>destroy(e)}/>
                 </div>
             )}
 
@@ -78,7 +79,7 @@ function History() {
                 ))}
 
         <div className='customer-history-div'>
-            <button className='customer-history-back' onClick={()=>back()}><strong>BACK</strong></button>
+            <button className='customer-history-back' onClick={(e)=>back(e)}><strong>BACK</strong></button>
         </div>
     </div>
   )

@@ -10,7 +10,11 @@ import Home from '../page/home'
 
 import CustomerProfile from '../components/customer/page/profile'
 import CustomerHistory from '../components/customer/page/history'
-import CustomerHistoryDetail from '../components/customer/page/historyDefail'
+import CustomerHistoryDetail from '../components/customer/page/historyDetail'
+import CustomerReport from '../components/customer/page/report'
+
+import CustomerOrder from '../components/customer/page/order'
+import CustomerMap from '../components/customer/page/map'
 
 function PrivateRoute(props) {
 
@@ -68,6 +72,10 @@ function PrivateRoute(props) {
                 <Route path='/customer-profile' element={<CustomerProfile  logout = {logout}  />} exact/>
                 <Route path='/customer-history' element={<CustomerHistory   />} exact/>
                 <Route path='/customer-history-detail' element={<CustomerHistoryDetail  />} exact/>
+                <Route path='/customer-report' element={<CustomerReport  />} exact/>
+
+                <Route path='/customer-map' element={<CustomerMap  />} exact/>
+                <Route path='/order' element={<CustomerOrder  />} exact/>
             </>
         )}
 
