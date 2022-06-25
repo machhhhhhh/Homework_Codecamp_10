@@ -118,8 +118,10 @@ const userRegister = async(req,res,next) => {
 const updateProfile = async(req,res,next) => {
     try {
 
-        const customer = await Customer.findOne({where : {id : req.user.id}})
-        if(!customer) return res.status(404).send({message : 'customer not found'})
+        const customer = await Customer.findOne({where : {username : req.user.username}})
+        if(!customer){
+            res.status(404).send({message : 'Customer not found'})
+        }
 
         cloundinary.uploader.upload(req.file.path, async (err,result)=>{ // set photo in public to clound
             if(err) return next(err)
@@ -131,7 +133,7 @@ const updateProfile = async(req,res,next) => {
             }) // push photo from clond to database
             
             if(req.user.customerImg){
-                const splited = req.user.profileImg.split('/')
+                const splited = req.user.customerImg.split('/')
                 cloundinary.uploader.destroy(
                     splited[splited.length -1],split('.')[0],
                     (err, result) => {}
@@ -139,7 +141,7 @@ const updateProfile = async(req,res,next) => {
             }
 
             fs.unlinkSync(req.file.path)
-            return res.status(201).send({message : 'Change Profile Photo complete'})
+            res.status(201).send({message : 'Change Profile Photo complete'})
         })
 
     } catch (error) {

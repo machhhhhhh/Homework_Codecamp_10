@@ -3,6 +3,6 @@ import '../../css/customer/header.css'
 
 export default function Header() {
   return (
-    <h1>SMART REPAIR <br></br> SHOP SEARCH</h1>
+    <h1 className='app-header'>SMART REPAIR <br></br> SHOP SEARCH</h1>
   )
 }

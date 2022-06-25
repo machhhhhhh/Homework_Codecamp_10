@@ -1,25 +1,67 @@
-import React , {useState} from 'react'
+import React , {useState, useRef, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
-// import axios from '../../config/axios'
+import axios from '../../../config/axios'
 import '../../css/customer/profile.css'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
 import Header from '../components/Header'
 
-const URL = 'https://icon-library.com/images/no-user-image-icon/no-user-image-icon-26.jpg'
+const url = 'https://icon-library.com/images/no-user-image-icon/no-user-image-icon-26.jpg'
 
-function Profile({logout, user}) {
+function Profile({logout}) {
+
+    const inputEl = useRef()
+
+    const [image, setImage] = useState(null)
+    const [user, setUser] = useState([])
+    
 
     const navigate = useNavigate()
     const name = user.firstname + ' ' + user.lastname
+
+    useEffect(()=>{
+        
+        const getUser = async() => {
+          try {
+            
+            const result = await axios.get('/user')
+            setUser(result.data)
+            
+          } catch (error) {
+            console.error(error)
+          }
+        }
+
+        getUser()
+
+    },[])
+
+    const updateProfile = async(e) => {
+      try {
+          e.preventDefault()
+          inputEl.current.click()
+
+          if(image){
+            const formData = new FormData()
+            formData.append('customerImg', image)
+
+            await axios.put('/customer/profile', formData)
+          }
+
+          // return navigate('/customer-profile')
+        
+      } catch (error) {
+          console.error(error)
+      }
+    }
 
     const back = async(e) => {
       try {
   
         e.preventDefault()
   
-        return navigate('/customer-profile')
+        return navigate('/index')
         
       } catch (error) {
         console.error(error)
@@ -28,7 +70,8 @@ function Profile({logout, user}) {
 
     const history = async() => {
       try {
-        // return navigate('/customer-history')
+        // setCheck(prev=>!prev)
+        return navigate('/customer-history')
       } catch (error) {
         console.error(error)
       }
@@ -39,10 +82,18 @@ function Profile({logout, user}) {
         <Header/>
 
         <div className='customer-profile-image'>
+            <input 
+                type='file'
+                onChange={e => setImage(e.target.files[0])} 
+                hidden
+                ref={inputEl}
+                alt = 'customer-profile'
+            />
             <img 
                 className='customer-profile-image-tag'
-                src={user.image ? user.image : URL}
+                src={image? URL.createObjectURL(image) : user.image ? user.image : url}
                 alt='customer-profile'
+                onClick={(e)=>updateProfile(e)}
             />
         </div>
 

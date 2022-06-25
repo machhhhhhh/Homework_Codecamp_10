@@ -1,0 +1,99 @@
+.customer-history-detail{
+    background-color: darkviolet;
+    height: 100vh;
+}
+
+.customer-history-detail-info {
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    align-items: center;
+    font-size: 1.2em;
+    margin-bottom: 100px;
+}
+
+.customer-history-detail-problem {
+    background-color: white;
+    padding: 10px 10px;
+    border-radius: 10px;
+}
+.customer-history-detail-shop{
+    margin-top: 30px;
+    background-color: white;
+    padding: 10px 40px;
+    border-radius: 10px;
+}
+.customer-history-detail-date{
+    margin-top: 30px;
+    background-color: white;
+    padding: 10px 10px;
+    border-radius: 10px;
+}
+.customer-history-detail-shop-span {
+    margin-left: 20px;
+}
+
+.customer-history-detail-button > button {
+    border: none;
+    border-radius: 30px;
+    padding: 15px 15px 12px 15px;
+    cursor: pointer;
+}
+
+.customer-history-detail-button {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.customer-history-detail-button-back {
+    background-color: rgb(50,250,0);
+    color: white;
+}
+
+.customer-history-detail-button-chat{
+    background-color: white;
+    color: blue;
+}
+
+.customer-history-detail-button-qr-code {
+    background-color: yellow;
+    color: black;
+}
+
+.customer-history-detail-button-report {
+    color: white;
+    background-color: red;
+}
+
+.customer-history-detail-button-back:hover{
+    color: black;
+    background-color: lightgrey;
+}
+
+.customer-history-detail-button-chat:hover{
+    background-color: lightgrey;
+    color: black;
+}
+
+.customer-history-detail-button-qr-code:hover{
+    color: beige;
+    background-color: lightgrey;
+}
+
+.customer-history-detail-button-report:hover{
+    color: black;
+    background-color: lightgrey;
+}
+
+.customer-history-detail-button-qr-code:disabled{
+    cursor: default;
+    background-color: black;
+    color: white;
+}
+
+.customer-history-detail-button-report:disabled{
+    cursor: default;
+    background-color: black;
+    color: white;
+}

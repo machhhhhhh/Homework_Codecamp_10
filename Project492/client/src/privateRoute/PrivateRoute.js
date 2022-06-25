@@ -9,6 +9,8 @@ import Register from '../page/Register'
 import Home from '../page/home'
 
 import CustomerProfile from '../components/customer/page/profile'
+import CustomerHistory from '../components/customer/page/history'
+import CustomerHistoryDetail from '../components/customer/page/historyDefail'
 
 function PrivateRoute(props) {
 
@@ -23,20 +25,22 @@ function PrivateRoute(props) {
         if(role === 'shop') navigate('/home')
         
 
-        const fetchUser = async () => {
+        
+        
+        if(role!=='guest') fetchUser()
+        
+    },[role])
+    
+    const fetchUser = async () => {
             
-            try {
-                const result = await axios.get('/user')
-                setUser(result.data)
-            } catch (error) {
-                console.error(error)
-            }
-
+        try {
+            const result = await axios.get('/user')
+            setUser(result.data)
+        } catch (error) {
+            console.error(error)
         }
 
-        if(role!=='guest') fetchUser()
-
-    },[role])
+    }
 
 
     const logout = async() => {
@@ -61,7 +65,9 @@ function PrivateRoute(props) {
         {role ==='customer' && (
             <>
                 <Route path='/index' element={<Index user = {user}  />} exact/>
-                <Route path='/customer-profile' element={<CustomerProfile logout={logout} user = {user}  />} exact/>
+                <Route path='/customer-profile' element={<CustomerProfile  logout = {logout}  />} exact/>
+                <Route path='/customer-history' element={<CustomerHistory   />} exact/>
+                <Route path='/customer-history-detail' element={<CustomerHistoryDetail  />} exact/>
             </>
         )}
 

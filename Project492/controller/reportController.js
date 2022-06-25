@@ -25,7 +25,7 @@ const getReport = async(req,res,next) => {
 const isReport = async(req,res,next) => {
     try {
 
-        const {id} = req.params // report id
+        const {id} = req.params // order id
 
         const shop = await Shop.findOne({where : {username : req.user.username}})
         if(shop) return res.status(400).send({message: 'shop cannot check whether report or not'})
@@ -35,7 +35,7 @@ const isReport = async(req,res,next) => {
 
         const report = await Report.findOne({
             where : {
-                id : id,
+                OrderId : id,
                 CustomerId : customer.id
             },
             include : [
@@ -53,7 +53,9 @@ const isReport = async(req,res,next) => {
 
         if(!report) return res.status(404).send({message : 'report not found'})
 
-        return res.status(200).send({message : 'reported', report})
+        if(report.isReport==="NO") return res.status(200).send({check : false, report})
+
+        return res.status(200).send({check : true , report})
 
 
     } catch (error) {

@@ -1,0 +1,73 @@
+.customer-history{
+    background-color: darkviolet;
+    height: auto;
+}
+
+.customer-history > .customer-history-header{
+    display: flex;
+    justify-content: space-between;
+}
+.customer-history-no-list{
+    margin-top: 100px;
+    text-align: center;
+}
+
+.customer-history-header-delete{
+    margin-right: 10px;
+    margin-top: 20px;
+    color: red;
+    cursor: pointer;
+}
+.customer-history-header-delete:hover{
+    color: black;
+}
+
+.customer-history-div {
+    padding-bottom: 30px;
+    text-align: center;
+}
+
+.customer-history-back{
+    margin-top: 300px;
+    border: none;
+    font-size: 2em;
+    padding: 10px 20px;
+    border-radius: 15px;
+    background-color: rgb(50,250,0);
+    color: white;
+    cursor: pointer;
+}
+.customer-history-back:hover{
+    background-color: lightgrey;
+    color: black;
+}
+
+.histories {
+    display: flex;
+    background-color: #f1f2f3;
+    padding: 20px;
+    font-size: 1.2em;
+    justify-content: space-around;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 30px;
+}
+
+.histories > .histories-delete{
+    cursor: pointer;
+    color: red;
+    margin-top: 10px;
+    margin-left: 30px;
+}   
+.histories > .histories-delete:hover{
+    color: black;
+}   
+.histories-appear {
+    color: blue;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-right: -10px;
+}
+.histories-appear:hover {
+    color: black;
+}

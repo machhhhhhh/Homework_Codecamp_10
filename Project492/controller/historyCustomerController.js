@@ -1,4 +1,4 @@
-const {Hcus, Order, Customer} = require('../models') 
+const {Hcus, Order, Customer, Shop} = require('../models') 
 
 const getHistory = async(req,res,next) => {
     try {
@@ -28,6 +28,41 @@ const getHistory = async(req,res,next) => {
         next(error)
     }   
 }
+
+const getOneHistory = async(req,res,next) => {
+    try {
+
+        const {id} = req.params // order history id
+
+        const customer = await Customer.findOne({where : {username : req.user.username}})
+        if(!customer) return res.status(404).send({message : 'customer not found'})
+
+        const history = await Hcus.findOne({
+            where : {
+                id : id,
+                CustomerId : customer.id
+            },
+            include : [
+                {
+                    model : Order,
+                    include : [
+                        {
+                            model : Shop
+                        }
+                    ]
+                }
+            ]
+        })
+
+        if(!history) return res.status(404).send({message : 'history not found'})
+
+        return res.status(200).send(history)
+        
+    } catch (error) {
+        next(error)
+    }
+}
+
 const createHistory = async(req,res,next) => {
     try {
 
@@ -91,8 +126,35 @@ const updateDelete = async(req,res,next) => {
     }
 }
 
+const deleteAll = async(req,res,next) => {
+    try {
+        const customer = await Customer.findOne({where : {username : req.user.username}})
+        if(!customer) return res.status(404).send({message : 'customer not found'})
+
+        const history = await Hcus.findAll({
+            where : {
+                CustomerId : customer.id
+            }
+        })
+
+        for(let i=0; i<history.length ; i++){
+            await history[i].update({
+                    isDelete : "YES"
+            })
+        }
+
+        // if(!history) return res.status(404).send({message : 'history not found'})
+        return res.status(200).send(history)
+        
+    } catch (error) {
+        next(error)
+    }
+}
+
 module.exports = {
     getHistory,
     createHistory,
-    updateDelete
+    updateDelete,
+    getOneHistory,
+    deleteAll
 }
