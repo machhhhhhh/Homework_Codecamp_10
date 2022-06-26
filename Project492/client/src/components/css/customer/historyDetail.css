@@ -67,23 +67,21 @@
 }
 
 .customer-history-detail-button-back:hover{
-    color: black;
-    background-color: lightgrey;
+    background-color: black;
 }
 
 .customer-history-detail-button-chat:hover{
-    background-color: lightgrey;
-    color: black;
+    background-color: black;
+    color: white;
 }
 
 .customer-history-detail-button-qr-code:hover{
     color: beige;
-    background-color: lightgrey;
+    background-color: black;
 }
 
 .customer-history-detail-button-report:hover{
-    color: black;
-    background-color: lightgrey;
+    background-color: black;
 }
 
 .customer-history-detail-button-qr-code:disabled{

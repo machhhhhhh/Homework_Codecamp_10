@@ -75,7 +75,7 @@ const isPay = async(req,res,next) => {
         //     }
         // }
 
-        return res.status(400).send({message : 'something go wrongs !!!'})        
+        // return res.status(400).send({message : 'something go wrongs !!!'})        
 
         
     } catch (error) {
@@ -171,10 +171,21 @@ const addList = async (req,res,next) => {
 
 const payInvoice = async(req,res,next) => {
     try {
-        const {id} = req.params // invoice id
+        const {id} = req.params // order id
+
+        
+
+        const shop = await Shop.findOne({where : {username : req.user.username}})
+        if(shop) return res.status(400).send({message : 'shop only can make invoice (cannot pay)'})
+
+        const customer = await Customer.findOne({where : {username : req.user.username}})
+        if(!customer) return res.status(404).send({message : 'customer not found'})
 
         const invoice = await Invoice.findOne({
-            where : {id : id},
+            where : {
+                OrderId : id,
+                CustomerId : customer.id
+            },
             include : [
                 {
                     model : Customer
@@ -192,14 +203,8 @@ const payInvoice = async(req,res,next) => {
         })
         if(!invoice) return res.status(404).send({message : 'invoice not found'})
 
-        const shop = await Shop.findOne({where : {username : req.user.username}})
-        if(shop) return res.status(400).send({message : 'shop only can make invoice (cannot pay)'})
-
-        const customer = await Customer.findOne({where : {username : req.user.username}})
-        if(!customer) return res.status(404).send({message : 'customer not found'})
-
         if(invoice.CustomerId !== customer.id) return res.status(400).send({message : 'cannot pay invoice that not yours'})
-        if(invoice.isPay === 'YES') return res.status(400).send({message : 'has already pay'})
+        // if(invoice.isPay === 'YES') return res.status(400).send({message : 'has already pay'})
 
 
         let image = {}

@@ -38,8 +38,7 @@
     cursor: pointer;
 }
 .customer-history-back:hover{
-    background-color: lightgrey;
-    color: black;
+    background-color: black;
 }
 
 .histories {

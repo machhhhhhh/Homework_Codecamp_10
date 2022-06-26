@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {useLocation, useNavigate, Link} from 'react-router-dom'
+import {useLocation, useNavigate} from 'react-router-dom'
 import axios from '../../../config/axios'
 import '../../css/customer/historyDetail.css'
 
@@ -17,6 +17,7 @@ export default function HistoryDefail() {
     const order_id = location.state.order_id
 
     const [history, setHistory] = useState([])
+    const [invoice, setInvoice] = useState([])
     const [qr, setQR] = useState(false) // false == not pay || not create
     const [checkReport, setReport] = useState(false)
 
@@ -36,6 +37,8 @@ export default function HistoryDefail() {
         const isPay = async() => {
             try {
                     const result = await axios.get(`/invoice/${order_id}`)
+                    // console.log(result.data);
+                    setInvoice(result.data.invoice)
                     setQR(result.data.check)
                 
             } catch (error) {
@@ -72,7 +75,7 @@ export default function HistoryDefail() {
     const code = async(e) => {
         try {
             e.preventDefault()
-            // return navigate('/customer-invoice')
+            return navigate('/customer-invoice', {state:{ order_id : order_id, invoice_photo : invoice.photo}})
             
         } catch (error) {
             console.error(error)

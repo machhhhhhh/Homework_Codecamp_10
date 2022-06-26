@@ -84,10 +84,7 @@ function Report() {
             image.push(e.target.files[0])
             // image = e.target.files[0]
 
-            console.log(image);
-            image.map(item =>{
-                console.log(item);
-            })
+            // console.log(image);
 
         } catch (error) {
             console.error(error)
@@ -136,13 +133,13 @@ function Report() {
                         onChange={e => inputPhoto(e)} 
                         hidden
                         ref={inputEl}
-                        alt = 'report-photo'
+                        alt = 'report'
                     />
                     {image.length!==0 && (
                         image.map(item => 
                                 <img 
                                 src={URL.createObjectURL(item) }
-                                alt='report-photo'
+                                alt='report'
                             />)
                     )}
 

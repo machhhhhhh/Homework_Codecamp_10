@@ -67,12 +67,10 @@
     cursor: pointer;
 }
 .customer-profile-button > .customer-profile-button-back:hover {
-    color:  green;
-    background-color: lightgrey;
+    background-color: black;
 }
 .customer-profile-button > .customer-profile-button-logout:hover {
-    color:  green;
-    background-color: lightgrey;
+    background-color: black;
 }
 .customer-profile-button > .customer-profile-button-logout {
     color:  white;
