@@ -20,6 +20,7 @@ import CustomerOrderWaiting from '../components/customer/page/waiting'
 
 import ShopHistory from '../components/shop/history'
 import ShopProfile from '../components/shop/profile'
+import ShopHistoryDetail from '../components/shop/historyDetail'
 
 function PrivateRoute(props) {
 
@@ -90,9 +91,11 @@ function PrivateRoute(props) {
 
         {role ==='shop' && (
             <>
-                <Route path='/home' element={<Home  />} exact />
+                <Route path='/home' element={<Home/>} exact />
                 <Route path='/shop-profile' element={<ShopProfile logout = {logout} user = {user} reload = {fetchUser} />} exact />
                 <Route path='/shop-history' element={<ShopHistory  />} exact />
+                <Route path='/shop-history-detail' element={<ShopHistoryDetail  />} exact />
+
             </>
         )}
 

@@ -1,0 +1,153 @@
+.shop-history-detail {
+    background-color: darkviolet;
+    height: auto;
+    padding-bottom: 30px;
+}
+
+.shop-history-detail-info {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.shop-history-problem {
+    background-color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-right: 20px;
+    margin-left: 20px;
+    border-radius: 15px;
+}
+
+.shop-history-customer-name{
+    margin-top: 20px;
+    background-color: yellow;
+    margin-right: 20px;
+    margin-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 15px;
+}
+
+.shop-history-date{
+    margin-top: 20px;
+    background-color: white;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 15px;
+}
+
+.shop-history-detail-list-show {
+    display: flex;
+    margin-top: 30px;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.list-header {
+    color: white;
+    background-color: blue;
+    padding: 15px;
+    border-radius: 20px;
+}
+.list-item {
+    background-color: white;
+    padding: 0px 20px 15px 20px;
+    border-radius: 15px;
+}
+
+.list-image {
+    text-align: center;
+    margin-top: 30px;
+}
+.invoice-image {
+    width: 50%;
+    border-radius: 20px;
+}
+
+
+.shop-history-detail-button {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.shop-history-detail-button > button{
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.button-back {
+    color: white;
+    background-color: rgb(50,250,0);
+    padding: 15px 10px 10px 10px;
+}
+
+.button-code {
+    color: black;
+    background-color: yellow;
+    padding: 15px 10px 10px 10px;
+}
+
+.button-chat{
+    color: white;
+    background-color: blue;
+    padding: 15px 10px 10px 10px;
+}
+
+.button-send{
+    color: white;
+    background-color: red;
+    padding: 15px 10px 10px 10px;
+}
+
+.button-send:hover, .button-chat:hover, .button-back:hover {
+    background-color: black;
+}
+.button-code:hover{
+    color: white;
+    background-color: black;
+}
+
+.button-code:disabled, .button-send:disabled {
+    background-color: black;
+    color: white;
+    cursor: default;
+}
+.shop-profile-image-tag {
+    height: 200px;
+}
+.shop-history-tag {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.shop-history-detail-list{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.shop-history-detail-list-input {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.shop-history-detail-list-input > input {
+    padding: 10px 10px 10px 30px;
+    margin-top: 10px;
+    font-size: 1.5em;
+    width: 80%;
+}
+
+.input-list-header{
+    background-color: pink;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-right: 100px;
+    margin-left: 100px;
+}

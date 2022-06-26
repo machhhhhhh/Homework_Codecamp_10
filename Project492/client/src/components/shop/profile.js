@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react'
-import {useNavigate} from 'react-router-dom'
+import React, { useRef } from 'react'
+import { useNavigate} from 'react-router-dom'
 import Header from '../customer/components/Header'
 import axios from '../../config/axios'
 import '../css/shop/profile.css'
@@ -14,7 +14,6 @@ function Profile({logout,user,reload}) {
     const navigate = useNavigate()
     const name = user.firstname + ' ' + user.lastname
     const inputEl = useRef()
-    const [check, setOnline] = useState(user.isShopOn)
 
     const updateProfile = async(e) => {
         try {
@@ -37,7 +36,6 @@ function Profile({logout,user,reload}) {
             const check = window.confirm('CLOSE ??')
             if(!check) return;
             await axios.put('/shop/off')
-            setOnline(false)
             return reload()
         } catch (error) {
             console.error(error)
@@ -50,7 +48,6 @@ function Profile({logout,user,reload}) {
             const check = window.confirm('OPEN ??')
             if(!check) return;
             await axios.put('/shop/on')
-            setOnline(true)
             return reload()
             
         } catch (error) {
@@ -105,8 +102,11 @@ function Profile({logout,user,reload}) {
 
         </div>
 
-        {check &&  <button className='shop-profile-online' type='button' onClick={(e)=>offline(e)}><strong>Online</strong></button>}
-        {!check &&  <button className='shop-profile-offline' type='button' onClick={(e)=>online(e)} ><strong>Offline</strong></button>}
+        {user.isShopOn==='YES' ?  
+                <button className='shop-profile-online' type='button' onClick={(e)=>offline(e)}><strong>Online</strong></button>
+            : 
+                <button className='shop-profile-offline' type='button' onClick={(e)=>online(e)} ><strong>Offline</strong></button>
+            }
         
         <div className='shop-profile-button'>
             <button className='shop-profile-button-back' type='button' onClick={(e)=>back(e)}><ArrowBackIosNewIcon fontSize='large'/></button>

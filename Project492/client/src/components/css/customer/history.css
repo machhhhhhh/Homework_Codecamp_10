@@ -1,6 +1,6 @@
 .customer-history{
     background-color: darkviolet;
-    height: auto;
+    height: 100vh;
 }
 
 .customer-history > .customer-history-header{

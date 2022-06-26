@@ -45,6 +45,32 @@ const getInvoice = async(req,res,next) => {
     }
 }
 
+const checkInvoice = async(req,res,next) => {
+    try {
+        const {id} = req.params // order id
+
+        const customer = await Customer.findOne({where : {username : req.user.username}})
+        if(customer) return res.status(404).send({message : 'customer cannot get by id'})
+
+        const shop = await Shop.findOne({where : {username : req.user.username}})
+        if(!shop) return res.status(400).send({message : 'shop not found'})
+
+        const invoice = await Invoice.findOne({
+            where : {
+                OrderId : id,
+                ShopId : shop.id
+            }
+        })
+
+        if(!invoice) return res.status(200).send({check : true, message : 'can make invoice'})
+        return res.status(200).send({check : false, message: 'already have invoice', invoice})
+
+    } catch (error) {
+        next(error)
+    }
+}
+
+
 const isPay = async(req,res,next) => {
     try {
 
@@ -236,5 +262,6 @@ module.exports = {
     createInvoice,
     payInvoice,
     addList,
-    isPay
+    isPay,
+    checkInvoice
 }

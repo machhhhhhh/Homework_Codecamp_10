@@ -1,0 +1,23 @@
+.shop-history {
+    background-color: darkviolet;
+    height: 100vh;
+}
+
+.shop-history-title {
+    margin-top: 50px;
+}
+
+.shop-history-header{
+    display: flex;
+    justify-content: space-between;
+    margin-right: 20px;
+}
+
+.shop-history-header-delete{
+    color: red;
+    cursor: pointer;
+}
+
+.shop-history-header-delete:hover{
+    color: black;
+}
