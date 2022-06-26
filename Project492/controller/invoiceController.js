@@ -87,7 +87,12 @@ const isPay = async(req,res,next) => {
             where : {
                 OrderId : id,
                 CustomerId : customer.id
-            }
+            },
+            include : [
+                {
+                    model : InList
+                }
+            ]
         })
 
         if(!invoice) return res.status(200).send({check : false, invoice})

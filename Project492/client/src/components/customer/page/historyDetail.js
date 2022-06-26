@@ -20,26 +20,29 @@ export default function HistoryDefail() {
     const [invoice, setInvoice] = useState([])
     const [qr, setQR] = useState(false) // false == not pay || not create
     const [checkReport, setReport] = useState(false)
+    const [invoiceList, setList] = useState([])
 
 
-    useEffect(()=>{
+    useEffect(()=>{ // make 3 function for easy to read but fetchHistory have everything
 
 
         const fetchHistory = async() => {
             try {
                 const result = await axios.get(`/history-customer/${order_id}`)
+                // console.log(result.data);
                 setHistory(result.data)
             } catch (error) {
                 console.error(error)
             }
         }
 
-        const isPay = async() => {
+        const isPay = async() => { 
             try {
                     const result = await axios.get(`/invoice/${order_id}`)
-                    // console.log(result.data);
+                    console.log(result.data);
                     setInvoice(result.data.invoice)
                     setQR(result.data.check)
+                    setList(result.data.invoice.InLists)
                 
             } catch (error) {
                 console.error(error)
@@ -112,7 +115,14 @@ export default function HistoryDefail() {
             </div>
         )}
         
-        {/* {(list) && ()} */}
+        <div className='shop-history-detail-list-show'>
+            <h1 className='list-header'>List</h1>
+            <div className='list-item'>
+                {(invoiceList.length!==0) && invoiceList.map(list => 
+                <h3 key={list.id}>- {list.description}</h3>
+            )}
+            </div>
+        </div>
 
 
 

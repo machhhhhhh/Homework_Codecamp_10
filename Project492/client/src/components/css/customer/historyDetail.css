@@ -1,6 +1,7 @@
 .customer-history-detail{
     background-color: darkviolet;
-    height: 100vh;
+    height: auto;
+    padding-bottom: 30px;
 }
 
 .customer-history-detail-info {
@@ -9,7 +10,6 @@
     margin-top: 50px;
     align-items: center;
     font-size: 1.1em;
-    margin-bottom: 100px;
 }
 
 .customer-history-detail-problem {

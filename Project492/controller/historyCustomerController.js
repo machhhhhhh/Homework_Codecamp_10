@@ -1,4 +1,4 @@
-const {Hcus, Order, Customer, Shop} = require('../models') 
+const {Hcus, Order, Customer, Shop, Invoice, InList, Report,Rphoto} = require('../models') 
 
 const getHistory = async(req,res,next) => {
     try {
@@ -48,6 +48,22 @@ const getOneHistory = async(req,res,next) => {
                     include : [
                         {
                             model : Shop
+                        },
+                        {
+                            model : Invoice,
+                            include : [
+                                {
+                                    model : InList
+                                }
+                            ]
+                        },
+                        {
+                            model : Report,
+                            include : [
+                                {
+                                    model : Rphoto
+                                }
+                            ]
                         }
                     ]
                 }
