@@ -1,5 +1,8 @@
 import React from 'react'
 import {useNavigate} from 'react-router-dom'
+import '../../css/customer/map.css'
+import Header from '../components/Header'
+
 
 function Map() {
 
@@ -16,9 +19,12 @@ function Map() {
     }
 
   return (
-    <div className='map'>
+    <div className='customer-map'>
+
+        <Header/>
         <h1>MAP ROAD</h1>
-        <button onClick={(e)=>back(e)}>BACK</button>
+
+        <h1 className='customer-map-back-button' onClick={(e)=>back(e)}><strong>BACK</strong></h1>
     </div>
   )
 }

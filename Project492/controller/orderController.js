@@ -50,7 +50,6 @@ const getAllOrder = async (req,res,next) => { // every shop who are online can s
 const getOrderOfCustomer = async (req,res,next) => {
     try {
 
-        const {id} = req.params
 
         const shop = await Shop.findOne({where : {username : req.user.username}})
         if(shop) return res.status(400).send({message : 'shop cannot see the waiting order'})
@@ -62,7 +61,9 @@ const getOrderOfCustomer = async (req,res,next) => {
 
         const order = await Order.findOne({
             where : {
-                id : id,
+                ShopId : {
+                    [Op.is] : null  // to specify for order that waiting to accept
+                },
                 CustomerId : customer.id
             },
             include : [
@@ -78,14 +79,14 @@ const getOrderOfCustomer = async (req,res,next) => {
             ]
         })
 
-        if(!order) return res.status(404).send({message : 'No Have Order now..'})
+        if(!order) return res.status(200).send({check : false , message : 'No Have Order now..'})
 
-        if(order && !order.ShopId) return res.status(400).send({message : 'waiting for shop to accept the order'})
+        if(order && !order.ShopId) return res.status(200).send({check : true ,message : 'waiting for shop to accept the order', order})
 
-        if(order.ShopId) return res.status(200).send({message : 'shop has taken the order'})
+        if(order.ShopId) return res.status(200).send({check : false , message : 'shop has taken the order', order})
 
 
-        return res.status(200).send(order)
+        return res.status(200).send({check : false, order})
     } catch (error) {
         next(error)
     }
@@ -115,6 +116,8 @@ const addOrder = async (req,res,next) => {
         const newOrder = await Order.create({
             problem : req.body.problem,
             description : req.body.description,
+            brand : req.body.brand,
+            model : req.body.model,
             latitude : req.body.latitude,
             longitude : req.body.longitude,
             CustomerId : req.user.id

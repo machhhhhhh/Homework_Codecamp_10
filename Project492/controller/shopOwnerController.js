@@ -64,7 +64,8 @@ const shopRegister = async(req,res,next) => {
             phone : req.body.phone,
             shopname : req.body.shopname,
             latitude : req.body.latitude,
-            longitude : req.body.longitude
+            longitude : req.body.longitude,
+            isShopOn : "NO"
         })
 
         if(!user) return res.status(400).send({message : 'cannot create shop'})

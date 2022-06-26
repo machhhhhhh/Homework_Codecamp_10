@@ -79,7 +79,7 @@ function History() {
                 ))}
 
         <div className='customer-history-div'>
-            <button className='customer-history-back' onClick={(e)=>back(e)}><strong>BACK</strong></button>
+            <button type='button' className='customer-history-back' onClick={(e)=>back(e)}><strong>BACK</strong></button>
         </div>
     </div>
   )

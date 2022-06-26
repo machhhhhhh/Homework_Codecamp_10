@@ -4,7 +4,7 @@ const orderController = require('../controller/orderController')
 const authenticate = require('../middleware/passport')
 
 route.get('/',authenticate, orderController.getAllOrder)
-route.get('/:id',authenticate, orderController.getOrderOfCustomer)
+route.get('/customer',authenticate, orderController.getOrderOfCustomer)
 route.post('/',authenticate,orderController.addOrder)
 route.put('/:id', authenticate, orderController.acceptOrder)
 route.delete('/:id', authenticate, orderController.cancelOrder)

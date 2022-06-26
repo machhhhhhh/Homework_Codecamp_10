@@ -22,7 +22,7 @@ function Invoice() {
             formData.append('invoiceImg', e.target.files[0])
             setImage(e.target.files[0])
 
-            const result = await axios.put(`/invoice/${order_id}`, formData)
+            await axios.put(`/invoice/${order_id}`, formData)
             // console.log(result);
 
             // setImage(null)
@@ -70,7 +70,7 @@ function Invoice() {
                         onClick={()=>inputEl.current.click()}
                     />
                     <div className='customer-invoice-back-div'>
-                        <button className='customer-invoice-back' onClick={(e)=>back(e)}><strong>BACK</strong></button>
+                        <button type='button' className='customer-invoice-back' onClick={(e)=>back(e)}><strong>BACK</strong></button>
                     </div>
                 </>
             )
@@ -80,7 +80,7 @@ function Invoice() {
                         <AddPhotoAlternateIcon fontSize='large' className='customer-invoice-photo-icon-tag' onClick={()=>inputEl.current.click()}/>
                     </div>
                     <div className='customer-invoice-back-div'>
-                            <button className='customer-invoice-back-2' onClick={(e)=>back(e)}><strong>BACK</strong></button>
+                            <button type='button' className='customer-invoice-back-2' onClick={(e)=>back(e)}><strong>BACK</strong></button>
                     </div>
                 </>
             }

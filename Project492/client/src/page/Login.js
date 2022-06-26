@@ -5,6 +5,7 @@ import axios from '../config/axios'
 import LocalStorageService from '../service/LocalStorageService'
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
+
 function Login({setRole,role}) {
 
   const navigate = useNavigate()
@@ -43,11 +44,11 @@ function Login({setRole,role}) {
       // console.log(result.data)
       
       LocalStorageService.setToken(result.data.token)
-      setRole(result.data.message)
-  
+      
       setPassword('')
       setUsername('')
-
+      
+      return setRole(result.data.message)
 
     } catch (error) {
       console.error(error)
@@ -71,7 +72,7 @@ function Login({setRole,role}) {
                 <div className='login-form'>
                   <input 
                       placeholder='username' 
-                      type='text'  
+                      type='email'
                       value={username}
                       onChange={ e => setUsername(e.target.value)}  
                     />

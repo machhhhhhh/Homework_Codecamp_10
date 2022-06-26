@@ -117,10 +117,10 @@ export default function HistoryDefail() {
 
 
         <div className='customer-history-detail-button'>
-            <button className='customer-history-detail-button-back' onClick={(e)=>back(e)}><ArrowBackIcon fontSize='large' /></button>
-            <button className='customer-history-detail-button-chat' onClick={(e)=>chat(e)}><ChatIcon fontSize='large' /></button>
-            <button className='customer-history-detail-button-qr-code' disabled={!qr} onClick={(e)=>code(e)}><QrCodeScannerIcon fontSize='large'/></button>
-            <button className='customer-history-detail-button-report' disabled={checkReport} onClick={(e)=>report(e)}  ><ReportIcon fontSize='large' /></button>
+            <button type='button' className='customer-history-detail-button-back' onClick={(e)=>back(e)}><ArrowBackIcon fontSize='large' /></button>
+            <button type='button' className='customer-history-detail-button-chat' onClick={(e)=>chat(e)}><ChatIcon fontSize='large' /></button>
+            <button type='button' className='customer-history-detail-button-qr-code' disabled={!qr} onClick={(e)=>code(e)}><QrCodeScannerIcon fontSize='large'/></button>
+            <button type='button' className='customer-history-detail-button-report' disabled={checkReport} onClick={(e)=>report(e)}  ><ReportIcon fontSize='large' /></button>
         </div>
 
     </div>

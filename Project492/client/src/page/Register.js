@@ -105,7 +105,7 @@ function Register() {
                   placeholder='Username' 
                   value={username} 
                   onChange={(e)=>setUsername(e.target.value)}
-                  type='text'
+                  type='email'
                 />
               <input 
                   placeholder='Password' 
@@ -139,7 +139,7 @@ function Register() {
                 />
           </div>
           <div className='button'>
-            <button className='button-back' onClick={(e)=>back(e)}><ArrowBackIcon fontSize='large'/></button>
+            <button type='button' className='button-back' onClick={(e)=>back(e)}><ArrowBackIcon fontSize='large'/></button>
             <button className='button-submit' type='submit' onClick={(e)=>register(e)}><CheckIcon fontSize='large' /></button>
           </div>
       </form>

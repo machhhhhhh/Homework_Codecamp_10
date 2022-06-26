@@ -1,11 +1,38 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {Avatar} from '@mui/material'
 import '../components/css/customer/index.css'
 import {useNavigate} from 'react-router-dom'
+import  axios  from '../config/axios'
 
 function Index({logout,user}) {
 
   const navigate = useNavigate()
+
+  // ใช้ useEffect ทำการ fetchOrder ถ้ามีส่งเข้า Order Waiting Page
+  useEffect(()=>{
+
+    const checkOrder = async() => {
+      try {
+        
+        const result = await axios.get('/order/customer')
+        // console.log(result.data);
+
+        // null = shop has take
+        // false = can add order
+        // true = waiting for shop
+
+        if(result.data.check){
+          return navigate('/order-waiting', {state : {order : result.data.order}})
+        }
+
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    checkOrder()
+
+  },[])
 
 
   const profile = async(e) => {

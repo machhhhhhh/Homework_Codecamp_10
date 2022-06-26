@@ -15,6 +15,7 @@ import CustomerReport from '../components/customer/page/report'
 import CustomerInvoice from '../components/customer/page/invoice'
 import CustomerOrder from '../components/customer/page/order'
 import CustomerMap from '../components/customer/page/map'
+import CustomerOrderWaiting from '../components/customer/page/waiting'
 
 function PrivateRoute(props) {
 
@@ -77,6 +78,7 @@ function PrivateRoute(props) {
 
                 <Route path='/customer-map' element={<CustomerMap  />} exact/>
                 <Route path='/order' element={<CustomerOrder  />} exact/>
+                <Route path='/order-waiting' element={<CustomerOrderWaiting  />} exact/>
             </>
         )}
 

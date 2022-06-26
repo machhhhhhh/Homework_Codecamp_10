@@ -81,10 +81,10 @@ function Report() {
             e.preventDefault()
 
             // setImage(...image,e.target.files[0])
-            image.push(e.target.files[0])
             // image = e.target.files[0]
-
+            
             // console.log(image);
+            return image.push(e.target.files[0])
 
         } catch (error) {
             console.error(error)
@@ -149,7 +149,7 @@ function Report() {
 
                 <div className='customer-report-form-button'>
                     <button className='customer-report-form-button-subbmit' type='submit' onClick={(e)=>report(e)} ><strong>SEND</strong></button>
-                    <button className='customer-report-form-button-cancel' onClick={(e)=>back(e)}><strong>CANCEL</strong></button>
+                    <button className='customer-report-form-button-cancel' type='button' onClick={(e)=>back(e)}><strong>CANCEL</strong></button>
                 </div>
             </form>
 

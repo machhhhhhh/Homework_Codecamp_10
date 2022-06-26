@@ -7,6 +7,12 @@ module.exports = (sequelize, DataTypes) => {
                 notEmpty : true
             }
        },
+       brand : {
+           type : DataTypes.STRING(255)
+       },
+       model : {
+           type : DataTypes.STRING(255)
+       },
        description : {
            type : DataTypes.STRING(255)
        },
