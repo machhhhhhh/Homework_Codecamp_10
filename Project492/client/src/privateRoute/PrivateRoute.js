@@ -17,6 +17,10 @@ import CustomerOrder from '../components/customer/page/order'
 import CustomerMap from '../components/customer/page/map'
 import CustomerOrderWaiting from '../components/customer/page/waiting'
 
+
+import ShopHistory from '../components/shop/history'
+import ShopProfile from '../components/shop/profile'
+
 function PrivateRoute(props) {
 
     const role = props.role || 'guest' 
@@ -40,6 +44,7 @@ function PrivateRoute(props) {
             
         try {
             const result = await axios.get('/user')
+            // console.log(result.data);
             setUser(result.data)
         } catch (error) {
             console.error(error)
@@ -70,7 +75,7 @@ function PrivateRoute(props) {
         {role ==='customer' && (
             <>
                 <Route path='/index' element={<Index user = {user}  />} exact/>
-                <Route path='/customer-profile' element={<CustomerProfile  logout = {logout} reload = {fetchUser}  />} exact/>
+                <Route path='/customer-profile' element={<CustomerProfile  logout = {logout} reload = {fetchUser} user = {user} />} exact/>
                 <Route path='/customer-history' element={<CustomerHistory   />} exact/>
                 <Route path='/customer-history-detail' element={<CustomerHistoryDetail  />} exact/>
                 <Route path='/customer-report' element={<CustomerReport  />} exact/>
@@ -85,7 +90,9 @@ function PrivateRoute(props) {
 
         {role ==='shop' && (
             <>
-                <Route path='/home' element={<Home logout={logout} user = {user}  />} exact />
+                <Route path='/home' element={<Home  />} exact />
+                <Route path='/shop-profile' element={<ShopProfile logout = {logout} user = {user} reload = {fetchUser} />} exact />
+                <Route path='/shop-history' element={<ShopHistory  />} exact />
             </>
         )}
 

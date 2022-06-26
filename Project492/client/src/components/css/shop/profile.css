@@ -1,0 +1,98 @@
+.shop-profile {
+    background-color: darkviolet;
+    height: auto;
+    text-align: center;
+}
+
+.shop-profile-image {
+    text-align: center;
+    margin-top: 40px;
+}
+
+
+.shop-profile-image-tag{
+    background-color: white;
+    border-radius: 50%;
+    cursor: pointer;
+    height: 300px;
+}
+
+.shop-profile-info {
+    margin-top: 30px;
+    font-size: 1.9em;
+    background-color: #f1f2f3;
+    margin: 30px 20px  0px 20px;
+    padding-bottom: 25px;
+    padding-top: 10px;
+    border-radius: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.shop-profile-info-detail{
+    margin-top: 20px;
+}
+.shop-profile-info > .shop-profile-info-detail > input:nth-child(1){
+    width: 40%;
+}
+
+.shop-profile-info > .shop-profile-info-detail > input {
+    font-size: 0.9em;
+    width: 60%;
+    border: none;
+    padding-left: 30px;
+}
+
+.shop-profile-online{
+    margin-top: 50px;
+    border: none;
+    padding: 20px 100px;
+    font-size: 2em;
+    border-radius: 20px;
+    background-color: rgb(50,250,0);
+    color: black;
+    cursor: pointer;
+}
+.shop-profile-offline{
+    margin-top: 50px;
+    border: none;
+    padding: 20px 100px;
+    font-size: 2em;
+    border-radius: 20px;
+    background-color: red;
+    color: black;
+    cursor: pointer;
+}
+
+.shop-profile-offline:hover, .shop-profile-online:hover {
+    background-color: black;
+    color: white;
+}
+
+.shop-profile-button{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+    padding-bottom: 30px;
+}
+
+.shop-profile-button > button{
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.shop-profile-button-back {
+    padding: 20px 25px 15px 20px;
+    color: white;
+    background-color: rgb(50,250,0);
+}
+.shop-profile-button-out {
+    padding: 20px 20px 15px 21px;
+    color: white;
+    background-color: red;
+}
+
+.shop-profile-button-back:hover, .shop-profile-button-out:hover{
+    background-color: black;
+}

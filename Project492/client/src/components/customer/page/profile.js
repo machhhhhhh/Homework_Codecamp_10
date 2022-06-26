@@ -1,4 +1,4 @@
-import React , {useState, useRef, useEffect} from 'react'
+import React , { useRef} from 'react'
 import {useNavigate} from 'react-router-dom'
 import axios from '../../../config/axios'
 import '../../css/customer/profile.css'
@@ -9,54 +9,26 @@ import Header from '../components/Header'
 
 const url = 'https://icon-library.com/images/no-user-image-icon/no-user-image-icon-26.jpg'
 
-function Profile({logout, reload}) {
+function Profile({logout, reload, user}) {
 
     const inputEl = useRef()
 
-    // const [image, setImage] = useState(null)
-    const [user, setUser] = useState([])
-    
-
     const navigate = useNavigate()
     const name = user.firstname + ' ' + user.lastname
-
-    const getUser = async() => {
-      try {
-        
-        const result = await axios.get('/user')
-        setUser(result.data)
-        
-      } catch (error) {
-        console.error(error)
-      }
-    }
-
-    useEffect(()=>{
-        
-        getUser()
-
-    },[])
 
 
     const updateProfile = async(e) => {
       try {
           e.preventDefault()
 
-          // setImage(e.target.files[0])
-
-          // if(image){
             const formData = new FormData()
             formData.append('customerImg', e.target.files[0])
 
             await axios.put('/customer/profile', formData)
-          // }
 
-          // setImage(null)
-          reload()
+          return reload()
           
 
-          return getUser()
-        
       } catch (error) {
           console.error(error)
       }
@@ -102,7 +74,6 @@ function Profile({logout, reload}) {
                 alt='customer-profile'
                 onClick={()=>inputEl.current.click()}
             />
-            {/* <button hidden ={!image} onClick={(e)=>updateProfile(e)}>Update</button> */}
         </div>
 
         <div className='customer-profile-info'>

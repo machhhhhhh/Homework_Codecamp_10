@@ -83,8 +83,8 @@ function Index({logout,user}) {
             />
         </div>
 
-        <button className='customer-index-start' onClick={(e)=>getStart(e)}><strong>Get Start</strong></button>
-        <button className='customer-index-map' onClick={(e)=>map(e)} ><strong>Map</strong></button>
+        <button type='button' className='customer-index-start' onClick={(e)=>getStart(e)}><strong>Get Start</strong></button>
+        <button type='button' className='customer-index-map' onClick={(e)=>map(e)} ><strong>Map</strong></button>
 
     </div>
   )

@@ -1,0 +1,45 @@
+.shop-home{
+    background-color: darkviolet;
+    height: auto;
+    padding-top: 80px;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 100px;
+}
+
+.shop-home-logo {
+    text-align: center;
+}
+
+.shop-home-logo-image {
+    height: 300px;
+    background-color: yellow;
+    border-radius: 50%;
+    padding: 10px;
+}
+
+.shop-home > button {
+    border: none;
+    font-size: 3.5em;
+    margin-top: 80px;
+    margin-left: 40px;
+    margin-right: 40px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+.shop-home-start {
+    background-color: rgb(50,250,0);
+    color: black;
+}
+.shop-home-history {
+    background-color: orange;
+    color: black;
+}
+
+.shop-home-start:hover, .shop-home-history:hover{
+    background-color: black;
+    color: white;
+}
