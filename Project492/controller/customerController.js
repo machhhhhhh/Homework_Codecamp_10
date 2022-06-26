@@ -128,8 +128,8 @@ const updateProfile = async(req,res,next) => {
 
             await customer.update({
                 image : result.secure_url,
-                // firstname : req.body.firstname,
-                // lastname : req.body.lastname,
+                firstname : req.body.firstname,
+                lastname : req.body.lastname,
             }) // push photo from clond to database
             
             if(req.user.customerImg){

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, {  useRef, useState } from 'react'
 import { useLocation, useNavigate} from 'react-router-dom'
 import '../../css/customer/report.css'
 import TextareaAutosize from '@mui/material/TextareaAutosize';
@@ -6,7 +6,7 @@ import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 
 import Header from '../components/Header'
 import axios from '../../../config/axios';
-import e from 'cors';
+import { Image } from 'antd';
 
 function Report() {
 
@@ -17,8 +17,8 @@ function Report() {
     const shop = location.state.shop
 
     const inputEl = useRef()
-    // const [image, setImage] = useState([])
-    let image = []
+    const [image, setImage] = useState([])
+    // let image = []
     const [description, setDescription] = useState('')
 
 
@@ -33,22 +33,23 @@ function Report() {
             const check = window.confirm('Sure ??!')
             if(!check) return;
             const result = await axios.put(`/report/${order_id}`, body)
+            console.log(result);
             const report_id = result.data.report.id
 
-            // if(image.length!==0) {
-            //     for(let i=0; i< image.length; i++){
+            if(image.length!==0) {
+                for(let i=0; i< image.length; i++){
 
-            //         const formData = new FormData()
-            //         formData.append('ReportId', report_id)
-            //         formData.append('reportImg', image[i])
+                    const formData = new FormData()
+                    formData.append('ReportId', report_id)
+                    formData.append('reportImg', image[i])
 
-            //         await axios.post('/report/photo', formData)
-            //     }
-            // }
+                    await axios.post('/report/photo', formData)
+                }
+            }
 
-            // setDescription('')
-            // // setImage(null)
-            // inputEl.current.value = null
+            setDescription('')
+            // setImage(null)
+            inputEl.current.value = null
 
             return navigate('/customer-history-detail',{state:{ order_id : order_id}})
             
@@ -91,7 +92,7 @@ function Report() {
                     <h1 className='customer-report-photo-add'>Photo <AddAPhotoIcon className='customer-report-photo-icon' fontSize='large' onClick={()=>inputEl.current.click()}/> </h1>
                     <input 
                         type='file'
-                        onChange={e => image.push(e.target.files[0])} 
+                        onChange={e => setImage(...image, e.target.files[0])} 
                         hidden
                         ref={inputEl}
                         alt = 'report-photo'

@@ -69,7 +69,7 @@ function PrivateRoute(props) {
         {role ==='customer' && (
             <>
                 <Route path='/index' element={<Index user = {user}  />} exact/>
-                <Route path='/customer-profile' element={<CustomerProfile  logout = {logout}  />} exact/>
+                <Route path='/customer-profile' element={<CustomerProfile  logout = {logout} reload = {fetchUser}  />} exact/>
                 <Route path='/customer-history' element={<CustomerHistory   />} exact/>
                 <Route path='/customer-history-detail' element={<CustomerHistoryDetail  />} exact/>
                 <Route path='/customer-report' element={<CustomerReport  />} exact/>

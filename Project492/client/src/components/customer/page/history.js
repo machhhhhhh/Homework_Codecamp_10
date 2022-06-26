@@ -35,7 +35,7 @@ function History() {
     const destroy = async(e) => {
         try {
             e.preventDefault()
-            const check = window.confirm('Sure ??!')
+            const check = window.confirm('Clear all ??!')
             if(!check) return;
 
             await axios.post('/history-customer/clear')

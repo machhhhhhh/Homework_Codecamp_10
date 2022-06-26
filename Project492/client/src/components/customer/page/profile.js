@@ -9,47 +9,53 @@ import Header from '../components/Header'
 
 const url = 'https://icon-library.com/images/no-user-image-icon/no-user-image-icon-26.jpg'
 
-function Profile({logout}) {
+function Profile({logout, reload}) {
 
     const inputEl = useRef()
 
-    const [image, setImage] = useState(null)
+    // const [image, setImage] = useState(null)
     const [user, setUser] = useState([])
     
 
     const navigate = useNavigate()
     const name = user.firstname + ' ' + user.lastname
 
+    const getUser = async() => {
+      try {
+        
+        const result = await axios.get('/user')
+        setUser(result.data)
+        
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
     useEffect(()=>{
         
-        const getUser = async() => {
-          try {
-            
-            const result = await axios.get('/user')
-            setUser(result.data)
-            
-          } catch (error) {
-            console.error(error)
-          }
-        }
-
         getUser()
 
     },[])
 
+
     const updateProfile = async(e) => {
       try {
           e.preventDefault()
-          inputEl.current.click()
 
-          if(image){
+          // setImage(e.target.files[0])
+
+          // if(image){
             const formData = new FormData()
-            formData.append('customerImg', image)
+            formData.append('customerImg', e.target.files[0])
 
             await axios.put('/customer/profile', formData)
-          }
+          // }
 
-          // return navigate('/customer-profile')
+          // setImage(null)
+          reload()
+          
+
+          return getUser()
         
       } catch (error) {
           console.error(error)
@@ -85,33 +91,34 @@ function Profile({logout}) {
         <div className='customer-profile-image'>
             <input 
                 type='file'
-                onChange={e => setImage(e.target.files[0])} 
+                onChange={e => updateProfile(e)} 
                 hidden
                 ref={inputEl}
                 alt = 'customer-profile'
             />
             <img 
                 className='customer-profile-image-tag'
-                src={image? URL.createObjectURL(image) : user.image ? user.image : url}
+                src={ user.image ? user.image : url}
                 alt='customer-profile'
-                onClick={(e)=>updateProfile(e)}
+                onClick={()=>inputEl.current.click()}
             />
+            {/* <button hidden ={!image} onClick={(e)=>updateProfile(e)}>Update</button> */}
         </div>
 
         <div className='customer-profile-info'>
 
               <div className='customer-profile-info-detail'>
                   <label>Name : </label>
-                  <input type='text' value={name} />
+                  <input type='text' disabled value={name} />
               </div>
 
               <div className='customer-profile-info-detail'>
                   <label>E-Mail : </label>
-                  <input type='text' value={user.username} />
+                  <input type='text' disabled value={user.username} />
               </div>
               <div className='customer-profile-info-detail'>
                   <label>Phone : </label>
-                  <input type='text' value={user.phone} />
+                  <input type='text' disabled value={user.phone} />
               </div>
         </div>
         <button className='customer-profile-history' onClick={(e)=>history(e)}><strong>History</strong></button>

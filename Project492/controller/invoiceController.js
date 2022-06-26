@@ -65,8 +65,7 @@ const isPay = async(req,res,next) => {
         })
 
         if(!invoice) return res.status(200).send({check : false, invoice})
-        if(invoice.isPay ==='NO') return res.status(200).send({check : true, invoice})
-        return res.status(200).send({check : false, invoice})
+        return res.status(200).send({check : true, invoice})
 
         // if (shop) {
         //     if(invoice.ShopId !== shop.id) return res.status(400).send({message : 'not shop who create the invoice'})
