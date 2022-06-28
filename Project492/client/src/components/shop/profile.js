@@ -36,7 +36,7 @@ function Profile({logout,user,reload}) {
             const check = window.confirm('CLOSE ??')
             if(!check) return;
             await axios.put('/shop/off')
-            return reload()
+            reload()
         } catch (error) {
             console.error(error)
         }
@@ -48,7 +48,7 @@ function Profile({logout,user,reload}) {
             const check = window.confirm('OPEN ??')
             if(!check) return;
             await axios.put('/shop/on')
-            return reload()
+            reload()
             
         } catch (error) {
             console.error(error)

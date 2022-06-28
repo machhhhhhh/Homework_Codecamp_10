@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import '../components/css/shop/home.css'
 import io from 'socket.io-client'
 import axios from '../config/axios'
+import LocalStorageService from '../service/LocalStorageService'
 
 const socket = io.connect('http://localhost:5000', {
     transports : ['websocket'], 
@@ -11,20 +12,51 @@ const socket = io.connect('http://localhost:5000', {
     "my-custom-header": "abcd"
     }})
 
-function Home({user}) {
+function Home({user,reload}) {
 
   const navigate = useNavigate()
+  
+
+
+  useEffect(()=>{
+    
+    const checkOrderFinish = async() => {
+      try {
+
+        const result = await axios.get('/order/check')
+        const order = result.data
+        // console.log(order);
+        if(!order) return ;
+        return navigate('/shop-show', {state : { order : order}})
+        
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    // const token = LocalStorageService.getToken()
+    // console.log(token);
+
+    // if(!user) reload()
+    // reload()
+    checkOrderFinish()
+    console.log('home',user);
+
+  },[])
 
   useEffect(()=>{
 
-         // if(user.isShopOn ==='Yes') { // can get order
-            socket.on('get-order', data => {
-
-              return navigate('/shop-service-call', {state : {order : data.order}})
+    // reload()
+    // console.log(user);
+    socket.on('get-order', data => {
+        reload()
+              if(user.isShopOn ==='YES') { // can get order
+                    return navigate('/shop-service-call', {state : {order : data.order}})
+              }
+              else return;
             })
-
   },[socket])
-
+  
 
 
   const getStart = async(e) => {

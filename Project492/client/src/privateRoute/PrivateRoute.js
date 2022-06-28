@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {Route, Routes, useNavigate} from 'react-router-dom'
+import {Route, Routes, useNavigate, useLocation} from 'react-router-dom'
 import LocalStorageService from '../service/LocalStorageService'
 import axios from '../config/axios'
 
@@ -29,38 +29,69 @@ import ShopShow from '../components/shop/show'
 
 function PrivateRoute(props) {
 
-    const role = props.role || 'guest' 
+    // const role = props.role || 'guest' 
+    const [role, setRole] = useState(LocalStorageService.getToken() ? null : 'guest' )
     const [user, setUser] = useState(null)
 
     const navigate = useNavigate()
+    const location = useLocation()
 
     useEffect(()=>{
+
+        if(location.pathname!=='/login' || LocalStorageService.getToken()) fetchUser()
+
+    },[])
+
+    useEffect(()=>{
+
+        // console.log('check check');
+
         if(role === 'guest') navigate('/login')
-        if(role === 'customer') navigate('/index')
-        if(role === 'shop') navigate('/home')
+        // if(role!=='guest') fetchUser().then(()=>{
+        //     console.log('user',user)
+        // }).then(()=>{
+            if(role === 'customer') {
+                navigate('/index')
+            }
+            if(role === 'shop') {
+                navigate('/home')
+            }
+        // })
         
 
-        
-        
-        if(role!=='guest') fetchUser()
-        
+
     },[role])
-    
+
     const fetchUser = async () => {
-            
+
         try {
+            
             const result = await axios.get('/user')
             // console.log(result.data);
             setUser(result.data)
+            setRole(result.data.role)
+            // setUser(result.data) 
+            // console.log('set user', user)
+            
         } catch (error) {
             console.error(error)
         }
-
+    
     }
 
 
+    // useEffect(() => {
+    //     if(role === 'customer') navigate('/index')
+    //     if(role === 'shop') navigate('/home')
+        
+    //     console.log('123',user);
+    // }, [user]);
+
+
+
+
     const logout = async() => {
-        props.setRole('guest')
+        setRole('guest')
         LocalStorageService.removeToken()
         return navigate('/login')
       }
@@ -72,7 +103,7 @@ function PrivateRoute(props) {
 
         {role==='guest' && (
             <>
-                <Route path='/login' element={<Login setRole={props.setRole}  role= {role} /> }  exact />
+                <Route path='/login' element={<Login reload = {fetchUser}  /> }  exact />
                 <Route path='/register' element={<Register/>}  exact/>
                 
             </>
@@ -80,7 +111,7 @@ function PrivateRoute(props) {
 
         {role ==='customer' && (
             <>
-                <Route path='/index' element={<Index user = {user}  />} exact/>
+                <Route path='/index' element={<Index user = {user} reload = {fetchUser}  />} exact/>
                 <Route path='/customer-profile' element={<CustomerProfile  logout = {logout} reload = {fetchUser} user = {user} />} exact/>
                 <Route path='/customer-history' element={<CustomerHistory   />} exact/>
                 <Route path='/customer-history-detail' element={<CustomerHistoryDetail  />} exact/>
@@ -98,7 +129,7 @@ function PrivateRoute(props) {
 
         {role ==='shop' && (
             <>
-                <Route path='/home' element={<Home user = {user}/>} exact />
+                <Route path='/home' element={<Home user = {user} reload={fetchUser}/>} exact />
                 <Route path='/shop-profile' element={<ShopProfile logout = {logout} user = {user} reload = {fetchUser} />} exact />
                 <Route path='/shop-history' element={<ShopHistory  />} exact />
                 <Route path='/shop-history-detail' element={<ShopHistoryDetail  />} exact />

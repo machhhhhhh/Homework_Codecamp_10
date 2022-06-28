@@ -17,10 +17,12 @@ const getUser = async(req,res,next) => {
                     username : req.user.username,
                 }
             })
-            if(!shop) return res.status(404).send({message : 'user not found'})
-            return res.status(200).send(shop)
+            if(!shop) return res.status(200).send({message : 'user not found'})
+            return res.status(200).send({role : 'shop', ...shop.dataValues})
         }
-        return res.status(200).send(customer)
+        
+
+        return res.status(200).send({role : 'customer', ...customer.dataValues})
     } catch (error) {
         next(error)
     }

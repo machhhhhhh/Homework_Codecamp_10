@@ -4,7 +4,7 @@ import '../components/css/customer/index.css'
 import {useNavigate} from 'react-router-dom'
 import  axios  from '../config/axios'
 
-function Index({logout,user}) {
+function Index({logout,user,reload}) {
 
   const navigate = useNavigate()
 
@@ -30,9 +30,26 @@ function Index({logout,user}) {
       }
     }
 
-    
+    const checkOrderFinish = async() => {
+      try {
 
+        const result = await axios.get('/order/check')
+        const order = result.data
+        // console.log(order);
+
+        if(!order) return ;
+
+        return navigate('/customer-show', {state : { order : order}})
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    reload()
+    console.log(user);
     checkOrder()
+
+    checkOrderFinish()
 
   },[])
 

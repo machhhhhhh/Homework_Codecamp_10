@@ -8,6 +8,12 @@ function Show() {
   const navigate = useNavigate()
   const order = location.state.order
 
+  useEffect(()=>{
+
+    console.log(order);
+
+  },[order])
+
   return (
     <div>Customer Show</div>
   )

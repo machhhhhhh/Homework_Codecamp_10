@@ -1,17 +1,18 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import '../components/css/login.css'
 import {useNavigate} from 'react-router-dom'
 import axios from '../config/axios'
 import LocalStorageService from '../service/LocalStorageService'
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
+function Login({reload}) {
 
-function Login({setRole,role}) {
 
   const navigate = useNavigate()
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+
 
   const register = async(e) => {
     try {
@@ -48,7 +49,7 @@ function Login({setRole,role}) {
       setPassword('')
       setUsername('')
       
-      return setRole(result.data.message)
+      reload()
 
     } catch (error) {
       console.error(error)

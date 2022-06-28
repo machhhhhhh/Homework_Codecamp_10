@@ -7,17 +7,28 @@ const checkFinish = async(req,res,next) => {
 
         const customer = await Customer.findOne({where : {username : req.user.username}})
         if(!customer){
-            const shop = await shop.findOne({where : {username : req.user.username}})
+            const shop = await Shop.findOne({where : {username : req.user.username}})
             if(!shop) return res.status(404).send({message : 'user not found'})
 
             const order = await Order.findOne({
                 where : {
                     isFinish : 'NO',
                     ShopId : shop.id
-                }
+                },
+                include : [
+                    {
+                        model : Customer
+                    },
+                    {
+                        model : Shop
+                    },
+                    {
+                        model : Ophoto
+                    }
+                ]
             })
 
-            if(!order) return res.status(404).send({message : 'order not found'})
+            if(!order) return res.status(200).send(null)
 
             return res.status(200).send(order)
 
@@ -28,10 +39,21 @@ const checkFinish = async(req,res,next) => {
             where : {
                 CustomerId : customer.id,
                 isFinish : 'NO'
-            }
+            },
+            include : [
+                {
+                    model : Customer
+                },
+                {
+                    model : Shop
+                },
+                {
+                    model : Ophoto
+                }
+            ]
         })
 
-        if(!order) return res.status(404).send({message : 'order not found'})
+        if(!order) return res.status(200).send(null)
 
         return res.status(200).send(order)
 
@@ -89,45 +111,70 @@ const getAllOrder = async (req,res,next) => { // every shop who are online can s
 const getOneOrder = async(req,res,next) => {
     try {
         const id = req.params
-        
-        const customer = await Customer.findOne({where : {username : req.user.username}})
-
-        if(!customer) {
-
-            const shop = await Shop.findOne({where : {username : req.user.username}})
-            if(!shop) return res.status(404).send({message : 'uesr not found'})
-
-            const order = await Order.findOne({
-                where : {
-                    id : id,
-                    ShopId : shop.id
-                },
-                include : [
-                    {
-                        model : Customer
-                    }
-                ]
-            })
-
-            if(!order) return res.status(404).send({message : 'order not found'})
-
-            return res.status(200).send(order)
-
-        }
 
         const order = await Order.findOne({
             where : {
-                id : id,
-                CustomerId : customer.id
+                id : id
             },
             include : [
                 {
+                    model : Customer
+                },
+                {
                     model : Shop
+                },
+                {
+                    model : Ophoto
                 }
             ]
         })
 
         if(!order) return res.status(404).send({message : 'order not found'})
+        
+        // const customer = await Customer.findOne({where : {username : req.user.username}})
+
+        // if(!customer) {
+
+        //     const shop = await Shop.findOne({where : {username : req.user.username}})
+        //     if(!shop) return res.status(404).send({message : 'uesr not found'})
+
+        //     const order = await Order.findOne({
+        //         where : {
+        //             id : id,
+        //             ShopId : shop.id
+        //         },
+        //         include : [
+        //             {
+        //                 model : Customer
+        //             },
+        //             {
+        //                 model : Ophoto
+        //             }
+        //         ]
+        //     })
+
+        //     if(!order) return res.status(404).send({message : 'order not found'})
+
+        //     return res.status(200).send(order)
+
+        // }
+
+        // const order = await Order.findOne({
+        //     where : {
+        //         id : id,
+        //         CustomerId : customer.id
+        //     },
+        //     include : [
+        //         {
+        //             model : Shop
+        //         },
+        //         {
+        //             model : Ophoto
+        //         }
+        //     ]
+        // })
+
+        // if(!order) return res.status(404).send({message : 'order not found'})
 
         return res.status(200).send(order)
 
@@ -154,7 +201,7 @@ const getOrderOfCustomer = async (req,res,next) => {
                     [Op.is] : null  // to specify for order that waiting to accept
                 },
                 CustomerId : customer.id,
-                isFinish : 'NO'
+                // isFinish : 'NO'
             },
             include : [
                 {
