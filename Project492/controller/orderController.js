@@ -2,6 +2,44 @@ const {Order,Customer,Shop, Ophoto} = require('../models')
 const {Op} = require('sequelize')
 const axios = require('../config/axios/axios')
 
+const checkFinish = async(req,res,next) => {
+    try {
+
+        const customer = await Customer.findOne({where : {username : req.user.username}})
+        if(!customer){
+            const shop = await shop.findOne({where : {username : req.user.username}})
+            if(!shop) return res.status(404).send({message : 'user not found'})
+
+            const order = await Order.findOne({
+                where : {
+                    isFinish : 'NO',
+                    ShopId : shop.id
+                }
+            })
+
+            if(!order) return res.status(404).send({message : 'order not found'})
+
+            return res.status(200).send(order)
+
+        }
+        
+
+        const order = await Order.findOne({
+            where : {
+                CustomerId : customer.id,
+                isFinish : 'NO'
+            }
+        })
+
+        if(!order) return res.status(404).send({message : 'order not found'})
+
+        return res.status(200).send(order)
+
+    } catch (error) {
+        next(error)
+    }
+}
+
 const getAllOrder = async (req,res,next) => { // every shop who are online can see every non-accept order
     try {
 
@@ -47,6 +85,57 @@ const getAllOrder = async (req,res,next) => { // every shop who are online can s
         next(error)
     }
 }
+
+const getOneOrder = async(req,res,next) => {
+    try {
+        const id = req.params
+        
+        const customer = await Customer.findOne({where : {username : req.user.username}})
+
+        if(!customer) {
+
+            const shop = await Shop.findOne({where : {username : req.user.username}})
+            if(!shop) return res.status(404).send({message : 'uesr not found'})
+
+            const order = await Order.findOne({
+                where : {
+                    id : id,
+                    ShopId : shop.id
+                },
+                include : [
+                    {
+                        model : Customer
+                    }
+                ]
+            })
+
+            if(!order) return res.status(404).send({message : 'order not found'})
+
+            return res.status(200).send(order)
+
+        }
+
+        const order = await Order.findOne({
+            where : {
+                id : id,
+                CustomerId : customer.id
+            },
+            include : [
+                {
+                    model : Shop
+                }
+            ]
+        })
+
+        if(!order) return res.status(404).send({message : 'order not found'})
+
+        return res.status(200).send(order)
+
+    } catch (error) {
+        next(error)
+    }
+}
+
 const getOrderOfCustomer = async (req,res,next) => {
     try {
 
@@ -64,7 +153,8 @@ const getOrderOfCustomer = async (req,res,next) => {
                 ShopId : {
                     [Op.is] : null  // to specify for order that waiting to accept
                 },
-                CustomerId : customer.id
+                CustomerId : customer.id,
+                isFinish : 'NO'
             },
             include : [
                 {
@@ -120,7 +210,8 @@ const addOrder = async (req,res,next) => {
             model : req.body.model,
             latitude : req.body.latitude,
             longitude : req.body.longitude,
-            CustomerId : req.user.id
+            CustomerId : req.user.id,
+            isFinish : 'NO'
         })
 
         if(!newOrder) return res.status(400).send({message : 'cannot create order'})
@@ -213,26 +304,57 @@ const acceptOrder = async (req,res,next) => {
 const cancelOrder = async (req,res,next) => {
     try {
 
-        const order = await Order.findOne({where : {id : req.params.id}})
-        if(!order) return res.status(404).send({message : 'order not found'})
+        // const order = await Order.findOne({where : {id : req.params.id}})
+        // if(!order) return res.status(404).send({message : 'order not found'})
         // if(order.CustomerId !== req.user.id) return res.status(400).send({message : 'you are not owner order'})
-        const customer = await Customer.findOne({where : {username : req.user.username}})
-        const shop = await Shop.findOne({where : {username : req.user.username}})
         
-        if(!order.ShopId && shop) return res.status(400).send({message: 'waiting for customer accept for cancel'})
-        if(order.ShopId && customer) return res.status(400).send({message : 'shop has accepted cannot delete'})
+        // if(!order.ShopId && shop) return res.status(400).send({message: 'waiting for customer accept for cancel'})
+        // if(order.ShopId && customer) return res.status(400).send({message : 'shop has accepted cannot delete'})
 
-        if(!order.ShopId && customer.id !== order.CustomerId) return res.status(400).send({message : 'you are not owner of order'})
-        if(order.ShopId && order.ShopId !== shop.id) return res.status(400).send({message : 'Not Shop who take the order'})
+        // if(!order.ShopId && customer.id !== order.CustomerId) return res.status(400).send({message : 'you are not owner of order'})
+        // if(order.ShopId && order.ShopId !== shop.id) return res.status(400).send({message : 'Not Shop who take the order'})
        
-        if(order.ShopId && order.ShopId === shop.id || (!order.ShopId && customer.id === order.CustomerId)  ) {
+        // if(order.ShopId && order.ShopId === shop.id || (!order.ShopId && customer.id === order.CustomerId)  ) {
+        //     await order.destroy()
+        //     return res.status(204).send({message : 'delete order complete'})
+        // }
+
+
+        // else return res.status(400).send({message : 'error with condition'})
+        const {id} = req.params
+        const customer = await Customer.findOne({where : {username : req.user.username}})
+        
+        if(!customer) {
+            const shop = await Shop.findOne({where : {username : req.user.username}})
+
+            if(!shop) return res.status(404).send({message : 'user not found'})
+
+            const order = await Order.findOne({
+                where : {
+                    id : id,
+                    ShopId : shop.id
+                }
+            })
+            
+            if(!order) return res.status(404).send({message : 'order not found'})
+            
             await order.destroy()
-            return res.status(204).send({message : 'delete order complete'})
+            return res.status(204)
+
         }
 
+        const order = await Order.findOne({
+            where : {
+                id : id,
+                CustomerId : customer.id
+            }
+        })
 
-        else return res.status(400).send({message : 'error with condition'})
-        
+        if(!order) return res.status(404).send({message : 'order not found'})
+
+        await order.destroy()
+
+        return res.status(204)
 
 
     } catch (error) {
@@ -245,5 +367,7 @@ module.exports = {
     getOrderOfCustomer,
     addOrder,
     acceptOrder,
-    cancelOrder
+    cancelOrder,
+    getOneOrder,
+    checkFinish
 }

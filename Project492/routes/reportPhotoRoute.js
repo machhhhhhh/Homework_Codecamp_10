@@ -6,4 +6,6 @@ const upload = require('../middleware/upload')
 
 route.post('/', authenticate,upload.single('reportImg'), reportPhotoController.addPhoto )
 
+// upload.array('reportImg', 12) and input make multiple
+
 module.exports = route

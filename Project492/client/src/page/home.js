@@ -1,10 +1,31 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import '../components/css/shop/home.css'
+import io from 'socket.io-client'
+import axios from '../config/axios'
 
-function Home() {
+const socket = io.connect('http://localhost:5000', {
+    transports : ['websocket'], 
+    withCredentials: true,
+    extraHeaders: {
+    "my-custom-header": "abcd"
+    }})
+
+function Home({user}) {
 
   const navigate = useNavigate()
+
+  useEffect(()=>{
+
+         // if(user.isShopOn ==='Yes') { // can get order
+            socket.on('get-order', data => {
+
+              return navigate('/shop-service-call', {state : {order : data.order}})
+            })
+
+  },[socket])
+
+
 
   const getStart = async(e) => {
     try {

@@ -39,7 +39,7 @@ export default function HistoryDefail() {
         const isPay = async() => { 
             try {
                     const result = await axios.get(`/invoice/${order_id}`)
-                    console.log(result.data);
+                    // console.log(result.data);
                     setInvoice(result.data.invoice)
                     setQR(result.data.check)
                     setList(result.data.invoice.InLists)
@@ -63,7 +63,7 @@ export default function HistoryDefail() {
         isPay()
         isReport()
         
-    },[])
+    },[order_id])
     
 
     const back = async(e) => {

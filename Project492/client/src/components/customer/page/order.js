@@ -5,6 +5,14 @@ import Header from '../components/Header'
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import axios from '../../../config/axios'
+import io from 'socket.io-client'
+
+const socket = io.connect('http://localhost:5000', {
+    transports : ['websocket'], 
+    withCredentials: true,
+    extraHeaders: {
+    "my-custom-header": "abcd"
+    }})
 
 function Order() {
 
@@ -13,10 +21,10 @@ function Order() {
     
     // const latitude, longitude
 
-    const [problem ,setProblem] = useState('Cannot Start')
+    const [problem ,setProblem] = useState(`Can't Start`)
     const [brand, setBrand] = useState('Honda')
     const [model, setModel] = useState('Wave')
-    const [description, setDescription] = useState(null)
+    const [description, setDescription] = useState('')
     const image = []
 
     const search = async(e) => {
@@ -27,17 +35,23 @@ function Order() {
 
             const body = {
                 problem : problem,
-                description : description,
+                // description : description,
                 brand : brand,
                 model : model
                 // latitude : 
                 // longitude : 
             }
+            if(description!=='') body.description = description
 
             const result = await axios.post('/order', body)
+
             // console.log(result.data);
+            socket.emit('send-order', {order : result.data})
 
             // const formData = new FormData()
+
+            setDescription('')
+
             return navigate('/order-waiting', {state : {order : result.data}})
 
         } catch (error) {
@@ -193,8 +207,8 @@ function Order() {
                 <div className='customer-order-form-info-detail'>
                     <h1 className='customer-order-form-info-detail-title'>Problem :</h1>
                     <select value={problem} onChange={e => setProblem(e.target.value)}>
-                        {problems.map((problem) => (
-                            <option defaultValue={problems[0]} value={problem}>{problem}</option>
+                        {problems.map((problem,key) => (
+                            <option key={key} defaultValue={problems[0]} value={problem}>{problem}</option>
                             ))}
                     </select>
                 </div>
@@ -202,8 +216,8 @@ function Order() {
                 <div className='customer-order-form-info-detail'>
                 <h1 className='customer-order-form-info-detail-title'>Brand :</h1>
                     <select value={brand} onChange={e => setBrand(e.target.value)}>
-                        {brands.map((brand) => (
-                            <option defaultValue={brands[0]} value={brand}>{brand}</option>
+                        {brands.map((brand,key) => (
+                            <option key={key} defaultValue={brands[0]} value={brand}>{brand}</option>
                             ))}
                     </select>
 
@@ -211,8 +225,8 @@ function Order() {
                 <div className='customer-order-form-info-detail'>
                     <h1 className='customer-order-form-info-detail-title'>Model :</h1>
                     <select value={model} onChange={e => setModel(e.target.value)}>
-                        {models.map((model) => (
-                            <option defaultChecked={models[0]} value={model}>{model}</option>
+                        {models.map((model,key) => (
+                            <option key={key} defaultChecked={models[0]} value={model}>{model}</option>
                             ))}
                     </select>
                 </div>

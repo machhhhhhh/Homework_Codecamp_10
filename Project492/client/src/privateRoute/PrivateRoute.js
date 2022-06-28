@@ -16,11 +16,16 @@ import CustomerInvoice from '../components/customer/page/invoice'
 import CustomerOrder from '../components/customer/page/order'
 import CustomerMap from '../components/customer/page/map'
 import CustomerOrderWaiting from '../components/customer/page/waiting'
-
+import CustomerShow from '../components/customer/page/show'
+import CustomerDecide from '../components/customer/page/decide'
 
 import ShopHistory from '../components/shop/history'
 import ShopProfile from '../components/shop/profile'
 import ShopHistoryDetail from '../components/shop/historyDetail'
+import ShopServiceCall from '../components/shop/serviceCall'
+import ShopConfirm from '../components/shop/confirm'
+import ShopWaiting from '../components/shop/waiting'
+import ShopShow from '../components/shop/show'
 
 function PrivateRoute(props) {
 
@@ -85,17 +90,23 @@ function PrivateRoute(props) {
                 <Route path='/customer-map' element={<CustomerMap  />} exact/>
                 <Route path='/order' element={<CustomerOrder  />} exact/>
                 <Route path='/order-waiting' element={<CustomerOrderWaiting  />} exact/>
+                <Route path='/customer-decide' element={<CustomerDecide  />} exact/>
+                <Route path='/customer-show' element={<CustomerShow  />} exact/>
             </>
         )}
 
 
         {role ==='shop' && (
             <>
-                <Route path='/home' element={<Home/>} exact />
+                <Route path='/home' element={<Home user = {user}/>} exact />
                 <Route path='/shop-profile' element={<ShopProfile logout = {logout} user = {user} reload = {fetchUser} />} exact />
                 <Route path='/shop-history' element={<ShopHistory  />} exact />
                 <Route path='/shop-history-detail' element={<ShopHistoryDetail  />} exact />
-
+                
+                <Route path='/shop-service-call' element={<ShopServiceCall  />} exact />
+                <Route path='/shop-confirm' element={<ShopConfirm  />} exact />
+                <Route path='/shop-waiting' element={<ShopWaiting  />} exact />
+                <Route path='/shop-show' element={<ShopShow  />} exact />
             </>
         )}
 

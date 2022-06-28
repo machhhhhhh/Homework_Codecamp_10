@@ -30,6 +30,8 @@ function Index({logout,user}) {
       }
     }
 
+    
+
     checkOrder()
 
   },[])

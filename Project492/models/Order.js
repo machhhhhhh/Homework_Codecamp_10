@@ -21,6 +21,13 @@ module.exports = (sequelize, DataTypes) => {
        },
        longitude : {
            type : DataTypes.INTEGER(255)
+       },
+       isFinish : {
+        type : DataTypes.STRING(255),
+           defaultValue : 'NO',
+            validate : {
+                isIn : [['YES', 'NO']]
+            }
        }
 
     }, {

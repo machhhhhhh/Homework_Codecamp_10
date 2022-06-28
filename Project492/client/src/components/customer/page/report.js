@@ -132,12 +132,14 @@ function Report() {
                         type='file'
                         onChange={e => inputPhoto(e)} 
                         hidden
+                        multiple
                         ref={inputEl}
                         alt = 'report'
                     />
                     {image.length!==0 && (
                         image.map(item => 
                                 <img 
+                                key={item.id}
                                 src={URL.createObjectURL(item) }
                                 alt='report'
                             />)
