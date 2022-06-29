@@ -39,17 +39,18 @@ function Home({user,reload}) {
 
     // if(!user) reload()
     // reload()
-    checkOrderFinish()
-    console.log('home',user);
-
+    // checkOrderFinish()
+    // console.log('home',user);
   },[])
 
   useEffect(()=>{
 
     // reload()
     // console.log(user);
+    // reload()
     socket.on('get-order', data => {
-        reload()
+      // reload()
+      // console.log(data);
               if(user.isShopOn ==='YES') { // can get order
                     return navigate('/shop-service-call', {state : {order : data.order}})
               }

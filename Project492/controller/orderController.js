@@ -248,7 +248,7 @@ const addOrder = async (req,res,next) => {
             }
         })
 
-        if(isOrder) return res.status(400).send({message : 'cannot create the second order'})
+        // if(isOrder) return res.status(400).send({message : 'cannot create the second order'})
 
         const newOrder = await Order.create({
             problem : req.body.problem,

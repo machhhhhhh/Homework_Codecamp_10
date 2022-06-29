@@ -46,10 +46,10 @@ function Index({logout,user,reload}) {
     }
 
     reload()
-    console.log(user);
-    checkOrder()
+    // console.log(user);
+    // checkOrder()
 
-    checkOrderFinish()
+    // checkOrderFinish()
 
   },[])
 

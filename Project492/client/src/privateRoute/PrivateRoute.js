@@ -32,6 +32,7 @@ function PrivateRoute(props) {
     // const role = props.role || 'guest' 
     const [role, setRole] = useState(LocalStorageService.getToken() ? null : 'guest' )
     const [user, setUser] = useState(null)
+    const [change, setChange] = useState(false)
 
     const navigate = useNavigate()
     const location = useLocation()
@@ -41,6 +42,7 @@ function PrivateRoute(props) {
         if(location.pathname!=='/login' || LocalStorageService.getToken()) fetchUser()
 
     },[])
+
 
     useEffect(()=>{
 
@@ -53,9 +55,15 @@ function PrivateRoute(props) {
             if(role === 'customer') {
                 navigate('/index')
             }
-            if(role === 'shop') {
-                navigate('/home')
-            }
+            if(role==='shop') navigate('/home')
+            // if(role === 'shop' &&  location.pathname ==='/login' ) {
+            //     navigate('/home')
+            // }
+            
+            // if(role === 'shop' && location.pathname ==='/shop-profile' || location.pathname ==='/home'){
+                
+            //     navigate(location.pathname)
+            // }
         // })
         
 
@@ -68,24 +76,16 @@ function PrivateRoute(props) {
             
             const result = await axios.get('/user')
             // console.log(result.data);
-            setUser(result.data)
+            setUser({...result.data})
             setRole(result.data.role)
             // setUser(result.data) 
-            // console.log('set user', user)
+            // console.log(result.data)
             
         } catch (error) {
             console.error(error)
         }
     
     }
-
-
-    // useEffect(() => {
-    //     if(role === 'customer') navigate('/index')
-    //     if(role === 'shop') navigate('/home')
-        
-    //     console.log('123',user);
-    // }, [user]);
 
 
 
@@ -119,7 +119,7 @@ function PrivateRoute(props) {
                 <Route path='/customer-invoice' element={<CustomerInvoice  />} exact/>
 
                 <Route path='/customer-map' element={<CustomerMap  />} exact/>
-                <Route path='/order' element={<CustomerOrder  />} exact/>
+                <Route path='/order' element={<CustomerOrder change = { change}  chang reload = {fetchUser} />} exact/>
                 <Route path='/order-waiting' element={<CustomerOrderWaiting  />} exact/>
                 <Route path='/customer-decide' element={<CustomerDecide  />} exact/>
                 <Route path='/customer-show' element={<CustomerShow  />} exact/>
@@ -130,7 +130,7 @@ function PrivateRoute(props) {
         {role ==='shop' && (
             <>
                 <Route path='/home' element={<Home user = {user} reload={fetchUser}/>} exact />
-                <Route path='/shop-profile' element={<ShopProfile logout = {logout} user = {user} reload = {fetchUser} />} exact />
+                <Route path='/shop-profile' element={<ShopProfile logout = {logout} user = {user} reload = {fetchUser} setChange = { setChange}  setUser={setUser}/>} exact />
                 <Route path='/shop-history' element={<ShopHistory  />} exact />
                 <Route path='/shop-history-detail' element={<ShopHistoryDetail  />} exact />
                 

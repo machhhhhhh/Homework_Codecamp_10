@@ -65,18 +65,24 @@ io.on('connection', (socket) => {
 
   socket.on('send-order', data => {
 
-    // console.log(data);
+    // console.log(data); // data.order.id
     socket.broadcast.emit('get-order', data)
+    // socket.join(data)
+
+    socket.on('accept-order', data => {
+      // console.log('sdfdsfsdfdsfsdfsfdsdffsdsfd',data)
+      // if (data.order.id === item.order_id) console.log('data is sameee');
+      // else console.log('not same');
+      // socket.to(data.order_id).emit('customer-decide', data)
+  
+      // if(data.accept) socket.broadcast.emit('customer-decide', data)
+      // if(data) 
+      socket.broadcast.emit('customer-decide', {order : data})
+    })
 
   })
 
-  socket.on('accept-order', data => {
-    // console.log(data);
-
-    if(data.accept) socket.broadcast.emit('customer-decide', data)
-    // if(data) 
-    // socket.broadcast.emit('customer-decide', {order : data})
-  })
+  
 
   socket.on('customer-select', data => {
       // console.log(data);

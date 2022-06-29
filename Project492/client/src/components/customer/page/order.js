@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import '../../css/customer/order.css'
 import Header from '../components/Header'
@@ -14,7 +14,7 @@ const socket = io.connect('http://localhost:5000', {
     "my-custom-header": "abcd"
     }})
 
-function Order() {
+function Order({reload, change}) {
 
     const navigate = useNavigate()
     const inputEl = useRef()
@@ -26,6 +26,13 @@ function Order() {
     const [model, setModel] = useState('Wave')
     const [description, setDescription] = useState('')
     const image = []
+
+    useEffect(()=>{
+
+        setProblem(...problem)
+        // window.location.reload();
+
+    },[change])
 
     const search = async(e) => {
         try {
@@ -45,8 +52,16 @@ function Order() {
 
             const result = await axios.post('/order', body)
 
+            // reload()
+
             // console.log(result.data);
-            socket.emit('send-order', {order : result.data})
+
+            const data = {
+                order_id : result.data.id,
+                order : result.data
+            }
+
+            await socket.emit('send-order', data)
 
             // const formData = new FormData()
 

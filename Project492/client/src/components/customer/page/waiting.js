@@ -18,9 +18,9 @@ function Waiting() {
     useEffect(()=>{
 
           socket.on('customer-decide', data => {
-            // console.log(data);
+            console.log(data);
             // if(data.id===order.id)
-              return navigate('/customer-decide', {state : {order : order}})
+              // return navigate('/customer-decide', {state : {order : order}})
           })
 
     },[socket])

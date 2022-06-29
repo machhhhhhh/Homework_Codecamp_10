@@ -30,7 +30,12 @@ export default function Confirm() {
 
             await axios.put(`/order/${order.id}`)
 
-            socket.emit('accept-order', {accept : true})
+            const data = {
+                order_id : order.id,
+                accept : true
+            }
+
+            await socket.emit('accept-order', data)
 
             return navigate('/shop-waiting', {state : {order : order}})
 
@@ -48,7 +53,13 @@ export default function Confirm() {
                 
                 return ;
             }
-            socket.emit('accept-order', {accept : false})
+
+            const data = {
+                order_id : order.id,
+                accept : false
+            }
+
+            await socket.emit('accept-order', data)
 
             return navigate('/home')
             

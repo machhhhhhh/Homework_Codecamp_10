@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useNavigate} from 'react-router-dom'
 import Header from '../customer/components/Header'
 import axios from '../../config/axios'
@@ -9,11 +9,15 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
 const url = 'https://icon-library.com/images/no-user-image-icon/no-user-image-icon-26.jpg'
 
-function Profile({logout,user,reload}) {
+function Profile({logout,user,reload, setChange, setUser}) {
 
     const navigate = useNavigate()
     const name = user.firstname + ' ' + user.lastname
     const inputEl = useRef()
+
+    useEffect(()=>{
+        
+    },[])
 
     const updateProfile = async(e) => {
         try {
@@ -23,20 +27,32 @@ function Profile({logout,user,reload}) {
               formData.append('shopImg', e.target.files[0])
   
               await axios.put('/shop/profile', formData)
-            return reload()
-  
-        } catch (error) {
-            console.error(error)
+              setChange(prev=>!prev)
+              //   window.location.reload()
+            
+              
+            } catch (error) {
+                console.error(error)
+            }
         }
-      }
-
-      const offline = async(e) => {
-        try {
-            e.preventDefault()
-            const check = window.confirm('CLOSE ??')
-            if(!check) return;
-            await axios.put('/shop/off')
-            reload()
+        
+        const offline = async(e) => {
+            try {
+                e.preventDefault()
+                const check = window.confirm('CLOSE ??')
+                if(!check) return;
+                await axios.put('/shop/off');
+                await reload();
+                return navigate('/home')
+                // setUser(result.data.data)
+                // const result = await axios.get('/user')   
+                // setUser({...result.data})
+                // setChange(prev=>!prev)
+            // console.log(result.data.data);
+            //  console.log("userdata offline:", user);
+            // setChange(prev=>!prev)
+            // window.location.reload()
+            // return reload()
         } catch (error) {
             console.error(error)
         }
@@ -47,9 +63,14 @@ function Profile({logout,user,reload}) {
             e.preventDefault()
             const check = window.confirm('OPEN ??')
             if(!check) return;
-            await axios.put('/shop/on')
-            reload()
-            
+           await axios.put('/shop/on')
+           await reload()
+           return navigate('/home')
+        //    setUser(result.data.data)
+        // console.log(result.data.data);
+            // const result = await axios.get('/user');   
+            // setUser({...result.data})
+            //  console.log("userdata online:", user);
         } catch (error) {
             console.error(error)
         }
