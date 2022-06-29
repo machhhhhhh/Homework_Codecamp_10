@@ -34,6 +34,7 @@ const historyShopRoute = require('./routes/historyShopRoute')
 const invoiceRoute = require('./routes/invoiceRoute')
 const reportRoute = require('./routes/reportRoute')
 const reportPhotoRoute = require('./routes/reportPhotoRoute')
+const { findSourceMap } = require('module')
 
 //  actual routes
 route.use('/user', userRoute)
@@ -70,7 +71,7 @@ io.on('connection', (socket) => {
     // socket.join(data)
 
     socket.on('accept-order', data => {
-      // console.log('sdfdsfsdfdsfsdfsfdsdffsdsfd',data)
+      console.log('sdfdsfsdfdsfsdfsfdsdffsdsfd',data)
       // if (data.order.id === item.order_id) console.log('data is sameee');
       // else console.log('not same');
       // socket.to(data.order_id).emit('customer-decide', data)

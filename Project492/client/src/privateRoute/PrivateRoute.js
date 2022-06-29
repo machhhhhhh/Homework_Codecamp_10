@@ -65,6 +65,7 @@ function PrivateRoute(props) {
             //     navigate(location.pathname)
             // }
         // })
+        // console.log(user);
         
 
 

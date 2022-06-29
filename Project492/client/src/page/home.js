@@ -50,7 +50,7 @@ function Home({user,reload}) {
     // reload()
     socket.on('get-order', data => {
       // reload()
-      // console.log(data);
+      // console.log('socket',user);
               if(user.isShopOn ==='YES') { // can get order
                     return navigate('/shop-service-call', {state : {order : data.order}})
               }
