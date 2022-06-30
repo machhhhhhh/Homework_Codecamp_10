@@ -34,10 +34,15 @@ function Index({logout,user,reload}) {
       try {
 
         const result = await axios.get('/order/check')
-        const order = result.data
+        const order = result.data.order
+        const check = result.data.check
         // console.log(order);
 
+
         if(!order) return ;
+        if(check===false) {
+          return navigate('/customer-decide', {state : { order : order}})
+        }
 
         return navigate('/customer-show', {state : { order : order}})
       } catch (error) {
@@ -45,9 +50,9 @@ function Index({logout,user,reload}) {
       }
     }
 
-    // reload()
+    reload()
     // console.log(user);
-    checkOrder()
+    // checkOrder()
 
     checkOrderFinish()
 

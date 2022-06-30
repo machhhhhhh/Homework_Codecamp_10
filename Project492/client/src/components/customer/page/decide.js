@@ -24,6 +24,7 @@ function Decide() {
         try {
             e.preventDefault()
             await socket.emit('customer-select', {order_id : order.id ,select : true})
+            await axios.put(`/order/choose/${order.id}`)
 
             return navigate('/customer-show', {state : { order : order}})
 

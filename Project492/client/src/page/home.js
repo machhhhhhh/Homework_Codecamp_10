@@ -29,6 +29,12 @@ function Home({user,reload,check}) {
         const order = result.data
         // console.log(order);
         if(!order) return ;
+
+        const check = result.data.check
+        if(check === false) {
+          return navigate('/shop-waiting', {state : { order : order}})
+        }
+
         return navigate('/shop-show', {state : { order : order}})
         
       } catch (error) {

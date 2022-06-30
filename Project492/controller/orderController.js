@@ -26,11 +26,14 @@ const checkFinish = async(req,res,next) => {
                         model : Ophoto
                     }
                 ]
-            })
+            }) 
 
             if(!order) return res.status(200).send(null)
 
-            return res.status(200).send(order)
+            if(order.isChoose ==='NO') return res.status(200).send({check : false, order}) // waiting for decide
+            if(order.isFinish ==='NO') return res.status(200).send({check :true, order}) // show
+
+            return res.status(200).send(null)
 
         }
         
@@ -55,7 +58,11 @@ const checkFinish = async(req,res,next) => {
 
         if(!order) return res.status(200).send(null)
 
-        return res.status(200).send(order)
+        if(order.ShopId == null) return res.status(200).send(null) // waiting
+        if(order.isChoose === 'NO') return res.status(200).send({check : false, order}) // decide
+        if(order.isFinish === 'NO') return res.status(200).send({check : true, order}) // show
+
+        return res.status(200).send(null)
 
     } catch (error) {
         next(error)
@@ -412,6 +419,36 @@ const cancelOrder = async (req,res,next) => {
     }
 }
 
+const choose = async(req,res,next) => {
+    try {
+
+        const {id} = req.params // order_id
+        const shop = await Shop.findOne({where : {username : req.user.username}})
+        if(shop) return res.status(404).send({message : 'shop cannot choose shop'})
+
+        const customer = await Customer.findOne({where : {username : req.user.username}})
+        if(!customer) return res.status(404).send({message : 'customer not found'})
+
+        const order = await Order.findOne({
+            where : {
+                id : id,
+                CustomerId : customer.id
+            }
+        })
+
+        if(!order) return res.status(404).send({message : 'order not found'})
+
+        await order.update({
+            isChoose : 'YES'
+        })
+
+        return res.status(200).send(order)
+        
+    } catch (error) {
+        next(error)
+    }
+}
+
 module.exports = {
     getAllOrder,
     getOrderOfCustomer,
@@ -419,5 +456,6 @@ module.exports = {
     acceptOrder,
     cancelOrder,
     getOneOrder,
-    checkFinish
+    checkFinish,
+    choose
 }

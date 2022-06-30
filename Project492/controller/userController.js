@@ -1,4 +1,4 @@
-const {Customer, Shop} = require('../models')
+const {Customer, Shop,Order,Ophoto} = require('../models')
 const bcryptjs = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const storage = require('node-sessionstorage')
@@ -75,7 +75,97 @@ const userLogin = async(req,res,next) => {
     }
 }
 
+const checkFinish = async(req,res,next) => {
+    try {
+
+        const customer = await Customer.findOne({where : {username : req.user.username}})
+        if(!customer){
+            const shop = await Shop.findOne({where : {username : req.user.username}})
+            if(!shop) return res.status(404).send({message : 'user not found'})
+
+            const order = await Order.findOne({
+                where : {
+                    isFinish : 'NO',
+                    ShopId : shop.id
+                },
+                include : [
+                    {
+                        model : Customer
+                    },
+                    {
+                        model : Shop
+                    },
+                    {
+                        model : Ophoto
+                    }
+                ]
+            })
+
+            if(!order) return res.status(200).send(null)
+
+            return res.status(200).send(order)
+
+        }
+        
+
+        const order = await Order.findOne({
+            where : {
+                CustomerId : customer.id,
+                isFinish : 'NO'
+            },
+            include : [
+                {
+                    model : Customer
+                },
+                {
+                    model : Shop
+                },
+                {
+                    model : Ophoto
+                }
+            ]
+        })
+
+        if(!order) return res.status(200).send(null)
+
+        return res.status(200).send(order)
+
+    } catch (error) {
+        next(error)
+    }
+}
+
+const choose = async(req,res,next) => {
+    try {
+
+        const {id} = req.params // order_id
+        const shop = await Shop.findOne({where : {username : req.user.username}})
+        if(shop) return res.status(404).send({message : 'shop cannot choose shop'})
+
+        const customer = await Customer.findOne({where : {username : req.user.username}})
+        if(!customer) return res.status(404).send({message : 'customer not found'})
+
+        const order = await Order.findOne({
+            where : {
+                id : id,
+                CustomerId : customer.id
+            }
+        })
+
+        if(!order) return res.status(404).send({message : 'order not found'})
+
+        await order.update({
+            isChoose : 'YES'
+        })
+        
+    } catch (error) {
+        next(error)
+    }
+}
+
 module.exports = {
     getUser,
-    userLogin
+    userLogin,
+    checkFinish,
+    choose
 }
