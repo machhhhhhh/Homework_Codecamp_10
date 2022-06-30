@@ -12,9 +12,11 @@ const socket = io.connect('http://localhost:5000', {
     "my-custom-header": "abcd"
     }})
 
-function Home({user,reload}) {
+function Home({user,reload,check}) {
 
   const navigate = useNavigate()
+
+  const [holdOrder, setHold] = useState(null)
   
 
 
@@ -38,9 +40,11 @@ function Home({user,reload}) {
     // console.log(token);
 
     // if(!user) reload()
-    // reload()
-    // checkOrderFinish()
+    reload()
+    // window.location.reload()
+    checkOrderFinish()
     // console.log('home',user);
+
   },[])
 
   useEffect(()=>{
@@ -48,16 +52,34 @@ function Home({user,reload}) {
     // reload()
     // console.log(user);
     // reload()
-    socket.on('get-order', data => {
-      // reload()
-      // console.log('socket',user);
-              if(user.isShopOn ==='YES') { // can get order
-                    return navigate('/shop-service-call', {state : {order : data.order}})
-              }
-              else return;
-            })
+      
+      socket.on('get-order', data => {
+        // reload()
+        // console.log('socket',user);
+        // console.log(data);
+              // if(check === true) return ;
+                if( user.isShopOn ==='YES') { // can get order
+                  socket.disconnect()
+                  goToServiceCall(data.order)
+                  // console.log('test test test ttttt');
+                      
+                }
+                else return;
+      })
   },[socket])
   
+  const goToServiceCall = (data) => {
+    try {
+
+      if(holdOrder===null) setHold(data.id)
+      else if(data.id !== holdOrder) return;
+      return navigate('/shop-service-call', {state : {order : data}})
+
+
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
 
   const getStart = async(e) => {

@@ -216,6 +216,8 @@ const getOrderOfCustomer = async (req,res,next) => {
             ]
         })
 
+        // return res.status(200).send(order)
+
         if(!order) return res.status(200).send({check : false , message : 'No Have Order now..'})
 
         if(order && !order.ShopId) return res.status(200).send({check : true ,message : 'waiting for shop to accept the order', order})
@@ -248,7 +250,7 @@ const addOrder = async (req,res,next) => {
             }
         })
 
-        // if(isOrder) return res.status(400).send({message : 'cannot create the second order'})
+        if(isOrder) return res.status(400).send({message : 'cannot create the second order'})
 
         const newOrder = await Order.create({
             problem : req.body.problem,
@@ -258,6 +260,7 @@ const addOrder = async (req,res,next) => {
             latitude : req.body.latitude,
             longitude : req.body.longitude,
             CustomerId : req.user.id,
+            isChoose : "NO",
             isFinish : 'NO'
         })
 
@@ -301,7 +304,7 @@ const acceptOrder = async (req,res,next) => {
         if(shop.isShopOn === "NO") return res.status(400).send({message : "Please Open Shop"})
 
         
-        if(order.ShopId) return res.status(400).send({message : 'This Order already taken'})
+        if(order.ShopId) return res.status(200).send({message : 'taken'})
 
 
         await order.update({

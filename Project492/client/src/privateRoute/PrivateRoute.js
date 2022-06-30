@@ -23,16 +23,26 @@ import ShopHistory from '../components/shop/history'
 import ShopProfile from '../components/shop/profile'
 import ShopHistoryDetail from '../components/shop/historyDetail'
 import ShopServiceCall from '../components/shop/serviceCall'
-import ShopConfirm from '../components/shop/confirm'
+// import ShopConfirm from '../components/shop/confirm'
 import ShopWaiting from '../components/shop/waiting'
 import ShopShow from '../components/shop/show'
 
-function PrivateRoute(props) {
+function PrivateRoute() {
+
+    const shopRoutes = [
+        '/home',
+        '/shop-profile',
+        '/shop-history',
+        '/shop-history-detail',
+        '/shop-service-call',
+        '/shop-waiting',
+        '/shop-show'
+]
 
     // const role = props.role || 'guest' 
     const [role, setRole] = useState(LocalStorageService.getToken() ? null : 'guest' )
     const [user, setUser] = useState(null)
-    const [change, setChange] = useState(false)
+    const [isHaveOrder, setCheck] = useState(false)
 
     const navigate = useNavigate()
     const location = useLocation()
@@ -55,15 +65,18 @@ function PrivateRoute(props) {
             if(role === 'customer') {
                 navigate('/index')
             }
-            if(role==='shop') navigate('/home')
+            // if(role==='shop') navigate('/home')
             // if(role === 'shop' &&  location.pathname ==='/login' ) {
             //     navigate('/home')
             // }
+
             
-            // if(role === 'shop' && location.pathname ==='/shop-profile' || location.pathname ==='/home'){
+            // if(role === 'shop' && shopRoutes.includes(location.pathname)){
                 
             //     navigate(location.pathname)
             // }
+
+            if (role==='shop') navigate('/home')
         // })
         // console.log(user);
         
@@ -89,6 +102,9 @@ function PrivateRoute(props) {
     }
 
 
+    const setOrder = (content) => {
+        setCheck(content)
+    }
 
 
     const logout = async() => {
@@ -104,7 +120,7 @@ function PrivateRoute(props) {
 
         {role==='guest' && (
             <>
-                <Route path='/login' element={<Login reload = {fetchUser}  /> }  exact />
+                <Route path='/login' element={<Login reload = {fetchUser} setRole ={setRole}  /> }  exact />
                 <Route path='/register' element={<Register/>}  exact/>
                 
             </>
@@ -120,7 +136,7 @@ function PrivateRoute(props) {
                 <Route path='/customer-invoice' element={<CustomerInvoice  />} exact/>
 
                 <Route path='/customer-map' element={<CustomerMap  />} exact/>
-                <Route path='/order' element={<CustomerOrder change = { change}  chang reload = {fetchUser} />} exact/>
+                <Route path='/order' element={<CustomerOrder reload = {fetchUser} />} exact/>
                 <Route path='/order-waiting' element={<CustomerOrderWaiting  />} exact/>
                 <Route path='/customer-decide' element={<CustomerDecide  />} exact/>
                 <Route path='/customer-show' element={<CustomerShow  />} exact/>
@@ -130,13 +146,13 @@ function PrivateRoute(props) {
 
         {role ==='shop' && (
             <>
-                <Route path='/home' element={<Home user = {user} reload={fetchUser}/>} exact />
-                <Route path='/shop-profile' element={<ShopProfile logout = {logout} user = {user} reload = {fetchUser} setChange = { setChange}  setUser={setUser}/>} exact />
+                <Route path='/home' element={<Home user = {user} reload={fetchUser} check={isHaveOrder} />} exact />
+                <Route path='/shop-profile' element={<ShopProfile logout = {logout} user = {user} reload = {fetchUser} />} exact />
                 <Route path='/shop-history' element={<ShopHistory  />} exact />
                 <Route path='/shop-history-detail' element={<ShopHistoryDetail  />} exact />
                 
-                <Route path='/shop-service-call' element={<ShopServiceCall  />} exact />
-                <Route path='/shop-confirm' element={<ShopConfirm  />} exact />
+                <Route path='/shop-service-call' element={<ShopServiceCall setCheck = {setOrder}  />} exact />
+                {/* <Route path='/shop-confirm' element={<ShopConfirm  setCheck = {setOrder} />} exact /> */}
                 <Route path='/shop-waiting' element={<ShopWaiting  />} exact />
                 <Route path='/shop-show' element={<ShopShow  />} exact />
             </>

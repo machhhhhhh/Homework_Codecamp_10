@@ -61,7 +61,10 @@ function Order({reload, change}) {
                 order : result.data
             }
 
+            await socket.emit('matching-user' ,result.data.id)
             await socket.emit('send-order', data)
+
+
 
             // const formData = new FormData()
 

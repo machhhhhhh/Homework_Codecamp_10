@@ -5,7 +5,7 @@ import axios from '../config/axios'
 import LocalStorageService from '../service/LocalStorageService'
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
-function Login({reload}) {
+function Login({reload,setRole}) {
 
 
   const navigate = useNavigate()
@@ -45,6 +45,8 @@ function Login({reload}) {
       // console.log(result.data)
       
       LocalStorageService.setToken(result.data.token)
+      
+      setRole(result.data.message)
       
       setPassword('')
       setUsername('')

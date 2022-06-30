@@ -15,9 +15,9 @@ function Profile({logout,user,reload, setChange, setUser}) {
     const name = user.firstname + ' ' + user.lastname
     const inputEl = useRef()
 
-    useEffect(()=>{
-        console.log(user);
-    },[])
+    // useEffect(()=>{
+    //     console.log(user);
+    // },[])
 
     const updateProfile = async(e) => {
         try {
@@ -27,8 +27,10 @@ function Profile({logout,user,reload, setChange, setUser}) {
               formData.append('shopImg', e.target.files[0])
   
               await axios.put('/shop/profile', formData)
-              setChange(prev=>!prev)
+            //   setChange(prev=>!prev)
               //   window.location.reload()
+
+              reload()
             
               
             } catch (error) {

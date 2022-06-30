@@ -18,9 +18,13 @@ function Waiting() {
     useEffect(()=>{
 
           socket.on('customer-decide', data => {
-            console.log(data);
-            // if(data.id===order.id)
-              // return navigate('/customer-decide', {state : {order : order}})
+            console.log('data',data);
+            console.log('order',order);
+            // console.log('orderid',order.id);
+            if(data.order===order.id && data.accept === true)
+              return navigate('/customer-decide', {state : {order : order}})
+            // }
+              
           })
 
     },[socket])

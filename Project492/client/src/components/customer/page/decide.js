@@ -23,7 +23,7 @@ function Decide() {
     const yes = async(e) => {
         try {
             e.preventDefault()
-            socket.emit('customer-select', {select : true})
+            await socket.emit('customer-select', {order_id : order.id ,select : true})
 
             return navigate('/customer-show', {state : { order : order}})
 
@@ -36,10 +36,11 @@ function Decide() {
         try {
             e.preventDefault()
 
-            socket.emit('customer-select', {select : false})
-            navigate('/index')
-
-           return await axios.delete(`/order/${order.id}`)
+            await socket.emit('customer-select', {order_id : order.id ,select : false})
+            await axios.delete(`/order/${order.id}`)
+            // navigate('/index')
+            navigate('/index') // problem is here !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            // window.location.reload()
 
 
         } catch (error) {

@@ -45,11 +45,11 @@ function Index({logout,user,reload}) {
       }
     }
 
-    reload()
+    // reload()
     // console.log(user);
-    // checkOrder()
+    checkOrder()
 
-    // checkOrderFinish()
+    checkOrderFinish()
 
   },[])
 

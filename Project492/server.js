@@ -64,26 +64,50 @@ const io = new Server(server, {
 io.on('connection', (socket) => {
   // console.log('User + ' + socket.id);
 
-  socket.on('send-order', data => {
+  
+
+  socket.on('matching-user', data => {
+    // console.log(data);
+    // socket.join(data)
+    console.log('User : ' + socket.id + " Join : " + data );
+    // console.log(io.sockets.adapter.rooms[data.order_id]);
+    // console.log(io.in(data).allSockets());
+
+  })
+  
+  socket.on('send-order', data => { // customer send order
+    
 
     // console.log(data); // data.order.id
+    // socket.join(data.order.id)
     socket.broadcast.emit('get-order', data)
     // socket.join(data)
 
-    socket.on('accept-order', data => {
-      console.log('sdfdsfsdfdsfsdfsfdsdffsdsfd',data)
-      // if (data.order.id === item.order_id) console.log('data is sameee');
-      // else console.log('not same');
-      // socket.to(data.order_id).emit('customer-decide', data)
-  
-      // if(data.accept) socket.broadcast.emit('customer-decide', data)
-      // if(data) 
-      socket.broadcast.emit('customer-decide', {order : data})
-    })
+    
 
   })
 
-  
+
+  socket.on('accept-order', data => { // shop accept order
+
+    // console.log('sdfdsfsdfdsfsdfsfdsdffsdsfd',data)
+    // socket.join(data.order_id)
+    // console.log(io.in(data.order_id).allSockets());
+    // console.log(io.in());
+    // console.log(data);
+    // if (data.order.id === item.order_id) console.log('data is sameee');
+    // else console.log('not same');
+    // socket.to(data).emit('customer-decide', {order_id : data, accept : true})
+
+    // if(data.accept) socket.broadcast.emit('customer-decide', data)
+    // if(data) 
+    socket.broadcast.emit('customer-decide', {order : data, accept : true})
+    // try {
+      // socket.broadcast.to(data.order_id).emit('customer-decide', data)
+    // } catch (err) {
+    //   console.error(err)
+    // }
+  })
 
   socket.on('customer-select', data => {
       // console.log(data);

@@ -15,12 +15,19 @@ module.exports = (sequelize, DataTypes) => {
        },
        description : {
            type : DataTypes.STRING(255)
-       },
-       latitude : {
-           type : DataTypes.INTEGER(255)
-       },
-       longitude : {
-           type : DataTypes.INTEGER(255)
+        },
+        latitude : {
+            type : DataTypes.INTEGER(255)
+        },
+        longitude : {
+            type : DataTypes.INTEGER(255)
+        },
+       isChoose : {
+        type : DataTypes.STRING(255),
+           defaultValue : 'NO',
+            validate : {
+                isIn : [['YES', 'NO']]
+            }
        },
        isFinish : {
         type : DataTypes.STRING(255),
@@ -28,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
             validate : {
                 isIn : [['YES', 'NO']]
             }
-       }
+       },
 
     }, {
         tableName : 'Order',
