@@ -1,14 +1,7 @@
 import React, { useEffect } from 'react'
 import {useNavigate, useLocation} from 'react-router-dom'
-import io from 'socket.io-client'
 import axios from '../../../config/axios'
-
-const socket = io.connect('http://localhost:5000', {
-    transports : ['websocket'], 
-    withCredentials: true,
-    extraHeaders: {
-    "my-custom-header": "abcd"
-    }})
+import socket from '../../../config/socket'
 
 function Decide() {
 
@@ -40,7 +33,7 @@ function Decide() {
             await socket.emit('customer-select', {order_id : order.id ,select : false})
             await axios.delete(`/order/${order.id}`)
             // navigate('/index')
-            navigate('/index') // problem is here !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            return navigate('/') // problem is here !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             // window.location.reload()
 
 

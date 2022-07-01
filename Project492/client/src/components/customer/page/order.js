@@ -5,14 +5,7 @@ import Header from '../components/Header'
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import axios from '../../../config/axios'
-import io from 'socket.io-client'
-
-const socket = io.connect('http://localhost:5000', {
-    transports : ['websocket'], 
-    withCredentials: true,
-    extraHeaders: {
-    "my-custom-header": "abcd"
-    }})
+import socket from '../../../config/socket'
 
 function Order({reload, change}) {
 

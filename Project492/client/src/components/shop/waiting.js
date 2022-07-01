@@ -1,17 +1,10 @@
 import React, { useEffect } from 'react'
 import {useNavigate, useLocation} from 'react-router-dom'
-import io from 'socket.io-client'
 import Header from '../customer/components/Header'
 // import axios from '../../config/axios'
 // import jwtDecode from 'jwt-decode'
 import LocalStorageService from '../../service/LocalStorageService'
-
-const socket = io.connect('http://localhost:5000', {
-    transports : ['websocket'], 
-    withCredentials: true,
-    extraHeaders: {
-    "my-custom-header": "abcd"
-    }})
+import socket from '../../config/socket'
 
 function Waiting() {
 

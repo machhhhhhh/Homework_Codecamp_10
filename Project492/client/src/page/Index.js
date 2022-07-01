@@ -4,7 +4,7 @@ import '../components/css/customer/index.css'
 import {useNavigate} from 'react-router-dom'
 import  axios  from '../config/axios'
 
-function Index({logout,user,reload}) {
+function Index({user,reload}) {
 
   const navigate = useNavigate()
 
@@ -52,7 +52,7 @@ function Index({logout,user,reload}) {
 
     reload()
     // console.log(user);
-    // checkOrder()
+    checkOrder()
 
     checkOrderFinish()
 

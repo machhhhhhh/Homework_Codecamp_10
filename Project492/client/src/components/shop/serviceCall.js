@@ -2,25 +2,26 @@ import React, { useEffect,useState } from 'react'
 import {useNavigate, useLocation} from 'react-router-dom'
 import Header from '../customer/components/Header'
 import axios from '../../config/axios'
-import io from 'socket.io-client'
+import socket from '../../config/socket'
 
-const socket = io.connect('http://localhost:5000', {
-    transports : ['websocket'], 
-    withCredentials: true,
-    extraHeaders: {
-    "my-custom-header": "abcd"
-    }})
 export default function ServiceCall({setCheck}) {
 
     const navigate = useNavigate()
     const location = useLocation()
     const order = location.state.order
     const [show, setShow] = useState(false)
+    const [press, setPress] = useState(false)
 
     useEffect(()=>{
       // console.log(order);
       // setCheck(true)
-    },[])
+
+      // reconnect socket
+      socket.connect()
+
+    },[press])
+
+
     const accept = async(e)=>{
       try {
           e.preventDefault()
@@ -42,33 +43,39 @@ export default function ServiceCall({setCheck}) {
               accept : true
           }
           setCheck(false)
-
-        //   console.log(order);
-
+          setPress(prev=>!prev)
+          
+          //   console.log(order);
+          
           await socket.emit('matching-user', order.id)
           await socket.emit('accept-order', order.id)
 
           return navigate('/shop-waiting', {state : {order : order}})
-
-      } catch (error) {
-          console.error(error)
-      }
-  }
-
-
-  const reject = async(e)=>{
-      try {
+          
+        } catch (error) {
+            console.error(error)
+        }
+    }
+    
+    
+    const reject = async(e)=>{
+        try {
           e.preventDefault()
           const check  = window.confirm('Reject ?!!')
           if(!check){
               
               return ;
-          }
-          setCheck(false)
-          const data = {
-              order_id : order.id,
-              accept : false
-          }
+            }
+
+            setCheck(false)
+            const data = {
+                order_id : order.id,
+                accept : false
+            }
+            
+            setPress(prev=>!prev)
+
+            
 
           await socket.emit('accept-order', data)
 

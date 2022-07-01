@@ -1,16 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import '../components/css/shop/home.css'
-import io from 'socket.io-client'
 import axios from '../config/axios'
-import LocalStorageService from '../service/LocalStorageService'
-
-const socket = io.connect('http://localhost:5000', {
-    transports : ['websocket'], 
-    withCredentials: true,
-    extraHeaders: {
-    "my-custom-header": "abcd"
-    }})
+import socket from '../config/socket'
 
 function Home({user,reload,check}) {
 
@@ -50,6 +42,9 @@ function Home({user,reload,check}) {
     // window.location.reload()
     checkOrderFinish()
     // console.log('home',user);
+
+
+    // reconnecttion socket
 
   },[])
 

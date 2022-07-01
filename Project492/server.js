@@ -94,7 +94,7 @@ io.on('connection', (socket) => {
     // socket.join(data.order_id)
     // console.log(io.in(data.order_id).allSockets());
     // console.log(io.in());
-    // console.log(data);
+    console.log(data);
     // if (data.order.id === item.order_id) console.log('data is sameee');
     // else console.log('not same');
     // socket.to(data).emit('customer-decide', {order_id : data, accept : true})
