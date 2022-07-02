@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import {useNavigate, useLocation} from 'react-router-dom'
 import socket from '../../../config/socket'
 import Header from '../components/Header'
+import '../../css/customer/waiting.css'
 
 function Waiting() {
 
@@ -16,8 +17,8 @@ function Waiting() {
             // console.log('data',data);
             // console.log('order',order);
             // console.log('orderid',order.id);
-            if(data.order===order.id && data.accept === true)
-              return navigate('/customer-decide', {state : {order : order}})
+            if(data.order.id===order.id && data.accept === true)
+              return navigate('/customer-decide', {state : {order : data.order}})
             // }
             else return;
               
@@ -42,10 +43,19 @@ function Waiting() {
     }
 
   return (
-    <div>
+    <div className='customer-waiting'>
       <Header />
-      <h1>Please wait a moment</h1>
-      <button onClick={(e) => cancel(e)}>CANCEL</button>
+      <div className='customer-waiting-content'>
+        <h1 className='customer-waiting-tag'>
+          Please wait <br></br>
+          a moment <br></br> 
+          the system's <br></br>
+          looking for <br></br>
+          a shop  <br></br>
+          in your area
+        </h1>
+        <button className='customer-waiting-button' onClick={(e) => cancel(e)}><strong>CANCEL</strong></button>
+      </div>
     </div>
   )
 }

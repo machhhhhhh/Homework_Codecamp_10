@@ -150,7 +150,7 @@ function PrivateRoute() {
 
         {role ==='shop' && (
             <>
-                <Route path='/home' element={<Home user = {user} reload={fetchUser}  holdOrder = {holdOrder} setHOld={setHold}/>} exact />
+                <Route path='/home' element={<Home user = {user} reload={fetchUser}  holdOrder = {holdOrder} setHold={setHold}/>} exact />
                 <Route path='/shop-profile' element={<ShopProfile logout = {logout} user = {user} reload = {fetchUser} />} exact />
                 <Route path='/shop-history' element={<ShopHistory  />} exact />
                 <Route path='/shop-history-detail' element={<ShopHistoryDetail  />} exact />

@@ -1,0 +1,130 @@
+.shop-service-noti {
+    background-color: darkviolet;
+    height: 100vh;
+    text-align: center;
+}
+
+.shop-service-noti-tag {
+    font-size: 3em;
+    padding-top: 100px;
+    color: gold;
+}
+
+.shop-service-noti-button {
+    margin-top: 50px;
+    border: none;
+    padding: 30px;
+    font-size: 2.5em;
+    cursor: pointer;
+    border-radius: 20px;
+    color: black;
+    background-color: yellow;
+}
+
+.shop-service-noti-button:hover{
+    background-color: black;
+    color: white;
+}
+
+.shop-service-call {
+    background: darkviolet;
+    height: auto;
+    padding-bottom: 30px;
+}
+
+.shop-order {
+    display: flex;
+    flex-direction: column;
+    padding-top: 30px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.shop-order-title {
+    display: flex;
+    margin-top: 30px;
+    background-color: white;
+    padding: 10px 20px;
+    border-radius: 15px;
+    justify-content: space-evenly;
+}
+
+.shop-order-title-problem{
+    margin-left: 7px;
+}
+
+
+.shop-order-description {
+    margin-top: 30px;
+    background-color: white;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 2em;
+    border-radius: 15px;
+}
+
+.shop-service-map {
+    margin-top: 30px;
+    border: none;
+    cursor: pointer;
+    font-size: 2em;
+    padding: 20px 20px;
+    margin-left: 100px;
+    margin-right: 100px;
+    border-radius: 20px;
+    background-color: blue;
+    color: white;
+}
+
+.shop-service-map:hover{
+    color: white;
+    background-color: black;
+}
+
+.shop-service-button {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+}
+
+.shop-service-button > button {
+    border: none;
+    padding: 15px 20px;
+    font-size: 1.6em;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.shop-service-button-accept {
+    background-color: rgb(50,250,0);
+    color: white;
+}
+.shop-service-button-reject {
+    background-color: red;
+    color: white;
+}
+
+.shop-service-button > button:hover{
+    background-color: black;
+}
+
+.shop-order-no-photo {
+    margin-top: 30px;
+    background-color: white;
+    padding: 15px 20px;
+    font-size: 1.6em;
+    text-align: center;
+}
+
+.shop-service-prevent {
+    height: 100vh;
+    background-color: darkviolet;
+}
+
+.shop-service-prevent-tag {
+    padding-top: 100px;
+    text-align: center;
+    font-size: 3em;
+    color: gold;
+    margin-bottom: 50px;
+}

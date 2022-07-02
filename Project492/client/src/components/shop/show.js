@@ -14,7 +14,7 @@ export default function Show() {
 
       console.log(order);
   
-    },[order])
+    },[])
 
   return (
     <div>Shop Show</div>

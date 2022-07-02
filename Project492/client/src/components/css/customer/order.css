@@ -19,6 +19,7 @@
     padding-bottom: 20px;
     margin-left: 20px;
     margin-right: 20px;
+    border-radius: 10px;
 }
 .customer-order-form-info-detail-title {
     font-size: 2em;
@@ -77,4 +78,17 @@
 }
 .customer-order-photo-icon:hover{
     color: black;
+}
+
+.customer-order-prevent {
+    height: 100vh;
+    background-color: darkviolet;
+}
+
+.customer-order-prevent-tag {
+    font-size: 2.5em;
+    color: wheat;
+    text-align: center;
+    margin-top: 100px;
+    margin-bottom: 70px;
 }

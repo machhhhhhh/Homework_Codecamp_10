@@ -1,0 +1,16 @@
+.shop-waiting { 
+    height: 100vh;
+    background-color: darkviolet;
+}
+
+.shop-waiting-title {
+    color: white;
+    font-size: 1.7em;
+    margin-top: 70px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.shop-waiting-content {
+    text-align: center;
+}

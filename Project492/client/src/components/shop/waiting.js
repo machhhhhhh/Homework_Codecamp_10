@@ -4,6 +4,7 @@ import Header from '../customer/components/Header'
 // import axios from '../../config/axios'
 // import jwtDecode from 'jwt-decode'
 import socket from '../../config/socket'
+import '../css/shop/waiting.css'
 
 function Waiting() {
 
@@ -33,9 +34,18 @@ function Waiting() {
     // },[])
 
   return (
-    <div>
+    <div className='shop-waiting'>
       <Header />
-      <h1>Please wait for customer confirmed</h1>
+      
+      <div className='shop-waiting-title'>
+        <h1 className='shop-waiting-content'>
+          Please <br></br>
+          wait for <br></br>
+          customer <br></br>
+          confirmed
+        </h1>
+      </div>
+
     </div>
   )
 }

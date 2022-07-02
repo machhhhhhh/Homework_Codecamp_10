@@ -2,6 +2,8 @@ import React, { useEffect } from 'react'
 import {useNavigate, useLocation} from 'react-router-dom'
 import axios from '../../../config/axios'
 import socket from '../../../config/socket'
+import '../../css/customer/decide.css'
+import Header from '../components/Header'
 
 function Decide() {
 
@@ -54,9 +56,18 @@ function Decide() {
 
   return (
     <div className='customer-decide'>
-        <h1>decide</h1>
-        <button type='submit' onClick={(e)=> yes(e)} >YES</button>
-        <button type='button' onClick={(e)=> no(e)} >NO</button>
+        <Header />
+        <h1 className='customer-decide-title'>
+            Would you like <br></br>
+            to accept <br></br>
+        </h1>
+        <h1 className='customer-decide-shop-name'>
+                {order.Shop.shopname}
+        </h1>
+        <div className='customer-decide-button'>
+            <button className='customer-decide-button-yes' type='submit' onClick={(e)=> yes(e)} ><strong>YES</strong></button>
+            <button className='customer-decide-button-no' type='button' onClick={(e)=> no(e)} ><strong>NO</strong></button>
+        </div>
     </div>
   )
 }

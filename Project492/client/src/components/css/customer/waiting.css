@@ -1,0 +1,32 @@
+.customer-waiting {
+    background-color: darkviolet;
+    height: 100vh;
+    /* display: f; */
+}
+
+.customer-waiting-tag {
+    font-size: 2.5em;
+    margin-top: 50px;
+    /* text-align: center; */
+    color: wheat;
+}
+.customer-waiting-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.customer-waiting-button {
+    margin-top: 50px;
+    border: none;
+    font-size: 2em;
+    padding: 20px;
+    border-radius: 20px;
+    background-color: red;
+    color: white;
+    cursor: pointer;
+}
+
+.customer-waiting-button:hover{
+    background-color: black;
+}
