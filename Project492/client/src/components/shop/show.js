@@ -8,6 +8,8 @@ export default function Show() {
     const location = useLocation()
     const order = location.state.order
 
+    // if finish setHold == null
+
     useEffect(()=>{
 
       console.log(order);

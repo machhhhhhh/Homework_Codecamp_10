@@ -2,14 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import '../components/css/shop/home.css'
 import axios from '../config/axios'
+import { WAITING_REQUEST, ACCEPT_REQUEST, HOLD_REQUEST } from '../config/data'
 import socket from '../config/socket'
 
-function Home({user,reload,check}) {
+function Home({user,reload,holdOrder, setHold}) {
 
   const navigate = useNavigate()
-
-  const [holdOrder, setHold] = useState(null)
-  
 
 
   useEffect(()=>{
@@ -27,12 +25,16 @@ function Home({user,reload,check}) {
           return navigate('/shop-waiting', {state : { order : order}})
         }
 
+        // setMode(ACCEPT_REQUEST)
+
         return navigate('/shop-show', {state : { order : order}})
         
       } catch (error) {
         console.error(error)
       }
     }
+
+    // setMode(WAITING_REQUEST)
 
     // const token = LocalStorageService.getToken()
     // console.log(token);
@@ -43,31 +45,40 @@ function Home({user,reload,check}) {
     checkOrderFinish()
     // console.log('home',user);
 
+    //----------- if have order setPress(false)
 
     // reconnecttion socket
+    console.log(user);
 
   },[])
 
-  useEffect(()=>{
+  
+    useEffect(()=>{
 
-    // reload()
-    // console.log(user);
-    // reload()
+      // reload()
+      // console.log(user);
+      // reload()
       
-      socket.on('get-order', data => {
-        // reload()
-        // console.log('socket',user);
-        // console.log(data);
-              // if(check === true) return ;
-                if( user.isShopOn ==='YES') { // can get order
-                  socket.disconnect()
-                  goToServiceCall(data.order)
-                  // console.log('test test test ttttt');
-                      
-                }
-                else return;
-      })
-  },[socket])
+
+        socket.on('get-order', data => {
+          // reload()
+          // console.log('socket',user);
+          // console.log(data);
+          // if (mode === WAITING_REQUEST) {
+                // if(check === true) return ;
+                    if( user.isShopOn ==='YES') { // can get order
+                      socket.disconnect()
+                      // setPress(false)
+                      // setMode(HOLD_REQUEST)
+                      goToServiceCall(data.order)
+                      // console.log('test test test ttttt');
+                          
+                    }
+                    else return;
+                // }
+          })
+        
+    },[socket])
   
   const goToServiceCall = (data) => {
     try {

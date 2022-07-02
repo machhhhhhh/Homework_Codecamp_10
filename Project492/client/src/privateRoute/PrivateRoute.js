@@ -27,6 +27,8 @@ import ShopServiceCall from '../components/shop/serviceCall'
 import ShopWaiting from '../components/shop/waiting'
 import ShopShow from '../components/shop/show'
 
+import {WAITING_REQUEST} from '../config/data'
+
 function PrivateRoute() {
 
     const shopRoutes = [
@@ -42,7 +44,9 @@ function PrivateRoute() {
     // const role = props.role || 'guest' 
     const [role, setRole] = useState(LocalStorageService.getToken() ? null : 'guest' )
     const [user, setUser] = useState(null)
-    const [isHaveOrder, setCheck] = useState(false)
+    // const [isHaveOrder, setCheck] = useState(null)
+    const [mode, setMode] = useState(WAITING_REQUEST)
+    const [holdOrder, setHold] = useState(null)
 
     const navigate = useNavigate()
     const location = useLocation()
@@ -102,9 +106,9 @@ function PrivateRoute() {
     }
 
 
-    const setOrder = (content) => {
-        setCheck(content)
-    }
+    // const setOrder = (content) => {
+    //     setCheck(content)
+    // }
 
 
     const logout = async() => {
@@ -136,7 +140,7 @@ function PrivateRoute() {
                 <Route path='/customer-invoice' element={<CustomerInvoice  />} exact/>
 
                 <Route path='/customer-map' element={<CustomerMap  />} exact/>
-                <Route path='/order' element={<CustomerOrder reload = {fetchUser} />} exact/>
+                <Route path='/order' element={<CustomerOrder />} exact/>
                 <Route path='/order-waiting' element={<CustomerOrderWaiting  />} exact/>
                 <Route path='/customer-decide' element={<CustomerDecide  />} exact/>
                 <Route path='/customer-show' element={<CustomerShow  />} exact/>
@@ -146,12 +150,12 @@ function PrivateRoute() {
 
         {role ==='shop' && (
             <>
-                <Route path='/home' element={<Home user = {user} reload={fetchUser} check={isHaveOrder} />} exact />
+                <Route path='/home' element={<Home user = {user} reload={fetchUser}  holdOrder = {holdOrder} setHOld={setHold}/>} exact />
                 <Route path='/shop-profile' element={<ShopProfile logout = {logout} user = {user} reload = {fetchUser} />} exact />
                 <Route path='/shop-history' element={<ShopHistory  />} exact />
                 <Route path='/shop-history-detail' element={<ShopHistoryDetail  />} exact />
                 
-                <Route path='/shop-service-call' element={<ShopServiceCall setCheck = {setOrder}  />} exact />
+                <Route path='/shop-service-call' element={<ShopServiceCall   setHold = {setHold}  />} exact />
                 {/* <Route path='/shop-confirm' element={<ShopConfirm  setCheck = {setOrder} />} exact /> */}
                 <Route path='/shop-waiting' element={<ShopWaiting  />} exact />
                 <Route path='/shop-show' element={<ShopShow  />} exact />

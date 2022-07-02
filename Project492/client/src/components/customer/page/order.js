@@ -7,7 +7,7 @@ import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import axios from '../../../config/axios'
 import socket from '../../../config/socket'
 
-function Order({reload, change}) {
+function Order() {
 
     const navigate = useNavigate()
     const inputEl = useRef()
@@ -18,14 +18,8 @@ function Order({reload, change}) {
     const [brand, setBrand] = useState('Honda')
     const [model, setModel] = useState('Wave')
     const [description, setDescription] = useState('')
-    const image = []
+    let image = []
 
-    useEffect(()=>{
-
-        setProblem(...problem)
-        // window.location.reload();
-
-    },[change])
 
     const search = async(e) => {
         try {

@@ -3,7 +3,6 @@ import {useNavigate, useLocation} from 'react-router-dom'
 import Header from '../customer/components/Header'
 // import axios from '../../config/axios'
 // import jwtDecode from 'jwt-decode'
-import LocalStorageService from '../../service/LocalStorageService'
 import socket from '../../config/socket'
 
 function Waiting() {
@@ -11,7 +10,6 @@ function Waiting() {
     const navigate = useNavigate()
     const location = useLocation()
     const order = location.state.order
-    const token = LocalStorageService.getToken()
     // const shopid = jwtDecode(token)
 
     // query one order where shop and accept
@@ -35,7 +33,10 @@ function Waiting() {
     // },[])
 
   return (
-    <div>Please wait for customer confirmed</div>
+    <div>
+      <Header />
+      <h1>Please wait for customer confirmed</h1>
+    </div>
   )
 }
 

@@ -61,8 +61,10 @@ const io = new Server(server, {
   }
 })
 
+// io.set("transports", ["websocket"])
+
 io.on('connection', (socket) => {
-  // console.log('User + ' + socket.id);
+  console.log('User + ' + socket.id + ' has connected');
 
   
 
@@ -94,7 +96,7 @@ io.on('connection', (socket) => {
     // socket.join(data.order_id)
     // console.log(io.in(data.order_id).allSockets());
     // console.log(io.in());
-    console.log(data);
+    // console.log(data);
     // if (data.order.id === item.order_id) console.log('data is sameee');
     // else console.log('not same');
     // socket.to(data).emit('customer-decide', {order_id : data, accept : true})
@@ -113,6 +115,10 @@ io.on('connection', (socket) => {
       // console.log(data);
       socket.broadcast.emit('show-order', data)
   })
+
+  // socket.emit('disconnect', ()=> {
+  //     console.log('User : ' + socket.id + ' has disconnected');
+  // })
 
 
 })

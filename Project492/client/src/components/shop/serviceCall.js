@@ -3,33 +3,31 @@ import {useNavigate, useLocation} from 'react-router-dom'
 import Header from '../customer/components/Header'
 import axios from '../../config/axios'
 import socket from '../../config/socket'
+import { ACCEPT_REQUEST, WAITING_REQUEST } from '../../config/data'
 
-export default function ServiceCall({setCheck}) {
+export default function ServiceCall({setHold}) {
 
     const navigate = useNavigate()
     const location = useLocation()
     const order = location.state.order
     const [show, setShow] = useState(false)
-    const [press, setPress] = useState(false)
+    // const [press, setPress] = useState(false)
 
-    useEffect(()=>{
-      // console.log(order);
-      // setCheck(true)
+    // useEffect(()=>{
+    //   // console.log(order);
+    //   // setCheck(true)
 
-      // reconnect socket
-      socket.connect()
+    //   // reconnect socket
+    //   // socket.io.reconnect()
 
-    },[press])
+    // },[press])
 
 
     const accept = async(e)=>{
       try {
           e.preventDefault()
           const check  = window.confirm('Accept ?!!')
-          if(!check){
-              
-              return ;
-          }
+          if(!check) return ;
 
           const result = await axios.put(`/order/${order.id}`)
         //   console.log(result);
@@ -42,8 +40,9 @@ export default function ServiceCall({setCheck}) {
               order_id : order.id,
               accept : true
           }
-          setCheck(false)
-          setPress(prev=>!prev)
+          // socket.reconnect()
+          socket.connect()
+          // setMode(ACCEPT_REQUEST)
           
           //   console.log(order);
           
@@ -62,19 +61,17 @@ export default function ServiceCall({setCheck}) {
         try {
           e.preventDefault()
           const check  = window.confirm('Reject ?!!')
-          if(!check){
-              
-              return ;
-            }
+          if(!check) return ;
 
-            setCheck(false)
             const data = {
                 order_id : order.id,
                 accept : false
             }
             
-            setPress(prev=>!prev)
+            socket.connect()
+            // setMode(WAITING_REQUEST)
 
+            setHold(null)
             
 
           await socket.emit('accept-order', data)
