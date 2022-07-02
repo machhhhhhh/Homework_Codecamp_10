@@ -50,8 +50,8 @@ function Index({user,reload}) {
       }
     }
 
-    reload()
-    // console.log(user);
+    // reload()
+    console.log(user);
     checkOrder()
 
     checkOrderFinish()

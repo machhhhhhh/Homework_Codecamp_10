@@ -59,16 +59,31 @@ function PrivateRoute() {
 
 
     useEffect(()=>{
+        if(role ==='customer') navigate('/index')
+        if(role ==='shop') navigate('/home')
+
+    },[user])
+
+
+    useEffect( ()=>{
 
         // console.log('check check');
+
+        
 
         if(role === 'guest') navigate('/login')
         // if(role!=='guest') fetchUser().then(()=>{
         //     console.log('user',user)
         // }).then(()=>{
-            if(role === 'customer') {
-                navigate('/index')
-            }
+
+        if(role!=='guest') {
+             fetchUser()
+        }
+
+            // if(role === 'customer') {
+            //     navigate('/index')
+            // }
+
             // if(role==='shop') navigate('/home')
             // if(role === 'shop' &&  location.pathname ==='/login' ) {
             //     navigate('/home')
@@ -80,7 +95,10 @@ function PrivateRoute() {
             //     navigate(location.pathname)
             // }
 
-            if (role==='shop') navigate('/home')
+            // if (role==='shop'){
+            //      navigate('/home')
+            // }
+
         // })
         // console.log(user);
         
@@ -124,7 +142,7 @@ function PrivateRoute() {
 
         {role==='guest' && (
             <>
-                <Route path='/login' element={<Login reload = {fetchUser} setRole ={setRole}  /> }  exact />
+                <Route path='/login' element={<Login   setRole ={setRole}   /> }  exact />
                 <Route path='/register' element={<Register/>}  exact/>
                 
             </>

@@ -40,7 +40,7 @@ function Home({user,reload,holdOrder, setHold}) {
     // console.log(token);
 
     // if(!user) reload()
-    reload()
+    // reload()
     // window.location.reload()
     checkOrderFinish()
     // console.log('home',user);
@@ -48,7 +48,8 @@ function Home({user,reload,holdOrder, setHold}) {
     //----------- if have order setPress(false)
 
     // reconnecttion socket
-    // console.log(user);
+    console.log(user);
+    if(!user) reload()
 
   },[])
 
