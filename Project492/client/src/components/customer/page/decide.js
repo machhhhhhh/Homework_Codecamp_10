@@ -18,8 +18,8 @@ function Decide() {
     const yes = async(e) => {
         try {
             e.preventDefault()
-            const check  = window.confirm('Confirm ?!!')
-             if(!check) return ;
+            // const check  = window.confirm('Confirm ?!!')
+            //  if(!check) return ;
 
             await socket.emit('customer-select', {order_id : order.id ,select : true})
             await axios.put(`/order/choose/${order.id}`)
@@ -35,8 +35,8 @@ function Decide() {
         try {
             e.preventDefault()
 
-            const check  = window.confirm('Sure ?!!')
-            if(!check) return ;
+            // const check  = window.confirm('Sure ?!!')
+            // if(!check) return ;
 
             await socket.emit('customer-select', {order_id : order.id ,select : false})
             await axios.delete(`/order/${order.id}`)

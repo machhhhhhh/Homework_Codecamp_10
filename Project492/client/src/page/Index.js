@@ -51,7 +51,7 @@ function Index({user,reload}) {
     }
 
     // reload()
-    console.log(user);
+    // console.log(user);
     checkOrder()
 
     checkOrderFinish()

@@ -48,8 +48,8 @@ function Home({user,reload,holdOrder, setHold}) {
     //----------- if have order setPress(false)
 
     // reconnecttion socket
-    console.log(user);
-    if(!user) reload()
+    // console.log(user);
+    // if(!user) reload()
 
   },[])
 

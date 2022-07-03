@@ -1,5 +1,5 @@
 import axios from '../../../config/axios'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import {useNavigate, useLocation} from 'react-router-dom'
 import socket from '../../../config/socket'
 import Header from '../components/Header'
@@ -10,6 +10,7 @@ function Waiting() {
     const location = useLocation()
     const navigate = useNavigate()
     const order = location.state.order
+    const [press, setPress] = useState(false)
 
     useEffect(()=>{
 
@@ -26,11 +27,21 @@ function Waiting() {
 
     },[socket])
 
+    const preventCancel = async(e) => {
+      try {
+        e.preventDefault()
+        setPress(true)
+        
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
     const cancel = async(e) => {
       try {
         e.preventDefault()
-        const check = window.confirm('CANCEL ?')
-        if(!check) return;
+        // const check = window.confirm('CANCEL ?')
+        // if(!check) return;
 
         await axios.delete(`/order/${order.id}`)
         
@@ -42,9 +53,17 @@ function Waiting() {
       }
     }
 
-  return (
-    <div className='customer-waiting'>
-      <Header />
+    const back = async(e) => {
+      try {
+        e.preventDefault()
+        setPress(false)
+        
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    let content = (
       <div className='customer-waiting-content'>
         <h1 className='customer-waiting-tag'>
           Please wait <br></br>
@@ -54,8 +73,28 @@ function Waiting() {
           a shop  <br></br>
           in your area
         </h1>
-        <button className='customer-waiting-button' onClick={(e) => cancel(e)}><strong>CANCEL</strong></button>
+        <button className='customer-waiting-button' type='button' onClick={(e) => preventCancel(e)}><strong>CANCEL</strong></button>
       </div>
+    )
+
+    if(press) { 
+      content = (
+        <>
+        <h1 className='customer-waiting-cancel-title'>Do you sure <br></br> to cancel order</h1>
+        <div className='customer-waiting-cancel-button'>
+            <button className='customer-waiting-cancel-yes' onClick={e=>cancel(e)} type='submit'><strong>YES</strong></button>
+            <button className='customer-waiting-cancel-no' onClick={e=>back(e)} type='button'><strong>NO</strong></button>
+        </div>
+        </>
+      )
+    }
+
+
+
+  return (
+    <div className='customer-waiting'>
+      <Header />
+      {content}
     </div>
   )
 }

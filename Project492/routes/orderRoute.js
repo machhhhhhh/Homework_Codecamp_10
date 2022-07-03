@@ -10,6 +10,7 @@ route.get('/:id', authenticate, orderController.getOneOrder)
 route.post('/',authenticate,orderController.addOrder)
 route.put('/:id', authenticate, orderController.acceptOrder)
 route.put('/choose/:id', authenticate, orderController.choose)
+route.put('/finish/:id', authenticate, orderController.finishOrder)
 route.delete('/:id', authenticate, orderController.cancelOrder)
 
 // route.get('/customer',authenticate, orderController.getOrderOfCustomer)

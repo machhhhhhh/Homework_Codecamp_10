@@ -5,6 +5,22 @@ const cloundinary = require('cloudinary').v2
 const fs = require('fs')
 const stoage = require('node-sessionstorage')
 
+
+const getOnlineShop = async(req,res,next) => {
+    try {
+        const shop = await Shop.findAll({
+            where : {
+                isShopOn : 'YES'
+            }
+        })
+
+        return res.status(200).send(shop)
+        
+    } catch (error) {
+        next(error)
+    }
+}
+
 const getUser = async(req,res,next) => {
     try {
         const shop = await Shop.findOne({
@@ -148,5 +164,6 @@ module.exports = {
     shopRegister,
     updateProfile,
     turnOff,
-    turnOn
+    turnOn,
+    getOnlineShop
 }

@@ -1,6 +1,7 @@
 const {Order,Customer,Shop, Ophoto} = require('../models')
 const {Op} = require('sequelize')
 const axios = require('../config/axios/axios')
+const { Router } = require('express')
 
 const checkFinish = async(req,res,next) => {
     try {
@@ -449,6 +450,39 @@ const choose = async(req,res,next) => {
     }
 }
 
+const finishOrder = async(req,res,next) => {
+    try {
+
+        const { id } = req.params
+
+        const customer = await Customer.findOne({where : {username : req.user.username}})
+        if(customer) return res.status(400).send({message : 'customer cannot make order finish'})
+
+        const shop = await Shop.findOne({where : {username : req.user.username}})
+        if(!shop) return res.status(404).send({message : 'shop not found'})
+
+        const order = await Order.findOne({
+            where : {
+                id : id,
+                ShopId : shop.id
+            }
+        })
+
+        if(!order) return res.status(404).send({message : 'order not found'})
+
+        const data = await order.update({
+            isFinish : "YES"
+        })
+
+        if(!data) return res.status(400).send({message : 'cannot finish order'})
+
+        return res.status(200).send(data)
+        
+    } catch (error) {
+        next(error)
+    }
+}
+
 module.exports = {
     getAllOrder,
     getOrderOfCustomer,
@@ -457,5 +491,6 @@ module.exports = {
     cancelOrder,
     getOneOrder,
     checkFinish,
-    choose
+    choose,
+    finishOrder
 }

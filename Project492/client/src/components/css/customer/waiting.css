@@ -30,3 +30,36 @@
 .customer-waiting-button:hover{
     background-color: black;
 }
+
+.customer-waiting-cancel-title {
+    margin-top: 70px;
+    text-align: center;
+    font-size: 2.5em;
+    color: gold;
+}
+
+.customer-waiting-cancel-button {
+    margin-top: 70px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.customer-waiting-cancel-button > button {
+    cursor: pointer;
+    border: none;
+    padding:  30px;
+    font-size: 1.8em;
+    border-radius: 20px;
+    color: white;
+}
+
+.customer-waiting-cancel-button > button:hover {
+    background-color: black;
+}
+
+.customer-waiting-cancel-yes {
+    background-color: rgb(50,250,0);
+}
+.customer-waiting-cancel-no {
+    background-color: red;
+}
