@@ -1,12 +1,26 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {useNavigate} from 'react-router-dom'
 import '../../css/customer/map.css'
 import Header from '../components/Header'
-
+import axios from '../../../config/axios'
 
 function Map() {
 
     const navigate = useNavigate()
+
+    useEffect(()=>{
+        const fetchOnlineShop = async() => {
+            try {
+                const result = await axios.get('/shop')
+                console.log(result.data);
+            } catch (error) {
+                console.error(error)
+            }
+        }
+
+        fetchOnlineShop()
+
+    },[])
 
     const back = async(e) => {
         try {

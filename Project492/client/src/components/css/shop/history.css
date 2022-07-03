@@ -1,6 +1,7 @@
 .shop-history {
     background-color: darkviolet;
     height: auto;
+    padding-bottom: 50px;
 }
 
 .shop-history-title {
@@ -20,4 +21,19 @@
 
 .shop-history-header-delete:hover{
     color: black;
+}
+
+.customer-history-back-button{
+    margin-top: 400px;
+    border: none;
+    padding: 30px;
+    font-size: 1.6em;
+    border-radius: 20px;
+    background-color: rgb(50,250,0);
+    color: white;
+    cursor: pointer;
+}
+
+.customer-history-back-button:hover {
+    background-color: black;
 }

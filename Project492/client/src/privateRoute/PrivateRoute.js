@@ -36,10 +36,20 @@ function PrivateRoute() {
         '/shop-profile',
         '/shop-history',
         '/shop-history-detail',
-        '/shop-service-call',
-        '/shop-waiting',
-        '/shop-show'
-]
+        // '/shop-service-call',
+        // '/shop-waiting',
+        // '/shop-show'
+    ]
+
+    const customerRoutes = [
+        '/index',
+        '/customer-profile',
+        '/customer-history',
+        '/customer-history-detail',
+        '/customer-report',
+        '/customer-invoice',
+        '/order'
+    ]
 
     // const role = props.role || 'guest' 
     const [role, setRole] = useState(LocalStorageService.getToken() ? null : 'guest' )
@@ -61,6 +71,16 @@ function PrivateRoute() {
     useEffect(()=>{
         if(role ==='customer') navigate('/index')
         if(role ==='shop') navigate('/home')
+
+        if(role === 'shop' && shopRoutes.includes(location.pathname)){
+                
+            navigate(location.pathname)
+        }
+        if(role === 'customer' && customerRoutes.includes(location.pathname)){
+                
+            navigate(location.pathname)
+        }
+
 
     },[user])
 
@@ -90,10 +110,7 @@ function PrivateRoute() {
             // }
 
             
-            // if(role === 'shop' && shopRoutes.includes(location.pathname)){
-                
-            //     navigate(location.pathname)
-            // }
+            
 
             // if (role==='shop'){
             //      navigate('/home')

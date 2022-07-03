@@ -1,7 +1,6 @@
 const {Order,Customer,Shop, Ophoto} = require('../models')
 const {Op} = require('sequelize')
 const axios = require('../config/axios/axios')
-const { Router } = require('express')
 
 const checkFinish = async(req,res,next) => {
     try {
@@ -108,7 +107,35 @@ const getAllOrder = async (req,res,next) => { // every shop who are online can s
                 }
             ]
         })
-        if(!order) return res.status(404).send({message : 'order not found'})
+
+        // const order = await Order.findAll({
+        //     where : {
+        //         ShopId : {
+        //             [Op.is] : null  // to specify for order that waiting to accept
+        //         }
+        //     },
+        //     include : [
+        //         {
+        //             model : Customer,
+        //             attributes : {
+        //                 exclude : ['username', 'password']
+        //             }
+        //         },
+        //         {
+        //             model : Shop,
+        //             attributes : {
+        //                 exclude : ['username', 'password']
+        //             }
+        //         },
+        //         {
+        //             model : Ophoto,
+        //             // attributes : {
+        //             //     exclude : ['username', 'password']
+        //             // }
+        //         }
+        //     ]
+        // })
+        // if(!order) return res.status(200).send({order : null})
         return res.status(200).send(order)
 
     } catch (error) {
@@ -339,18 +366,7 @@ const acceptOrder = async (req,res,next) => {
             ]
         })
 
-        const body = {
-            order_id : data.id,
-        }
-
-        const history_customer = await axios.post('/history-customer', body)
-        if(!history_customer) return res.status(400).send({message : 'cannot create history of customer'})
-
-        const history_shop = await axios.post('/history-shop', body)
-        if(!history_shop) return res.status(400).send({ message : 'cannot create history of shop'})
-
-        const report = await axios.post("/report", body)
-        if(!report) return res.status(400).send({message : 'cannot create report'})
+        
 
         return res.status(200).send({message : 'Accept Complete', data})
 
@@ -475,6 +491,19 @@ const finishOrder = async(req,res,next) => {
         })
 
         if(!data) return res.status(400).send({message : 'cannot finish order'})
+
+        const body = {
+            order_id : data.id,
+        }
+
+        const history_customer = await axios.post('/history-customer', body)
+        if(!history_customer) return res.status(400).send({message : 'cannot create history of customer'})
+
+        const history_shop = await axios.post('/history-shop', body)
+        if(!history_shop) return res.status(400).send({ message : 'cannot create history of shop'})
+
+        const report = await axios.post("/report", body)
+        if(!report) return res.status(400).send({message : 'cannot create report'})
 
         return res.status(200).send(data)
         

@@ -1,6 +1,7 @@
 .customer-history{
     background-color: darkviolet;
     height: auto;
+    padding-bottom: 50px;
 }
 
 .customer-history > .customer-history-header{
@@ -14,7 +15,6 @@
 
 .customer-history-header-delete{
     margin-right: 10px;
-    margin-top: 20px;
     color: red;
     cursor: pointer;
 }
@@ -28,17 +28,16 @@
 }
 
 .customer-history-back{
-    margin-top: 300px;
     border: none;
     font-size: 2em;
-    padding: 10px 20px;
-    border-radius: 15px;
-    background-color: rgb(50,250,0);
-    color: white;
+    /* margin-top: 20px; */
+    /* padding: 10px 20px; */
+    margin-left: 30px;
+    color: yellow;
     cursor: pointer;
 }
 .customer-history-back:hover{
-    background-color: black;
+    color: black;
 }
 
 .histories {
@@ -69,4 +68,10 @@
 }
 .histories-appear:hover {
     color: black;
+}
+
+.customer-history-header{
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-around;
 }

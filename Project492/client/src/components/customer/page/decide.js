@@ -11,10 +11,6 @@ function Decide() {
     const navigate = useNavigate()
     const order = location.state.order
 
-    useEffect(()=>{
-        console.log(order);
-    },[])
-
     const yes = async(e) => {
         try {
             e.preventDefault()

@@ -8,9 +8,42 @@ import socket from '../config/socket'
 function Home({user,reload,holdOrder, setHold}) {
 
   const navigate = useNavigate()
-
+  const [index, setIndex] = useState(null)
 
   useEffect(()=>{
+    console.log(index);
+  },[index])
+
+  useEffect(()=>{
+
+    const checkOrder = async() => {
+      try {
+        const result = await axios.get('/order')
+        // if(result.data.order===null) return ;
+        // if(!id) setId(result.data.id)
+        // if(!result)
+        // console.log(result.data);
+        // if(id===result.data.id) return ;
+        console.log(result.data);
+        for(let i=0; i<result.data.length; i++){
+            setIndex(item => [...item, i])
+        }
+
+        // console.log(index);
+
+        // if(result.data) {
+        //   if(id === result.data.id) return;
+
+        //   id = result.data.id
+          return navigate('/shop-service-call', {state : {order : result.data}})
+        // }
+        
+        
+
+      } catch (error) {
+        console.error(error)
+      }
+    }
     
     const checkOrderFinish = async() => {
       try {
@@ -42,13 +75,14 @@ function Home({user,reload,holdOrder, setHold}) {
     // if(!user) reload()
     // reload()
     // window.location.reload()
+    // checkOrder()
     checkOrderFinish()
     // console.log('home',user);
 
     //----------- if have order setPress(false)
 
     // reconnecttion socket
-    // console.log(user);
+    console.log(user);
     // if(!user) reload()
 
   },[])

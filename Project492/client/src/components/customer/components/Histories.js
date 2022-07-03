@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ClearIcon from '@mui/icons-material/Clear';
 import { Link } from 'react-router-dom';
@@ -6,6 +6,11 @@ import axios from '../../../config/axios';
 
 
 function Histories({history, reload}) {
+
+  useEffect(()=>{
+    console.log(history);
+
+  },[])
   
 
     const destroy = async(e) => {

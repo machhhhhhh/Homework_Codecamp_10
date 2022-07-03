@@ -5,6 +5,7 @@ import Header from '../customer/components/Header'
 import Histories from './components/Histories'
 import '../css/shop/history.css'
 import DeleteIcon from '@mui/icons-material/Delete';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 function History() {
 
@@ -63,7 +64,7 @@ function History() {
 
           {(history.length!==0) && (
                 <div className='shop-history-header'>
-                    <h1></h1>
+                 <ArrowBackIcon fontSize='large' className='customer-history-back' onClick={(e)=>back(e)}/>
                     <DeleteIcon fontSize='large' className='shop-history-header-delete' onClick={(e)=>destroy(e)}/>
                 </div>
             )}
@@ -80,11 +81,14 @@ function History() {
               )}
           </div>
 
+          {history.length===0 && (
+            <div className='customer-history-div'>
+              <button type='button' className='customer-history-back-button' onClick={(e)=>back(e)}><strong>BACK</strong></button>
+          </div>
+          )}
+
       </div>
 
-      <div className='customer-history-div'>
-            <button type='button' className='customer-history-back' onClick={(e)=>back(e)}><strong>BACK</strong></button>
-        </div>
     </div>
   )
 }

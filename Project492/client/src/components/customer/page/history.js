@@ -4,6 +4,7 @@ import axios from '../../../config/axios'
 import '../../css/customer/history.css'
 import {  useNavigate } from 'react-router-dom'
 import DeleteIcon from '@mui/icons-material/Delete';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 import Histories from '../components/Histories'
 
@@ -62,7 +63,7 @@ function History() {
 
             {(history.length!==0) && (
                 <div className='customer-history-header'>
-                    <h1></h1>
+                    <ArrowBackIcon fontSize='large' className='customer-history-back' onClick={(e)=>back(e)}/>
                     <DeleteIcon fontSize='large' className='customer-history-header-delete' onClick={(e)=>destroy(e)}/>
                 </div>
             )}
@@ -77,10 +78,12 @@ function History() {
                             reload = {fetchHistory}  
                         />   
                 ))}
+                {history.length===0 && (
+            <div className='customer-history-div'>
+              <button type='button' className='customer-history-back-button' onClick={(e)=>back(e)}><strong>BACK</strong></button>
+          </div>
+          )}
 
-        <div className='customer-history-div'>
-            <button type='button' className='customer-history-back' onClick={(e)=>back(e)}><strong>BACK</strong></button>
-        </div>
     </div>
   )
 }
