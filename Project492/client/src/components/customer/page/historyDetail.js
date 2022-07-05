@@ -105,7 +105,7 @@ export default function HistoryDefail() {
     
 
   return (
-    <div className='customer-history-detail'>
+    <div className='customer-history-detail' style={{height : invoiceList.length < 2 ? '100vh' : 'auto'}} >
         <Header/>
         {history.length!==0 && (
             <div className='customer-history-detail-info'>
@@ -115,14 +115,16 @@ export default function HistoryDefail() {
             </div>
         )}
         
-        <div className='shop-history-detail-list-show'>
-            <h1 className='list-header'>List</h1>
-            <div className='list-item'>
-                {(invoiceList.length!==0) && invoiceList.map(list => 
-                <h3 key={list.id}>- {list.description}</h3>
-            )}
+        {invoiceList.length!==0 && 
+            <div className='shop-history-detail-list-show'>
+                <h1 className='list-header'>List</h1>
+                <div className='list-item'>
+                    {(invoiceList.length!==0) && invoiceList.map(list => 
+                    <h3 key={list.id}>- {list.description}</h3>
+                )}
+                </div>
             </div>
-        </div>
+        }
 
 
 

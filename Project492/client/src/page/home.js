@@ -10,9 +10,9 @@ function Home({user,reload,holdOrder, setHold}) {
   const navigate = useNavigate()
   const [index, setIndex] = useState(null)
 
-  useEffect(()=>{
-    console.log(index);
-  },[index])
+  // useEffect(()=>{
+  //   console.log(index);
+  // },[index])
 
   useEffect(()=>{
 
@@ -49,18 +49,18 @@ function Home({user,reload,holdOrder, setHold}) {
       try {
 
         const result = await axios.get('/order/check')
-        const order = result.data
+        const data = result.data
         // console.log(order);
-        if(!order) return ;
+        if(!data) return ;
 
         const check = result.data.check
         if(check === false) {
-          return navigate('/shop-waiting', {state : { order : order}})
+          return navigate('/shop-waiting', {state : { order : data.order}})
         }
 
         // setMode(ACCEPT_REQUEST)
 
-        return navigate('/shop-show', {state : { order : order}})
+        return navigate('/shop-show', {state : { order : data.order}})
         
       } catch (error) {
         console.error(error)

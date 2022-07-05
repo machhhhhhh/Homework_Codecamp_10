@@ -33,7 +33,7 @@ function PrivateRoute() {
 
     const shopRoutes = [
         '/home',
-        '/shop-profile',
+        // '/shop-profile',
         '/shop-history',
         '/shop-history-detail',
         // '/shop-service-call',
@@ -193,7 +193,7 @@ function PrivateRoute() {
                 <Route path='/shop-service-call' element={<ShopServiceCall   setHold = {setHold}  />} exact />
                 {/* <Route path='/shop-confirm' element={<ShopConfirm  setCheck = {setOrder} />} exact /> */}
                 <Route path='/shop-waiting' element={<ShopWaiting  />} exact />
-                <Route path='/shop-show' element={<ShopShow  />} exact />
+                <Route path='/shop-show' element={<ShopShow setHold={setHold} />} exact />
             </>
         )}
 

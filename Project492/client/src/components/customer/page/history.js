@@ -58,7 +58,7 @@ function History() {
     }
 
   return (
-    <div className='customer-history'>
+    <div className='customer-history' style={{height : history.length > 5 ? 'auto' : '100vh'}}>
         <Header/>
 
             {(history.length!==0) && (

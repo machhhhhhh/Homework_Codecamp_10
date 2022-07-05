@@ -329,14 +329,14 @@ const acceptOrder = async (req,res,next) => {
     try {
 
         const order = await Order.findOne({where : {id : req.params.id}})
-        if(!order) return res.status(404).send({message : 'order not found'})
+        if(!order) return res.status(200).send({order : null})
         if(!order.CustomerId) return res.status(400).send({message : 'order must have customer'})
 
         const shop = await Shop.findOne({where : {username : req.user.username}})
         const customer = await Customer.findOne({where : {username : req.user.username}})
         if(customer) return res.status(400).send({message : 'customer cannot accept'}) 
         if(!shop) return res.status(404).send({message : 'shop not found'})
-        if(shop.isShopOn === "NO") return res.status(400).send({message : "Please Open Shop"})
+        if(shop.isShopOn === "NO") return res.status(200).send({isShopon : false})
 
         
         if(order.ShopId) return res.status(200).send({message : 'taken'})
@@ -428,7 +428,7 @@ const cancelOrder = async (req,res,next) => {
 
         await order.destroy()
 
-        return res.status(204)
+        return res.status(204).send({message : 'Delete Successfully'})
 
 
     } catch (error) {

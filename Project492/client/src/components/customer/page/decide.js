@@ -33,12 +33,11 @@ function Decide() {
 
             // const check  = window.confirm('Sure ?!!')
             // if(!check) return ;
-
-            await socket.emit('customer-select', {order_id : order.id ,select : false})
             await axios.delete(`/order/${order.id}`)
+            await socket.emit('customer-select', {order_id : order.id ,select : false})
+            return navigate('/index')
             // navigate('/index')
              // problem is here !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            return navigate('/index')
             // window.location.reload()
 
 

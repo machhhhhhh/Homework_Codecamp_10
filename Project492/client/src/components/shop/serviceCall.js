@@ -52,9 +52,19 @@ export default function ServiceCall({setHold}) {
           e.preventDefault()
           // const check  = window.confirm('Accept ?!!')
           // if(!check) return ;
+          await socket.connect()
 
           const result = await axios.put(`/order/${order.id}`)
         //   console.log(result);
+        if(result.data.isShopon==false) {
+          alert('Please Open the shop')
+          return navigate('/home')
+        }
+        
+        if(result.data.order==null) {
+          alert('Order was cancelled')
+          return navigate('/home')
+        }
           if(result.data.message === 'taken') {
             alert('Taken')  
             return navigate('/home');
@@ -65,7 +75,7 @@ export default function ServiceCall({setHold}) {
               accept : true
           }
           // socket.reconnect()
-          socket.connect()
+          await socket.connect()
           // setMode(ACCEPT_REQUEST)
 
           // console.log(result.data.data);
@@ -75,7 +85,7 @@ export default function ServiceCall({setHold}) {
           await socket.emit('matching-user', order.id)
           await socket.emit('accept-order', result.data.data)
 
-          return navigate('/shop-waiting', {state : {order : order}})
+          return navigate('/shop-waiting', {state : {order : result.data.data}})
           
         } catch (error) {
             console.error(error)
@@ -94,7 +104,7 @@ export default function ServiceCall({setHold}) {
                 accept : false
             }
             
-            socket.connect()
+            await socket.connect()
             // setMode(WAITING_REQUEST)
 
             setHold(null)

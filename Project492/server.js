@@ -68,14 +68,7 @@ io.on('connection', (socket) => {
 
   
 
-  socket.on('matching-user', data => {
-    // console.log(data);
-    // socket.join(data)
-    console.log('User : ' + socket.id + " Join : " + data );
-    // console.log(io.sockets.adapter.rooms[data.order_id]);
-    // console.log(io.in(data).allSockets());
-
-  })
+ 
   
   socket.on('send-order', data => { // customer send order
     
@@ -89,21 +82,36 @@ io.on('connection', (socket) => {
 
   })
 
+  socket.on('matching-user', data => {
+    // console.log(data);
+    socket.join(data)
+    console.log('User : ' + socket.id + " Join : " + data );
+    // console.log(socket.rooms.has(data.id))
+    // console.log(io.sockets.adapter.rooms[data.order_id]);
+    // console.log(io.in(data).allSockets());
+
+  })
 
   socket.on('accept-order', data => { // shop accept order
 
     // console.log('sdfdsfsdfdsfsdfsfdsdffsdsfd',data)
     // socket.join(data.order_id)
-    // console.log(io.in(data.order_id).allSockets());
     // console.log(io.in());
     // console.log(data);
     // if (data.order.id === item.order_id) console.log('data is sameee');
     // else console.log('not same');
     // socket.to(data).emit('customer-decide', {order_id : data, accept : true})
-
+    
     // if(data.accept) socket.broadcast.emit('customer-decide', data)
     // if(data) 
+
+    // console.log(data.id);
+
+    console.log(io.in(data.id).allSockets());
     socket.broadcast.emit('customer-decide', {order : data, accept : true})
+    // socket.broadcast.to(data.id).emit('customer-decide', {order : data, accept : true})
+    
+
     // try {
       // socket.broadcast.to(data.order_id).emit('customer-decide', data)
     // } catch (err) {
@@ -119,6 +127,11 @@ io.on('connection', (socket) => {
   // socket.emit('disconnect', ()=> {
   //     console.log('User : ' + socket.id + ' has disconnected');
   // })
+
+  socket.on('order-finish', data => {
+    console.log(data);
+    socket.broadcast.emit('redirect-customer', data)
+  })
 
 
 })

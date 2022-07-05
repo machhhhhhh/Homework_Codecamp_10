@@ -1,0 +1,179 @@
+.shop-show {
+    background-color: darkviolet;
+    height: auto;
+    padding-bottom: 40px;
+}
+
+.shop-show-customer-image {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.shop-show-customer-image-tag {
+    height: 300px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 50%;
+}
+
+.shop-show-customer-header {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.shop-show-customer-info {
+    margin-top: 30px;
+    display: flex;
+    background-color: white;
+    justify-content: space-evenly;
+    margin-right: 30px;
+    margin-left: 30px;
+    padding: 10px 10px;
+    border-radius: 15px;
+}
+
+.shop-show-button-up {
+    display: flex;
+    margin-top: 40px;
+    justify-content: space-around;
+}
+
+.shop-show-button-up> button {
+    border: none;
+    padding: 20px;
+    font-size: 1.6em;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+.shop-show-button-up> button:hover, .shop-show-button-down > button:hover{
+    background-color: black;
+    color: white;
+}
+
+.shop-show-button-map {
+    background-color: aqua;
+}
+
+.shop-show-button-chat {
+    background-color: gold;
+}
+
+.shop-show-button-down {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.shop-show-button-down > button {
+    cursor: pointer;
+    border: none;
+    border-radius: 20px;
+    padding: 20px;
+    font-size: 1.6em;
+}
+
+.shop-show-button-order {
+    background-color: rgb(50,250,0);
+}
+
+.shop-show-button-finish{
+    background-color: red;
+}
+
+.shop-show-order {
+    height: 100vh;
+}
+
+.shop-show-order-content {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.shop-show-order-content-info {
+    background-color: white;
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 30px;
+    padding: 10px 15px;
+    margin-right: 25px;
+    margin-left: 25px;
+    border-radius: 15px;
+}
+
+.shop-show-order-description {
+    margin-top: 30px;
+    text-align: center;
+    background-color: lightgrey;
+    margin-left: 30px;
+    margin-right: 30px;
+    padding: 10px;
+    border-radius: 15px;
+    font-size: 0.8em;
+    color: grey;
+}
+
+.shop-show-order-photo {
+    background-color: lightgrey;
+    padding: 10px;
+    margin-top: 30px;
+    margin-right: 30px;
+    margin-left: 30px;
+    text-align: center;
+    color: grey;
+    border-radius: 15px;
+}
+
+.shop-show-order-back{
+    margin-top: 30px;
+    border: none;
+    padding: 20px;
+    color: white;
+    background-color: rgb(50,250,0);
+    border-radius: 20px;
+    font-size: 1.6em;
+}
+
+.shop-show-order-button {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.shop-show-finish{
+    height: 100vh;
+    margin-top: 100px;
+}
+
+.shop-show-finish-header {
+    text-align: center;
+    color: gold;
+    font-size: 3em;
+}
+
+.shop-show-finish-button {
+    margin-top: 100px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.shop-show-finish-button > button {
+    cursor: pointer;
+    padding: 20px;
+    font-size: 1.6em;
+    border: none;
+    border-radius: 20px;
+    color: white;
+}
+
+.shop-show-finish-button > button:hover {
+    background-color: black;
+    color: white;
+}
+.shop-show-finish-button-yes {
+    background-color: rgb(50,250,0);
+}
+.shop-show-finish-button-no {
+    background-color: red;
+}

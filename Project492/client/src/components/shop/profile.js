@@ -15,9 +15,9 @@ function Profile({logout,user,reload, setChange, setUser}) {
     const name = user.firstname + ' ' + user.lastname
     const inputEl = useRef()
 
-    // useEffect(()=>{
-    //     console.log(user);
-    // },[])
+    useEffect(()=>{
+        console.log(user);
+    },[user])
 
     const updateProfile = async(e) => {
         try {
@@ -45,8 +45,10 @@ function Profile({logout,user,reload, setChange, setUser}) {
                 if(!check) return;
                 await axios.put('/shop/off');
                 // await reload();
-                 window.location.reload()
-                navigate('/home')
+                //  reload()
+
+                reload()
+                // navigate('/home')
                 // setUser(result.data.data)
                 // const result = await axios.get('/user')   
                 // setUser({...result.data})
@@ -66,9 +68,10 @@ function Profile({logout,user,reload, setChange, setUser}) {
             const check = window.confirm('OPEN ??')
             if(!check) return;
             await axios.put('/shop/on')
-            window.location.reload()
+             reload()
         //    await reload()
-            navigate('/home')
+        // window.location.reload()
+            //  navigate('/home')
         //    setUser(result.data.data)
         // console.log(result.data.data);
             // const result = await axios.get('/user');   
