@@ -28,12 +28,13 @@ import ShopWaiting from '../components/shop/waiting'
 import ShopShow from '../components/shop/show'
 
 import {WAITING_REQUEST} from '../config/data'
+import socket from '../config/socket'
 
 function PrivateRoute() {
 
     const shopRoutes = [
         '/home',
-        // '/shop-profile',
+        '/shop-profile',
         '/shop-history',
         '/shop-history-detail',
         // '/shop-service-call',
@@ -46,7 +47,7 @@ function PrivateRoute() {
         '/customer-profile',
         '/customer-history',
         '/customer-history-detail',
-        '/customer-report',
+        // '/customer-report',
         '/customer-invoice',
         '/order'
     ]
@@ -65,7 +66,9 @@ function PrivateRoute() {
 
         if(location.pathname!=='/login' || LocalStorageService.getToken()) fetchUser()
 
+
     },[])
+
 
 
     useEffect(()=>{
@@ -73,7 +76,7 @@ function PrivateRoute() {
         if(role ==='shop') navigate('/home')
 
         if(role === 'shop' && shopRoutes.includes(location.pathname)){
-                
+            
             navigate(location.pathname)
         }
         if(role === 'customer' && customerRoutes.includes(location.pathname)){
@@ -83,6 +86,7 @@ function PrivateRoute() {
 
 
     },[user])
+
 
 
     useEffect( ()=>{
@@ -119,9 +123,10 @@ function PrivateRoute() {
         // })
         // console.log(user);
         
-
+        
 
     },[role])
+
 
     const fetchUser = async () => {
 
@@ -130,6 +135,9 @@ function PrivateRoute() {
             const result = await axios.get('/user')
             // console.log(result.data);
             setUser({...result.data})
+            // setInterval(() => {
+            //     console.log(user);
+            // }, 1000);
             setRole(result.data.role)
             // setUser(result.data) 
             // console.log(result.data)
@@ -151,6 +159,15 @@ function PrivateRoute() {
         LocalStorageService.removeToken()
         return navigate('/login')
       }
+
+
+    const goToPage = async (page,state) => {
+        await socket.disconnect()
+        alert('Leaving')
+
+        if(state) return navigate(page,state)
+        return navigate(page)
+    }
 
 
   return (
@@ -185,10 +202,10 @@ function PrivateRoute() {
 
         {role ==='shop' && (
             <>
-                <Route path='/home' element={<Home user = {user} reload={fetchUser}  holdOrder = {holdOrder} setHold={setHold}/>} exact />
-                <Route path='/shop-profile' element={<ShopProfile logout = {logout} user = {user} reload = {fetchUser} />} exact />
-                <Route path='/shop-history' element={<ShopHistory  />} exact />
-                <Route path='/shop-history-detail' element={<ShopHistoryDetail  />} exact />
+                <Route path='/home' element={<Home user = {user} reload={fetchUser}  holdOrder = {holdOrder} setHold={setHold} goToPage={goToPage}/>} exact />
+                <Route path='/shop-profile' element={<ShopProfile logout = {logout} user = {user} reload = {fetchUser} goToPage={goToPage}/>} exact />
+                <Route path='/shop-history' element={<ShopHistory goToPage={goToPage}  />} exact />
+                <Route path='/shop-history-detail' element={<ShopHistoryDetail goToPage={goToPage} />} exact />
                 
                 <Route path='/shop-service-call' element={<ShopServiceCall   setHold = {setHold}  />} exact />
                 {/* <Route path='/shop-confirm' element={<ShopConfirm  setCheck = {setOrder} />} exact /> */}

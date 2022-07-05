@@ -1,5 +1,10 @@
 module.exports = (sequelize, DataTypes) => {
     const model = sequelize.define('Rphoto', {
+        id: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true
+          },
         photo : {
             type : DataTypes.STRING(255)
        }

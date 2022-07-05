@@ -5,7 +5,7 @@ import axios from '../config/axios'
 import { WAITING_REQUEST, ACCEPT_REQUEST, HOLD_REQUEST } from '../config/data'
 import socket from '../config/socket'
 
-function Home({user,reload,holdOrder, setHold}) {
+function Home({user,reload,holdOrder, setHold, goToPage}) {
 
   const navigate = useNavigate()
   const [index, setIndex] = useState(null)
@@ -82,10 +82,13 @@ function Home({user,reload,holdOrder, setHold}) {
     //----------- if have order setPress(false)
 
     // reconnecttion socket
-    console.log(user);
+    
+    // console.log(user);
     // if(!user) reload()
-
+    socket.connect()
+    
   },[])
+
 
   
     useEffect(()=>{
@@ -132,7 +135,8 @@ function Home({user,reload,holdOrder, setHold}) {
   const getStart = async(e) => {
     try {
       e.preventDefault()
-      return navigate('/shop-profile')
+     goToPage('/shop-profile')
+      
       
     } catch (error) {
       console.error(error)
@@ -142,7 +146,7 @@ function Home({user,reload,holdOrder, setHold}) {
   const history = async(e) => {
     try {
       e.preventDefault()
-      return navigate('/shop-history')
+      goToPage('/shop-history')
     } catch (error) {
       console.error(error)
     }
@@ -150,6 +154,17 @@ function Home({user,reload,holdOrder, setHold}) {
 
   return (
     <div className='shop-home'>
+
+      <div className='shop-home-header'>
+          {user.isShopOn==='YES' ? (
+              <>
+                <h1>ON</h1>
+              </>
+          ) : (
+                <h1>OFF</h1>
+
+          )}
+      </div>
 
       <div className='shop-home-logo'>
           <img 

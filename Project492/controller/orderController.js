@@ -329,7 +329,8 @@ const acceptOrder = async (req,res,next) => {
     try {
 
         const order = await Order.findOne({where : {id : req.params.id}})
-        if(!order) return res.status(200).send({order : null})
+        if(!order) return res.status(200).send({message : 'order not found'})
+        // console.log(order);
         if(!order.CustomerId) return res.status(400).send({message : 'order must have customer'})
 
         const shop = await Shop.findOne({where : {username : req.user.username}})
@@ -368,7 +369,7 @@ const acceptOrder = async (req,res,next) => {
 
         
 
-        return res.status(200).send({message : 'Accept Complete', data})
+        return res.status(200).send({message : 'Accept Complete', order :data})
 
 
     } catch (error) {

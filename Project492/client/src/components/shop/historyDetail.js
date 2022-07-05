@@ -7,10 +7,11 @@ import CheckIcon from '@mui/icons-material/Check';
 import QrCodeScannerIcon from '@mui/icons-material/QrCodeScanner';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ChatIcon from '@mui/icons-material/Chat';
+import socket from '../../config/socket'
 
 import '../css/shop/historyDetail.css'
 
-export default function HistoryDetail() {
+export default function HistoryDetail({goToPage}) {
 
 
     const navigate = useNavigate()
@@ -49,6 +50,7 @@ export default function HistoryDetail() {
     useEffect(()=>{
 
         fetchHistory()
+        socket.connect()
 
     },[])
 
@@ -112,7 +114,7 @@ export default function HistoryDetail() {
     const back = async(e) => {
         try {
             e.preventDefault()
-            return navigate('/shop-history')
+            goToPage('/shop-history')
             
         } catch (error) {
             console.error(error)

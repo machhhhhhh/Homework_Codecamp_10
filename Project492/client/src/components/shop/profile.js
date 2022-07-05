@@ -1,23 +1,30 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate} from 'react-router-dom'
 import Header from '../customer/components/Header'
 import axios from '../../config/axios'
 import '../css/shop/profile.css'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import socket from '../../config/socket'
 
 
 const url = 'https://icon-library.com/images/no-user-image-icon/no-user-image-icon-26.jpg'
 
-function Profile({logout,user,reload, setChange, setUser}) {
+function Profile({logout,user,reload, setUser,goToPage}) {
 
     const navigate = useNavigate()
     const name = user.firstname + ' ' + user.lastname
     const inputEl = useRef()
+    const [change, setChange] = useState(null)
+    
 
     useEffect(()=>{
         console.log(user);
-    },[user])
+        // reload()
+        socket.connect()
+    },[])
+
+
 
     const updateProfile = async(e) => {
         try {
@@ -29,9 +36,9 @@ function Profile({logout,user,reload, setChange, setUser}) {
               await axios.put('/shop/profile', formData)
             //   setChange(prev=>!prev)
               //   window.location.reload()
-
-              reload()
-            
+              await  reload()
+            //   setChange(true)
+              
               
             } catch (error) {
                 console.error(error)
@@ -44,17 +51,19 @@ function Profile({logout,user,reload, setChange, setUser}) {
                 const check = window.confirm('CLOSE ??')
                 if(!check) return;
                 await axios.put('/shop/off');
+                // reload()
+                window.location.href = '/home'
                 // await reload();
                 //  reload()
+                
 
-                reload()
                 // navigate('/home')
                 // setUser(result.data.data)
                 // const result = await axios.get('/user')   
                 // setUser({...result.data})
                 // setChange(prev=>!prev)
-            // console.log(result.data.data);
-            //  console.log("userdata offline:", user);
+                // console.log(result.data.data);
+                //  console.log("userdata offline:", user);
             // setChange(prev=>!prev)
             // return reload()
         } catch (error) {
@@ -68,7 +77,7 @@ function Profile({logout,user,reload, setChange, setUser}) {
             const check = window.confirm('OPEN ??')
             if(!check) return;
             await axios.put('/shop/on')
-             reload()
+            window.location.href = '/home'
         //    await reload()
         // window.location.reload()
             //  navigate('/home')
@@ -85,7 +94,8 @@ function Profile({logout,user,reload, setChange, setUser}) {
     const back = async(e) => {
         try {
             e.preventDefault()
-            return navigate('/home')
+            // onLeave()
+            goToPage('/home')
             
         } catch (error) {
             console.error(error)

@@ -105,7 +105,7 @@ io.on('connection', (socket) => {
     // if(data.accept) socket.broadcast.emit('customer-decide', data)
     // if(data) 
 
-    // console.log(data.id);
+    console.log(data);
 
     console.log(io.in(data.id).allSockets());
     socket.broadcast.emit('customer-decide', {order : data, accept : true})

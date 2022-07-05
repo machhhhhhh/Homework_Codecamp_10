@@ -16,8 +16,8 @@ function Report() {
     const shop = location.state.shop
 
     const inputEl = useRef()
-    // const [image, setImage] = useState([])
-    let image = []
+    const [image, setImage] = useState([])
+    // let image = []
     const [description, setDescription] = useState('')
 
 
@@ -45,17 +45,17 @@ function Report() {
                     // await axios.post('/report/photo', formData)
                 // }
 
-                image.map( async photo => {
-                    const formData = new FormData()
-                    formData.append('ReportId', report_id)
-                    formData.append('reportImg', photo)
+                for(const photo of image){
 
+                    const formData = new FormData()
+                    formData.append('report_id', report_id)
+                    formData.append('reportImg', photo)
                     await axios.post('/report/photo', formData)
-                })
+                }
+
             }
 
             setDescription('')
-            image = []
             // setImage(null)
             inputEl.current.value = null
 
@@ -79,12 +79,17 @@ function Report() {
     const inputPhoto = async(e) => {
         try {
             e.preventDefault()
-
+            
             // setImage(...image,e.target.files[0])
             // image = e.target.files[0]
             
             // console.log(image);
-            return image.push(e.target.files[0])
+            // image.push(e.target.files[0])
+            setImage([...image, e.target.files[0]])
+            // setImage(e.target.files[0])
+            // setImage((image) => [...image,e.target.files[0]])
+            // console.log(e.target.files[0]);
+            // console.log(image);
 
         } catch (error) {
             console.error(error)
@@ -137,13 +142,25 @@ function Report() {
                         alt = 'report'
                     />
                     {image.length!==0 && (
-                        image.map(item => 
-                                <img 
-                                key={item.id}
-                                src={URL.createObjectURL(item) }
-                                alt='report'
-                            />)
+                        image.map((item,key) => 
+                            <img 
+                                        key={key}
+                                        src={URL.createObjectURL(item) }
+                                        alt='report'
+                                />
+                                
+                            )
                     )}
+
+                    {/* {image && (
+                        <img 
+                                    // key={item.id}
+                                    src={URL.createObjectURL(image) }
+                                    alt='report'
+                            />
+                    )} */}
+
+
 
                     
 

@@ -25,6 +25,9 @@ export default function ServiceCall({setHold}) {
     //   // socket.io.reconnect()
 
     // },[press])
+    useEffect(()=>{
+      socket.connect()
+    },[])
 
     const checkAccept = async(e) => {
       try {
@@ -61,7 +64,7 @@ export default function ServiceCall({setHold}) {
           return navigate('/home')
         }
         
-        if(result.data.order==null) {
+        if(result.data.message==='order not found') {
           alert('Order was cancelled')
           return navigate('/home')
         }
@@ -83,9 +86,9 @@ export default function ServiceCall({setHold}) {
           //   console.log(order);
           
           await socket.emit('matching-user', order.id)
-          await socket.emit('accept-order', result.data.data)
+          await socket.emit('accept-order', result.data.order)
 
-          return navigate('/shop-waiting', {state : {order : result.data.data}})
+          return navigate('/shop-waiting', {state : {order : result.data.order}})
           
         } catch (error) {
             console.error(error)

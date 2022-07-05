@@ -6,11 +6,12 @@ import Histories from './components/Histories'
 import '../css/shop/history.css'
 import DeleteIcon from '@mui/icons-material/Delete';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import socket from '../../config/socket'
 
-function History() {
+function History({goToPage}) {
 
-  const navigate = useNavigate()
   const [history, setHistory] = useState([])
+
 
   const fetchHistory = async() => {
     try {
@@ -25,6 +26,7 @@ function History() {
 
   useEffect(()=>{
     fetchHistory()
+    socket.connect()
   },[])
 
   const destroy = async(e) => {
@@ -45,8 +47,7 @@ function History() {
   const back = async(e) => {
     try {
       e.preventDefault()
-
-      return navigate('/home')
+      goToPage('/home')
     } catch (error) {
       console.error(error)
     }

@@ -17,6 +17,10 @@ function Waiting() {
     // query one order where shop and accept
     // order not found ==> alert
     // 
+
+    useEffect(()=>{
+      socket.connect()
+    },[])
     
     useEffect(()=>{
 

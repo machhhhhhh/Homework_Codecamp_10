@@ -10,6 +10,8 @@ const addPhoto = async(req,res,next) => {
     try {
 
         const {report_id} = req.body
+        console.log(report_id);
+        console.log('body', req.body);
 
         const shop = await Shop.findOne({where : {username : req.user.username}})
         if(shop) return res.status(400).send({message : 'shop cannot create the report photo'})
@@ -23,17 +25,18 @@ const addPhoto = async(req,res,next) => {
         if(report.CustomerId !== customer.id) return res.status(400).send({message : 'only customer who report can add the photo'})
 
         if(!req.file) return res.status(400).send({message : 'Add the photo'})
-
+        // console.log('00000000000000000000000');
         let image = {}
         if(req.file){
             image = await uploadPromise(req.file.path)
             fs.unlinkSync(req.file.path)
         }
-
+        // console.log('111111111111111111111');
         const newPhoto = await Rphoto.create({
             photo : image.secure_url,
             ReportId : report_id
         })
+        // console.log('22222222222222222');
 
         if(!newPhoto) return res.status(400).send({message : 'cannot create the photo'})
         return res.status(201).send(newPhoto)
