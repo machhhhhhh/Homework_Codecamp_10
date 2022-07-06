@@ -14,7 +14,7 @@ export default function Show({setHold}) {
     const order = location.state.order
     const [see, setSee] = useState(false)
     const [press, setPress] = useState(false)
-    const [comeingOrder, setOrder] = useState(null)
+    // const [comeingOrder, setOrder] = useState(null)
 
     // if finish setHold == null
 

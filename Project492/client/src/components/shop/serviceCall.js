@@ -3,7 +3,7 @@ import {useNavigate, useLocation} from 'react-router-dom'
 import Header from '../customer/components/Header'
 import axios from '../../config/axios'
 import socket from '../../config/socket'
-import { ACCEPT_REQUEST, WAITING_REQUEST } from '../../config/data'
+// import { ACCEPT_REQUEST, WAITING_REQUEST } from '../../config/data'
 import '../css/shop/serviceCall.css'
 
 export default function ServiceCall({setHold}) {
@@ -59,7 +59,7 @@ export default function ServiceCall({setHold}) {
 
           const result = await axios.put(`/order/${order.id}`)
         //   console.log(result);
-        if(result.data.isShopon==false) {
+        if(result.data.isShopon===false) {
           alert('Please Open the shop')
           return navigate('/home')
         }
@@ -73,10 +73,10 @@ export default function ServiceCall({setHold}) {
             return navigate('/home');
           }
 
-          const data = {
-              order_id : order.id,
-              accept : true
-          }
+          // const data = {
+          //     order_id : order.id,
+          //     accept : true
+          // }
           // socket.reconnect()
           await socket.connect()
           // setMode(ACCEPT_REQUEST)

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import '../components/css/login.css'
 import {useNavigate} from 'react-router-dom'
 import axios from '../config/axios'

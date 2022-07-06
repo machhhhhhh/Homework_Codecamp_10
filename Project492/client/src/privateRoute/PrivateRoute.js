@@ -27,7 +27,7 @@ import ShopServiceCall from '../components/shop/serviceCall'
 import ShopWaiting from '../components/shop/waiting'
 import ShopShow from '../components/shop/show'
 
-import {WAITING_REQUEST} from '../config/data'
+// import {WAITING_REQUEST} from '../config/data'
 import socket from '../config/socket'
 
 function PrivateRoute() {
@@ -56,7 +56,7 @@ function PrivateRoute() {
     const [role, setRole] = useState(LocalStorageService.getToken() ? null : 'guest' )
     const [user, setUser] = useState(null)
     // const [isHaveOrder, setCheck] = useState(null)
-    const [mode, setMode] = useState(WAITING_REQUEST)
+    // const [mode, setMode] = useState(WAITING_REQUEST)
     const [holdOrder, setHold] = useState(null)
 
     const navigate = useNavigate()

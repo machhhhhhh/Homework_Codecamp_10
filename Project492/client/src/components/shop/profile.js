@@ -1,5 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { useNavigate} from 'react-router-dom'
+import React, { useEffect, useRef} from 'react'
 import Header from '../customer/components/Header'
 import axios from '../../config/axios'
 import '../css/shop/profile.css'
@@ -12,14 +11,14 @@ const url = 'https://icon-library.com/images/no-user-image-icon/no-user-image-ic
 
 function Profile({logout,user,reload, setUser,goToPage}) {
 
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
     const name = user.firstname + ' ' + user.lastname
     const inputEl = useRef()
-    const [change, setChange] = useState(null)
+    // const [change, setChange] = useState(null)
     
 
     useEffect(()=>{
-        console.log(user);
+        // console.log(user);
         // reload()
         socket.connect()
     },[])

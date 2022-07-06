@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import {useNavigate, useLocation} from 'react-router-dom'
-import axios from '../../../config/axios'
 import Header from '../../customer/components/Header'
 import '../../css/customer/show.css'
 import socket from '../../../config/socket'
@@ -13,11 +12,6 @@ function Show() {
   const navigate = useNavigate()
   const order = location.state.order
 
-  // useEffect(()=>{
-
-  //   console.log('customer',order);
-
-  // },[order])
 
   useEffect(()=>{
     socket.on('redirect-customer', data => {

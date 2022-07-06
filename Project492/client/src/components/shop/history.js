@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import axios from '../../config/axios'
 import Header from '../customer/components/Header'
 import Histories from './components/Histories'
@@ -11,7 +10,6 @@ import socket from '../../config/socket'
 function History({goToPage}) {
 
   const [history, setHistory] = useState([])
-
 
   const fetchHistory = async() => {
     try {

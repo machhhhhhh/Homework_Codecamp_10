@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import {useLocation } from 'react-router-dom'
 import axios from '../../config/axios'
 import Header from '../customer/components/Header'
 
@@ -14,7 +14,7 @@ import '../css/shop/historyDetail.css'
 export default function HistoryDetail({goToPage}) {
 
 
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
     const location = useLocation()
     const inputEl = useRef()
 

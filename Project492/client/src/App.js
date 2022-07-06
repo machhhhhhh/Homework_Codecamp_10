@@ -1,9 +1,7 @@
-import React , {useEffect, useState} from "react";
-import LocalStorageService from "./service/LocalStorageService";
+import React from "react";
 import PrivateRoute from './privateRoute/PrivateRoute'
 
 function App() {
-
 
   return <PrivateRoute  />
 

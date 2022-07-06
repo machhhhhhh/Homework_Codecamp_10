@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
 import '../components/css/shop/home.css'
 import axios from '../config/axios'
-import { WAITING_REQUEST, ACCEPT_REQUEST, HOLD_REQUEST } from '../config/data'
+// import { WAITING_REQUEST, ACCEPT_REQUEST, HOLD_REQUEST } from '../config/data'
 import socket from '../config/socket'
 
 function Home({user,reload,holdOrder, setHold, goToPage}) {
 
   const navigate = useNavigate()
-  const [index, setIndex] = useState(null)
+  // const [index, setIndex] = useState(null)
 
   // useEffect(()=>{
   //   console.log(index);
@@ -16,34 +16,34 @@ function Home({user,reload,holdOrder, setHold, goToPage}) {
 
   useEffect(()=>{
 
-    const checkOrder = async() => {
-      try {
-        const result = await axios.get('/order')
-        // if(result.data.order===null) return ;
-        // if(!id) setId(result.data.id)
-        // if(!result)
-        // console.log(result.data);
-        // if(id===result.data.id) return ;
-        console.log(result.data);
-        for(let i=0; i<result.data.length; i++){
-            setIndex(item => [...item, i])
-        }
+    // const checkOrder = async() => {
+    //   try {
+    //     const result = await axios.get('/order')
+    //     // if(result.data.order===null) return ;
+    //     // if(!id) setId(result.data.id)
+    //     // if(!result)
+    //     // console.log(result.data);
+    //     // if(id===result.data.id) return ;
+    //     console.log(result.data);
+    //     for(let i=0; i<result.data.length; i++){
+    //         setIndex(item => [...item, i])
+    //     }
 
-        // console.log(index);
+    //     // console.log(index);
 
-        // if(result.data) {
-        //   if(id === result.data.id) return;
+    //     // if(result.data) {
+    //     //   if(id === result.data.id) return;
 
-        //   id = result.data.id
-          return navigate('/shop-service-call', {state : {order : result.data}})
-        // }
+    //     //   id = result.data.id
+    //       return navigate('/shop-service-call', {state : {order : result.data}})
+    //     // }
         
         
 
-      } catch (error) {
-        console.error(error)
-      }
-    }
+    //   } catch (error) {
+    //     console.error(error)
+    //   }
+    // }
     
     const checkOrderFinish = async() => {
       try {
