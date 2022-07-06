@@ -1,17 +1,11 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ClearIcon from '@mui/icons-material/Clear';
 import { Link } from 'react-router-dom';
 import axios from '../../../config/axios';
 
-
 function Histories({history, reload}) {
 
-  useEffect(()=>{
-    console.log(history);
-
-  },[])
-  
 
     const destroy = async(e) => {
       try {
@@ -27,7 +21,6 @@ function Histories({history, reload}) {
         console.error(error)
       }
     }
-
   return (
     <div className='histories'>
               {history.Order && (<h1 className='histories-time'><strong>{history.Order.createdAt.slice(0,10)}</strong></h1>)}

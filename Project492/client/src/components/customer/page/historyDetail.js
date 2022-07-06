@@ -42,7 +42,7 @@ export default function HistoryDefail() {
                     // console.log(result.data);
                     setInvoice(result.data.invoice)
                     setQR(result.data.check)
-                    setList(result.data.invoice.InLists)
+                    if(result.data.invoice!==null) setList(result.data.invoice.InLists)
                 
             } catch (error) {
                 console.error(error)

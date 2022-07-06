@@ -85,3 +85,61 @@
     color: black;
     background-color: lightgrey;
 }
+
+.customer-report-show{
+    text-align: center;
+}
+.customer-report-show-photo{
+    margin-top: 40px;
+    width: 70%;
+    height: 300px;
+}
+
+.customer-report-delete-icon{
+    color: red;
+    margin-left: 40px;
+    cursor: pointer;
+}
+.customer-report-delete-icon:hover{
+    color: black;
+}
+
+.customer-report-clear-header {
+    text-align: center;
+    margin-top: 100px;
+    font-size: 3em;
+    color: gold;
+}
+
+.customer-report-clear-button {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 100px;
+}
+
+.customer-report-clear-button > button {
+    border: none;
+    padding: 20px;
+    font-size: 2em;
+    cursor: pointer;
+    border-radius: 20px;
+    color: white;
+}
+
+.customer-report-clear-yes {
+    background-color: rgb(50,250,0);
+}
+.customer-report-clear-no {
+    background-color: red;
+}
+
+.customer-report-clear-button > button:hover {
+    background-color: black;
+}
+
+.customer-report-success{
+    color: rgb(50,250,0);
+    text-align: center;
+    margin-top: 50px;
+    font-size: 1.8em;
+}
