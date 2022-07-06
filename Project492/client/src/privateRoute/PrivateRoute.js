@@ -163,7 +163,7 @@ function PrivateRoute() {
 
     const goToPage = async (page,state) => {
         await socket.disconnect()
-        alert('Leaving')
+        // alert('Leaving')
 
         if(state) return navigate(page,state)
         return navigate(page)

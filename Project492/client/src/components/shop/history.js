@@ -77,6 +77,7 @@ function History({goToPage}) {
                     <Histories 
                       key={item.id}
                       history = {item}
+                      goToPage = {goToPage}
                       reload = {fetchHistory}
                     />
               )}

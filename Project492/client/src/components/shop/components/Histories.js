@@ -1,11 +1,13 @@
 import React from 'react'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ClearIcon from '@mui/icons-material/Clear';
-import { Link } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 import axios from '../../../config/axios';
+import socket from '../../../config/socket'
 
+export default function Histories({reload,history,goToPage}) {
 
-export default function Histories({reload,history}) {
+  const navigate = useNavigate()
 
     const destroy = async(e) => {
         try {
@@ -23,13 +25,21 @@ export default function Histories({reload,history}) {
         }
     }
 
+    const see = async(e) =>{
+      try {
+        e.preventDefault()
+        await socket.disconnect()
+        return navigate('/shop-history-detail', {state : {order_id: history.OrderId}} )
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
   return (
     <div className='histories'>
               {history.Order && (<h1 className='histories-time'><strong>{history.Order.createdAt.slice(0,10)}</strong></h1>)}
               <ClearIcon fontSize='large' className='histories-delete' onClick={e=>destroy(e)} />
-              <Link to='/shop-history-detail' state={{ order_id: history.OrderId }}>
-                <ArrowForwardIosIcon fontSize='large' className='histories-appear' />
-              </Link>
+              <ArrowForwardIosIcon fontSize='large' className='histories-appear' onClick={e=>see(e)} />
     </div>
   )
 }

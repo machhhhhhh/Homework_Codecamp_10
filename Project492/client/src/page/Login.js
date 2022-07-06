@@ -12,7 +12,8 @@ function Login({setRole}) {
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-
+  const [space, setSpace] = useState(false)
+  const [error, setError] = useState(false)
 
   const register = async(e) => {
     try {
@@ -28,7 +29,9 @@ function Login({setRole}) {
     try {
       e.preventDefault()
       if(username ==='' || password === '') {
-        alert('must type e-mail and password')
+        // alert('must type e-mail and password')
+        setSpace(true)
+        setError(false)
         return;
       }
       
@@ -55,7 +58,9 @@ function Login({setRole}) {
       // setLogin(prev=>!prev)
 
     } catch (error) {
-      console.error(error)
+      setError(true)
+      setSpace(false)
+      // console.error(error)
     }
 
   }
@@ -88,7 +93,11 @@ function Login({setRole}) {
                       onChange= {e => setPassword(e.target.value)}
                       />
                 </div>
-                <button onClick={e=>login(e)}><ExitToAppIcon fontSize='large'/></button>
+
+                {space && <h2 className='login-error'>Please type e-mail and password</h2>}
+                {error && <h2 className='login-error'>username or password <br></br> not correct</h2>}
+
+                <button type='submit' onClick={e=>login(e)}><ExitToAppIcon fontSize='large'/></button>
             </form>
 
             <h3>No Account ? <span onClick={(e)=>register(e)}>Register</span></h3>

@@ -15,7 +15,7 @@ function Waiting() {
     useEffect(()=>{
 
           socket.on('customer-decide', data => {
-            // console.log('data',data);
+            console.log('data',data);
             // console.log('order',order);
             // console.log('orderid',order.id);
             if(data.order.id===order.id && data.accept === true)

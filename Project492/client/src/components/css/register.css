@@ -64,3 +64,24 @@
     color: black;
     background-color: lightgray;
 }
+
+.register-error{
+    font-size: 1.44em;
+    color: red;
+    margin-top: 10px;
+}
+
+.register-error-firstname{
+    font-size: 1.4em;
+}
+
+.catch-error, .password-error{
+    text-align: center;
+    font-size: 1.8em;
+    margin-top: 20px;
+}
+
+.password-error{
+    text-align: center;
+    font-size: 1.8em;
+}
